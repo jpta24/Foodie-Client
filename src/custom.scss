@@ -1,0 +1,15 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+// Create your own map
+$custom-colors: (
+  "f-primary": #900,
+  "f-secondary": green
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
