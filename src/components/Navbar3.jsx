@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 
 function Navbar() {
 	const { isLoggedIn, logOutUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
@@ -74,6 +75,17 @@ function Navbar() {
 							</ul>
 						</li> */}
 					</ul>
+                    <form className='d-flex'>
+						<input
+							className='form-control me-2'
+							type='search'
+							placeholder='Search'
+							aria-label='Search'
+						/>
+						<button className='btn btn-outline-success' type='submit'>
+							Search
+						</button>
+					</form>
 					<div className='navbar-nav mb-2 mb-lg-0 me-4'>
 						{isLoggedIn && (
 							<>
@@ -83,7 +95,7 @@ function Navbar() {
 								<button className='btn btn-outline-success px-2 mx-2' type='submit'>
 									Cart 🛒
 								</button>
-								<button className='btn btn-primary mx-2 px-4' type='submit'>
+								<button className='btn btn-primary mx-2 px-4' type='submit' onClick={logOutUser}>
 									Log Out
 								</button>
 							</>
@@ -94,27 +106,15 @@ function Navbar() {
 									Cart 🛒
 								</button>
                                 
-								<button className='btn btn-outline-primary mx-2 px-4' type='submit'>
+								<button className='btn btn-outline-primary mx-2 px-4' type='submit' >
 									Log In
 								</button>
-								<button className='btn btn-primary mx-2 px-4' type='submit'>
+								<button className='btn btn-primary mx-2 px-4' type='submit' >
 									Sing Up
 								</button>
 							</>
 						)}
 					</div>
-
-					{/* <form className='d-flex'>
-						<input
-							className='form-control me-2'
-							type='search'
-							placeholder='Search'
-							aria-label='Search'
-						/>
-						<button className='btn btn-outline-success' type='submit'>
-							Search
-						</button>
-					</form> */}
 				</div>
 			</div>
 		</nav>

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import {AuthContext} from '../context/auth.context';
 import axios from "axios";
 
+import { Button } from 'react-bootstrap'
+
 const Login = () => {
   const navigate = useNavigate();
   const { storeToken, authenticateUser } = useContext(AuthContext);
@@ -10,10 +12,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
-
-  const handleUsername = (e) => setUsername(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
-
+ 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const requestBody = { username, password };
@@ -34,32 +33,58 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleLoginSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsername}
-        />
+    <div className='container'>
+			<h1>Welcome back</h1>
+            <p>Enter your credentials to access your account</p>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+			<div className='row justify-content-md-center p-4'>
+				<div className='col-md-6 col-lg-5 '>
+					<form className='form-control' onSubmit={handleLoginSubmit}>
 
-        <br />
+						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
+							<label htmlFor='inputUser01' className='form-label'>
+								Username
+							</label>
+							<input
+								name='username'
+								type='text'
+								className='form-control'
+								id='inputUser01'
+								value={username}
+								onChange={(e) => {
+									setUsername(e.target.value);
+								}}
+							/>
+						</div>
 
-        <button type="submit">Sign Up</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-    </div>
-  );
+						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
+							<label htmlFor='inputPassword01' className='form-label'>
+								Password
+							</label>
+							<input
+								name='password'
+								type='password'
+								className='form-control'
+								id='inputPassword01'
+                                value={password}
+								onChange={(e) => {
+									setPassword(e.target.value);
+                                }}
+							/>
+						</div>
+                        {errorMessage && <p className='text-danger'>{errorMessage}</p>}
+						<div className='col-12 my-3'>
+                            <Button type='submit'  className='col-4'>Log In</Button>
+						</div>
+					</form>
+                    <hr />
+                    <p>Don't have an account?</p>
+                    <Button href='/signup'  variant='outline-primary' className='mx-2 my-1 col-4'>Sign Up</Button>
+				</div>
+			</div>
+			
+		</div>
+	);
 };
 
 export default Login;

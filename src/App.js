@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import './App.css';
 import IsAnon from "./components/IsAnon";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Nabvar";
 // import IsPrivate from "./components/IsPrivate";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
