@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import './App.css';
+
+import { ToastContainer } from 'react-toastify';
 import IsAnon from "./components/IsAnon";
 import Navbar from "./components/Nabvar";
 // import IsPrivate from "./components/IsPrivate";
@@ -12,13 +14,16 @@ function App() {
   return (
     <div className="App">
     <Navbar/>
+    <div>
+    <ToastContainer />
+    </div>
       <Routes>      
         <Route exact path="/" element={<HomePage />} />
         {/* <Route exact path="/profile" element={<IsPrivate><ProfilePage /></IsPrivate>} /> */}
         <Route exact path="/signup" element={<IsAnon><SignupPage /></IsAnon>} />
-        <Route exact path="/login" element={<IsAnon><LoginPage /></IsAnon>} /> 
-              
+        <Route exact path="/login" element={<IsAnon><LoginPage /></IsAnon>} />     
       </Routes>
+      
     </div>
   );
 }

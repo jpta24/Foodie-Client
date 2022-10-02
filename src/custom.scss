@@ -13,3 +13,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
+
+.Toastify__toast-container--top-right {
+  top: 1.5em;
+  right: 1.5em; 
+}

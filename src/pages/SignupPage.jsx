@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { Button } from 'react-bootstrap'
+import { toast } from 'react-toastify';
 
 const Signup = () => {
 	const navigate = useNavigate();
@@ -17,21 +18,23 @@ const Signup = () => {
 
 	const handleSignupSubmit = (e) => {
 		e.preventDefault();
+        toast.success('User successfully created',{theme:'dark'})
+
 		// Create an object representing the request body
-		const requestBody = { username, password, email };
+		// const requestBody = { username, password, email };
 
 		// Make an axios request to the API
 		// If POST request is successful redirect to login page
 		// If the request resolves with an error, set the error message in the state
-		axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, requestBody)
-			.then((response) => {
-				navigate('/login');
-			})
-			.catch((error) => {
-				const errorDescription = error.response.data.message;
-				setErrorMessage(errorDescription);
-			});
+		// axios
+		// 	.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, requestBody)
+		// 	.then((response) => {
+		// 		navigate('/login');
+		// 	})
+		// 	.catch((error) => {
+		// 		const errorDescription = error.response.data.message;
+		// 		setErrorMessage(errorDescription);
+		// 	});
 	};
 
     // const handleRol = (rolStr) =>{
