@@ -18,9 +18,10 @@ const Nabvar2 = () => {
                 <Nav.Link href="#about-us">About Us</Nav.Link>
             </Nav>
             <Nav className='navbar-nav mb-2 mb-lg-0 me-4'>
+            <Nav.Link href="/markets">Markets 🏪</Nav.Link>
                 {isLoggedIn && (
                     <>
-                        <Nav.Link href="'/dashboard">Dashboard 📉</Nav.Link>
+                        <Nav.Link href="/dashboard">Dashboard 📉</Nav.Link>
                         <Button href='/cart' variant="outline-success" className='mx-2 my-1' >Cart 🛒</Button>
                         <Button className='mx-2 my-1' onClick={logOutUser}>Log Out</Button>
                     </>
