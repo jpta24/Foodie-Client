@@ -47,26 +47,52 @@ const CreateBusiness = () => {
 
 	const handleBusinessSubmit = (e) => {
 		e.preventDefault();
-		toast.success('Business successfully created', { theme: 'dark' });
+    const storedToken = localStorage.getItem("authToken"); 
 
 		// Create an object representing the request body
 		const requestBody = business;
-
 
 		// Make an axios request to the API
 		// If POST request is successful redirect to Business/Dashboard page
 		// If the request resolves with an error, set the error message in the state
 		axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/business/create`, requestBody)
+			.post(`${process.env.REACT_APP_SERVER_URL}/business/create`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then((response) => {
-        const nameEncoded = response.name.toLowerCase().split(' ').join('-')
+        const nameEncoded = response.data.business.name.toLowerCase().split(' ').join('-')
 				navigate(`/${nameEncoded}/dashboard`);
+		    toast.success('Business successfully created', { theme: 'dark' });
 			})
 			.catch((error) => {
+        console.log({error});
 				const errorDescription = error.response.data.message;
+        toast.error('Business could not be Created', { theme: 'dark' });
 				setErrorMessage(errorDescription);
 			});
 	};
+
+  const uploadImage = (file) => {
+    return  axios.post(`${process.env.REACT_APP_SERVER_URL}/api/upload`, file)
+      .then(res => res.data)
+      .catch(err=>console.log(err));
+  };
+
+  const handleFileUpload = (e,field) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+    const uploadData = new FormData();
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("imageUrl", e.target.files[0]);
+ 
+    uploadImage(uploadData)
+      .then(response => {
+        // console.log(response.fileUrl);
+        // response carries "fileUrl" which we can use to update the state
+        setBusiness({...business, [field]:response.fileUrl});
+        
+      })
+      .catch(err => console.log("Error while uploading the file: ", err));
+  };
+  
 	return (
 		<div className='container'>
 			<h1>Let's create a Business!</h1>
@@ -97,11 +123,7 @@ const CreateBusiness = () => {
 								<Form.Label>Business Logo</Form.Label>
 								<Form.Control
 									type='file'
-									name='logoUrl'
-									value={business.logoUrl}
-									onChange={(e) => {
-										setBusiness({...business, [e.target.name]:e.target.value});
-									}}
+                  onChange={(e) => handleFileUpload(e,'logoUrl')}
 								/>
 							</Form.Group>
 						</div>
@@ -310,11 +332,7 @@ const CreateBusiness = () => {
 								<Form.Label>Backgroung Image</Form.Label>
 								<Form.Control
 									type='file'
-									name='bgUrl'
-									value={business.bgUrl}
-									onChange={(e) => {
-										setBusiness({...business, [e.target.name]:e.target.value});
-									}}
+									onChange={(e) => handleFileUpload(e,'bgUrl')}
 								/>
 							</Form.Group>
 
@@ -324,11 +342,7 @@ const CreateBusiness = () => {
 								<Form.Label>Menu PDF (optional)</Form.Label>
 								<Form.Control
 									type='file'
-									name='pdfMenu'
-									value={business.pdfMenu}
-									onChange={(e) => {
-										setBusiness({...business, [e.target.name]:e.target.value});
-									}}
+									onChange={(e) => handleFileUpload(e,'pdfMenu')}
 								/>
 							</Form.Group>
 						</div>
