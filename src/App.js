@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Dashboard from "./pages/Dashboard";
 import CreateBusiness from "./pages/CreateBusiness";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>      
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/dashboard" element={<IsPrivate><Dashboard /></IsPrivate>} />
+        <Route exact path="/profile/:userID" element={<IsPrivate><ProfilePage /></IsPrivate>} />
         <Route exact path="/create-business" element={<IsPrivate><CreateBusiness /></IsPrivate>} />
         <Route exact path="/signup" element={<IsAnon><SignupPage /></IsAnon>} />
         <Route exact path="/login" element={<IsAnon><LoginPage /></IsAnon>} />     

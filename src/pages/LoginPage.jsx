@@ -4,6 +4,7 @@ import {AuthContext} from '../context/auth.context';
 import axios from "axios";
 
 import { Button } from 'react-bootstrap'
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,10 +25,11 @@ const Login = () => {
         // console.log('JWT token', response.data.authToken );
         storeToken(response.data.authToken) // store in my localStorage the authToken
         authenticateUser() // verify token is valid to get the user information from the server 
-        navigate('/');                               
+        navigate('/');                        
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
+        toast.error('Sorry, read the error message', { theme: 'dark' });
         setErrorMessage(errorDescription);
       })
   };
