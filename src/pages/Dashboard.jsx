@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
-import { Row, Button } from 'react-bootstrap';
+import { Row, Card, Button } from 'react-bootstrap';
 import DashboardCard from '../components/DashboardCard';
 
 const Dashboard = () => {
@@ -15,7 +15,16 @@ const Dashboard = () => {
 				<DashboardCard href={`/${user.business.name}`} button={user.business.name} src={user.business.logoUrl}/>
                 )}
                 <DashboardCard href={`/profile/${user._id}`} button='Profile' src='/userActive.png'/>
-                <DashboardCard href={`/create-business`} button='+ Business' src='/businessActive.png' />
+				{user.business ? (
+					<Card className='col-4 mx-3 my-2 p-2  mx-md-5 col-md-2'>
+					<Card.Img className='p-2' variant='top' src='/businessInactive.png' />
+					<Button variant='outline-success' size='sm' disabled>
+					+ Business
+					</Button>
+				</Card>
+				) : <DashboardCard href={`/create-business`} button='+ Business' src='/businessActive.png' />}
+                
+				
                 <DashboardCard href='/cart' button='Cart' src='https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/shopping_cart.png' />
                 <DashboardCard href='/orders' button='Orders' src='https://www.iconbunny.com/icons/media/catalog/product/6/1/611.8-orders-icon-iconbunny.jpg'/>
 				<DashboardCard href='/mySavedBusiness' button='♥ Business' src='https://cdn.iconscout.com/icon/free/png-256/market-144-910307.png'/>

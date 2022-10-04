@@ -58,7 +58,7 @@ const CreateBusiness = () => {
 		axios
 			.post(`${process.env.REACT_APP_SERVER_URL}/business/create`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then((response) => {
-        const nameEncoded = response.data.business.name.toLowerCase().split(' ').join('-')
+        const nameEncoded = response.data.business.name.split(' ').join('-')
 				navigate(`/${nameEncoded}/dashboard`);
 		    toast.success('Business successfully created', { theme: 'dark' });
 			})
