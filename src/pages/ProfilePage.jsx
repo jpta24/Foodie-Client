@@ -44,9 +44,6 @@ const ProfilePage = () => {
 		e.preventDefault();
         const storedToken = localStorage.getItem("authToken"); 
 
-		// Create an object representing the request body
-		const buznameEncoded = buzname.split(' ').join('-');
-
         let newRol =''
         Object.entries(rol).forEach(eachrol=>{
             if (eachrol[1]) {

@@ -1,4 +1,4 @@
-import { Card, Col, Row, Button } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 const ProfileCard = ({src,onclick,button}) => {
   return (
