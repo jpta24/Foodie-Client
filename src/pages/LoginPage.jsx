@@ -1,48 +1,48 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import {AuthContext} from '../context/auth.context';
-import axios from "axios";
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/auth.context';
+import axios from 'axios';
 
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+	const navigate = useNavigate();
+	const { storeToken, authenticateUser } = useContext(AuthContext);
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(undefined);
- 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    const requestBody = { username, password };
- 
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
-      .then((response) => {
-      // Request to the server's endpoint `/auth/login` returns a response
-      // with the JWT string ->  response.data.authToken
-        // console.log('JWT token', response.data.authToken );
-        storeToken(response.data.authToken) // store in my localStorage the authToken
-        authenticateUser() // verify token is valid to get the user information from the server 
-        navigate('/');                        
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        toast.error('Sorry, read the error message', { theme: 'dark' });
-        setErrorMessage(errorDescription);
-      })
-  };
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [errorMessage, setErrorMessage] = useState(undefined);
 
-  return (
-    <div className='container'>
+	const handleLoginSubmit = (e) => {
+		e.preventDefault();
+		const requestBody = { username, password };
+
+		axios
+			.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
+			.then((response) => {
+				// Request to the server's endpoint `/auth/login` returns a response
+				// with the JWT string ->  response.data.authToken
+				// console.log('JWT token', response.data.authToken );
+				storeToken(response.data.authToken); // store in my localStorage the authToken
+				authenticateUser(); // verify token is valid to get the user information from the server
+				navigate('/');
+			})
+			.catch((error) => {
+				const errorDescription = error.response.data.message;
+				toast.error('Sorry, read the error message', { theme: 'dark' });
+				setErrorMessage(errorDescription);
+			});
+	};
+
+	return (
+		<div className='container'>
 			<h1>Welcome back</h1>
-            <p>Enter your credentials to access your account</p>
+			<p>Enter your credentials to access your account</p>
 
 			<div className='row justify-content-md-center p-4'>
 				<div className='col-md-6 col-lg-5 '>
 					<form className='form-control' onSubmit={handleLoginSubmit}>
-
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputUser01' className='form-label'>
 								Username
@@ -68,23 +68,30 @@ const Login = () => {
 								type='password'
 								className='form-control'
 								id='inputPassword01'
-                                value={password}
+								value={password}
 								onChange={(e) => {
 									setPassword(e.target.value);
-                                }}
+								}}
 							/>
 						</div>
-                        {errorMessage && <p className='text-danger'>{errorMessage}</p>}
+						{errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						<div className='col-12 my-3'>
-                            <Button type='submit'  className='col-4'>Log In</Button>
+							<Button type='submit' className='col-4'>
+								Log In
+							</Button>
 						</div>
 					</form>
-                    <hr />
-                    <p>Don't have an account?</p>
-                    <Button href='/signup'  variant='outline-primary' className='mx-2 my-1 col-4'>Sign Up</Button>
+					<hr />
+					<p>Don't have an account?</p>
+					<Button
+						href='/signup'
+						variant='outline-primary'
+						className='mx-2 my-1 col-4'
+					>
+						Sign Up
+					</Button>
 				</div>
 			</div>
-			
 		</div>
 	);
 };
