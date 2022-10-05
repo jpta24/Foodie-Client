@@ -4,7 +4,6 @@ import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { QRCode } from 'react-qrcode-logo';
 
-import { Row, Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import BusinessViewCard from '../components/BusinessViewCard';
 
@@ -132,9 +131,6 @@ const BusinessView = () => {
         )
     }
     
-
-
-  
 }
 
 export default BusinessView

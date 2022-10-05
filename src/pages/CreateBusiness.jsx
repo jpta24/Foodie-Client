@@ -56,7 +56,7 @@ const CreateBusiness = () => {
 		// If POST request is successful redirect to Business/Dashboard page
 		// If the request resolves with an error, set the error message in the state
 		axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/business/create`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
+			.post(`${process.env.REACT_APP_SERVER_URL}/business`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then((response) => {
         const nameEncoded = response.data.business.name.split(' ').join('-')
 				navigate(`/${nameEncoded}/dashboard`);
@@ -297,7 +297,6 @@ const CreateBusiness = () => {
 								<Form.Control
 									type='text'
 									placeholder='Ex: Specialties, Snacks, Dessert, Drinks, etc'
-									name='country'
 									value={menucategoriessearch}
 									onChange={(e)=>{
                     setmenucategoriessearch( e.target.value )
