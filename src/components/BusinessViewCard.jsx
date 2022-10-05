@@ -1,6 +1,6 @@
 import { Card, Button } from 'react-bootstrap';
 
-const DashboardCard = ({src,href,button}) => {
+const BusinessViewCard = ({src,href,button}) => {
   return (
     <>
         <Card className='col-4 mx-3 my-2 p-2  mx-md-5 col-md-2'>
@@ -13,4 +13,4 @@ const DashboardCard = ({src,href,button}) => {
   )
 }
 
-export default DashboardCard
+export default BusinessViewCard
