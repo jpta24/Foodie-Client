@@ -117,8 +117,10 @@ const BusinessView = () => {
                     </div>
                 </div>
                 <div className="row d-flex flex-row my-2 justify-content-center">
-                    <div className="col-md-8 d-flex justify-content-start flex-column align-items-start">
-                        <BusinessViewCard href={`/${businessNameEncoded}/products`} button='Products' src='https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/shopping_cart.png' />
+                    <div className="col-md-8 col-12 d-flex justify-content-start align-items-start">
+                        <BusinessViewCard href={`/${businessNameEncoded}/products`} button='Products' src='/productsIcon.png' />
+                        <BusinessViewCard href={`/${businessNameEncoded}/employees`} button='Employees' src='/employeeActive.png' />
+                        <BusinessViewCard href={`/${businessNameEncoded}/orders`} button='Orders' src='https://www.iconbunny.com/icons/media/catalog/product/6/1/611.8-orders-icon-iconbunny.jpg' />
                     </div>
                 </div>
 
