@@ -26,7 +26,6 @@ const CreateProduct = () => {
         business:'',
         type:'',
         price:'',
-
 		ingredients:[],
         categories:['General'],
 	};
@@ -65,7 +64,7 @@ const CreateProduct = () => {
 		axios
 			.post(`${process.env.REACT_APP_SERVER_URL}/products`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then((response) => {
-                setProduct(initialState)
+                setProduct({...initialState,business:business._id})
 		        toast.success('Product successfully created', { theme: 'dark' });
 			})
 			.catch((error) => {
@@ -143,7 +142,7 @@ const CreateProduct = () => {
                                     <Form.Label>Product Name</Form.Label>
                                     <Form.Control
                                         type='text'
-                                        placeholder='Enter a Name for rhe Product'
+                                        placeholder='Enter a Name for the Product'
                                         name='name'
                                         value={product.name}
                                         onChange={(e) => {
@@ -174,7 +173,7 @@ const CreateProduct = () => {
                                     as="textarea" 
                                     rows={3}
 									type='text'
-									placeholder='Enter a Name for rhe Product'
+									placeholder='Enter a Name for the Product'
 									name='description'
 									value={product.description}
 									onChange={(e) => {
