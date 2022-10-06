@@ -109,7 +109,7 @@ const CartPage = () => {
 			.then((response) => {
 		        toast.success('Order Placed', { theme: 'dark' });
                 setCart(null)
-                navigate(`/order/${user._id}`)
+                navigate(`/orders/${user._id}`)
 			})
 			.catch((error) => {
                 console.log({error});
