@@ -21,8 +21,17 @@ $custom-colors: (
 }
 
 .cartProducts {
-  height: 68vh;
+  max-height: 68vh;
   overflow: auto;
+}
+
+.cartSummary {
+  height: 86vh;
+}
+@media screen and (max-width: 400px) {
+  .cartSummary {
+    height: fit-content;
+  }
 }
 
 /* width */
