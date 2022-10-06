@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
+import iconsCloud from '../data/icons.json'
+
 const CreateProduct = () => {
     const { user } = useContext(AuthContext);
     const { businessName } = useParams();
@@ -115,7 +117,7 @@ const CreateProduct = () => {
                         height: '150px'
                     }}>
                         <div className='d-flex col-12 justify-content-start'>
-                            <Link className='m-2' to={`/${businessNameEncoded}/products`}><span className="bg-dark rounded-circle border m-2 "><img src="/backIcon.png" alt="backIcon" width={35}/></span></Link>
+                            <Link className='m-2' to={`/${businessNameEncoded}/products`}><span className="bg-dark rounded-circle border m-2 "><img src={iconsCloud[0].backIcon} alt="backIcon" width={35}/></span></Link>
                             
                         </div>
                         <div className='d-flex justify-content-center align-items-end'>
@@ -212,7 +214,7 @@ const CreateProduct = () => {
 							>
 								<Form.Label>Price</Form.Label>
                                 <InputGroup className="mb-3">
-                                    <InputGroup.Text>$</InputGroup.Text>
+                                    <InputGroup.Text>€</InputGroup.Text>
                                     <Form.Control
 									type='number'
 									placeholder='use dot for decimals'

@@ -1,13 +1,17 @@
 import { Button, Nav, Navbar } from 'react-bootstrap'
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
+import { CartContext } from '../context/cart.context';
+
+import iconsCloud from '../data/icons.json'
 
 const Nabvar2 = () => {
     const { isLoggedIn, logOutUser } = useContext(AuthContext);
+    const { cart } = useContext(CartContext)
   return (
     <Navbar className='px-4' bg="dark" variant="dark" sticky="top" expand="sm" collapseOnSelect>
         <Navbar.Brand>
-        <img src='/myIcon.png' width="40px" height="40px" alt='altLogo'/>{' '}
+        <img src={iconsCloud[0].foodieIcon} width="40px" height="40px" alt='altLogo'/>{' '}
         Foodie
         </Navbar.Brand>
 
@@ -22,15 +26,26 @@ const Nabvar2 = () => {
                 {isLoggedIn && (
                     <>
                         <Nav.Link href="/dashboard">Dashboard 📉</Nav.Link>
-                        <Button href='/cart' variant="outline-success" className='mx-2 my-1' >Cart 🛒</Button>
+                        <Button href='/cart' variant="outline-success" className='mx-2 my-1 position-relative' >Cart 🛒
+                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">
+                                {cart.length}
+                                <span className="visually-hidden">unread messages</span>
+                            </span>
+                        </Button>
                         <Button className='mx-2 my-1' onClick={logOutUser}>Log Out</Button>
                     </>
                 )}
                 {!isLoggedIn && (
                     <>
-                        <Button href='/cart' variant="outline-success" className='mx-2 my-1'>Cart 🛒</Button>
+                        <Button href='/cart' variant="outline-success" className='mx-2 my-1 position-relative'>Cart 🛒
+                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">
+                                {cart.length}
+                                <span className="visually-hidden">unread messages</span>
+                            </span>
+                        </Button>
                         <Button href='/login'  variant='outline-primary' className='mx-2 my-1'>Log In</Button>
                         <Button href='/signup'  className='mx-2 my-1'>Sign Up</Button>
+                        
                     </>
                 )}
             </Nav>

@@ -7,6 +7,8 @@ import { QRCode } from 'react-qrcode-logo';
 import { toast } from 'react-toastify';
 import BusinessViewCard from '../components/BusinessViewCard';
 
+import iconsCloud from '../data/icons.json'
+
 const BusinessView = () => {
     const { user } = useContext(AuthContext);
     const { businessName } = useParams();
@@ -67,6 +69,7 @@ const BusinessView = () => {
                         backgroundRepeat: 'no-repeat',
                         height: '150px'
                         }}>
+                        
                         <div className='rounded-circle border border-dark bg-dark d-flex justify-content-center align-items-center' style={{  
                             height: '90px',
                             width: '90px'
@@ -97,7 +100,7 @@ const BusinessView = () => {
                     <div className="p-1 col-6 m-auto" style={{
                             width: '190px'
                         }}>
-                        <div className="border border-dark">
+                        <div className="border border-dark shadow-lg">
                             <QRCode value={`https://foodie-de.netlify.app/${business.name}`} size='150' logoImage={business.logoUrl} removeQrCodeBehindLogo='true' qrStyle='dots' ecLevel='H' />
                         </div>
                     </div>     
@@ -117,9 +120,9 @@ const BusinessView = () => {
                 </div>
                 <div className="row d-flex flex-row my-2 justify-content-center">
                     <div className="col-md-8 col-12 d-flex justify-content-start align-items-start">
-                        <BusinessViewCard href={`/${businessNameEncoded}/products`} button='Products' src='/productsIcon.png' />
-                        <BusinessViewCard href={`/${businessNameEncoded}/employees`} button='Employees' src='/employeeActive.png' />
-                        <BusinessViewCard href={`/${businessNameEncoded}/orders`} button='Orders' src='https://www.iconbunny.com/icons/media/catalog/product/6/1/611.8-orders-icon-iconbunny.jpg' />
+                        <BusinessViewCard href={`/${businessNameEncoded}/products`} button='Products' src={iconsCloud[0].products} />
+                        <BusinessViewCard href={`/${businessNameEncoded}/employees`} button='Employees' src={iconsCloud[0].employeeManage} />
+                        <BusinessViewCard href={`/${businessNameEncoded}/orders`} button='Orders' src={iconsCloud[0].orders} />
                     </div>
                 </div>
 

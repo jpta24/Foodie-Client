@@ -1,4 +1,4 @@
-import { useState, useContext,useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {  useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
@@ -6,7 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+
 import ProductCard from '../components/ProductCard';
+import ProductCardDesktop from '../components/ProductCardDesktop';
+
+import iconsCloud from '../data/icons.json'
 
 const BusinessProducts = () => {
     const { user } = useContext(AuthContext);
@@ -48,7 +52,7 @@ const BusinessProducts = () => {
                         height: '150px'
                     }}>
                         <div className='d-flex col-12 justify-content-start'>
-                            <Link className='m-2' to={`/${businessNameEncoded}/dashboard`}><span className="bg-dark rounded-circle border m-2 "><img src="/backIcon.png" alt="backIcon" width={35}/></span></Link>
+                            <Link className='m-2' to={`/${businessNameEncoded}/dashboard`}><span className="shadow m-2 "><img src={iconsCloud[0].backIcon} alt="backIcon" width={35}/></span></Link>
                             
                         </div>
                         <div className='d-flex justify-content-center align-items-end'>
@@ -69,11 +73,19 @@ const BusinessProducts = () => {
                     </div>
                 </div>
                 <div className="row p-0 justify-content-center">
-                    <div className=" col-md-8 col-12 d-flex flex-column justify-content-center align-items-center ">
+
+                {window.innerWidth < 400 ? 
+                    <div className="col-12 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.map(product =>{
                             return <ProductCard key={uuidv4()} product={product}/>
                         })}
-                    </div>
+                    </div> : 
+                    <div className=" col-md-10 d-flex flex-wrap justify-content-center align-items-stretch ">
+                        {business.products.map(product =>{
+                            return <ProductCardDesktop key={uuidv4()} product={product}/>
+                        })}
+                    </div>}
+                    
                 </div>
 
             </div>

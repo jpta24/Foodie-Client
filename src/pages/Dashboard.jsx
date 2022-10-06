@@ -1,33 +1,32 @@
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 
-import { Row, Card, Button } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import DashboardCard from '../components/DashboardCard';
+
+import iconsCloud from '../data/icons.json'
 
 const Dashboard = () => {
 	const { user } = useContext(AuthContext);
+
+	let businessNameEncoded 
+	if (user.business) {
+		businessNameEncoded = user.business.name.split(' ').join('-')
+	}
 	return (
 		<div className='dashboard container justify-content-center'>
 			<h1 className='my-2'>Dashboard</h1>
 			<Row xs={1} md={2} className='g-4 px-3 my-3 justify-content-center'>
-			{user.business && (
-				<DashboardCard href={`/${user.business.name}`} button={user.business.name} src={user.business.logoUrl}/>
-                )}
-                <DashboardCard href={`/profile/${user._id}`} button='Profile' src='/userActive.png'/>
 				{user.business ? (
-					<Card className='col-4 mx-3 my-2 p-2  mx-md-5 col-md-2'>
-					<Card.Img className='p-2' variant='top' src='/businessInactive.png' />
-					<Button variant='outline-success' size='sm' disabled>
-					+ Business
-					</Button>
-				</Card>
-				) : <DashboardCard href={`/create-business`} button='+ Business' src='/businessActive.png' />}
-                
+				<DashboardCard href={`/${businessNameEncoded}/dashboard`} button='Business' src={iconsCloud[0].newBuz}/>
+                ) : <DashboardCard href={`/create-business`} button='+ Business' src={iconsCloud[0].newBuz} /> }
+                <DashboardCard href={`/profile/${user._id}`} button='Profile' src={iconsCloud[0].profile}/>
+				                
 				
-                <DashboardCard href='/cart' button='Cart' src='https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/shopping_cart.png' />
-                <DashboardCard href='/orders' button='Orders' src='https://www.iconbunny.com/icons/media/catalog/product/6/1/611.8-orders-icon-iconbunny.jpg'/>
-				<DashboardCard href='/mySavedBusiness' button='♥ Business' src='https://cdn.iconscout.com/icon/free/png-256/market-144-910307.png'/>
-                <DashboardCard href='/mySavedProducts' button='♥ Products' src='https://cdn3.iconfinder.com/data/icons/restaurant-element/64/dinner-food-meal-juice-evening-512.png'/>
+                <DashboardCard href='/cart' button='Cart' src={iconsCloud[0].cart} />
+                <DashboardCard href='/orders' button='Orders' src={iconsCloud[0].orders}/>
+				<DashboardCard href='/mySavedBusiness' button='♥ Business' src={iconsCloud[0].savedBuz}/>
+                <DashboardCard href='/mySavedProducts' button='♥ Products' src={iconsCloud[0].savedProducts}/>
 			</Row>
 		</div>
 	);

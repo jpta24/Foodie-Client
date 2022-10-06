@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 import ProfileCard from '../components/ProfileCard';
 
+import iconsCloud from '../data/icons.json'
+
 const ProfilePage = () => {
 	const { user } = useContext(AuthContext);
     const { userID } = useParams();
@@ -51,7 +53,7 @@ const ProfilePage = () => {
             }
         })   
         const requestBody = {
-            update:1,
+            update:'rol',
             rol:newRol,
             buzname
         } 
@@ -79,7 +81,7 @@ const ProfilePage = () => {
         </Row> */}
         <Row className='d-flex flex-row justify-content-center pt-3'>
             <div className='col-3 col-md-2 justify-content-center align-items-center mx-2'>
-                <img src={user.avatarUrl || 'https://res.cloudinary.com/dwtnqtdcs/image/upload/v1664807121/foodie-gallery/userActive_g8bwbi.png'} alt='altProfile' className='w-100 rounded-circle border border-dark p-2 d-block'/>
+                <img src={user.avatarUrl || iconsCloud[0].userDefault} alt='altProfile' className='w-100 rounded-circle border border-dark p-2 d-block'/>
             </div>
             <div className='col-8 col-md-6 d-flex flex-column align-items-start'>
                 <div className='d-flex col-12 justify-content-between'>
@@ -95,9 +97,9 @@ const ProfilePage = () => {
         <Row className='justify-content-center'>
             <h5 className='my-2'>Change Rol</h5>
             <Row xs={2} md={2} className='g-4 px-3 my-0 justify-content-center'>
-                <ProfileCard onclick={()=>{handleChange('user')}} button='User' src={`/user${rol.user ? 'A': 'Ina'}ctive.png`}/>
-                <ProfileCard onclick={()=>{handleChange('admin')}} button='Admin' src={`/admin${rol.admin ? 'A': 'Ina'}ctive.png`}/>
-                <ProfileCard onclick={()=>{handleChange('employee')}} button='Employee' src={`/employee${rol.employee ? 'A': 'Ina'}ctive.png`}/>
+                <ProfileCard onclick={()=>{handleChange('user')}} button='User' src={rol.user ? iconsCloud[0].userActive: iconsCloud[0].userInactive}/>
+                <ProfileCard onclick={()=>{handleChange('admin')}} button='Admin' src={rol.admin ? iconsCloud[0].adminActive: iconsCloud[0].adminInactive}/>
+                <ProfileCard onclick={()=>{handleChange('employee')}} button='Employee' src={rol.employee ? iconsCloud[0].employeeActive: iconsCloud[0].employeeInactive}/>
             </Row>
             
                 <Form onSubmit={handleBuzNameSubmit}>
