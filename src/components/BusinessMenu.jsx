@@ -1,11 +1,9 @@
-import { useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
 const BusinessMenu = ({business}) => {
   
   let initialMenu = {}
-  const [menuActive, setMenuActive] = useState({})
 
     let arrCategories = []
         if (business.products) {

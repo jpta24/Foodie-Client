@@ -20,12 +20,8 @@ const CartProviderWrapper = (props) => {
                     { headers: { Authorization: `Bearer ${storedToken}`} }
                   )
                   .then((response) => {
-                      
                     const newCart = response.data.cart;
-                    if (newCart) {
-                      setCart(newCart)
-                      console.log(cart);
-                    }      
+                    setCart(newCart)
                   })
                   .catch((error) => {
                     console.log({error});       

@@ -8,16 +8,16 @@ $custom-colors: (
   "f-secondary": green
 );
 .card:hover {
-  transform: scale(1.05);
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  -o-transform: scale(1.05);
+  transform: scale(1.01);
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
   transition: all 0.3s linear !important;
-	-webkit-transition: all 0.3s linear !important;
-	-moz-transition: all 0.3s linear !important;
-	-ms-transition: all 0.3s linear !important;
-	-o-transition: all 0.3s linear !important; 
+  -webkit-transition: all 0.3s linear !important;
+  -moz-transition: all 0.3s linear !important;
+  -ms-transition: all 0.3s linear !important;
+  -o-transition: all 0.3s linear !important;
 }
 // Merge the maps
 $theme-colors: map-merge($theme-colors, $custom-colors);

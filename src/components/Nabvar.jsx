@@ -6,7 +6,7 @@ import { CartContext } from '../context/cart.context';
 import iconsCloud from '../data/icons.json'
 
 const Nabvar2 = () => {
-    const { isLoggedIn, logOutUser } = useContext(AuthContext);
+    const { isLoggedIn, logOutUser, user } = useContext(AuthContext);
     const { cart } = useContext(CartContext)
 
   return (
@@ -27,7 +27,7 @@ const Nabvar2 = () => {
                 {isLoggedIn && (
                     <>
                         <Nav.Link href="/dashboard">Dashboard 📉</Nav.Link>
-                        <Button href='/cart' variant="outline-success" className='mx-2 my-1 position-relative' >Cart 🛒
+                        <Button href={`/cart/${user._id}`} variant="outline-success" className='mx-2 my-1 position-relative' >Cart 🛒
                             {cart && cart.length > 0 &&
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">
                                 {cart.length}
@@ -39,14 +39,14 @@ const Nabvar2 = () => {
                 )}
                 {!isLoggedIn && (
                     <>
-                        <Button href='/cart' variant="outline-success" className='mx-2 my-1 position-relative'>Cart 🛒
+                        {/* <Button href='/cart' variant="outline-success" className='mx-2 my-1 position-relative'>Cart 🛒
 
                             {cart && cart.length > 0 &&
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">
                                 {cart.length}
                                 <span className="visually-hidden">unread messages</span>
                             </span>}
-                        </Button>
+                        </Button> */}
                         <Button href='/login'  variant='outline-primary' className='mx-2 my-1'>Log In</Button>
                         <Button href='/signup'  className='mx-2 my-1'>Sign Up</Button>
                         

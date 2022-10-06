@@ -1,6 +1,5 @@
-import { useState, useContext, useEffect } from 'react';
-import {  useParams, useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../context/auth.context';
+import { useState, useEffect } from 'react';
+import {  useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,11 +8,9 @@ import { toast } from 'react-toastify';
 import ProductCard from '../components/ProductCard';
 import ProductCardDesktop from '../components/ProductCardDesktop';
 
-import iconsCloud from '../data/icons.json'
 import BusinessMenu from '../components/BusinessMenu';
 
 const Business = () => {
-    const { user } = useContext(AuthContext);
     
     const { businessName } = useParams();
     const navigate = useNavigate();
@@ -38,10 +35,7 @@ const Business = () => {
       }, [])
 
   if (business!=='') {
-        if(business.owner !== user._id){
-            navigate('/')
-        }
-            
+                   
         return (
             <div className='container-fluid'>
                 <div className="row p-0">
