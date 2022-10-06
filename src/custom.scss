@@ -19,6 +19,31 @@ $custom-colors: (
   -ms-transition: all 0.3s linear !important;
   -o-transition: all 0.3s linear !important;
 }
+
+.cartProducts {
+  height: 68vh;
+  overflow: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 // Merge the maps
 $theme-colors: map-merge($theme-colors, $custom-colors);
 

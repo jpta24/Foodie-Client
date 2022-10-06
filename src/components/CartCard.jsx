@@ -40,9 +40,10 @@ const CartCard = ({product,updateSummary}) => {
 
     useEffect(() => {
         updateSummary()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
   return (
-    <div className='rounded d-flex flex-row card col-12 align-items-center justify-content-between m-1 shadow'>
+    <div className='rounded d-flex flex-row card col-11 align-items-center justify-content-between m-1 shadow'>
         <div className="col-2 m-2 ">
             <div className="p-2 rounded border border-dark d-flex justify-items-center m-auto" 
                 style={{  
