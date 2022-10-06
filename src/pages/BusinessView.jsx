@@ -32,8 +32,6 @@ const BusinessView = () => {
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-
     
     if (business!=='') {
         if(business.owner !== user._id){

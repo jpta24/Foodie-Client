@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-
 const CartContext = createContext();
 
 const CartProviderWrapper = (props) => {    
@@ -25,6 +24,7 @@ const CartProviderWrapper = (props) => {
                     const newCart = response.data.cart;
                     if (newCart) {
                       setCart(newCart)
+                      console.log(cart);
                     }      
                   })
                   .catch((error) => {
@@ -43,7 +43,7 @@ const CartProviderWrapper = (props) => {
       }, [])
 
   return (
-    <CartContext.Provider value={{ cart, getCartData }}>
+    <CartContext.Provider value={{ cart, setCart, getCartData }}>
       {props.children}
     </CartContext.Provider>
   )

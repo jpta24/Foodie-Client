@@ -1,9 +1,12 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect,useContext } from "react";
+import {CartContext} from '../context/cart.context'
 import axios from "axios";
  
 const AuthContext = createContext();
  
 function AuthProviderWrapper(props) {
+  
+  const { getCartData, setCart } = useContext(CartContext);
     // 1. State variables are initialized
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +36,8 @@ function AuthProviderWrapper(props) {
            // Update state variables        
             setIsLoggedIn(true);
             setIsLoading(false);
-            setUser(user);        
+            setUser(user);    
+            getCartData()    
           })
           .catch((error) => {
             // If the server sends an error response (invalid token) 
@@ -60,6 +64,7 @@ function AuthProviderWrapper(props) {
         removeToken();
         // and update the state variables    
         authenticateUser();
+        setCart(null)
       }  
     
       // 3. Checks if we have a JWT token in localStorage
@@ -67,6 +72,7 @@ function AuthProviderWrapper(props) {
       // If not, update our state variable isLoading to false
       useEffect(()=>{
         authenticateUser();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
  
       // 2. Provider component that will share 'value' to the rest of the component tree

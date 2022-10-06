@@ -8,6 +8,7 @@ import iconsCloud from '../data/icons.json'
 const Nabvar2 = () => {
     const { isLoggedIn, logOutUser } = useContext(AuthContext);
     const { cart } = useContext(CartContext)
+
   return (
     <Navbar className='px-4' bg="dark" variant="dark" sticky="top" expand="sm" collapseOnSelect>
         <Navbar.Brand>
@@ -27,10 +28,11 @@ const Nabvar2 = () => {
                     <>
                         <Nav.Link href="/dashboard">Dashboard 📉</Nav.Link>
                         <Button href='/cart' variant="outline-success" className='mx-2 my-1 position-relative' >Cart 🛒
+                            {cart && cart.length > 0 &&
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">
                                 {cart.length}
                                 <span className="visually-hidden">unread messages</span>
-                            </span>
+                            </span>}
                         </Button>
                         <Button className='mx-2 my-1' onClick={logOutUser}>Log Out</Button>
                     </>
@@ -38,10 +40,12 @@ const Nabvar2 = () => {
                 {!isLoggedIn && (
                     <>
                         <Button href='/cart' variant="outline-success" className='mx-2 my-1 position-relative'>Cart 🛒
+
+                            {cart && cart.length > 0 &&
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">
                                 {cart.length}
                                 <span className="visually-hidden">unread messages</span>
-                            </span>
+                            </span>}
                         </Button>
                         <Button href='/login'  variant='outline-primary' className='mx-2 my-1'>Log In</Button>
                         <Button href='/signup'  className='mx-2 my-1'>Sign Up</Button>
