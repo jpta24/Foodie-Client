@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap'
 
-import iconsCloud from '../data/icons.json'
+// import iconsCloud from '../data/icons.json'
 
 function HomePage() {
   return (
