@@ -14,7 +14,7 @@ const OrdersPage = () => {
         return <div className='container p-0'>
             <div className="row d-flex flex-row rounded border border-light">
                 <div className="col-12 col-md-10">
-                    <div className="col-11 d-flex flex-column p-2 mt-2 form-control">
+                    <div className="col-12 d-flex flex-column justify-content-center align-items-center p-2 mt-2 form-control">
                         <h1>Hi, {user.username}</h1>
                         <h3>These are your Orders:</h3>
                         <div className="col-12 cartProducts">

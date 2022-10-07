@@ -143,9 +143,9 @@ const CartPage = () => {
                             <h2> Summary: € {summary.toFixed(2)}</h2>
                             <h4>Payment Method</h4>
                             <div className='d-flex px-2 m-2 justify-content-around'>
-                                <PayMethod onclick={()=>{handleChange('cash')}} src={rol.cash ? iconsCloud[0].userActive: iconsCloud[0].userInactive}/>
-                                <PayMethod onclick={()=>{handleChange('card')}} src={rol.card ? iconsCloud[0].adminActive: iconsCloud[0].adminInactive}/>
-                                <PayMethod onclick={()=>{handleChange('pp')}} src={rol.pp ? iconsCloud[0].employeeActive: iconsCloud[0].employeeInactive}/>
+                                <PayMethod onclick={()=>{handleChange('cash')}} src={rol.cash ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
+                                <PayMethod onclick={()=>{handleChange('card')}} src={rol.card ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>
+                                <PayMethod onclick={()=>{handleChange('pp')}} src={rol.pp ? iconsCloud[0].ppActive: iconsCloud[0].ppInactive}/>
                             </div>
 
                             <div className='d-flex flex-column justify-content-between mb-2 '>

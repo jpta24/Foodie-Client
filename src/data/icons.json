@@ -22,6 +22,13 @@
         "savedProducts":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665010199/foodie-gallery/Imagen22_grjjwn.png",
         "employeeManage":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665010498/foodie-gallery/Imagen23_o5drtp.png",
         "userDefault":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665012984/foodie-gallery/Imagen24_ua0gej.png",
-        "addToCart":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665047685/foodie-gallery/addCarr2_fa4dp1.png"
+        "addToCart":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665047685/foodie-gallery/addCarr2_fa4dp1.png",
+        "cashActive":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665099724/foodie-gallery/Imagen25_cljwxe.png",
+        "cashInactive":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665099724/foodie-gallery/Imagen28_dn8yae.png",
+        "cardActive":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665099724/foodie-gallery/Imagen26_weiimn.png",
+        "cardInactive":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665099724/foodie-gallery/Imagen29_xszjjn.png",
+        "ppActive":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665099724/foodie-gallery/Imagen27_o9rsil.png",
+        "ppInactive":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665099724/foodie-gallery/Imagen30_hsvo3o.png",
+        "homeBg":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1665100226/foodie-gallery/Imagen32_mkses8.png"
 }
 ]

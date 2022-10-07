@@ -19,11 +19,11 @@ const Nabvar2 = () => {
         <Navbar.Toggle className="coloring" />
         <Navbar.Collapse className='d-flex-lg justify-content-between '>
             <Nav>
-                <Nav.Link href="#home">Home</Nav.Link>
+                <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="#about-us">About Us</Nav.Link>
             </Nav>
             <Nav className='navbar-nav mb-2 mb-lg-0 me-4'>
-            <Nav.Link href="/markets">Markets 🏪</Nav.Link>
+            {/* <Nav.Link href="/markets">Markets 🏪</Nav.Link> */}
                 {isLoggedIn && (
                     <>
                         <Nav.Link href="/dashboard">Dashboard 📉</Nav.Link>
