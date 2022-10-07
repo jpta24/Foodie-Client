@@ -17,7 +17,7 @@ function HomePage() {
               fontSize:'5rem',
               fontWeight:'bolder',
           }}>Foodie!</h1>
-          {window.innerWidth > 400 && 
+          {window.innerWidth > 450 && 
           <h2 className='m-5 col-2' style={{  
                   fontSize:'2rem',
                   fontWeight:'bolder',
@@ -31,7 +31,7 @@ function HomePage() {
               
           </div>
         </div>
-        {window.innerWidth < 400 && <>
+        {window.innerWidth < 450 && <>
           <h2 className='m-auto col-11' style={{  
                   fontSize:'1.5rem',
                   fontWeight:'bolder',

@@ -70,7 +70,7 @@ const Business = () => {
                 </div>
                 <div className="row p-0 justify-content-center">
 
-                {window.innerWidth < 400 ? 
+                {window.innerWidth < 450 ? 
                     <div className="col-12 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.map(product =>{
                             return <ProductCard key={uuidv4()} product={product}/>
