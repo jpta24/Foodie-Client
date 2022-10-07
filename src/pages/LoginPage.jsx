@@ -26,7 +26,7 @@ const Login = () => {
 				// console.log('JWT token', response.data.authToken );
 				storeToken(response.data.authToken); // store in my localStorage the authToken
 				authenticateUser(); // verify token is valid to get the user information from the server
-				navigate('/');
+				navigate('/dashboard');
 			})
 			.catch((error) => {
 				const errorDescription = error.response.data.message;
