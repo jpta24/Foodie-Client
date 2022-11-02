@@ -1,14 +1,15 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import {CartContext} from '../context/cart.context'
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
 
-const ProductCard = ({product}) => {
-    // console.log(window.innerWidth)
+const ProductCard = ({product,businessNameEncoded}) => {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
 
@@ -17,24 +18,28 @@ const ProductCard = ({product}) => {
     const [added, setAdded] = useState(0)
 
     const handleAddToCart = () =>{
-        const requestBody = {
-            update:'cart',
-            cart:{
-                product:product._id,
-                quantity:added
-            }
-        } 
-        axios
-			.put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
-			.then(() => {
-		        toast.success('Item(s) added to Cart', { theme: 'dark' });
-                getCartData()
-                setAdded(0)
-			})
-			.catch((error) => {
-				const errorDescription = error.response.data.message;
-                toast.error(errorDescription, { theme: 'dark' });
-			});
+        if(user){
+            const requestBody = {
+                update:'cart',
+                cart:{
+                    product:product._id,
+                    quantity:added
+                }
+            } 
+            axios
+                .put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+                .then(() => {
+                    toast.success('Item(s) added to Cart', { theme: 'dark' });
+                    getCartData()
+                    setAdded(0)
+                })
+                .catch((error) => {
+                    const errorDescription = error.response.data.message;
+                    toast.error(errorDescription, { theme: 'dark' });
+                });
+        } else {
+           navigate(`/login/${businessNameEncoded}`)
+        }
     }
 
   return (

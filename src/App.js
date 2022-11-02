@@ -20,6 +20,8 @@ import Business from "./pages/Business";
 import CartPage from "./pages/CartPage";
 import OrdersPage from "./pages/OrdersPage";
 import BusinessOrders from "./pages/BusinessOrders";
+import LoginBizPage from "./pages/LoginBizPage";
+import SignupBizPage from "./pages/SignupBizPage";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/signup" element={<IsAnon><SignupPage /></IsAnon>} />
         <Route exact path="/login" element={<IsAnon><LoginPage /></IsAnon>} />  
+        <Route exact path="/signup/:businessName" element={<IsAnon><SignupBizPage /></IsAnon>} />
+        <Route exact path="/login/:businessName" element={<IsAnon><LoginBizPage /></IsAnon>} />  
         <Route exact path="/dashboard" element={<IsPrivate><Dashboard /></IsPrivate>} />
         <Route exact path="/profile/:userID" element={<IsPrivate><ProfilePage /></IsPrivate>} />
         <Route exact path="/create-business" element={<IsPrivate><CreateBusiness /></IsPrivate>} />

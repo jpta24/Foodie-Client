@@ -73,12 +73,12 @@ const Business = () => {
                 {window.innerWidth < 450 ? 
                     <div className="col-12 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.map(product =>{
-                            return <ProductCard key={uuidv4()} product={product}/>
+                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
                         })}
                     </div> : 
                     <div className=" col-md-10 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product}/>
+                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
                         })}
                     </div>}
                     
