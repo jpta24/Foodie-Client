@@ -1,41 +1,47 @@
-import { useState, useEffect } from 'react';
-// import axios from 'axios';
-
-// import { AuthContext } from '../context/auth.context';
-// import {CartContext} from '../context/cart.context'
-
-// import iconsCloud from '../data/icons.json'
+import { useEffect, useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../context/auth.context';
+import {CartContext} from '../context/cart.context'
 
 const CartCard = ({product,updateSummary}) => {
-    
-    // const { user } = useContext(AuthContext);
-    // const { getCartData } = useContext(CartContext);
+    const { user } = useContext(AuthContext);
+    const { getCartData } = useContext(CartContext);
 
-    // const storedToken = localStorage.getItem("authToken"); 
-
-    const [added, setAdded] = useState(product.quantity)
-
-    const handleAddToCart = (operation) =>{
-        operation==='add' ?setAdded( added + 1) :setAdded( added===0 ? 0 : added - 1)
-        // updateSummary()
-
-        // let qtySend = added
-        // operation==='add' ? qtySend = added + 1 : qtySend = added - 1
-        // const requestBody = {
-        //     update:'cartQty',
-        //     cart:{
-        //         product:product.product._id,
-        //         quantity:qtySend
-        //     }
-        // } 
-        // axios
-		// 	.put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
-		// 	.then(() => {
-        //         getCartData()
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error)
-		// 	});
+    const storedToken = localStorage.getItem("authToken"); 
+    const handleAddToCart = () =>{
+        const requestBody = {
+            update:'cart',
+            cart:{
+                product:product.product._id,
+                quantity:1
+            }
+        } 
+        axios
+            .put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then(() => {
+                getCartData()
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+        
+    }
+    const handleRemoveToCart = () =>{
+        const requestBody = {
+            update:'removeCart',
+            cart:{
+                product:product._id,
+            }
+        } 
+        axios
+            .put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then(() => {
+                getCartData()
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+        
     }
 
     useEffect(() => {
@@ -65,18 +71,18 @@ const CartCard = ({product,updateSummary}) => {
             <div className="mb-1">
                 <p className='mb-1'>
                     <span className="badge rounded-pill bg-success">
-                        <span className="p-1" onClick={()=>{handleAddToCart('substract')}}>-</span>
-                        <span className="p-1">{added}</span>
-                        <span className="p-1" onClick={()=>{handleAddToCart('add')}}>+</span>
+                        <span className="p-1" onClick={()=>{handleRemoveToCart()}}>-</span>
+                        <span className="p-1">{product.quantity}</span>
+                        <span className="p-1" onClick={()=>{handleAddToCart()}}>+</span>
                     </span>
                 </p>
             </div>
         </div>
         <div className="m-1 col-2">
-            <h3>{added}</h3>
+            <h3>{product.quantity}</h3>
         </div>
         <div className="m-1 col-2">
-            <h3 className='subtotal'>€ {(added * product.product.price).toFixed(2)}</h3>
+            <h3 className='subtotal'>€ {(product.quantity * product.product.price).toFixed(2)}</h3>
         </div>
     </div>
   )

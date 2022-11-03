@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import {CartContext} from '../context/cart.context'
 import { useNavigate } from "react-router-dom";
@@ -14,8 +14,6 @@ const ProductCard = ({product,businessNameEncoded}) => {
     const { getCartData } = useContext(CartContext);
 
     const storedToken = localStorage.getItem("authToken"); 
-    
-    const [added, setAdded] = useState(0)
 
     const handleAddToCart = () =>{
         if(user){
@@ -23,7 +21,7 @@ const ProductCard = ({product,businessNameEncoded}) => {
                 update:'cart',
                 cart:{
                     product:product._id,
-                    quantity:added
+                    quantity:1
                 }
             } 
             axios
@@ -31,7 +29,6 @@ const ProductCard = ({product,businessNameEncoded}) => {
                 .then(() => {
                     toast.success('Item(s) added to Cart', { theme: 'dark' });
                     getCartData()
-                    setAdded(0)
                 })
                 .catch((error) => {
                     const errorDescription = error.response.data.message;
@@ -60,23 +57,9 @@ const ProductCard = ({product,businessNameEncoded}) => {
             
         </dir>
         <div className="mb-2">
-            {added === 0 ? 
-                <span className="p-1">
-                    <img src={iconsCloud[0].addIcon} alt="" width={25} onClick={()=>{setAdded(1)}}/>
-                </span> 
-                :
-                <p>
-                    <span className="badge rounded-pill bg-success">
-                        <span className="p-1" onClick={()=>{setAdded(added-1)}}>-</span>
-                        <span className="p-1">{added}</span>
-                        <span className="p-1" onClick={()=>{setAdded(added+1)}}>+</span>
-                        
-                    </span>
-                    <span className="p-1">
-                        <img src={iconsCloud[0].addToCart} alt="" width={20} onClick={handleAddToCart}/>
-                    </span>
-                </p>
-            }
+            <span className="p-1">
+                <img src={iconsCloud[0].addIcon} alt="" width={25} onClick={handleAddToCart}/>
+            </span> 
         </div>
     </div>
   )

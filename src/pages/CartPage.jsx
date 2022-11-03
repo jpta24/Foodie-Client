@@ -29,7 +29,6 @@ const CartPage = () => {
             arrSubtotal.push(+arrSubtotalElem[i].innerText.split(' ')[1])    
         }
         setSummary(arrSubtotal.reduce((acc,val)=>{return acc+val}))
-        // console.log(arrSubtotal.reduce((acc,val)=>{return acc+val}))
     }
 
     const initialState = {
@@ -53,7 +52,6 @@ const CartPage = () => {
     const handleChange = (rolClicked) => {
         const newState = {...initialState}
         newState[rolClicked]= true
-        // console.log(newState)
         setRol(newState)
     }
 
@@ -118,11 +116,33 @@ const CartPage = () => {
                 toast.error('Order could not be placed', { theme: 'dark' });
 			});
     }
-    
-    
+
 
     if(user && cart){
+    const allIds = cart.map(elem =>elem.product._id)
+    const cartProdIds = []
+    const renderCart = []
+
+    for (let i = 0; i < cart.length; i++) {
+        if (cartProdIds.includes(cart[i].product._id)) {
+
+            const filteredElem = renderCart.filter(elem=>{
+                return cart[i].product._id === elem.product._id
+            })
+            let qty = 0
+            allIds.forEach(elem=>{
+                if(elem === cart[i].product._id){
+                    qty += 1
+                }
+            })
+            filteredElem[0].quantity = qty                  
+        }else{
+            cartProdIds.push(cart[i].product._id)
+            renderCart.push(cart[i])
+        }
         
+    }   
+    
         return (
             <div className='container p-0'>
                 <div className="row d-flex flex-row rounded border border-light">
@@ -131,8 +151,8 @@ const CartPage = () => {
                             <h1>Hi, {user.username}</h1>
                             <h3>{cart.length===0?'Your Cart is Empty!':'This is your Cart'}</h3>
                             <div className="col-12 cartProducts">
-                                {cart.map(product => {
-                                return <CartCard key={uuidv4()} product={product} updateSummary={updateSummary}/>
+                                {renderCart.map(product => {
+                                return <CartCard key={uuidv4()} product={product} updateSummary={updateSummary} />
                                 })}
                             </div>
 
