@@ -173,10 +173,10 @@ const CartPage = () => {
                                     className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
                                     controlId='formBasicAddressName'
                                 >
-                                    <Form.Label>Name</Form.Label>
+                                    <Form.Label className='mb-0'>Name</Form.Label>
                                     <Form.Control
                                         type='text'
-                                        placeholder='Recepitan'
+                                        placeholder='Recipient'
                                         name='name'
                                         value={address.name}
                                         onChange={(e) => {
@@ -189,10 +189,10 @@ const CartPage = () => {
                                     className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
                                     controlId='formBasicAddressStreet'
                                 >
-                                    <Form.Label>Street</Form.Label>
+                                    <Form.Label className='mb-0'>Address</Form.Label>
                                     <Form.Control
                                         type='text'
-                                        placeholder='Street and building number'
+                                        placeholder='Street, building number and Floor'
                                         name='street'
                                         value={address.street}
                                         onChange={(e) => {
@@ -200,31 +200,31 @@ const CartPage = () => {
                                         }}
                                     />
                                 </Form.Group>
-                                {/* <Form.Group
-                                    className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
-                                    controlId='formBasicNote'
-                                >
-                                    <Form.Label>Note</Form.Label>
-                                    <Form.Control
-                                        type='text'
-                                        placeholder='add any note if need it'
-                                        name='note'
-                                        value={address.note}
-                                        onChange={(e) => {
-                                            setAddress({...address, [e.target.name]:e.target.value});;
-                                        }}
-                                    />
-                                </Form.Group> */}
                                 <Form.Group
                                     className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
                                     controlId='formBasicphone'
                                 >
-                                    <Form.Label>Phone</Form.Label>
+                                    <Form.Label className='mb-0'>Phone</Form.Label>
                                     <Form.Control
                                         type='tel'
                                         placeholder='add a phone number'
                                         name='phone'
                                         value={address.phone}
+                                        onChange={(e) => {
+                                            setAddress({...address, [e.target.name]:e.target.value});;
+                                        }}
+                                    />
+                                </Form.Group>
+                                 <Form.Group
+                                    className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
+                                    controlId='formBasicNote'
+                                >
+                                    <Form.Label className='mb-0'>Note</Form.Label>
+                                    <Form.Control
+                                        type='text'
+                                        placeholder='add any note, if need it'
+                                        name='note'
+                                        value={address.note}
                                         onChange={(e) => {
                                             setAddress({...address, [e.target.name]:e.target.value});;
                                         }}
