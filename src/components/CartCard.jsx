@@ -49,7 +49,7 @@ const CartCard = ({product,updateSummary}) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
   return (
-    <div className='rounded d-flex flex-row card col-11 align-items-center justify-content-between m-1 shadow'>
+    <div className='rounded d-flex flex-row card col-11 mx-auto align-items-center justify-content-between shadow'>
         <div className="col-2 m-2 ">
             <div className="p-2 rounded border border-dark d-flex justify-items-center m-auto" 
                 style={{  
@@ -70,7 +70,7 @@ const CartCard = ({product,updateSummary}) => {
             </dir>
             <div className="mb-1">
                 <p className='mb-1'>
-                    <span className="badge rounded-pill bg-success">
+                    <span style={{cursor:"pointer"}} className="badge rounded-pill bg-success">
                         <span className="p-1" onClick={()=>{handleRemoveToCart()}}>-</span>
                         <span className="p-1">{product.quantity}</span>
                         <span className="p-1" onClick={()=>{handleAddToCart()}}>+</span>
@@ -78,10 +78,10 @@ const CartCard = ({product,updateSummary}) => {
                 </p>
             </div>
         </div>
-        <div className="m-1 col-2">
+        <div className="m-1 col-1">
             <h3>{product.quantity}</h3>
         </div>
-        <div className="m-1 col-2">
+        <div className="m-1 col-3">
             <h3 className='subtotal'>€ {(product.quantity * product.product.price).toFixed(2)}</h3>
         </div>
     </div>
