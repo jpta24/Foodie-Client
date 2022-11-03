@@ -37,7 +37,7 @@ const CartPage = () => {
         pp: false
     }
     
-    const updatedRol = {...initialState,cash:true}
+    const updatedPayment = {...initialState,cash:true}
 
     const initialAddress ={
         street:'',
@@ -46,13 +46,13 @@ const CartPage = () => {
         phone:''
     }
 
-    const [rol, setRol] = useState(updatedRol)
+    const [payment, setPayment] = useState(updatedPayment)
     const [address, setAddress] = useState(initialAddress)
 
-    const handleChange = (rolClicked) => {
+    const handleChange = (paymentClicked) => {
         const newState = {...initialState}
-        newState[rolClicked]= true
-        setRol(newState)
+        newState[paymentClicked]= true
+        setPayment(newState)
     }
 
     const handlePlaceOrder =()=>{
@@ -60,7 +60,7 @@ const CartPage = () => {
 
         let payMethod = ''
         
-        Object.entries(rol).forEach(each =>{
+        Object.entries(payment).forEach(each =>{
             if(each[1]){
                 payMethod = each[0]
             }
@@ -163,9 +163,9 @@ const CartPage = () => {
                             <h2> Summary: € {summary.toFixed(2)}</h2>
                             <h4>Payment Method</h4>
                             <div className='d-flex px-2 m-2 justify-content-around'>
-                                <PayMethod onclick={()=>{handleChange('cash')}} src={rol.cash ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
-                                <PayMethod onclick={()=>{handleChange('card')}} src={rol.card ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>
-                                <PayMethod onclick={()=>{handleChange('pp')}} src={rol.pp ? iconsCloud[0].ppActive: iconsCloud[0].ppInactive}/>
+                                <PayMethod onclick={()=>{handleChange('cash')}} src={payment.cash ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
+                                <PayMethod onclick={()=>{handleChange('card')}} src={payment.card ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>
+                                <PayMethod onclick={()=>{handleChange('pp')}} src={payment.pp ? iconsCloud[0].ppActive: iconsCloud[0].ppInactive}/>
                             </div>
 
                             <div className='d-flex flex-column justify-content-between mb-2 '>
