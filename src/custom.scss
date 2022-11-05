@@ -63,3 +63,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   top: 1.5em;
   right: 1.5em; 
 }
+
+a {
+  text-decoration: none;
+}

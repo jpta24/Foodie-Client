@@ -53,7 +53,7 @@ const ProductCard = ({product,businessNameEncoded}) => {
         </div>
         <dir className='p-0 m-1'>
             <p className='p-1 m-0' style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>
-            <p className='text-bold m-0'>$ {product.price.toFixed(2)}</p>
+            <p className='text-bold m-0'>€ {product.price.toFixed(2)}</p>
             
         </dir>
         <div className="mb-2">

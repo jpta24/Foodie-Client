@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import {  useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import {  useParams, useNavigate, Link  } from 'react-router-dom'; 
+import { CartContext } from '../context/cart.context';
+import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,6 +13,15 @@ import ProductCardDesktop from '../components/ProductCardDesktop';
 import BusinessMenu from '../components/BusinessMenu';
 
 const Business = () => {
+    
+    const { cart } = useContext(CartContext)
+    const { user } = useContext(AuthContext)
+    let summary
+    if (cart) {
+        // console.log(cart);
+        const amounts = cart.map(item=>item.product.price)
+        summary = amounts.reduce((acc,val)=>{return acc+val}).toFixed(2)
+    } 
     
     const { businessName } = useParams();
     const navigate = useNavigate();
@@ -75,12 +86,24 @@ const Business = () => {
                         {business.products.map(product =>{
                             return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
                         })}
-                    </div> : 
+                    </div>
+                     : 
                     <div className=" col-md-10 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.map(product =>{
                             return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
                         })}
                     </div>}
+                    {cart && user && cart.length > 0 && 
+                        <Link to={`/cart/${user._id}`} className="sticky-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between">
+                            <span className='px-2 position-relative'>
+                                <span className="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark">
+                                {cart.length}
+                                </span>
+                                🛒</span>
+                            <span>Go to Cart ({summary} €)</span>
+                            <span className='px-2'>  </span>
+                        </Link>
+                         }
                     
                 </div>
 
