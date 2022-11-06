@@ -11,6 +11,7 @@ import ProductCard from '../components/ProductCard';
 import ProductCardDesktop from '../components/ProductCardDesktop';
 
 import iconsCloud from '../data/icons.json'
+import Loading from '../components/Loading';
 
 const BusinessProducts = () => {
     const { user } = useContext(AuthContext);
@@ -93,7 +94,7 @@ const BusinessProducts = () => {
         )
     }else {
         return (
-            <div>Loading...</div>
+            <div><Loading/></div>
         )
     }
 

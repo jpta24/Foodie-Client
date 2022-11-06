@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import BusinessViewCard from '../components/BusinessViewCard';
 
 import iconsCloud from '../data/icons.json'
+import Loading from '../components/Loading';
 
 const BusinessView = () => {
     const { user } = useContext(AuthContext);
@@ -128,7 +129,7 @@ const BusinessView = () => {
           )
     } else {
         return (
-            <div>Loading...</div>
+            <div><Loading/></div>
         )
     }
     

@@ -1,17 +1,18 @@
-import { useContext,useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import {  useParams, useNavigate } from 'react-router-dom';
-import OrderCard from '../components/OrderCard';
-import { CartContext } from '../context/cart.context';
+// import OrderCard from '../components/OrderCard';
+// import { CartContext } from '../context/cart.context';
 import axios from 'axios';
 
 import { toast } from 'react-toastify';
 
 import { v4 as uuidv4 } from 'uuid';
 import BusinessOrdersCard from '../components/BusinessOrdersCard';
+import Loading from '../components/Loading';
 
 const BusinessOrders = () => {
   
-    const { user } = useContext(CartContext);
+    // const { user } = useContext(CartContext);
     const { businessName } = useParams();
     const navigate = useNavigate();
     const storedToken = localStorage.getItem("authToken"); 
@@ -55,7 +56,7 @@ const BusinessOrders = () => {
         </div>
     }else{
         return (
-            <div>Loading...</div>
+            <div>L<Loading/></div>
         )
     }
 }

@@ -3,6 +3,7 @@ import OrderCard from '../components/OrderCard';
 import { CartContext } from '../context/cart.context';
 
 import { v4 as uuidv4 } from 'uuid';
+import Loading from '../components/Loading';
 
 const OrdersPage = () => {
     
@@ -29,7 +30,7 @@ const OrdersPage = () => {
         </div>
     }else{
         return (
-            <div>Loading...</div>
+            <div><Loading/></div>
         )
     }
 }

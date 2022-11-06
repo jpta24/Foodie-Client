@@ -13,6 +13,7 @@ import CartCard from '../components/CartCard';
 import { v4 as uuidv4 } from 'uuid';
 import PayMethod from '../components/PayMethod';
 import iconsCloud from '../data/icons.json'
+import Loading from '../components/Loading';
 
 
 const CartPage = () => {
@@ -264,7 +265,7 @@ const CartPage = () => {
         </div>
     }else{
         return (
-            <div>Loading...</div>
+            <div><Loading/></div>
         )
     }
     

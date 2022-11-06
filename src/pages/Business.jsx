@@ -11,6 +11,7 @@ import ProductCard from '../components/ProductCard';
 import ProductCardDesktop from '../components/ProductCardDesktop';
 
 import BusinessMenu from '../components/BusinessMenu';
+import Loading from '../components/Loading';
 
 const Business = () => {
     
@@ -112,7 +113,7 @@ const Business = () => {
         )
     }else {
         return (
-            <div>Loading...</div>
+            <div><Loading/></div>
         )
     }
 }

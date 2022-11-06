@@ -82,7 +82,7 @@ const CartCard = ({product,updateSummary}) => {
             <h3>{product.quantity}</h3>
         </div>
         <div className="m-1 col-3">
-            <h3 className='subtotal'>€ {(product.quantity * product.product.price).toFixed(2)}</h3>
+            <h3 className='subtotal fs-4'>€ {(product.quantity * product.product.price).toFixed(2)}</h3>
         </div>
     </div>
   )

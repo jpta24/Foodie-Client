@@ -8,6 +8,7 @@ import { Form, InputGroup, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
+import Loading from '../components/Loading';
 
 const CreateProduct = () => {
     const { user } = useContext(AuthContext);
@@ -320,7 +321,7 @@ const CreateProduct = () => {
         )
     }
   return (
-    <div>CreateProduct</div>
+    <div><Loading/></div>
   )
 }
 
