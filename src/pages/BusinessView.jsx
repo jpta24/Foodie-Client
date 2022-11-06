@@ -122,7 +122,10 @@ const BusinessView = () => {
                             </Link>
                         </div>
                         <Button  className='btn btn-secondary m-1 btn-sm' onClick={() =>  download()}>Download</Button>
-                        <Button  className='btn btn-secondary m-1 btn-sm' onClick={() =>  navigator.clipboard.writeText(link)}>Copy Link</Button>
+                        <Button  className='btn btn-secondary m-1 btn-sm' onClick={() =>  {
+                            navigator.clipboard.writeText(link)
+                            toast.success('Link copied to Clipboard', { theme: 'dark' });
+                            }}>Copy Link</Button>
                     </div>     
                     </div>
                     
