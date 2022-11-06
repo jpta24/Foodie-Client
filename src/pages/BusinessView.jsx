@@ -1,8 +1,9 @@
 import { useState, useContext,useEffect } from 'react';
-import {  useParams, useNavigate } from 'react-router-dom';
+import {  useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { QRCode } from 'react-qrcode-logo';
+import { Button } from 'react-bootstrap';
 
 import { toast } from 'react-toastify';
 import BusinessViewCard from '../components/BusinessViewCard';
@@ -38,6 +39,22 @@ const BusinessView = () => {
         if(business.owner !== user._id){
             navigate('/')
         }
+        const link = `https://foodie-de.netlify.app/${business.name}`
+
+        const download = () => {
+            const canvas = document.getElementById("react-qrcode-logo");
+            if (canvas) {
+              const pngUrl = canvas
+                .toDataURL("image/png");
+              let downloadLink = document.createElement("a");
+              downloadLink.href = pngUrl;
+              downloadLink.download = `qrBusiness.png`;
+              document.body.appendChild(downloadLink);
+              downloadLink.click();
+              document.body.removeChild(downloadLink);
+            }
+          };
+          
 
         let formatsArr = []
         
@@ -100,8 +117,12 @@ const BusinessView = () => {
                             width: '190px'
                         }}>
                         <div className="border border-dark shadow-lg">
-                            <QRCode value={`https://foodie-de.netlify.app/${business.name}`} size='150' logoImage={business.logoUrl} removeQrCodeBehindLogo='true' qrStyle='dots' ecLevel='H' />
+                            <Link to={`/${business.name}`}>
+                                <QRCode value={`https://foodie-de.netlify.app/${business.name}`} size='150' logoImage={business.logoUrl} enableCORS={true} removeQrCodeBehindLogo='true' qrStyle='dots' ecLevel='H' />
+                            </Link>
                         </div>
+                        <Button  className='btn btn-secondary m-1 btn-sm' onClick={() =>  download()}>Download</Button>
+                        <Button  className='btn btn-secondary m-1 btn-sm' onClick={() =>  navigator.clipboard.writeText(link)}>Copy Link</Button>
                     </div>     
                     </div>
                     
