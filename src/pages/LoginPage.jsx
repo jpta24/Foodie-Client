@@ -30,7 +30,11 @@ const Login = () => {
 			})
 			.catch((error) => {
 				const errorDescription = error.response.data.message;
-				toast.error('Sorry, read the error message', { theme: 'dark' });
+				// eslint-disable-next-line no-lone-blocks
+				{window.innerWidth < 450 ? 
+					toast.error("Sorry, read the error message !", {
+						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+					}) : toast.error('Sorry, read the error message', { theme: 'dark' });}
 				setErrorMessage(errorDescription);
 			});
 	};

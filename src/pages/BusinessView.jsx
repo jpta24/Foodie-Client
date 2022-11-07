@@ -28,7 +28,11 @@ const BusinessView = () => {
         })
         .catch((error) => {
             console.log({error});
-            toast.error('Sorry you are being redirected', { theme: 'dark' });
+            // eslint-disable-next-line no-lone-blocks
+            {window.innerWidth < 450 ? 
+              toast.error("Sorry you are being redirected !", {
+                  position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+              }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
             navigate('/')
             })
     
@@ -124,7 +128,13 @@ const BusinessView = () => {
                         <Button  className='btn btn-secondary m-1 btn-sm' onClick={() =>  download()}>Download</Button>
                         <Button  className='btn btn-secondary m-1 btn-sm' onClick={() =>  {
                             navigator.clipboard.writeText(link)
-                            toast.success('Link copied to Clipboard', { theme: 'dark' });
+                            // eslint-disable-next-line no-lone-blocks
+                            {window.innerWidth < 450 ? 
+                            toast.success("Link copied to Clipboard !", {
+                                position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                            }) : toast.success('Link copied to Clipboard', { theme: 'dark' });}
+                            
+                            
                             }}>Copy Link</Button>
                     </div>     
                     </div>

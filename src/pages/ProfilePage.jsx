@@ -64,11 +64,19 @@ const ProfilePage = () => {
 			.put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then(() => {
                 setIncommingMessage("Business's owner would let you know about your application")
-		        toast.success('Application Sent', { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+                {window.innerWidth < 450 ? 
+                    toast.success("Application Sent !", {
+                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                    }) : toast.success('Application Sent', { theme: 'dark' });}
 			})
 			.catch((error) => {
 				const errorDescription = error.response.data.message;
-                toast.error(errorDescription, { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+              {window.innerWidth < 450 ? 
+                toast.error(errorDescription, {
+                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                }) : toast.error(errorDescription, { theme: 'dark' });}
 				setErrorMessage(errorDescription);
 			});
 	};

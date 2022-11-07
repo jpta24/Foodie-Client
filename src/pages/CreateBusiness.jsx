@@ -60,15 +60,23 @@ const CreateBusiness = () => {
 			.then((response) => {
         const nameEncoded = response.data.business.name.split(' ').join('-')
 				navigate(`/${nameEncoded}/dashboard`);
-		    toast.success('Business successfully created', { theme: 'dark' });
+			// eslint-disable-next-line no-lone-blocks
+			{window.innerWidth < 450 ? 
+				toast.success("Business successfully created !", {
+					position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+				}) : toast.success('Business successfully created', { theme: 'dark' });}
 			})
 			.catch((error) => {
-        console.log({error});
+        		console.log({error});
 				const errorDescription = error.response.data.message;
-        toast.error('Business could not be Created', { theme: 'dark' });
-				setErrorMessage(errorDescription);
-			});
-	};
+				// eslint-disable-next-line no-lone-blocks
+				{window.innerWidth < 450 ? 
+					toast.error("Business could not be Created !", {
+						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+					}) : toast.error('Business could not be Created', { theme: 'dark' });}
+						setErrorMessage(errorDescription);
+					});
+				};
 
   const uploadImage = (file) => {
     return  axios.post(`${process.env.REACT_APP_SERVER_URL}/api/upload`, file)

@@ -106,7 +106,11 @@ const CartPage = () => {
         axios
 			.put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then((response) => {
-		        toast.success('Order Placed', { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+                {window.innerWidth < 450 ? 
+                    toast.success("Order Placed !", {
+                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                    }) : toast.success('Order Placed', { theme: 'dark' });}
                 setCart(null)
                 navigate(`/orders/${user._id}`)
 			})
@@ -114,7 +118,11 @@ const CartPage = () => {
                 console.log({error});
 				const errorDescription = error.response.data.message;
                 console.log(errorDescription);
-                toast.error('Order could not be placed', { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+              {window.innerWidth < 450 ? 
+                toast.error("Order could not be placed !", {
+                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                }) : toast.error('Order could not be placed', { theme: 'dark' });}
 			});
     }
 

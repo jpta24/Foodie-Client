@@ -47,7 +47,11 @@ const CreateProduct = () => {
           })
           .catch((error) => {
               console.log({error});
-              toast.error('Sorry you are being redirected', { theme: 'dark' });
+              // eslint-disable-next-line no-lone-blocks
+              {window.innerWidth < 450 ? 
+                toast.error("Sorry you are being redirected !", {
+                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
               navigate('/')
               })
       
@@ -68,12 +72,20 @@ const CreateProduct = () => {
 			.post(`${process.env.REACT_APP_SERVER_URL}/products`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then((response) => {
                 setProduct({...initialState,business:business._id})
-		        toast.success('Product successfully created', { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+                {window.innerWidth < 450 ? 
+                    toast.success("Product successfully created !", {
+                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                    }) : toast.success('Product successfully created', { theme: 'dark' });}
 			})
 			.catch((error) => {
                 console.log({error});
 				const errorDescription = error.response.data.message;
-                toast.error('Product could not be Created', { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+              {window.innerWidth < 450 ? 
+                toast.error("Product could not be Created !", {
+                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                }) : toast.error('Product could not be Created', { theme: 'dark' });}
 				setErrorMessage(errorDescription);
 			});
 	};

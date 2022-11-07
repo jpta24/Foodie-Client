@@ -28,11 +28,19 @@ const Signup = () => {
 			.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, requestBody)
 			.then((response) => {
 				navigate('/login');
-                toast.success('User successfully created', { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+				{window.innerWidth < 450 ? 
+					toast.success("User successfully created !", {
+						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+					}) : toast.success('User successfully created', { theme: 'dark' });}
 			})
 			.catch((error) => {
 				const errorDescription = error.response.data.message;
-                toast.error('User could not be Created', { theme: 'dark' });
+				// eslint-disable-next-line no-lone-blocks
+				{window.innerWidth < 450 ? 
+					toast.error("User could not be Created !", {
+						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+					}) : toast.error('User could not be Created', { theme: 'dark' });}
 				setErrorMessage(errorDescription);
 			});
 	};

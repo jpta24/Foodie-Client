@@ -28,7 +28,7 @@ function App() {
     <div className="App">
     <Navbar/>
     <div>
-    <ToastContainer />
+    <ToastContainer className='my-5'/>
     </div>
       <Routes>      
         <Route exact path="/" element={<HomePage />} />
