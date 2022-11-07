@@ -1,27 +1,15 @@
 
 import { v4 as uuidv4 } from 'uuid';
 
-const BusinessMenu = ({business}) => {
+const BusinessMenu = ({business,handleCategory, category, arrCategories}) => {
   
-  let initialMenu = {}
-
-    let arrCategories = []
-        if (business.products) {
-            business.products.forEach(prod=>{
-                prod.categories.forEach(cate=>{
-                    if(!arrCategories.includes(cate)){
-                    arrCategories.push(cate) 
-                    initialMenu[cate]=false
-                    } 
-                })
-                initialMenu.General=true
-            })
-        }
+  const active ='bg-secondary text-bg-secondary'
+  const inactive = 'bg-light text-bg-info'
 
   return (
     <div className=' col-6 d-flex flex-row justify-content-around'>
       {arrCategories.map(cat => {
-        return <span key={uuidv4()} name={cat} className="badge bg-secondary my-1 mx-2">{cat}</span>
+        return <span key={uuidv4()} name={cat} className={`badge border border-dark my-1 mx-2 ${category[cat] === true ? active : inactive}`} onClick={()=>handleCategory(cat)}>{cat}</span>
         })}
     </div>
   )
