@@ -263,6 +263,10 @@ const CreateProduct = () => {
                                 value={menucategoriessearch}
                                 onChange={(e)=>{
                                     setmenucategoriessearch( e.target.value )
+                                    if(e.target.value[e.target.value.length - 1] === ','){
+                                        setProduct({...product,categories:[...product.categories,e.target.value.split(',')[0]]})
+                                        setmenucategoriessearch('')
+                                    }
                                 }}
                             />
                             <div className="d-flex flex-column align-items-start">

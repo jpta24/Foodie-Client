@@ -31,27 +31,28 @@ const Business = () => {
     let businessNameEncoded = businessName.split(' ').join('-')
 
     const [business, setBusiness] = useState('')
+    const [searchProduct, setSearchProduct] = useState('')
     
     
-    let initialMenu = {}
+    // let initialMenu = {}
     let arrCategories = []
     if (business.products) {
         business.products.forEach(prod=>{
             prod.categories.forEach(cate=>{
                 if(!arrCategories.includes(cate)){
                 arrCategories.push(cate) 
-                initialMenu[cate]=false
+                // initialMenu[cate]=false
                 } 
             })
         })
     }
-    const updatedCategory = {...initialMenu,General:true}
-    const [category, setCategory] = useState( updatedCategory)
-    let activeCategory = 'General'
+    // const updatedCategory = {...initialMenu,General:true}
+    const [category, setCategory] = useState( 'General')
+    // let activeCategory = 'General'
 
     const handleCategory = (cat) => {
-        const newCatState = {...initialMenu,[cat]:true}
-        setCategory(newCatState)
+        // const newCatState = {...initialMenu,[cat]:true}
+        setCategory(cat)
     }
     
     
@@ -106,25 +107,25 @@ const Business = () => {
                 <div className="row p-0">
                     <div className="d-flex flex-column justify-content-center align-items-center">
                         <h1>{business.name}</h1>
-                        <BusinessMenu business={business} handleCategory={handleCategory} category={category} arrCategories={arrCategories}/>
+                        <BusinessMenu handleCategory={handleCategory} category={category} arrCategories={arrCategories}/>
                     </div>
                 </div>
                 <div className="row p-0 justify-content-center">
 
                 {window.innerWidth < 450 ? 
-                    <div className="col-12 d-flex flex-wrap justify-content-center align-items-stretch ">
-                        {business.products.filter(prod =>prod.categories.includes(activeCategory)).map(product =>{
+                    <div    className="col-12 d-flex flex-wrap justify-content-center align-items-stretch ">
+                        {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
                             return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
                         })}
                     </div>
                      : 
                     <div className=" col-md-10 d-flex flex-wrap justify-content-center align-items-stretch ">
-                        {business.products.map(product =>{
+                        {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
                             return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
                         })}
                     </div>}
                     {cart && user && cart.length > 0 && 
-                        <Link to={`/cart/${user._id}`} className="sticky-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between">
+                        <Link    to={`/cart/${user._id}`} className='fixed-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between'>
                             <span className='px-2 position-relative'>
                                 <span className="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark">
                                 {cart.length}
