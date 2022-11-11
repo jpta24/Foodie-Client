@@ -50,7 +50,7 @@ const BusinessOrders = () => {
                         <h3>These are your Orders:</h3>
                         <div className="col-12 cartProducts">
                                {business.orders.map(order=>{
-                                return<BusinessOrdersCard key={uuidv4()} order={order} />
+                                return<BusinessOrdersCard key={uuidv4()} order={order} currency={business.currency} />
                                })}
                             </div>
                         

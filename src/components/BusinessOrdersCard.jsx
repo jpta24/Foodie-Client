@@ -2,7 +2,7 @@ import React from 'react'
 
 import { v4 as uuidv4 } from 'uuid';
 
-const BusinessOrdersCard = ({order}) => {
+const BusinessOrdersCard = ({order,currency}) => {
   return (
     <div className='rounded d-flex flex-row card col-11 align-items-center justify-content-around m-1 shadow'>
         <div className="col-2 m-2 ">
@@ -29,7 +29,7 @@ const BusinessOrdersCard = ({order}) => {
                     })}
                 </ul>
 
-                <p className='text-bold m-0 text-start'>Summary: € {order.summary.toFixed(2)}</p>
+                <p className='text-bold m-0 text-start'>Summary: {currency} {order.summary.toFixed(2)}</p>
                 <p className='text-bold m-0 text-start'>Status: {order.status}</p>
                 
             </dir>

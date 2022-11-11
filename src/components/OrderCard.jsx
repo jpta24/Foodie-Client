@@ -27,7 +27,7 @@ const OrderCard = ({order}) => {
                     })}
                 </ul>
 
-                <p className='text-bold m-0 text-start'>Summary: € {order.summary.toFixed(2)}</p>
+                <p className='text-bold m-0 text-start'>Summary: {order.business.currency} {order.summary.toFixed(2)}</p>
                 <p className='text-bold m-0 text-start'>Status: {order.status}</p>
                 
             </dir>

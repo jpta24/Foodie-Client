@@ -185,6 +185,7 @@ const CartPage = () => {
     const allIds = cart.map(elem =>elem.product._id)
     const cartProdIds = []
     const renderCart = []
+    const currency = cart[0].product.business.currency
 
     for (let i = 0; i < cart.length; i++) {
         if (cartProdIds.includes(cart[i].product._id)) {
@@ -215,7 +216,7 @@ const CartPage = () => {
                             <h3>{cart.length===0?'Your Cart is Empty!':'This is your Cart'}</h3>
                             <div className="col-12 cartProducts">
                                 {renderCart.map(product => {
-                                return <CartCard key={uuidv4()} product={product} updateSummary={updateSummary} />
+                                return <CartCard key={uuidv4()} product={product} updateSummary={updateSummary} currency={currency} />
                                 })}
                             </div>
 
@@ -223,7 +224,7 @@ const CartPage = () => {
                     </div>
                     <div className="col-12 col-md-5">
                     <div className="col-11 d-flex flex-column p-2 mt-2 py-3 form-control bg-success cartSummary">
-                            <h2 className='fw-bold text-light'> Summary: € {summary.toFixed(2)}</h2>
+                            <h2 className='fw-bold text-light'> Summary: {currency} {summary.toFixed(2)}</h2>
 
                             <h4>Delivery Format</h4>
                             <div className='d-flex px-2 mx-2 justify-content-around'>

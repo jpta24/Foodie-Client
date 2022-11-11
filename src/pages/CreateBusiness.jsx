@@ -7,6 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import menuCategories from '../data/categories.json'
+import iconsCloud from '../data/icons.json'
 
 const CreateBusiness = () => {
 	const navigate = useNavigate();
@@ -15,25 +16,33 @@ const CreateBusiness = () => {
 
 	const initialState = {
 		name: '',
-		logoUrl: '',
+		logoUrl: iconsCloud[0].defaultBusinessLogo,
 		address: {
 			city: '',
 			street: '',
 			postCode: 0,
 			country: '',
 		},
+		currency:'',
 		format: {
-      delivery:false,
-      "pickup": false,
-      'inplace': false
-    },
-    type:{
+			delivery:false,
+			pickup: true,
+			inplace: false
+    	},
+		payment:{
+			cash:true,
+			card: false,
+			pp: false,
+			pagoMovil: false,
+			zelle: false
+		},
+    	type:{
 			prepared:false,
 			packed: false,
 			frozen: false
 		},
 		categories: ['General'],
-		bgUrl: '',
+		bgUrl: iconsCloud[0].defaultBusinessBG,
 		pdfMenu: '',
 		employees: [],
 		owner: user._id,
@@ -131,7 +140,7 @@ const CreateBusiness = () => {
 								<Form.Label>Business Logo</Form.Label>
 								<Form.Control
 									type='file'
-                  onChange={(e) => handleFileUpload(e,'logoUrl')}
+                  					onChange={(e) => handleFileUpload(e,'logoUrl')}
 								/>
 							</Form.Group>
 						</div>
@@ -201,139 +210,220 @@ const CreateBusiness = () => {
 								/>
 							</Form.Group>
 						</div>
-            <hr />
-						<div className='d-flex justify-content-around'>
-              <Form.Group
-								className='mb-3 col-md-5 d-flex flex-column'
-								controlId='formBasicBusinessCountry'
+            			<hr />
+						<div className='d-flex justify-content-between'>
+						<Form.Group
+								className='mb-3 col-4 d-flex flex-column align-items-start'
+								controlId='formCurrency'
 							>
-                <Form.Label>Product Types</Form.Label>
-                <div>
-                  <Form.Check
-                    inline
-                    label='Prepared'
-                    name='prepared'
-                    type='checkbox'
-                    id={`inline-$'checkbox'-1`}
-                    checked={business.type.prepared}
-                    onChange={(e)=>{
-                      setBusiness({...business, type : {...business.type, prepared:!business.type.prepared} })
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    label='Packed'
-                    name='packed'
-                    type='checkbox'
-                    id={`inline-$'checkbox'-2`}
-                    checked={business.type.packed}
-                    onChange={(e)=>{
-                      setBusiness({...business, type : {...business.type, packed:!business.type.packed} })
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    label='Frozen'
-                    name='frozen'
-                    type='checkbox'
-                    id={`inline-$'checkbox'-3`}
-                    checked={business.type.frozen}
-                    onChange={(e)=>{
-                      setBusiness({...business, type : {...business.type, frozen:!business.type.frozen} })
-                    }}
-                  />
-                </div>
-              </Form.Group>
-              <Form.Group
-								className='mb-3 col-md-5 d-flex flex-column'
-								controlId='formBasicBusinessCountry'
-							>
-                <Form.Label>Delivery Format</Form.Label>
-                <div>
-                  <Form.Check
-                    inline
-                    label='Delivery'
-                    name='delivery'
-                    type='checkbox'
-                    id={`inline-$'checkbox'-1`}
-                    checked={business.format.delivery}
-                    onChange={(e)=>{
-                      setBusiness({...business, format : {...business.format, delivery:!business.format.delivery} })
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    label='Pick-up'
-                    name='pickup'
-                    type='checkbox'
-                    id={`inline-$'checkbox'-2`}
-                    checked={business.format.pickup}
-                    onChange={(e)=>{
-                      setBusiness({...business, format : {...business.format, pickup:!business.format.pickup} })
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    label='In-place'
-                    name='inplace'
-                    type='checkbox'
-                    id={`inline-$'checkbox'-3`}
-                    checked={business.format.inplace}
-                    onChange={(e)=>{
-                      setBusiness({...business, format : {...business.format, inplace:!business.format.inplace} })
-                    }}
-                  />
-                </div>
-              </Form.Group>
-
-						</div>
-            <Form.Group
-								className='mb-3 d-flex flex-column align-items-start'
-								controlId='formBasicBusinessCountry'
-							>
-								<Form.Label>Catalog Categories</Form.Label>
-                <Form.Label className='card p-2 col-12 d-flex flex-row'>
-                  {business.categories.map(cat => {
-                    return <span key={cat} name={cat} className="badge rounded-pill bg-success m-1" onClick={(e) => {
-                            let newCategories = business.categories.filter(cat=>{
-                              return cat !== e.target.innerText
-                            })
-                            setBusiness({...business,categories:newCategories})
-                          }}>{cat}</span>
-                  })}
-                </Form.Label>
+								<Form.Label>Currency</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='Ex: Specialties, Snacks, Dessert, Drinks, etc'
-									value={menucategoriessearch}
-									onChange={(e)=>{
-                    setmenucategoriessearch( e.target.value )
+									placeholder='Simbol'
+									name='currency'
+									value={business.currency}
+									onChange={(e) => {
+										setBusiness(setBusiness({...business, [e.target.name]:e.target.value}));
 									}}
 								/>
-                <div className="d-flex flex-column align-items-start">
-                  {menucategoriessearch!=='' && (menuCategories[0].src.filter(category=>{
-                    return (category.toLowerCase().includes(menucategoriessearch.toLocaleLowerCase()) )
-                      })
-                      .map((category,i) => {
-                        return(!business.categories.includes(category) && 
-                          <div
-                          key={`${category}-${i}`}
-                            onClick={(e) => {
-                              setBusiness({...business,categories:[...business.categories,e.target.innerText]})
-                            }}
-                            className="px-2"
-                            data-name={category}
-                          >
-                            {category}
-                          </div>
-                        )
-                      }) 
-                  )}
-                </div>
+							</Form.Group>
+							<Form.Group
+								className='mb-3 col-7 d-flex flex-column'
+								controlId='formPaymentMethods'
+							>
+								<Form.Label>Payment Methods</Form.Label>
+								<div className='d-flex flex-wrap col-12'>
+									<Form.Check
+										inline
+										label='Cash'
+										name='cash'
+										type='checkbox'
+										id={`inline-$'checkbox'-1`}
+										checked={business.payment.cash}
+										onChange={(e)=>{
+										setBusiness({...business, payment : {...business.payment, cash:!business.payment.cash} })
+										}}
+									/>
+									<Form.Check
+										inline
+										label='Credit Card'
+										name='card'
+										type='checkbox'
+										id={`inline-$'checkbox'-1`}
+										checked={business.payment.card}
+										onChange={(e)=>{
+										setBusiness({...business, payment : {...business.payment, card:!business.payment.card} })
+										}}
+									/>
+									<Form.Check
+										inline
+										label='PayPal'
+										name='pp'
+										type='checkbox'
+										id={`inline-$'checkbox'-1`}
+										checked={business.payment.pp}
+										onChange={(e)=>{
+										setBusiness({...business, payment : {...business.payment, pp:!business.payment.pp} })
+										}}
+									/>
+									<Form.Check
+										inline
+										label='PagoMovil'
+										name='pagoMovil'
+										type='checkbox'
+										id={`inline-$'checkbox'-1`}
+										checked={business.payment.pagoMovil}
+										onChange={(e)=>{
+										setBusiness({...business, payment : {...business.payment, pagoMovil:!business.payment.pagoMovil} })
+										}}
+									/>
+									<Form.Check
+										inline
+										label='Zelle'
+										name='zelle'
+										type='checkbox'
+										id={`inline-$'checkbox'-1`}
+										checked={business.payment.zelle}
+										onChange={(e)=>{
+										setBusiness({...business, payment : {...business.payment, zelle:!business.payment.zelle} })
+										}}
+									/>
+								
+								</div>
+							</Form.Group>
+						</div>
+						<hr />
+						<div className='d-flex justify-content-around'>
+              				<Form.Group
+								className='mb-3 col-md-5 d-flex flex-column'
+								controlId='formBasicBusinessCountry'
+							>
+								<Form.Label>Product Types</Form.Label>
+								<div>
+									<Form.Check
+										inline
+										label='Prepared'
+										name='prepared'
+										type='checkbox'
+										id={`inline-$'checkbox'-1`}
+										checked={business.type.prepared}
+										onChange={(e)=>{
+										setBusiness({...business, type : {...business.type, prepared:!business.type.prepared} })
+										}}
+									/>
+									<Form.Check
+										inline
+										label='Packed'
+										name='packed'
+										type='checkbox'
+										id={`inline-$'checkbox'-2`}
+										checked={business.type.packed}
+										onChange={(e)=>{
+										setBusiness({...business, type : {...business.type, packed:!business.type.packed} })
+										}}
+									/>
+									<Form.Check
+										inline
+										label='Frozen'
+										name='frozen'
+										type='checkbox'
+										id={`inline-$'checkbox'-3`}
+										checked={business.type.frozen}
+										onChange={(e)=>{
+										setBusiness({...business, type : {...business.type, frozen:!business.type.frozen} })
+										}}
+									/>
+								</div>
+							</Form.Group>
+							<Form.Group
+								className='mb-3 col-md-5 d-flex flex-column'
+								controlId='formBasicBusinessCountry'
+							>
+								<Form.Label>Delivery Format</Form.Label>
+								<div>
+								<Form.Check
+									inline
+									label='Delivery'
+									name='delivery'
+									type='checkbox'
+									id={`inline-$'checkbox'-1`}
+									checked={business.format.delivery}
+									onChange={(e)=>{
+									setBusiness({...business, format : {...business.format, delivery:!business.format.delivery} })
+									}}
+								/>
+								<Form.Check
+									inline
+									label='Pick-up'
+									name='pickup'
+									type='checkbox'
+									id={`inline-$'checkbox'-2`}
+									checked={business.format.pickup}
+									onChange={(e)=>{
+									setBusiness({...business, format : {...business.format, pickup:!business.format.pickup} })
+									}}
+								/>
+								<Form.Check
+									inline
+									label='In-place'
+									name='inplace'
+									type='checkbox'
+									id={`inline-$'checkbox'-3`}
+									checked={business.format.inplace}
+									onChange={(e)=>{
+									setBusiness({...business, format : {...business.format, inplace:!business.format.inplace} })
+									}}
+								/>
+								</div>
+							</Form.Group>
+						</div>
+            			<Form.Group
+							className='mb-3 d-flex flex-column align-items-start'
+							controlId='formBasicBusinessCountry'
+						>
+							<Form.Label>Catalog Categories</Form.Label>
+                			<Form.Label className='card p-2 col-12 d-flex flex-row'>
+								{business.categories.map(cat => {
+									return <span key={cat} name={cat} className="badge rounded-pill bg-success m-1" onClick={(e) => {
+											let newCategories = business.categories.filter(cat=>{
+											return cat !== e.target.innerText
+											})
+											setBusiness({...business,categories:newCategories})
+										}}>{cat}</span>
+								})}
+                			</Form.Label>
+							<Form.Control
+								type='text'
+								placeholder='Ex: Specialties, Snacks, Dessert, Drinks, etc'
+								value={menucategoriessearch}
+								onChange={(e)=>{
+									setmenucategoriessearch( e.target.value )
+								}}
+							/>
+							<div className="d-flex flex-column align-items-start">
+							{menucategoriessearch!=='' && (menuCategories[0].src.filter(category=>{
+								return (category.toLowerCase().includes(menucategoriessearch.toLocaleLowerCase()) )
+								})
+								.map((category,i) => {
+									return(!business.categories.includes(category) && 
+									<div
+									key={`${category}-${i}`}
+										onClick={(e) => {
+										setBusiness({...business,categories:[...business.categories,e.target.innerText]})
+										}}
+										className="px-2"
+										data-name={category}
+									>
+										{category}
+									</div>
+									)
+								}) 
+							)}
+							</div>
 						</Form.Group>
 
-            <div className='d-md-flex justify-content-md-between'>
-            <Form.Group
+            			<div className='d-md-flex justify-content-md-between'>
+            				<Form.Group
 								className='mb-3 col-md-5 d-flex flex-column align-items-start'
 							>
 								<Form.Label>Backgroung Image</Form.Label>
@@ -353,9 +443,9 @@ const CreateBusiness = () => {
 								/>
 							</Form.Group>
 						</div>
-            <hr />
-            <p>Create your Business to start adding products and/or employees</p>
-            {errorMessage && <p className='text-danger'>{errorMessage}</p>}
+           				<hr />
+            			<p>Create your Business to start adding products and/or employees</p>
+            			{errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						
 						<Button variant='primary' size="lg" type='submit' className='mx-2 my-1 col-8 col-md-4'>
 							Create the Business

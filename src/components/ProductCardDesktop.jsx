@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
 
-const ProductCardDesktop = ({product,businessNameEncoded}) => {
+const ProductCardDesktop = ({product,businessNameEncoded,currency}) => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
@@ -66,7 +66,7 @@ const ProductCardDesktop = ({product,businessNameEncoded}) => {
             <dir className='p-0 m-1'>
                 <p className='p-1 m-0 text-start' style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>
                 <p className='p-1 m-0 text-start' style={{fontSize:'0.8em'}}>{product.description}</p>
-                <p className='text-bold m-0'>€ {product.price.toFixed(2)}</p>
+                <p className='text-bold m-0'>{currency} {product.price.toFixed(2)}</p>
                 
             </dir>
             <div className="mb-2">

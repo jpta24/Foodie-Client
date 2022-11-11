@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 import {CartContext} from '../context/cart.context'
 
-const CartCard = ({product,updateSummary}) => {
+const CartCard = ({product,updateSummary,currency}) => {
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
 
@@ -65,7 +65,7 @@ const CartCard = ({product,updateSummary}) => {
         <div className="p-1 col-5 d-flex flex-column justify-content-between">
             <dir className='p-0 m-1'>
                 <p className='p-1 m-0 text-start' style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.product.name}</p>
-                <p className='text-bold m-0 text-start'>€ {product.product.price.toFixed(2)}</p>
+                <p className='text-bold m-0 text-start'>{currency} {product.product.price.toFixed(2)}</p>
                 
             </dir>
             <div className="mb-1">
@@ -82,7 +82,7 @@ const CartCard = ({product,updateSummary}) => {
             <h3>{product.quantity}</h3>
         </div>
         <div className="m-1 col-3">
-            <h3 className='subtotal fs-4'>€ {(product.quantity * product.product.price).toFixed(2)}</h3>
+            <h3 className='subtotal fs-4'>{currency} {(product.quantity * product.product.price).toFixed(2)}</h3>
         </div>
     </div>
   )

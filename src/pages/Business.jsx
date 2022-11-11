@@ -18,8 +18,7 @@ const Business = () => {
     const { cart } = useContext(CartContext)
     const { user } = useContext(AuthContext)
     let summary
-    if (cart) {
-        // console.log(cart);
+    if (cart!==null && cart.length > 0 ) {
         const amounts = cart.map(item=>item.product.price)
         summary = amounts.reduce((acc,val)=>{return acc+val}).toFixed(2)
     } 
@@ -77,6 +76,7 @@ const Business = () => {
       }, [])
 
     if (business!=='') {
+        const currency = business.currency
             
         return (
             <div className='container-fluid'>
@@ -115,13 +115,13 @@ const Business = () => {
                 {window.innerWidth < 450 ? 
                     <div    className="col-12 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
+                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency}/>
                         })}
                     </div>
                      : 
-                    <div className=" col-md-10 d-flex flex-wrap justify-content-center align-items-stretch ">
+                    <div className=" col-md-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
+                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency}/>
                         })}
                     </div>}
                     {cart && user && cart.length > 0 && 
@@ -131,7 +131,7 @@ const Business = () => {
                                 {cart.length}
                                 </span>
                                 🛒</span>
-                            <span>Go to Cart ({summary} €)</span>
+                            <span>Go to Cart ({summary} {currency})</span>
                             <span className='px-2'>  </span>
                         </Link>
                          }

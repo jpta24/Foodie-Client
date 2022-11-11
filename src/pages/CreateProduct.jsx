@@ -227,7 +227,7 @@ const CreateProduct = () => {
 							>
 								<Form.Label>Price</Form.Label>
                                 <InputGroup className="mb-3">
-                                    <InputGroup.Text>€</InputGroup.Text>
+                                    <InputGroup.Text>{business.currency}</InputGroup.Text>
                                     <Form.Control
 									type='number'
 									placeholder='use dot for decimals'
