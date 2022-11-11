@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import PayMethod from '../components/PayMethod';
 import iconsCloud from '../data/icons.json'
 import Loading from '../components/Loading';
+import FormatDelivery from '../components/FormatDelivery';
 
 
 const CartPage = () => {
@@ -31,14 +32,48 @@ const CartPage = () => {
         }
         setSummary(arrSubtotal.reduce((acc,val)=>{return acc+val}))
     }
+    
+    let buzs
+    // let businessArray = []
+    // const [businesses, setBusinesses] = useState([])
+
+    // if(cart){
+    //     const businessIdArr = cart.map(prod => {
+    //         return prod.product.business
+    //     });
+    //     buzs = [...new Set(businessIdArr)]
+    //     const storedToken = localStorage.getItem("authToken"); 
+
+    //     buzs.forEach(buzID=>{
+    //         axios.get(`${process.env.REACT_APP_SERVER_URL}/business/id/${buzID}`,{headers: {Authorization: `Bearer ${storedToken}`}})
+    //     .then(response=>{
+    //         console.log(response.data.business)
+    //         businessArray.push(response.data.business)
+    //     })
+    //     .catch((error) => {
+    //         console.log({error});
+    //         // eslint-disable-next-line no-lone-blocks
+    //         {window.innerWidth < 450 ? 
+    //           toast.error("Sorry Internal Error !", {
+    //               position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+    //           }) : toast.error('Sorry Internal Error', { theme: 'dark' });}
+    //         })
+    //     })
+
+    //     console.log(businessArray);    
+    // }
+    
+    
 
     const initialState = {
         cash: false,
         card: false,
         pp: false
     }
-    
+
     const updatedPayment = {...initialState,cash:true}
+
+    const [payment, setPayment] = useState(updatedPayment)
 
     const initialAddress ={
         street:'',
@@ -47,14 +82,30 @@ const CartPage = () => {
         phone:''
     }
 
-    const [payment, setPayment] = useState(updatedPayment)
-    const [address, setAddress] = useState(initialAddress)
-
     const handleChange = (paymentClicked) => {
         const newState = {...initialState}
         newState[paymentClicked]= true
         setPayment(newState)
     }
+
+    const [address, setAddress] = useState(initialAddress)
+
+    const initialDelivery = {
+        delivery:false,
+        pickup: false,
+        inplace: false
+    }
+
+    const updatedDelivery = {...initialDelivery,delivery:true}
+    
+    const [delivery, setDelivery] = useState(updatedDelivery)
+
+    const handleChangeFormat = (formatDeliveryClicked) => {
+        const newState = {...initialDelivery}
+        newState[formatDeliveryClicked]= true
+        setDelivery(newState)
+    }
+
 
     const handlePlaceOrder =()=>{
         const storedToken = localStorage.getItem("authToken"); 
@@ -66,12 +117,16 @@ const CartPage = () => {
                 payMethod = each[0]
             }
         })
-        const businessIdArr = cart.map(prod => {
-            return prod.product.business
-        });
-        const buzs = [...new Set(businessIdArr)]
-        const orders =[]
 
+        let deliveryFormat = ''
+        
+        Object.entries(delivery).forEach(each =>{
+            if(each[1]){
+                deliveryFormat = each[0]
+            }
+        })
+        
+        const orders =[]
         
         buzs.forEach(buz=>{
             return orders.push({
@@ -79,13 +134,13 @@ const CartPage = () => {
                 user:user._id,
                 status:'pending',
                 paymentMethod:payMethod,
+                format:deliveryFormat,
                 products:[],
                 note: address,
                 summary:summary
             })
         })
         orders.forEach(each=>{
-            
             cart.forEach(elem=>{
                 if (each.business === elem.product.business) {
                     each.products.push({
@@ -96,7 +151,6 @@ const CartPage = () => {
             })
         })
         console.log(orders)
-
 
 		const requestBody = {
             update:'order',
@@ -169,30 +223,52 @@ const CartPage = () => {
                     </div>
                     <div className="col-12 col-md-5">
                     <div className="col-11 d-flex flex-column p-2 mt-2 py-3 form-control bg-success cartSummary">
-                            <h2> Summary: € {summary.toFixed(2)}</h2>
-                            <h4>Payment Method</h4>
-                            <div className='d-flex px-2 m-2 justify-content-around'>
-                                <PayMethod onclick={()=>{handleChange('cash')}} src={payment.cash ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
-                                <PayMethod onclick={()=>{handleChange('card')}} src={payment.card ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>
-                                <PayMethod onclick={()=>{handleChange('pp')}} src={payment.pp ? iconsCloud[0].ppActive: iconsCloud[0].ppInactive}/>
-                            </div>
+                            <h2 className='fw-bold text-light'> Summary: € {summary.toFixed(2)}</h2>
+
+                            <h4>Delivery Format</h4>
+                            <div className='d-flex px-2 mx-2 justify-content-around'>
+                                <FormatDelivery onclick={()=>{handleChangeFormat('delivery')}} src={delivery.delivery ? iconsCloud[0].deliveryActive: iconsCloud[0].deliveryInactive}/>
+                                <FormatDelivery onclick={()=>{handleChangeFormat('pickup')}} src={delivery.pickup ? iconsCloud[0].pickupActive: iconsCloud[0].pickupInactive}/>
+                                <FormatDelivery onclick={()=>{handleChangeFormat('inplace')}} src={delivery.inplace ? iconsCloud[0].inplaceActive: iconsCloud[0].inplaceInactive}/>
+                            </div>  
 
                             <div className='d-flex flex-column justify-content-between mb-2 '>
-                                <Form.Group
-                                    className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
-                                    controlId='formBasicAddressName'
-                                >
-                                    <Form.Label className='mb-0'>Name</Form.Label>
-                                    <Form.Control
-                                        type='text'
-                                        placeholder='Recipient'
-                                        name='name'
-                                        value={address.name}
-                                        onChange={(e) => {
-                                            setAddress({...address, [e.target.name]:e.target.value});
-                                        }}
-                                    />
-                                </Form.Group>
+                                <div className="d-flex">
+                                    <Form.Group
+                                        className='mb-1 col-6 px-2 d-flex flex-column align-items-start'
+                                        controlId='formBasicAddressName'
+                                    >
+                                        <Form.Label className='mb-0'>Name</Form.Label>
+                                        <Form.Control
+                                            className='py-0'
+                                            type='text'
+                                            placeholder='Recipient'
+                                            name='name'
+                                            value={address.name}
+                                            onChange={(e) => {
+                                                setAddress({...address, [e.target.name]:e.target.value});
+                                            }}
+                                        />
+                                        
+                                    </Form.Group>
+                                    <Form.Group
+                                        className='mb-1 col-6 px-2 d-flex flex-column align-items-start'
+                                        controlId='formBasicphone'
+                                    >
+                                        <Form.Label className='mb-0'>Phone</Form.Label>
+                                        <Form.Control
+                                            className='py-0'
+                                            type='tel'
+                                            placeholder='add a phone number'
+                                            name='phone'
+                                            value={address.phone}
+                                            onChange={(e) => {
+                                                setAddress({...address, [e.target.name]:e.target.value});;
+                                            }}
+                                        />
+                                    </Form.Group>
+                                </div>
+                                
 
                                 <Form.Group
                                     className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
@@ -200,6 +276,7 @@ const CartPage = () => {
                                 >
                                     <Form.Label className='mb-0'>Address</Form.Label>
                                     <Form.Control
+                                        className='py-0'
                                         type='text'
                                         placeholder='Street, building number and Floor'
                                         name='street'
@@ -209,27 +286,14 @@ const CartPage = () => {
                                         }}
                                     />
                                 </Form.Group>
-                                <Form.Group
-                                    className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
-                                    controlId='formBasicphone'
-                                >
-                                    <Form.Label className='mb-0'>Phone</Form.Label>
-                                    <Form.Control
-                                        type='tel'
-                                        placeholder='add a phone number'
-                                        name='phone'
-                                        value={address.phone}
-                                        onChange={(e) => {
-                                            setAddress({...address, [e.target.name]:e.target.value});;
-                                        }}
-                                    />
-                                </Form.Group>
+                                
                                  <Form.Group
                                     className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
                                     controlId='formBasicNote'
                                 >
                                     <Form.Label className='mb-0'>Note</Form.Label>
                                     <Form.Control
+                                        className='py-0'
                                         type='text'
                                         placeholder='add any note, if need it'
                                         name='note'
@@ -239,8 +303,14 @@ const CartPage = () => {
                                         }}
                                     />
                                 </Form.Group>
-                            </div>                          
-                            
+                            </div>   
+
+                            <h4>Payment Method</h4>
+                            <div className='d-flex px-2 mx-2 justify-content-around'>
+                                <PayMethod onclick={()=>{handleChange('cash')}} src={payment.cash ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
+                                <PayMethod onclick={()=>{handleChange('card')}} src={payment.card ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>
+                                <PayMethod onclick={()=>{handleChange('pp')}} src={payment.pp ? iconsCloud[0].ppActive: iconsCloud[0].ppInactive}/>
+                            </div>
 
 
                             

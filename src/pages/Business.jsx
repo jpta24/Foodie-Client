@@ -31,7 +31,7 @@ const Business = () => {
     let businessNameEncoded = businessName.split(' ').join('-')
 
     const [business, setBusiness] = useState('')
-    const [searchProduct, setSearchProduct] = useState('')
+    // const [searchProduct, setSearchProduct] = useState('')
     
     
     // let initialMenu = {}
@@ -113,7 +113,7 @@ const Business = () => {
                 <div className="row p-0 justify-content-center">
 
                 {window.innerWidth < 450 ? 
-                    <div    className="col-12 d-flex flex-wrap justify-content-center align-items-stretch ">
+                    <div    className="col-12 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
                             return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded}/>
                         })}
