@@ -19,7 +19,7 @@ import FormatDelivery from '../components/FormatDelivery';
 
 const CartPage = () => {
     const { user } = useContext(AuthContext);
-    const { cart,setCart } = useContext(CartContext);
+    const { cart,setCart, getCartData } = useContext(CartContext);
 	const navigate = useNavigate();
 
     const [summary, setSummary] = useState(0)
@@ -105,79 +105,90 @@ const CartPage = () => {
         newState[formatDeliveryClicked]= true
         setDelivery(newState)
     }
-
+    
+	const [errorMessage, setErrorMessage] = useState(undefined);
 
     const handlePlaceOrder =()=>{
-        const storedToken = localStorage.getItem("authToken"); 
+        if (address.name === '' || address.phone === '') {
+            return setErrorMessage('Please provide a recipient, phone contact')
+        } else {
+            const storedToken = localStorage.getItem("authToken"); 
 
-        let payMethod = ''
-        
-        Object.entries(payment).forEach(each =>{
-            if(each[1]){
-                payMethod = each[0]
-            }
-        })
-
-        let deliveryFormat = ''
-        
-        Object.entries(delivery).forEach(each =>{
-            if(each[1]){
-                deliveryFormat = each[0]
-            }
-        })
-        
-        const orders =[]
-        
-        buzs.forEach(buz=>{
-            return orders.push({
-                business: buz,
-                user:user._id,
-                status:'pending',
-                paymentMethod:payMethod,
-                format:deliveryFormat,
-                products:[],
-                note: address,
-                summary:summary
-            })
-        })
-        orders.forEach(each=>{
-            cart.forEach(elem=>{
-                if (each.business === elem.product.business) {
-                    each.products.push({
-                        product:elem.product._id,
-                        quantity:elem.quantity
-                    })
+            let payMethod = ''
+            
+            Object.entries(payment).forEach(each =>{
+                if(each[1]){
+                    payMethod = each[0]
                 }
             })
-        })
-        console.log(orders)
 
-		const requestBody = {
-            update:'order',
-            orders
-        } 
+            let deliveryFormat = ''
+            
+            Object.entries(delivery).forEach(each =>{
+                if(each[1]){
+                    deliveryFormat = each[0]
+                }
+            })
+            
+            const orders =[]
+            const businessIdArr = cart.map(prod => {
+                        return prod.product.business
+                    });
+                    buzs = [...new Set(businessIdArr)]
+            
+            buzs.forEach(buz=>{
+                return orders.push({
+                    business: buz,
+                    user:user._id,
+                    status:'pending',
+                    paymentMethod:payMethod,
+                    format:deliveryFormat,
+                    products:[],
+                    note: address,
+                    summary:summary
+                })
+            })
+            orders.forEach(each=>{
+                cart.forEach(elem=>{
+                    if (each.business === elem.product.business) {
+                        each.products.push({
+                            product:elem.product._id,
+                            quantity:elem.quantity
+                        })
+                    }
+                })
+            })
+            console.log(orders)
 
-        axios
-			.put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
-			.then((response) => {
-                // eslint-disable-next-line no-lone-blocks
+            const requestBody = {
+                update:'order',
+                orders
+            } 
+
+            axios
+                .put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
+                .then((response) => {
+                    // eslint-disable-next-line no-lone-blocks
+                    {window.innerWidth < 450 ? 
+                        toast.success("Order Placed !", {
+                            position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                        }) : toast.success('Order Placed', { theme: 'dark' });}
+                    setCart(null)
+                    getCartData()
+                    navigate(`/orders/${user._id}`)
+                })
+                .catch((error) => {
+                    console.log({error});
+                    const errorDescription = error.response.data.message;
+                    console.log(errorDescription);
+                    // eslint-disable-next-line no-lone-blocks
                 {window.innerWidth < 450 ? 
-                    toast.success("Order Placed !", {
+                    toast.error("Order could not be placed !", {
                         position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    }) : toast.success('Order Placed', { theme: 'dark' });}
-                setCart(null)
-                navigate(`/orders/${user._id}`)
-			})
-			.catch((error) => {
-                console.log({error});
-				const errorDescription = error.response.data.message;
-                console.log(errorDescription);
-                // eslint-disable-next-line no-lone-blocks
-              {window.innerWidth < 450 ? 
-                toast.error("Order could not be placed !", {
-                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error('Order could not be placed', { theme: 'dark' });}
-			});
+                    }) : toast.error('Order could not be placed', { theme: 'dark' });}
+                });    
+        }
+        
     }
 
 
@@ -226,7 +237,7 @@ const CartPage = () => {
                     <div className="col-11 d-flex flex-column p-2 mt-2 py-3 form-control bg-success cartSummary">
                             <h2 className='fw-bold text-light'> Summary: {currency} {summary.toFixed(2)}</h2>
 
-                            <h4>Delivery Format</h4>
+                            <h4 className='mb-0'>Delivery Format</h4>
                             <div className='d-flex px-2 mx-2 justify-content-around'>
                                 <FormatDelivery onclick={()=>{handleChangeFormat('delivery')}} src={delivery.delivery ? iconsCloud[0].deliveryActive: iconsCloud[0].deliveryInactive}/>
                                 <FormatDelivery onclick={()=>{handleChangeFormat('pickup')}} src={delivery.pickup ? iconsCloud[0].pickupActive: iconsCloud[0].pickupInactive}/>
@@ -304,9 +315,10 @@ const CartPage = () => {
                                         }}
                                     />
                                 </Form.Group>
+                                {errorMessage && <p className='text-warning fs-6 mb-0 pb-0'>{errorMessage}</p>}
                             </div>   
 
-                            <h4>Payment Method</h4>
+                            <h4 className='mb-0'>Payment Method</h4>
                             <div className='d-flex px-2 mx-2 justify-content-around'>
                                 <PayMethod onclick={()=>{handleChange('cash')}} src={payment.cash ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
                                 <PayMethod onclick={()=>{handleChange('card')}} src={payment.card ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>

@@ -41,7 +41,7 @@ const CartProviderWrapper = (props) => {
       }, [])
 
   return (
-    <CartContext.Provider value={{ cart, setCart, getCartData, user}}>
+    <CartContext.Provider value={{ cart, setCart, getCartData, user, setUSer}}>
       {props.children}
     </CartContext.Provider>
   )

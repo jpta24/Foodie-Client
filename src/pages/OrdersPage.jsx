@@ -1,13 +1,35 @@
 import { useContext } from 'react';
-import OrderCard from '../components/OrderCard';
 import { CartContext } from '../context/cart.context';
+import axios from 'axios';
+
+import OrderCard from '../components/OrderCard';
 
 import { v4 as uuidv4 } from 'uuid';
 import Loading from '../components/Loading';
 
 const OrdersPage = () => {
     
-    const { user } = useContext(CartContext);
+    const { user, setUSer } = useContext(CartContext);
+    
+    const storedToken = localStorage.getItem("authToken"); 
+    const handleCancelOrder = (order)=>{
+        const requestBody = {
+            status:'cancelled'
+        } 
+
+        axios
+            .put(`${process.env.REACT_APP_SERVER_URL}/orders/status/${order._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then((response) => {
+                // If the server verifies that JWT token is valid  
+                const user = response.data;;
+               // Update state variables        
+                
+                setUSer(user); 
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
 
 
     if (user) {
@@ -20,7 +42,7 @@ const OrdersPage = () => {
                         <h3>These are your Orders:</h3>
                         <div className="col-12 cartProducts">
                                {user.orders.map(order=>{
-                                return<OrderCard key={uuidv4()} order={order} />
+                                return<OrderCard key={uuidv4()} order={order} handleCancelOrder={handleCancelOrder} />
                                })}
                             </div>
                         
