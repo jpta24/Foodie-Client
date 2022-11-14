@@ -10,44 +10,40 @@ const CartCard = ({product,updateSummary,currency}) => {
     const storedToken = localStorage.getItem("authToken"); 
     const handleAddToCart = () =>{
         const requestBody = {
-            update:'cart',
             cart:{
                 product:product.product._id,
                 quantity:1
             }
         } 
         axios
-            .put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .put(`${process.env.REACT_APP_SERVER_URL}/users/addCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
             .then(() => {
                 getCartData()
             })
             .catch((error) => {
                 console.log(error)
             });
-        
     }
+
     const handleRemoveToCart = () =>{
         const requestBody = {
-            update:'removeCart',
-            cart:{
-                product:product._id,
-            }
+            product:product._id,    
         } 
         axios
-            .put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .put(`${process.env.REACT_APP_SERVER_URL}/users/removeCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
             .then(() => {
                 getCartData()
             })
             .catch((error) => {
                 console.log(error)
             });
-        
     }
 
     useEffect(() => {
         updateSummary()
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
+      
   return (
     <div className='rounded d-flex flex-row card col-11 mx-auto align-items-center justify-content-between shadow'>
         <div className="col-2 m-2 ">

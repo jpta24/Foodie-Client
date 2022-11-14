@@ -19,7 +19,7 @@ import FormatDelivery from '../components/FormatDelivery';
 
 const CartPage = () => {
     const { user } = useContext(AuthContext);
-    const { cart,setCart, getCartData } = useContext(CartContext);
+    const { cart,setCart, getCartData, setUSer } = useContext(CartContext);
 	const navigate = useNavigate();
 
     const [summary, setSummary] = useState(0)
@@ -161,12 +161,11 @@ const CartPage = () => {
             console.log(orders)
 
             const requestBody = {
-                update:'order',
                 orders
             } 
 
             axios
-                .put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
+                .put(`${process.env.REACT_APP_SERVER_URL}/users/order/${user._id}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
                 .then((response) => {
                     // eslint-disable-next-line no-lone-blocks
                     {window.innerWidth < 450 ? 
@@ -175,6 +174,8 @@ const CartPage = () => {
                         }) : toast.success('Order Placed', { theme: 'dark' });}
                     setCart(null)
                     getCartData()
+                    const userUpdated = response.data;;
+                    setUSer(userUpdated); 
                     navigate(`/orders/${user._id}`)
                 })
                 .catch((error) => {

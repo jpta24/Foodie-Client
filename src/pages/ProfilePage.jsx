@@ -53,7 +53,6 @@ const ProfilePage = () => {
             }
         })   
         const requestBody = {
-            update:'rol',
             rol:newRol,
             buzname
         } 
@@ -61,7 +60,7 @@ const ProfilePage = () => {
 		// If POST request is successful redirect to Business/Dashboard page
 		// If the request resolves with an error, set the error message in the state
 		axios
-			.put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+			.put(`${process.env.REACT_APP_SERVER_URL}/users/rol/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then(() => {
                 setIncommingMessage("Business's owner would let you know about your application")
                 // eslint-disable-next-line no-lone-blocks

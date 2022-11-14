@@ -19,20 +19,19 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency}) => {
         
         if(user){
             const requestBody = {
-                update:'cart',
                 cart:{
                     product:product._id,
                     quantity:1
                 }
             } 
             axios
-                .put(`${process.env.REACT_APP_SERVER_URL}/users/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+                .put(`${process.env.REACT_APP_SERVER_URL}/users/addCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
                 .then(() => {
                     // eslint-disable-next-line no-lone-blocks
-                    {window.innerWidth < 450 ? 
-                        toast.success("Item(s) added to Cart !", {
-                            position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                        }) : toast.success('Item(s) added to Cart', { theme: 'dark' });}
+                    // {window.innerWidth < 450 ? 
+                    //     toast.success("Item(s) added to Cart !", {
+                    //         position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                    //     }) : toast.success('Item(s) added to Cart', { theme: 'dark' });}
                     getCartData()
                 })
                 .catch((error) => {
