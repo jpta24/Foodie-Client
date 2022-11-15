@@ -30,7 +30,7 @@ const Nabvar2 = () => {
                         <Button href={`/cart/${user._id}`} variant="outline-success" className='mx-2 my-1 position-relative' >Cart 🛒
                             {cart && cart.length > 0 &&
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">
-                                {cart.length}
+                                {cart.map(prod=>prod.quantity).reduce((acc,val)=>{return acc + val},0)}
                                 <span className="visually-hidden">unread messages</span>
                             </span>}
                         </Button>

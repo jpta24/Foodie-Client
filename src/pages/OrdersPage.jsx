@@ -33,7 +33,6 @@ const OrdersPage = () => {
 
 
     if (user) {
-        console.log(user.orders);
         return <div className='container p-0'>
             <div className="row d-flex flex-row rounded border border-light">
                 <div className="col-12 col-md-10">

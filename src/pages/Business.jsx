@@ -19,7 +19,7 @@ const Business = () => {
     const { user } = useContext(AuthContext)
     let summary
     if (cart!==null && cart.length > 0 ) {
-        const amounts = cart.map(item=>item.product.price)
+        const amounts = cart.map(item=>item.product.price*item.quantity)
         summary = amounts.reduce((acc,val)=>{return acc+val}).toFixed(2)
     } 
     
@@ -115,20 +115,20 @@ const Business = () => {
                 {window.innerWidth < 450 ? 
                     <div    className="col-12 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency}/>
+                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart}/>
                         })}
                     </div>
                      : 
                     <div className=" col-md-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency}/>
+                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart}/>
                         })}
                     </div>}
                     {cart && user && cart.length > 0 && 
                         <Link    to={`/cart/${user._id}`} className='fixed-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between'>
                             <span className='px-2 position-relative'>
                                 <span className="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark">
-                                {cart.length}
+                                {cart.map(prod=>prod.quantity).reduce((acc,val)=>{return acc + val},0)}
                                 </span>
                                 🛒</span>
                             <span>Go to Cart ({summary} {currency})</span>

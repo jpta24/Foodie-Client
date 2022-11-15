@@ -132,9 +132,11 @@ const CartPage = () => {
             
             const orders =[]
             const businessIdArr = cart.map(prod => {
-                        return prod.product.business
+
+                        return prod.product.business._id
                     });
                     buzs = [...new Set(businessIdArr)]
+            
             
             buzs.forEach(buz=>{
                 return orders.push({
@@ -145,16 +147,18 @@ const CartPage = () => {
                     format:deliveryFormat,
                     products:[],
                     note: address,
-                    summary:summary
+                    summary:0
                 })
             })
+            
             orders.forEach(each=>{
                 cart.forEach(elem=>{
-                    if (each.business === elem.product.business) {
+                    if (each.business === elem.product.business._id) {
                         each.products.push({
                             product:elem.product._id,
                             quantity:elem.quantity
                         })
+                        each.summary += elem.quantity * elem.product.price
                     }
                 })
             })
@@ -194,40 +198,41 @@ const CartPage = () => {
 
 
     if(user && cart){
-    const allIds = cart.map(elem =>elem.product._id)
-    const cartProdIds = []
-    const renderCart = []
-    const currency = cart[0].product.business.currency
+    // const allIds = cart.map(elem =>elem.product._id)
+    // const cartProdIds = []
+    // const renderCart = []
+    let currency = '$'
+    if(cart.length > 0) {currency = cart[0].product.business.currency} 
 
-    for (let i = 0; i < cart.length; i++) {
-        if (cartProdIds.includes(cart[i].product._id)) {
+    // for (let i = 0; i < cart.length; i++) {
+    //     if (cartProdIds.includes(cart[i].product._id)) {
 
-            const filteredElem = renderCart.filter(elem=>{
-                return cart[i].product._id === elem.product._id
-            })
-            let qty = 0
-            allIds.forEach(elem=>{
-                if(elem === cart[i].product._id){
-                    qty += 1
-                }
-            })
-            filteredElem[0].quantity = qty                  
-        }else{
-            cartProdIds.push(cart[i].product._id)
-            renderCart.push(cart[i])
-        }
+    //         const filteredElem = renderCart.filter(elem=>{
+    //             return cart[i].product._id === elem.product._id
+    //         })
+    //         let qty = 0
+    //         allIds.forEach(elem=>{
+    //             if(elem === cart[i].product._id){
+    //                 qty += 1
+    //             }
+    //         })
+    //         filteredElem[0].quantity = qty                  
+    //     }else{
+    //         cartProdIds.push(cart[i].product._id)
+    //         renderCart.push(cart[i])
+    //     }
         
-    }   
+    // }   
     
         return (
             <div className='container p-0'>
                 <div className="row d-flex flex-row rounded border border-light">
                     <div className="col-12 col-md-7">
-                        <div className="col-11 d-flex flex-column p-2 mt-2 form-control">
+                        <div className="col-11 d-flex flex-column p-2 my-2 form-control">
                             <h1>Hi, {user.username}</h1>
                             <h3>{cart.length===0?'Your Cart is Empty!':'This is your Cart'}</h3>
                             <div className="col-12 cartProducts">
-                                {renderCart.map(product => {
+                                {cart.map(product => {
                                 return <CartCard key={uuidv4()} product={product} updateSummary={updateSummary} currency={currency} />
                                 })}
                             </div>

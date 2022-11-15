@@ -8,15 +8,30 @@ const CartCard = ({product,updateSummary,currency}) => {
     const { getCartData } = useContext(CartContext);
 
     const storedToken = localStorage.getItem("authToken"); 
-    const handleAddToCart = () =>{
+    // const handleAddToCart = () =>{
+    //     const requestBody = {
+    //         cart:{
+    //             product:product.product._id,
+    //             quantity:1
+    //         }
+    //     } 
+    //     axios
+    //         .put(`${process.env.REACT_APP_SERVER_URL}/users/addCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+    //         .then(() => {
+    //             getCartData()
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         });
+    // }
+    const handleAddQtyToCart = () =>{
         const requestBody = {
             cart:{
                 product:product.product._id,
-                quantity:1
             }
         } 
         axios
-            .put(`${process.env.REACT_APP_SERVER_URL}/users/addCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .put(`${process.env.REACT_APP_SERVER_URL}/users/addQtyCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
             .then(() => {
                 getCartData()
             })
@@ -38,6 +53,21 @@ const CartCard = ({product,updateSummary,currency}) => {
                 console.log(error)
             });
     }
+    const handleRemoveQtyToCart = () =>{
+        const requestBody = {
+            cart:{
+                product:product.product._id,
+            }
+        } 
+        axios
+            .put(`${process.env.REACT_APP_SERVER_URL}/users/removeQtyCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then(() => {
+                getCartData()
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
 
     useEffect(() => {
         updateSummary()
@@ -45,7 +75,7 @@ const CartCard = ({product,updateSummary,currency}) => {
       }, [])
       
   return (
-    <div className='rounded d-flex flex-row card col-11 mx-auto align-items-center justify-content-between shadow'>
+    <div className='rounded d-flex flex-row card col-11 my-2 mx-auto align-items-center justify-content-between shadow'>
         <div className="col-2 m-2 ">
             <div className="p-2 rounded border border-dark d-flex justify-items-center m-auto" 
                 style={{  
@@ -67,9 +97,9 @@ const CartCard = ({product,updateSummary,currency}) => {
             <div className="mb-1">
                 <p className='mb-1'>
                     <span style={{cursor:"pointer"}} className="badge rounded-pill bg-success">
-                        <span className="p-1" onClick={()=>{handleRemoveToCart()}}>-</span>
+                        <span className="p-1" onClick={()=>{product.quantity ===1 ? handleRemoveToCart() : handleRemoveQtyToCart()}}>-</span>
                         <span className="p-1">{product.quantity}</span>
-                        <span className="p-1" onClick={()=>{handleAddToCart()}}>+</span>
+                        <span className="p-1" onClick={()=>{handleAddQtyToCart()}}>+</span>
                     </span>
                 </p>
             </div>

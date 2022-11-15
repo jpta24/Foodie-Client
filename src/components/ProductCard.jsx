@@ -8,40 +8,60 @@ import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
 
-const ProductCard = ({product,businessNameEncoded,currency}) => {
+const ProductCard = ({product,businessNameEncoded,currency,cart}) => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
 
     const storedToken = localStorage.getItem("authToken"); 
+    const handleAddQtyToCart = () =>{
+        const requestBody = {
+            cart:{
+                product:product._id,
+            }
+        } 
+        axios
+            .put(`${process.env.REACT_APP_SERVER_URL}/users/addQtyCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then(() => {
+                getCartData()
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
 
     const handleAddToCart = () =>{
         if(user){
-            const requestBody = {
-                cart:{
-                    product:product._id,
-                    quantity:1
-                }
-            } 
-            axios
-                .put(`${process.env.REACT_APP_SERVER_URL}/users/addCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
-                .then(() => {
-                    // eslint-disable-next-line no-lone-blocks
-                    // {window.innerWidth < 450 ? 
-                    //     toast.success("Item(s) added to Cart !", {
-                    //         position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    //     }) : toast.success('Item(s) added to Cart', { theme: 'dark' });}
-                    getCartData()
-                })
-                .catch((error) => {
-                    const errorDescription = error.response.data.message;
-                    toast.error(errorDescription, { theme: 'dark' });
-                    // eslint-disable-next-line no-lone-blocks
-                    {window.innerWidth < 450 ? 
-                        toast.error(errorDescription, {
-                            position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                        }) : toast.error(errorDescription, { theme: 'dark' });}
-                });
+            if(cart.map(prod=>prod.product._id).includes(product._id)){
+                handleAddQtyToCart()
+            } else {
+                const requestBody = {
+                    cart:{
+                        product:product._id,
+                        quantity:1
+                    }
+                } 
+                axios
+                    .put(`${process.env.REACT_APP_SERVER_URL}/users/addCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+                    .then(() => {
+                        // eslint-disable-next-line no-lone-blocks
+                        // {window.innerWidth < 450 ? 
+                        //     toast.success("Item(s) added to Cart !", {
+                        //         position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                        //     }) : toast.success('Item(s) added to Cart', { theme: 'dark' });}
+                        getCartData()
+                    })
+                    .catch((error) => {
+                        const errorDescription = error.response.data.message;
+                        toast.error(errorDescription, { theme: 'dark' });
+                        // eslint-disable-next-line no-lone-blocks
+                        {window.innerWidth < 450 ? 
+                            toast.error(errorDescription, {
+                                position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                            }) : toast.error(errorDescription, { theme: 'dark' });}
+                    });
+            }
+            
         } else {
            navigate(`/login/${businessNameEncoded}`)
         }
