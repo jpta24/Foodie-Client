@@ -20,6 +20,8 @@ const CreateBusiness = () => {
 		address: {
 			city: '',
 			street: '',
+			telephone:0,
+			email:'',
 			postCode: 0,
 			country: '',
 		},
@@ -56,8 +58,13 @@ const CreateBusiness = () => {
 
 	const handleBusinessSubmit = (e) => {
 		e.preventDefault();
-    const storedToken = localStorage.getItem("authToken"); 
-
+    	const storedToken = localStorage.getItem("authToken"); 
+		if (business.currency === ''){
+			business.currency = '$'
+		}
+		if (business.name === '' || business.address.telephone === 0 || business.address.email==='') {
+            return setErrorMessage('Please provide a Name, telephone and valid email')
+        } else {
 		// Create an object representing the request body
 		const requestBody = business;
 
@@ -85,7 +92,10 @@ const CreateBusiness = () => {
 					}) : toast.error('Business could not be Created', { theme: 'dark' });}
 						setErrorMessage(errorDescription);
 					});
-				};
+				};	
+	}
+
+		
 
   const uploadImage = (file) => {
     return  axios.post(`${process.env.REACT_APP_SERVER_URL}/api/upload`, file)
@@ -206,6 +216,39 @@ const CreateBusiness = () => {
 									value={business.address.country}
 									onChange={(e) => {
 										setBusiness({...business, address: {...business.address, country:e.target.value }});
+									}}
+								/>
+							</Form.Group>
+						</div>
+						<div className='d-md-flex justify-content-md-between'>
+							<Form.Group
+								className='mb-3 col-md-6 d-flex flex-column align-items-start'
+								controlId='formBasicBusinessEmail'
+							>
+								<Form.Label>E-mail</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='E-mail'
+									name='email'
+									value={business.address.email}
+									onChange={(e) => {
+										setBusiness({...business, address: {...business.address, email:e.target.value }});
+									}}
+								/>
+							</Form.Group>
+
+							<Form.Group
+								className='mb-3 col-md-5 d-flex flex-column align-items-start'
+								controlId='formBasicBusinessTelephone'
+							>
+								<Form.Label>Telephone</Form.Label>
+								<Form.Control
+									type='number'
+									placeholder='Telephone'
+									name='telephone'
+									value={business.address.telephone}
+									onChange={(e) => {
+										setBusiness({...business, address: {...business.address, telephone:e.target.value }});
 									}}
 								/>
 							</Form.Group>

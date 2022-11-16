@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext,useState } from 'react';
 import { CartContext } from '../context/cart.context';
+import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 import OrderCard from '../components/OrderCard';
@@ -8,6 +9,13 @@ import { v4 as uuidv4 } from 'uuid';
 import Loading from '../components/Loading';
 
 const OrdersPage = () => {
+    const initialState = {
+        show: false,
+        contact:'seller',
+        msg:'',
+        order:''
+    }
+    const [show, setShow] = useState(initialState);
     
     const { user, setUSer } = useContext(CartContext);
     
@@ -30,7 +38,11 @@ const OrdersPage = () => {
                 console.log(error)
             });
     }
-
+    
+    const handleClose = () => setShow(false);
+    const handleModal = (msg,order,contact) => {
+        setShow({...show,show:true,msg,order,contact})
+    }
 
     if (user) {
         return <div className='container p-0'>
@@ -41,13 +53,31 @@ const OrdersPage = () => {
                         <h3>These are your Orders:</h3>
                         <div className="col-12 cartProducts">
                                {user.orders.map(order=>{
-                                return<OrderCard key={uuidv4()} order={order} handleCancelOrder={handleCancelOrder} />
+                                return<OrderCard key={uuidv4()} order={order} handleCancelOrder={handleCancelOrder} handleModal={handleModal} />
                                })}
                             </div>
                         
                     </div>
                 </div>
             </div>
+            <Modal
+                show={show.show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                <Modal.Title>Contact {show.contact === 'us' ? 'Us' : 'Seller'}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {show.msg} {show.order!=='' && show.contact === 'seller' && `${show.order.business.address.email} or ${show.order.business.address.telephone}` }
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     }else{
         return (
