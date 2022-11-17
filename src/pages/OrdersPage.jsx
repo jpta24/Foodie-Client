@@ -7,6 +7,7 @@ import OrderCard from '../components/OrderCard';
 
 import { v4 as uuidv4 } from 'uuid';
 import Loading from '../components/Loading';
+import OrderStatus from '../components/OrderStatus';
 
 const OrdersPage = () => {
     const initialState = {
@@ -16,6 +17,10 @@ const OrdersPage = () => {
         order:''
     }
     const [show, setShow] = useState(initialState);
+    
+    const [status, setStatus] = useState('All Orders')
+
+    const statues = ['All Orders','Pending','Payed','Confirmed','Cancelled']
     
     const { user, setUSer } = useContext(CartContext);
     
@@ -51,6 +56,7 @@ const OrdersPage = () => {
                     <div className="col-12 d-flex flex-column justify-content-center align-items-center p-2 mt-2 form-control">
                         <h1>Hi, {user.username}</h1>
                         <h3>These are your Orders:</h3>
+                        <OrderStatus statues={statues} setStatus={setStatus} status={status}/>
                         <div className="col-12 cartProducts">
                                {user.orders.map(order=>{
                                 return<OrderCard key={uuidv4()} order={order} handleCancelOrder={handleCancelOrder} handleModal={handleModal} />

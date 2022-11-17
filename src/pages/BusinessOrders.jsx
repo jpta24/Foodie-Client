@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import BusinessOrdersCard from '../components/BusinessOrdersCard';
 import Loading from '../components/Loading';
+import OrderStatus from '../components/OrderStatus';
 
 const BusinessOrders = () => {
     const initialState = {
@@ -27,6 +28,10 @@ const BusinessOrders = () => {
     let businessNameEncoded = businessName.split(' ').join('-')
 
     const [business, setBusiness] = useState('')
+
+    const [status, setStatus] = useState('All Orders')
+
+    const statues = ['All Orders','Pending','Payed','Confirmed','Cancelled']
 
     const handleClose = () => setShow(false);
     const handleModal = (msg,order,contact) => {
@@ -78,9 +83,10 @@ const BusinessOrders = () => {
                     <div className="col-12 d-flex flex-column justify-content-center align-items-center p-2 mt-2 form-control">
                         <h1>Hi, {business.name}</h1>
                         <h3>These are your Orders:</h3>
+                        <OrderStatus statues={statues} setStatus={setStatus} status={status}/>
                         <div className="col-12 cartProducts">
-                               {business.orders.map(order=>{
-                                return<BusinessOrdersCard key={uuidv4()} order={order} handleCancelOrder={handleStatusOrder} handleModal={handleModal} />
+                               {business.orders.filter(filt=>{return filt.status===status.toLocaleLowerCase() || status==='All Orders'}).map(order=>{
+                                return<BusinessOrdersCard key={uuidv4()} order={order} handleStatusOrder={handleStatusOrder} handleModal={handleModal} />
                                })}
                             </div>
                         

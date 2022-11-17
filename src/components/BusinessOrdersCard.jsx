@@ -3,10 +3,10 @@ import { Button } from 'react-bootstrap';
 
 import { v4 as uuidv4 } from 'uuid';
 
-const BusinessOrdersCard = ({order,currency,handleStatusOrder, handleModal}) => {
+const BusinessOrdersCard = ({order,handleStatusOrder, handleModal}) => {
     return (
     <div className='rounded d-flex flex-row card col-11 align-items-center justify-content-around my-1 mx-auto shadow'>
-        <div className="col-1 m-1">
+        <div className="col-md-1 d-none d-md-block m-1">
             <div className="d-none d-md-block p-2 rounded border border-dark d-flex justify-items-center m-auto" 
                 style={{  
                     height: '60px',
@@ -18,13 +18,13 @@ const BusinessOrdersCard = ({order,currency,handleStatusOrder, handleModal}) => 
                 }}>
             </div>
         </div>
-        <div className="p-1 col-10 d-flex flex-column justify-content-between">
+        <div className="p-1 col-11 col-md-10 d-flex flex-column justify-content-between">
             <dir className='p-1 m-1'>
                 <p className='p-1 m-0 text-start' style={{fontSize:'0.95em', fontWeight:'bolder'}}>For: {order.note.name}</p>
                 <div className='p-1'>
                     {order.products.map(eachProduct=>{
                         return<p key={uuidv4()} className='m-0 text-start d-flex justify-content-between'>
-                        <span className='col-8'>{`- (${eachProduct.quantity}) ${eachProduct.product.name}`}</span><span>{order.business.currency} {eachProduct.product.price.toFixed(2)}</span></p>
+                        <span className='col-8'>{`- (${eachProduct.quantity}) ${eachProduct.product.name}`}</span><span>{order.business.currency} {(eachProduct.product.price * eachProduct.quantity).toFixed(2)}</span></p>
                     })}
                 </div>
                 <hr/>
