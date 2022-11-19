@@ -17,7 +17,7 @@ const OrdersPage = () => {
         order:''
     }
     const [show, setShow] = useState(initialState);
-    
+
     const [status, setStatus] = useState('All Orders')
 
     const statues = ['All Orders','Pending','Payed','Confirmed','Cancelled']
@@ -58,7 +58,7 @@ const OrdersPage = () => {
                         <h3>These are your Orders:</h3>
                         <OrderStatus statues={statues} setStatus={setStatus} status={status}/>
                         <div className="col-12 cartProducts">
-                               {user.orders.map(order=>{
+                               {user.orders.filter(filt=>{return filt.status===status.toLocaleLowerCase() || status==='All Orders'}).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).map(order=>{
                                 return<OrderCard key={uuidv4()} order={order} handleCancelOrder={handleCancelOrder} handleModal={handleModal} />
                                })}
                             </div>

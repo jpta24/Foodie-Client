@@ -75,7 +75,6 @@ const BusinessOrders = () => {
             });
     }
 
-
     if (business) {
         return <div className='container p-0'>
             <div className="row d-flex flex-row rounded border border-light">
@@ -85,7 +84,7 @@ const BusinessOrders = () => {
                         <h3>These are your Orders:</h3>
                         <OrderStatus statues={statues} setStatus={setStatus} status={status}/>
                         <div className="col-12 cartProducts">
-                               {business.orders.filter(filt=>{return filt.status===status.toLocaleLowerCase() || status==='All Orders'}).map(order=>{
+                               {business.orders.filter(filt=>{return filt.status===status.toLocaleLowerCase() || status==='All Orders'}).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).map(order=>{
                                 return<BusinessOrdersCard key={uuidv4()} order={order} handleStatusOrder={handleStatusOrder} handleModal={handleModal} />
                                })}
                             </div>
