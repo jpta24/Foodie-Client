@@ -45,6 +45,18 @@ const BusinessView = () => {
         }
         const link = `https://foodie-de.netlify.app/${business.name}`
 
+        let arrCategories = []
+        if (business.products) {
+            business.products.forEach(prod=>{
+                prod.categories.forEach(cate=>{
+                    if(!arrCategories.includes(cate)){
+                    arrCategories.push(cate) 
+                    // initialMenu[cate]=false
+                    } 
+                })
+            })
+        }
+
         const download = () => {
             const canvas = document.getElementById("react-qrcode-logo");
             if (canvas) {
@@ -145,7 +157,7 @@ const BusinessView = () => {
                         <span>Categories:</span>
                         <div className='d-flex flex-wrap'>
                         
-                             {business.categories.map(cat => {
+                             {arrCategories.map(cat => {
                                 return <span key={cat} className="badge rounded-pill bg-success m-1">{cat}</span>
                                     })}
                         </div>
