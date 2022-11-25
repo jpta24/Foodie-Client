@@ -7,6 +7,69 @@ $custom-colors: (
   "f-primary": #900,
   "f-secondary": green
 );
+
+body {
+  height: auto;
+  align-items: center;
+  background-image: linear-gradient(to right,#F1FAFF, #8EEDFF) !important
+}
+
+.App {
+  text-align: center;
+  /* background-image: linear-gradient(to right,#7ff3e98a, #f7f9f99e);*/ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  z-index: 1;
+}
+
+body * {
+  z-index: 2;
+}
+
+.background-shapes {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 5076px;
+  background-size: 100%;
+  animation: 180s infiniteScroll linear infinite;
+  background-repeat-x: repeat;
+  background-image:
+  url(https://cdn2.hubspot.net/hubfs/53/Pricing%202017%20Assets/marketing/Header_Circles-1.svg);
+  -webkit-animation: 180s infiniteScroll linear infinite;
+}
+
+@-webkit-keyframes infiniteScroll {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, -1692px, 0);
+    transform: translate3d(0, -1692px, 0);
+  }
+}
+
+@keyframes infiniteScroll {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, -1692px, 0);
+    transform: translate3d(0, -1692px, 0);
+  }
+}
+
 .card:hover {
   transform: scale(1.01);
   -webkit-transform: scale(1.01);
@@ -18,6 +81,10 @@ $custom-colors: (
   -moz-transition: all 0.3s linear !important;
   -ms-transition: all 0.3s linear !important;
   -o-transition: all 0.3s linear !important;
+}
+
+.cardBg {
+  background-color: rgba(255, 255, 255, 0.053) !important;
 }
 
 .cartProducts {

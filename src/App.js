@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import './App.css';
 
 import { ToastContainer } from 'react-toastify';
 import IsAnon from "./components/IsAnon";
@@ -26,6 +25,7 @@ import SignupBizPage from "./pages/SignupBizPage";
 function App() {
   return (
     <div className="App">
+    <div className="background-shapes"></div>
     <Navbar/>
     <div>
     <ToastContainer className='my-5'/>
