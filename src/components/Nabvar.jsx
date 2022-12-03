@@ -12,8 +12,8 @@ const Nabvar2 = () => {
   return (
     <Navbar className='px-4' bg="dark" variant="dark" sticky="top" expand="sm" collapseOnSelect>
         <Navbar.Brand>
-        <img src={iconsCloud[0].foodieIcon} width="40px" height="40px" alt='altLogo'/>{' '}
-        Foodie
+            <img src={iconsCloud[0].foodieIcon} width="40px" height="40px" alt='altLogo'/>{' '}
+            Foodie
         </Navbar.Brand>
 
         <Navbar.Toggle className="coloring" />

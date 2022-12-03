@@ -44,7 +44,7 @@ const OrdersPage = () => {
             });
     }
     
-    const handleClose = () => setShow(false);
+    const handleClose = () => setShow({...show,show:false});
     const handleModal = (msg,order,contact) => {
         setShow({...show,show:true,msg,order,contact})
     }

@@ -13,6 +13,13 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart}) => {
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
 
+    const owner = user.business._id ===product.business ? true : false
+    const prodIsActive = product.status === 'paused' ? false : true
+    const paused ='⏸'
+    const play = '▶'
+
+    console.log(prodIsActive); 
+
     const storedToken = localStorage.getItem("authToken"); 
 
     const handleAddQtyToCart = () =>{
@@ -69,8 +76,8 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart}) => {
     }
   return (
     <div className='rounded d-flex flex-row card col-4 align-items-center justify-content-between m-1 shadow'>
-        <div className="col-4 m-2 ">
-            <div className="p-2 rounded-circle border border-dark d-flex justify-items-center m-auto" 
+        <div className="col-4 m-2">
+            <div className={`p-2 rounded-circle border border-dark d-flex justify-items-center m-auto ${!prodIsActive && 'opacity-50'}`} 
                 style={{  
                     height: '100px',
                     width: '100px',
@@ -83,13 +90,18 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart}) => {
         </div>
         <div className="p-1 col-7 d-flex flex-column justify-content-between">
             <dir className='p-0 m-1'>
-                <p className='p-1 m-0 text-start' style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>
-                <p className='p-1 m-0 text-start' style={{fontSize:'0.8em'}}>{product.description}</p>
-                <p className='text-bold m-0'>{currency} {product.price.toFixed(2)}</p>
+                <div className={`p-0 m-0 ${owner === false && 'd-none'} text-end`}>
+                    <span style={{cursor:"pointer"}} className='mx-1'>{prodIsActive ? paused : play}</span>
+                    <span style={{cursor:"pointer"}} className='mx-1'>🖊</span>
+                    <span style={{cursor:"pointer"}} className='mx-1'>❌</span>
+                </div>
+                <p className={`p-1 m-0 text-start ${!prodIsActive && 'opacity-50'}`} style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>
+                <p className={`p-1 m-0 text-start ${!prodIsActive && 'opacity-50'}`} style={{fontSize:'0.8em'}}>{product.description}</p>
+                <p className={`text-bold m-0 ${!prodIsActive && 'opacity-50'}`}>{currency} {product.price.toFixed(2)}</p>
                 
             </dir>
             <div className="mb-2">
-                <span style={{cursor:"pointer"}} className="p-1">
+                <span style={{cursor:"pointer"}} className={`p-1 m-0 ${!prodIsActive && 'opacity-50'}`}>
                     <img src={iconsCloud[0].addIcon} alt="" width={25} onClick={handleAddToCart}/>
                 </span> 
             </div>

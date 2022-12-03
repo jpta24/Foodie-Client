@@ -31,6 +31,7 @@ const CreateProduct = () => {
         price:'',
 		ingredients:[],
         categories:['General'],
+        status:'active'
 	};
 
     const [product, setProduct] = useState(initialState)
