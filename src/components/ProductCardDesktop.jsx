@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
 
-const ProductCardDesktop = ({product,businessNameEncoded,currency,cart}) => {
+const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusiness}) => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
@@ -18,7 +18,6 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart}) => {
     const paused ='⏸'
     const play = '▶'
 
-    console.log(prodIsActive); 
 
     const storedToken = localStorage.getItem("authToken"); 
 
@@ -74,6 +73,29 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart}) => {
            navigate(`/login/${businessNameEncoded}`)
         }
     }
+
+    const handleProductStatus = () => {
+        const newStatus = prodIsActive ? 'paused' : 'active'
+        const requestBody = {
+            status:newStatus
+        } 
+        axios
+            .put(`${process.env.REACT_APP_SERVER_URL}/products/status/${product._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then((response) => {
+                return axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
+            }).then(response=>{
+                setBusiness(response.data.business)
+            }).catch((error) => {
+                console.log(error);
+                const errorDescription = error;
+                toast.error(errorDescription, { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+                {window.innerWidth < 450 ? 
+                    toast.error(errorDescription, {
+                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                    }) : toast.error(errorDescription, { theme: 'dark' });}
+            });
+    }
   return (
     <div className='rounded d-flex flex-row card col-4 align-items-center justify-content-between m-1 shadow'>
         <div className="col-4 m-2">
@@ -91,7 +113,7 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart}) => {
         <div className="p-1 col-7 d-flex flex-column justify-content-between">
             <dir className='p-0 m-1'>
                 <div className={`p-0 m-0 ${owner === false && 'd-none'} text-end`}>
-                    <span style={{cursor:"pointer"}} className='mx-1'>{prodIsActive ? paused : play}</span>
+                    <span style={{cursor:"pointer"}} className='mx-1' onClick={handleProductStatus}>{prodIsActive ? paused : play}</span>
                     <span style={{cursor:"pointer"}} className='mx-1'>🖊</span>
                     <span style={{cursor:"pointer"}} className='mx-1'>❌</span>
                 </div>

@@ -120,8 +120,8 @@ const Business = () => {
                     </div>
                      : 
                     <div className=" col-md-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
-                        {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart}/>
+                        {business.products.filter(prodAct =>prodAct.status !== 'paused').filter(prod =>prod.categories.includes(category)).map(product =>{
+                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness}/>
                         })}
                     </div>}
                     {cart && user && cart.length > 0 && 

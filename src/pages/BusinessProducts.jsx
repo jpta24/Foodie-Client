@@ -87,7 +87,7 @@ const BusinessProducts = () => {
                     </div> : 
                     <div className=" col-md-10 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product}/>
+                            return <ProductCardDesktop key={uuidv4()} product={product} setBusiness={setBusiness} businessNameEncoded={businessNameEncoded}/>
                         })}
                     </div>}
                     
