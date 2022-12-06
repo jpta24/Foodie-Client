@@ -18,7 +18,6 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusine
     const paused ='⏸'
     const play = '▶'
 
-
     const storedToken = localStorage.getItem("authToken"); 
 
     const handleAddQtyToCart = () =>{

@@ -8,12 +8,18 @@ import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
 
-const ProductCard = ({product,businessNameEncoded,currency,cart}) => {
+const ProductCard = ({product,businessNameEncoded,currency,cart,setBusiness}) => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
 
+    const owner = user.business._id ===product.business ? true : false
+    const prodIsActive = product.status === 'paused' ? false : true
+    const paused ='⏸'
+    const play = '▶'
+
     const storedToken = localStorage.getItem("authToken"); 
+
     const handleAddQtyToCart = () =>{
         const requestBody = {
             cart:{
@@ -67,9 +73,32 @@ const ProductCard = ({product,businessNameEncoded,currency,cart}) => {
         }
     }
 
+    const handleProductStatus = () => {
+        const newStatus = prodIsActive ? 'paused' : 'active'
+        const requestBody = {
+            status:newStatus
+        } 
+        axios
+            .put(`${process.env.REACT_APP_SERVER_URL}/products/status/${product._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then((response) => {
+                return axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
+            }).then(response=>{
+                setBusiness(response.data.business)
+            }).catch((error) => {
+                console.log(error);
+                const errorDescription = error;
+                toast.error(errorDescription, { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+                {window.innerWidth < 450 ? 
+                    toast.error(errorDescription, {
+                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                    }) : toast.error(errorDescription, { theme: 'dark' });}
+            });
+    }
+
   return (
     <div className='rounded d-flex flex-column card col-5 align-items-center justify-content-between m-1 shadow'>
-        <div className="p-2 rounded-circle border border-dark d-flex justify-items-center mt-2 shadow-sm " 
+        <div className={`p-2 rounded-circle border border-dark d-flex justify-items-center mt-2 shadow-sm ${!prodIsActive && 'opacity-50'}`} 
             style={{  
                 height: '100px',
                 width: '100px',
@@ -80,12 +109,17 @@ const ProductCard = ({product,businessNameEncoded,currency,cart}) => {
             }}>
         </div>
         <dir className='p-0 m-1'>
-            <p className='p-1 m-0' style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>
-            <p className='text-bold m-0'>{currency} {product.price.toFixed(2)}</p>
+            <div className={`p-0 m-0 ${owner === false && 'd-none'} text-end`}>
+                <span style={{cursor:"pointer"}} className='mx-1' onClick={handleProductStatus}>{prodIsActive ? paused : play}</span>
+                <span style={{cursor:"pointer"}} className='mx-1'>🖊</span>
+                <span style={{cursor:"pointer"}} className='mx-1'>❌</span>
+            </div>
+            <p className={`p-1 m-0 ${!prodIsActive && 'opacity-50'}`} style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>
+            <p className={`text-bold m-0 ${!prodIsActive && 'opacity-50'}`}>{currency} {product.price.toFixed(2)}</p>
             
         </dir>
         <div className="mb-2">
-            <span className="p-1">
+            <span style={{cursor:"pointer"}} className={`p-1 ${!prodIsActive && 'opacity-50'}`}>
                 <img src={iconsCloud[0].addIcon} alt="" width={25} onClick={handleAddToCart}/>
             </span> 
         </div>

@@ -45,6 +45,7 @@ const BusinessProducts = () => {
         if(business.owner !== user._id){
             navigate('/')
         }
+        const currency = business.currency
         return (
             <div className='container-fluid'>
                 <div className="row p-0">
@@ -82,12 +83,12 @@ const BusinessProducts = () => {
                 {window.innerWidth < 450 ? 
                     <div className="col-12 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.map(product =>{
-                            return <ProductCard key={uuidv4()} product={product}/>
+                            return <ProductCard key={uuidv4()} currency={currency} product={product} setBusiness={setBusiness} businessNameEncoded={businessNameEncoded}/>
                         })}
                     </div> : 
                     <div className=" col-md-10 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product} setBusiness={setBusiness} businessNameEncoded={businessNameEncoded}/>
+                            return <ProductCardDesktop key={uuidv4()} currency={currency} product={product} setBusiness={setBusiness} businessNameEncoded={businessNameEncoded}/>
                         })}
                     </div>}
                     
