@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
 
-const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusiness}) => {
+const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusiness,handleModal}) => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
@@ -114,7 +114,9 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusine
                 <div className={`p-0 m-0 ${owner === false && 'd-none'} text-end`}>
                     <span style={{cursor:"pointer"}} className='mx-1' onClick={handleProductStatus}>{prodIsActive ? paused : play}</span>
                     <Link to={`/${businessNameEncoded}/edit-product/${product._id}`}><span style={{cursor:"pointer"}}  className='mx-1'>🖊</span></Link>
-                    <span style={{cursor:"pointer"}} className='mx-1'>❌</span>
+                    <span style={{cursor:"pointer"}} className='mx-1' 
+                    onClick={()=>{handleModal(product.name,product._id)}}
+                    >❌</span>
                 </div>
                 <p className={`p-1 m-0 text-start ${!prodIsActive && 'opacity-50'}`} style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>
                 <p className={`p-1 m-0 text-start ${!prodIsActive && 'opacity-50'}`} style={{fontSize:'0.8em'}}>{product.description}</p>

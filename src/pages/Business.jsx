@@ -5,6 +5,8 @@ import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Modal, Button } from 'react-bootstrap';
+
 import { toast } from 'react-toastify';
 
 import ProductCard from '../components/ProductCard';
@@ -52,6 +54,37 @@ const Business = () => {
     const handleCategory = (cat) => {
         // const newCatState = {...initialMenu,[cat]:true}
         setCategory(cat)
+    }
+
+    const modalInitialState = {
+        show:false,
+        productName:'',
+        productID:''
+    }
+    const [show, setShow] = useState(modalInitialState)
+
+    const handleClose = () => setShow(modalInitialState);
+    const handleModal = (productName,productID) => {
+        setShow({show:true,productName,productID})
+    }
+    const deleteProduct =()=>{
+        axios
+            .delete(`${process.env.REACT_APP_SERVER_URL}/products/delete/${show.productID}`,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then(() => {
+                return axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
+            }).then(response=>{
+                setBusiness(response.data.business)
+                setShow(modalInitialState)
+            }).catch((error) => {
+                console.log(error);
+                const errorDescription = error;
+                toast.error(errorDescription, { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+                {window.innerWidth < 450 ? 
+                    toast.error(errorDescription, {
+                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                    }) : toast.error(errorDescription, { theme: 'dark' });}
+            });
     }
     
     
@@ -115,13 +148,13 @@ const Business = () => {
                 {window.innerWidth < 450 ? 
                     <div    className="col-12 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness}/>
+                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness} handleModal={handleModal}/>
                         })}
                     </div>
                      : 
                     <div className=" col-md-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prodAct =>prodAct.status !== 'paused').filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness}/>
+                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness} handleModal={handleModal}/>
                         })}
                     </div>}
                     {cart && user && cart.length > 0 && 
@@ -137,7 +170,28 @@ const Business = () => {
                          }
                     
                 </div>
-
+                <Modal
+                    show={show.show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                 >
+                    <Modal.Header closeButton>
+                    <Modal.Title>Delete Product</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    {`You are about to delete the "${show.productName}" product this action has no way back.`} <br/>
+                    Are you sure, you want to delete it?
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={deleteProduct}>
+                        Delete
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
 
         )

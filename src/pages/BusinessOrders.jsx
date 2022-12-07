@@ -33,7 +33,7 @@ const BusinessOrders = () => {
 
     const statues = ['All Orders','Pending','Payed','Confirmed','Cancelled']
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => setShow({...show,show:false});
     const handleModal = (msg,order,contact) => {
         setShow({...show,show:true,msg,order,contact})
     }

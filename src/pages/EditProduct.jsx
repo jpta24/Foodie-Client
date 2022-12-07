@@ -55,14 +55,9 @@ const EditProduct = () => {
 		// If POST request is successful redirect to Business/Dashboard page
 		// If the request resolves with an error, set the error message in the state
 		axios
-			.put(`${process.env.REACT_APP_SERVER_URL}/products/edit-product/${product._id}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
+			.put(`${process.env.REACT_APP_SERVER_URL}/products/edit/${product._id}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then(() => {
                 navigate(`/${businessNameEncoded}/products`)
-                // eslint-disable-next-line no-lone-blocks
-                {window.innerWidth < 450 ? 
-                    toast.success("Product successfully edited !", {
-                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    }) : toast.success('Product successfully edited', { theme: 'dark' });}
 			})
 			.catch((error) => {
                 console.log({error});
