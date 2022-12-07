@@ -111,7 +111,7 @@ const ProductCard = ({product,businessNameEncoded,currency,cart,setBusiness}) =>
         <dir className='p-0 m-1'>
             <div className={`p-0 m-0 ${owner === false && 'd-none'} text-end`}>
                 <span style={{cursor:"pointer"}} className='mx-1' onClick={handleProductStatus}>{prodIsActive ? paused : play}</span>
-                <span style={{cursor:"pointer"}} className='mx-1'>🖊</span>
+                <span style={{cursor:"pointer"}} href={`/${businessNameEncoded}/edit-product/${product._id}`} className='mx-1'>🖊</span>
                 <span style={{cursor:"pointer"}} className='mx-1'>❌</span>
             </div>
             <p className={`p-1 m-0 ${!prodIsActive && 'opacity-50'}`} style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>

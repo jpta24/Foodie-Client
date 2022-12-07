@@ -37,6 +37,7 @@
         "inplaceActive": "https://res.cloudinary.com/dwtnqtdcs/image/upload/v1668193310/foodie-gallery/Imagen36_mzfhte.png",
         "inplaceInactive":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1668193310/foodie-gallery/Imagen39_kqvbg0.png",
         "defaultBusinessBG":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1668202039/foodie-gallery/Imagen7_i1dr04.jpg",
-        "defaultBusinessLogo":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1668202329/foodie-gallery/logoUrl_uvg32a.png"
+        "defaultBusinessLogo":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1668202329/foodie-gallery/logoUrl_uvg32a.png",
+        "noImageIcon":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1670401896/foodie-gallery/no-image-icon_cky1rj.jpg"
 }
 ]

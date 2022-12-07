@@ -21,6 +21,7 @@ import OrdersPage from "./pages/OrdersPage";
 import BusinessOrders from "./pages/BusinessOrders";
 import LoginBizPage from "./pages/LoginBizPage";
 import SignupBizPage from "./pages/SignupBizPage";
+import EditProduct from "./pages/EditProduct";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route exact path="/:businessName/dashboard" element={<IsPrivate><BusinessView /></IsPrivate>} />
         <Route exact path="/:businessName/products" element={<IsPrivate><BusinessProducts /></IsPrivate>} />
         <Route exact path="/:businessName/create-product" element={<IsPrivate><CreateProduct /></IsPrivate>} />
+        <Route exact path="/:businessName/edit-product/:productID" element={<IsPrivate><EditProduct/></IsPrivate>} />
         <Route exact path="/:businessName/orders" element={<IsPrivate><BusinessOrders /></IsPrivate>} />
         <Route exact path="/errorPage" element={<ErrorPage />} /> 
       </Routes>

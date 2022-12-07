@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import {CartContext} from '../context/cart.context'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 import { toast } from 'react-toastify';
@@ -113,7 +113,7 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusine
             <dir className='p-0 m-1'>
                 <div className={`p-0 m-0 ${owner === false && 'd-none'} text-end`}>
                     <span style={{cursor:"pointer"}} className='mx-1' onClick={handleProductStatus}>{prodIsActive ? paused : play}</span>
-                    <span style={{cursor:"pointer"}} className='mx-1'>🖊</span>
+                    <Link to={`/${businessNameEncoded}/edit-product/${product._id}`}><span style={{cursor:"pointer"}}  className='mx-1'>🖊</span></Link>
                     <span style={{cursor:"pointer"}} className='mx-1'>❌</span>
                 </div>
                 <p className={`p-1 m-0 text-start ${!prodIsActive && 'opacity-50'}`} style={{fontSize:'0.95em', fontWeight:'bolder'}}>{product.name}</p>

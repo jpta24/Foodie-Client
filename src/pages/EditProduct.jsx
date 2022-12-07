@@ -10,41 +10,26 @@ import { toast } from 'react-toastify';
 import iconsCloud from '../data/icons.json'
 import Loading from '../components/Loading';
 
-const CreateProduct = () => {
+const EditProduct = () => {
     const { user } = useContext(AuthContext);
-    const { businessName } = useParams();
+    const { businessName, productID } = useParams();
     const navigate = useNavigate();
     const storedToken = localStorage.getItem("authToken"); 
 
     let businessNameEncoded = businessName.split(' ').join('-')
 
-    const [business, setBusiness] = useState('')
-
 	const [errorMessage, setErrorMessage] = useState(undefined);
 
-    const initialState = {
-		name: '',
-        mainImg:'',
-        description:'',
-        business:'',
-        type:'',
-        price:'',
-		ingredients:[],
-        categories:['General'],
-        status:'active'
-	};
-    
-    const [product, setProduct] = useState(initialState)
-    console.log(product.mainImg);
+    const [product, setProduct] = useState('')
+
     const [menucategoriessearch, setmenucategoriessearch] = useState('')
     
     const [productingredientsearch, setproductingredientsearch] = useState('')
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/products/${productID}`,{headers: {Authorization: `Bearer ${storedToken}`}})
           .then(response=>{
-              setBusiness(response.data.business)
-              setProduct({...product,business:response.data.business._id})
+              setProduct(response.data.product)
           })
           .catch((error) => {
               console.log({error});
@@ -59,7 +44,7 @@ const CreateProduct = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
-    const handleProductSubmit = (e) => {
+    const handleEditProduct = (e) => {
 		e.preventDefault();
         const storedToken = localStorage.getItem("authToken"); 
 
@@ -70,23 +55,23 @@ const CreateProduct = () => {
 		// If POST request is successful redirect to Business/Dashboard page
 		// If the request resolves with an error, set the error message in the state
 		axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/products`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
-			.then((response) => {
-                setProduct({...initialState,business:business._id})
+			.put(`${process.env.REACT_APP_SERVER_URL}/products/edit-product/${product._id}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
+			.then(() => {
+                navigate(`/${businessNameEncoded}/products`)
                 // eslint-disable-next-line no-lone-blocks
                 {window.innerWidth < 450 ? 
-                    toast.success("Product successfully created !", {
+                    toast.success("Product successfully edited !", {
                         position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    }) : toast.success('Product successfully created', { theme: 'dark' });}
+                    }) : toast.success('Product successfully edited', { theme: 'dark' });}
 			})
 			.catch((error) => {
                 console.log({error});
 				const errorDescription = error.response.data.message;
                 // eslint-disable-next-line no-lone-blocks
               {window.innerWidth < 450 ? 
-                toast.error("Product could not be Created !", {
+                toast.error("Product could not be Edited !", {
                     position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error('Product could not be Created', { theme: 'dark' });}
+                }) : toast.error('Product could not be Edited', { theme: 'dark' });}
 				setErrorMessage(errorDescription);
 			});
 	};
@@ -114,8 +99,8 @@ const CreateProduct = () => {
           .catch(err => console.log("Error while uploading the file: ", err));
       };
     
-    if (business!=='') {
-        if(business.owner !== user._id){
+      if (product!=='') {
+        if(product.business.owner !== user._id){
             navigate('/')
         }
         
@@ -124,7 +109,7 @@ const CreateProduct = () => {
                 <div className="row p-0">
                     <div className="d-flex flex-column align-items-center justify-content-between" 
                     style={{  
-                        backgroundImage: `url('${business.bgUrl}')`,
+                        backgroundImage: `url('${product.business.bgUrl}')`,
                         backgroundPosition: 'center',
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
@@ -139,17 +124,17 @@ const CreateProduct = () => {
                             height: '90px',
                             width: '90px'
                             }}>
-                                <img src={business.logoUrl} alt='altLogo' width={65}  /> 
+                                <img src={product.business.logoUrl} alt='altLogo' width={65}  /> 
                             </div>
                         </div>
                         
                     </div>
                 </div>
-                <h1>{business.name}</h1>
-                <h3>Let's create a Product!</h3>
+                <h1>{product.business.name}</h1>
+                <h3>Edit the fields you need!</h3>
                 <div className='row justify-content-center p-4 mb-4'>
 				    <div className='col-md-8 '>
-                        <Form onSubmit={handleProductSubmit}>
+                        <Form onSubmit={handleEditProduct}>
                         <div className="col-4 m-2 mx-auto">
                             <div className={`p-2 rounded-circle border border-dark d-flex justify-items-center m-auto $`} 
                                 style={{  
@@ -162,7 +147,6 @@ const CreateProduct = () => {
                                 }}>
                             </div>
                         </div>
-                            
                             <div className='d-md-flex justify-content-md-between'>
                                 <Form.Group
                                     className='mb-3 col-md-6 d-flex flex-column align-items-start'
@@ -218,7 +202,7 @@ const CreateProduct = () => {
 							>
                                 <Form.Label>Product Types</Form.Label>
                                     <div>
-                                        {Object.entries(business.type).map(eachType => {
+                                        {Object.entries(product.business.type).map(eachType => {
                                             return eachType[1] && (<Form.Check
                                             inline
                                             key={uuidv4()}
@@ -241,7 +225,7 @@ const CreateProduct = () => {
 							>
 								<Form.Label>Price</Form.Label>
                                 <InputGroup className="mb-3">
-                                    <InputGroup.Text>{business.currency}</InputGroup.Text>
+                                    <InputGroup.Text>{product.business.currency}</InputGroup.Text>
                                     <Form.Control
 									type='number'
 									placeholder='use dot for decimals'
@@ -294,7 +278,7 @@ const CreateProduct = () => {
                                 }}
                             />
                             <div className="d-flex flex-column align-items-start">
-                            {menucategoriessearch!=='' && (business.categories.filter(category=>{
+                            {menucategoriessearch!=='' && (product.business.categories.filter(category=>{
                                 return (category.toLowerCase().includes(menucategoriessearch.toLocaleLowerCase()) )
                                 })
                                 .map((category,i) => {
@@ -348,7 +332,7 @@ const CreateProduct = () => {
                         {errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						
 						<Button variant='primary' size="lg" type='submit' className='mx-2 my-1 col-8 col-md-4'>
-							Create Product
+							Edit Product
 						</Button>
                        
                         
@@ -360,9 +344,9 @@ const CreateProduct = () => {
             </div>
         )
     }
-  return (
-    <div><Loading/></div>
-  )
+    return (
+        <div><Loading/></div>
+      )
 }
 
-export default CreateProduct
+export default EditProduct
