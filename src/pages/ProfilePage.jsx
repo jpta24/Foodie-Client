@@ -109,7 +109,7 @@ const ProfilePage = () => {
                 <ProfileCard onclick={()=>{handleChange('employee')}} button='Employee' src={rol.employee ? iconsCloud[0].employeeActive: iconsCloud[0].employeeInactive}/>
             </Row>
             
-                <Form onSubmit={handleBuzNameSubmit}>
+                <Form onSubmit={handleBuzNameSubmit} className='pb-2'>
                 {(rol.admin || rol.employee) && (
                     <Form.Group
                         className='mb-3 col-md-6 d-flex flex-column align-items-start'
@@ -129,17 +129,12 @@ const ProfilePage = () => {
                 )}
                 {errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						
-						<Button variant='primary' size="lg" type='submit' className='mx-2 mt-2 col-8 col-md-4'>
+						<Button variant='primary' size="lg" type='submit' className='m-2 col-8 col-md-4'>
 							Apply
 						</Button>
                         
                     {incommingMessage && <p className='text-success'>{incommingMessage}</p>}
                 </Form>
-
-
-
-
-            
         </Row>
     </div>
   )
