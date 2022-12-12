@@ -215,14 +215,14 @@ const CartPage = () => {
                             {buzs.length > 1 && 
                             <div className="d-flex justify-content-center">
                                 {business !== 0 && <div>
-                                    <svg onClick={()=>handlePagination('less')} style={{cursor:'pointer'}} stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                        <polyline fill="none" stroke="#000" stroke-width="2" points="7 2 17 12 7 22" transform="matrix(-1 0 0 1 24 0)">
+                                    <svg onClick={()=>handlePagination('less')} style={{cursor:'pointer'}} stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                        <polyline fill="none" stroke="#000" strokeWidth="2" points="7 2 17 12 7 22" transform="matrix(-1 0 0 1 24 0)">
                                         </polyline></svg>
                                 </div>}
                                 <div className='mx-3'><span>{`${business + 1} of ${buzs.length}`}</span></div>
                                 {business + 1 !== buzs.length && <div>
-                                    <svg onClick={()=>handlePagination('more')} style={{cursor:'pointer'}} stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                        <polyline fill="none" stroke="#000" stroke-width="2" points="7 2 17 12 7 22">
+                                    <svg onClick={()=>handlePagination('more')} style={{cursor:'pointer'}} stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                        <polyline fill="none" stroke="#000" strokeWidth="2" points="7 2 17 12 7 22">
                                         </polyline>
                                     </svg>
                                 </div>}
