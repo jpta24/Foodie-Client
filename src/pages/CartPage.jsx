@@ -6,7 +6,7 @@ import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import { Button,Form } from 'react-bootstrap';
+import { Button,Form, Modal } from 'react-bootstrap';
 
 import CartCard from '../components/CartCard';
 
@@ -24,6 +24,9 @@ const CartPage = () => {
 
     const [summary, setSummary] = useState(0)
     const [business, setBusiness] = useState(0)
+    const [show, setShow] = useState(false)
+
+    const handleClose = () => setShow(false);
 
     const updateSummary =()=>{
         const arrSubtotalElem = document.querySelectorAll('.subtotal')
@@ -93,43 +96,25 @@ const CartPage = () => {
             return setErrorMessage('Please provide a recipient, phone contact')
         } else {
             const storedToken = localStorage.getItem("authToken"); 
-                        
-            const orders =[]
-            // const businessIdArr = cart.map(prod => {
 
-            //             return prod.product.business._id
-            //         });
-            //         buzs = [...new Set(businessIdArr)]
-            
-            
-            buzs.forEach(buz=>{
-                return orders.push({
-                    business: buz,
+            const productsOrder = cart.filter(buzFilt=>buzFilt.product.business._id===buzs[business]).map(product => {
+                return {product:product.product._id,
+                quantity:product.quantity}
+                })                
+
+            const order = {
+                    business: buzs[business],
                     user:user._id,
                     status:'pending',
                     paymentMethod:payment,
                     format:delivery,
-                    products:[],
+                    products:productsOrder,
                     note: address,
-                    summary:0
-                })
-            })
-            
-            orders.forEach(each=>{
-                cart.forEach(elem=>{
-                    if (each.business === elem.product.business._id) {
-                        each.products.push({
-                            product:elem.product._id,
-                            quantity:elem.quantity
-                        })
-                        each.summary += elem.quantity * elem.product.price
-                    }
-                })
-            })
-            console.log(orders)
+                    summary:summary
+            }
 
             const requestBody = {
-                orders
+                order
             } 
 
             axios
@@ -144,6 +129,7 @@ const CartPage = () => {
                     getCartData()
                     const userUpdated = response.data;;
                     setUSer(userUpdated); 
+
                     navigate(`/orders/${user._id}`)
                 })
                 .catch((error) => {
@@ -162,6 +148,7 @@ const CartPage = () => {
 
 
     if(user && cart){
+
     // const allIds = cart.map(elem =>elem.product._id)
     // const cartProdIds = []
     // const renderCart = []
@@ -199,6 +186,7 @@ const CartPage = () => {
         return prod.product.business.name
     });
     buzsNames = [...new Set(businessNameArr)]
+
     
         return (
             <div className='container p-0'>
@@ -237,9 +225,9 @@ const CartPage = () => {
 
                             <h4 className='mb-0'>Delivery Format</h4>
                             <div className='d-flex px-2 mx-2 justify-content-around'>
-                                <FormatDelivery onclick={()=>{setDelivery('delivery')}} src={delivery === 'delivery' ? iconsCloud[0].deliveryActive: iconsCloud[0].deliveryInactive}/>
-                                <FormatDelivery onclick={()=>{setDelivery('pickup')}} src={delivery === 'pickup' ? iconsCloud[0].pickupActive: iconsCloud[0].pickupInactive}/>
-                                <FormatDelivery onclick={()=>{setDelivery('inplace')}} src={delivery === 'inplace' ? iconsCloud[0].inplaceActive: iconsCloud[0].inplaceInactive}/>
+                            { cart.length!== 0 && Object.entries(cart.filter(buzFilt=>buzFilt.product.business._id===buzs[business])[0].product.business.format).filter(format=>format[1]===true).map(elem=>{
+                                return <FormatDelivery key={uuidv4()} onclick={()=>{setDelivery(elem[0])}} src={delivery === elem[0] ? iconsCloud[0][`${elem[0]}Active`] : iconsCloud[0][`${elem[0]}Inactive`]}/>
+                            })}
                             </div>  
 
                             <div className='d-flex flex-column justify-content-between mb-2 '>
@@ -317,10 +305,11 @@ const CartPage = () => {
                             </div>   
 
                             <h4 className='mb-0'>Payment Method</h4>
-                            <div className='d-flex px-2 mx-2 justify-content-around'>
-                                <PayMethod onclick={()=>{setPayment('cash')}} src={payment === 'cash' ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
-                                <PayMethod onclick={()=>{setPayment('card')}} src={payment === 'card' ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>
-                                <PayMethod onclick={()=>{setPayment('pp')}} src={payment === 'pp' ? iconsCloud[0].ppActive: iconsCloud[0].ppInactive}/>
+                            <div className='d-flex px-2 mx-2 justify-content-around flex-wrap'>
+                            {cart.length!== 0 && Object.entries(cart.filter(buzFilt=>buzFilt.product.business._id===buzs[business])[0].product.business.payment).filter(pay=>pay[1]===true).map(elem=>{
+                                return <PayMethod key={uuidv4()} onclick={()=>{setPayment(elem[0])}} src={payment === elem[0] ? iconsCloud[0][`${elem[0]}Active`] : iconsCloud[0][`${elem[0]}Inactive`]}/>
+                                
+                            })}
                             </div>
 
 
@@ -339,6 +328,27 @@ const CartPage = () => {
                     
 
                 </div>
+                <Modal
+                    show={show.show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                 >
+                    <Modal.Header closeButton>
+                    <Modal.Title>Question</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    Your Order was submitted, and you still have Order(s) pending, Would you like to continue in your Cart or would you like to go to your Orders
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Keep in Cart
+                    </Button>
+                    <Button variant="danger" src={`/orders/${user._id}`}>
+                        Go to Orders
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }else if(cart===null){
