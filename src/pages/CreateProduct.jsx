@@ -131,7 +131,7 @@ const CreateProduct = () => {
                         height: '150px'
                     }}>
                         <div className='d-flex col-12 justify-content-start'>
-                            <Link className='m-2' to={`/${businessNameEncoded}/products`}><span className="bg-dark rounded-circle border m-2 "><img src={iconsCloud[0].backIcon} alt="backIcon" width={35}/></span></Link>
+                            <Link className='m-2' to={`/${businessNameEncoded}/products`}><span className="shadow m-2 "><img src={iconsCloud[0].backIcon} alt="backIcon" width={35}/></span></Link>
                             
                         </div>
                         <div className='d-flex justify-content-center align-items-end'>

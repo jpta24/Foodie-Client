@@ -29,7 +29,7 @@ function App() {
     <div className="background-shapes"></div>
     <Navbar/>
     <div>
-    <ToastContainer className='my-5'/>
+    <ToastContainer className='my-5 ztoast'/>
     </div>
       <Routes>      
         <Route exact path="/" element={<HomePage />} />
