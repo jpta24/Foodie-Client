@@ -23,6 +23,7 @@ const CartPage = () => {
 	const navigate = useNavigate();
 
     const [summary, setSummary] = useState(0)
+    const [business, setBusiness] = useState(0)
 
     const updateSummary =()=>{
         const arrSubtotalElem = document.querySelectorAll('.subtotal')
@@ -34,6 +35,7 @@ const CartPage = () => {
     }
     
     let buzs
+    let buzsNames
     // let businessArray = []
     // const [businesses, setBusinesses] = useState([])
 
@@ -63,17 +65,9 @@ const CartPage = () => {
     //     console.log(businessArray);    
     // }
     
-    
+    const [payment, setPayment] = useState('cash')
 
-    const initialState = {
-        cash: false,
-        card: false,
-        pp: false
-    }
-
-    const updatedPayment = {...initialState,cash:true}
-
-    const [payment, setPayment] = useState(updatedPayment)
+    const [delivery, setDelivery] = useState('delivery')
 
     const initialAddress ={
         street:'',
@@ -82,60 +76,30 @@ const CartPage = () => {
         phone:''
     }
 
-    const handleChange = (paymentClicked) => {
-        const newState = {...initialState}
-        newState[paymentClicked]= true
-        setPayment(newState)
-    }
-
     const [address, setAddress] = useState(initialAddress)
-
-    const initialDelivery = {
-        delivery:false,
-        pickup: false,
-        inplace: false
-    }
-
-    const updatedDelivery = {...initialDelivery,delivery:true}
-    
-    const [delivery, setDelivery] = useState(updatedDelivery)
-
-    const handleChangeFormat = (formatDeliveryClicked) => {
-        const newState = {...initialDelivery}
-        newState[formatDeliveryClicked]= true
-        setDelivery(newState)
-    }
-    
+        
 	const [errorMessage, setErrorMessage] = useState(undefined);
+
+    const handlePagination = (word) => {
+        if(word === 'less'){
+            setBusiness(business - 1)
+        }else{
+            setBusiness(business + 1)
+        }
+    }
 
     const handlePlaceOrder =()=>{
         if (address.name === '' || address.phone === '') {
             return setErrorMessage('Please provide a recipient, phone contact')
         } else {
             const storedToken = localStorage.getItem("authToken"); 
-
-            let payMethod = ''
-            
-            Object.entries(payment).forEach(each =>{
-                if(each[1]){
-                    payMethod = each[0]
-                }
-            })
-
-            let deliveryFormat = ''
-            
-            Object.entries(delivery).forEach(each =>{
-                if(each[1]){
-                    deliveryFormat = each[0]
-                }
-            })
-            
+                        
             const orders =[]
-            const businessIdArr = cart.map(prod => {
+            // const businessIdArr = cart.map(prod => {
 
-                        return prod.product.business._id
-                    });
-                    buzs = [...new Set(businessIdArr)]
+            //             return prod.product.business._id
+            //         });
+            //         buzs = [...new Set(businessIdArr)]
             
             
             buzs.forEach(buz=>{
@@ -143,8 +107,8 @@ const CartPage = () => {
                     business: buz,
                     user:user._id,
                     status:'pending',
-                    paymentMethod:payMethod,
-                    format:deliveryFormat,
+                    paymentMethod:payment,
+                    format:delivery,
                     products:[],
                     note: address,
                     summary:0
@@ -223,6 +187,18 @@ const CartPage = () => {
     //     }
         
     // }   
+
+    const businessIdArr = cart.map(prod => {
+
+        return prod.product.business._id
+    });
+    buzs = [...new Set(businessIdArr)]
+
+    const businessNameArr = cart.map(prod => {
+
+        return prod.product.business.name
+    });
+    buzsNames = [...new Set(businessNameArr)]
     
         return (
             <div className='container p-0'>
@@ -230,13 +206,29 @@ const CartPage = () => {
                     <div className="col-12 col-md-7">
                         <div className="col-11 d-flex flex-column p-2 my-2 form-control">
                             <h1>Hi, {user.username}</h1>
-                            <h3>{cart.length===0?'Your Cart is Empty!':'This is your Cart'}</h3>
+                            <h3>{cart.length===0?'Your Cart is Empty!': `This is your Cart for ${buzsNames[business]}`}</h3>
                             <div className="col-12 cartProducts">
-                                {cart.map(product => {
+                                {cart.filter(buzFilt=>buzFilt.product.business._id===buzs[business]).map(product => {
                                 return <CartCard key={uuidv4()} product={product} updateSummary={updateSummary} currency={currency} />
                                 })}
                             </div>
-
+                            {buzs.length > 1 && 
+                            <div className="d-flex justify-content-center">
+                                {business !== 0 && <div>
+                                    <svg onClick={()=>handlePagination('less')} style={{cursor:'pointer'}} stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                        <polyline fill="none" stroke="#000" stroke-width="2" points="7 2 17 12 7 22" transform="matrix(-1 0 0 1 24 0)">
+                                        </polyline></svg>
+                                </div>}
+                                <div className='mx-3'><span>{`${business + 1} of ${buzs.length}`}</span></div>
+                                {business + 1 !== buzs.length && <div>
+                                    <svg onClick={()=>handlePagination('more')} style={{cursor:'pointer'}} stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                        <polyline fill="none" stroke="#000" stroke-width="2" points="7 2 17 12 7 22">
+                                        </polyline>
+                                    </svg>
+                                </div>}
+                                
+                            </div> }
+                               
                         </div>
                     </div>
                     <div className="col-12 col-md-5">
@@ -245,9 +237,9 @@ const CartPage = () => {
 
                             <h4 className='mb-0'>Delivery Format</h4>
                             <div className='d-flex px-2 mx-2 justify-content-around'>
-                                <FormatDelivery onclick={()=>{handleChangeFormat('delivery')}} src={delivery.delivery ? iconsCloud[0].deliveryActive: iconsCloud[0].deliveryInactive}/>
-                                <FormatDelivery onclick={()=>{handleChangeFormat('pickup')}} src={delivery.pickup ? iconsCloud[0].pickupActive: iconsCloud[0].pickupInactive}/>
-                                <FormatDelivery onclick={()=>{handleChangeFormat('inplace')}} src={delivery.inplace ? iconsCloud[0].inplaceActive: iconsCloud[0].inplaceInactive}/>
+                                <FormatDelivery onclick={()=>{setDelivery('delivery')}} src={delivery === 'delivery' ? iconsCloud[0].deliveryActive: iconsCloud[0].deliveryInactive}/>
+                                <FormatDelivery onclick={()=>{setDelivery('pickup')}} src={delivery === 'pickup' ? iconsCloud[0].pickupActive: iconsCloud[0].pickupInactive}/>
+                                <FormatDelivery onclick={()=>{setDelivery('inplace')}} src={delivery === 'inplace' ? iconsCloud[0].inplaceActive: iconsCloud[0].inplaceInactive}/>
                             </div>  
 
                             <div className='d-flex flex-column justify-content-between mb-2 '>
@@ -326,9 +318,9 @@ const CartPage = () => {
 
                             <h4 className='mb-0'>Payment Method</h4>
                             <div className='d-flex px-2 mx-2 justify-content-around'>
-                                <PayMethod onclick={()=>{handleChange('cash')}} src={payment.cash ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
-                                <PayMethod onclick={()=>{handleChange('card')}} src={payment.card ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>
-                                <PayMethod onclick={()=>{handleChange('pp')}} src={payment.pp ? iconsCloud[0].ppActive: iconsCloud[0].ppInactive}/>
+                                <PayMethod onclick={()=>{setPayment('cash')}} src={payment === 'cash' ? iconsCloud[0].cashActive: iconsCloud[0].cashInactive}/>
+                                <PayMethod onclick={()=>{setPayment('card')}} src={payment === 'card' ? iconsCloud[0].cardActive: iconsCloud[0].cardInactive}/>
+                                <PayMethod onclick={()=>{setPayment('pp')}} src={payment === 'pp' ? iconsCloud[0].ppActive: iconsCloud[0].ppInactive}/>
                             </div>
 
 
