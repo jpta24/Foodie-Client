@@ -127,10 +127,15 @@ const CartPage = () => {
                         }) : toast.success('Order Placed', { theme: 'dark' });}
                     setCart(null)
                     getCartData()
-                    const userUpdated = response.data;;
-                    setUSer(userUpdated); 
+                    const userUpdated = response.data;
+                    setUSer(userUpdated);
 
-                    navigate(`/orders/${user._id}`)
+                    if(buzs.length>1){
+                        setShow(true)
+                    }else{
+                        navigate(`/orders/${user._id}`)
+                    }
+                     
                 })
                 .catch((error) => {
                     console.log({error});
@@ -148,7 +153,7 @@ const CartPage = () => {
 
 
     if(user && cart){
-
+       
     // const allIds = cart.map(elem =>elem.product._id)
     // const cartProdIds = []
     // const renderCart = []
@@ -186,7 +191,7 @@ const CartPage = () => {
         return prod.product.business.name
     });
     buzsNames = [...new Set(businessNameArr)]
-
+    console.log(buzs);
     
         return (
             <div className='container p-0'>
@@ -329,22 +334,22 @@ const CartPage = () => {
 
                 </div>
                 <Modal
-                    show={show.show}
+                    show={show}
                     onHide={handleClose}
                     backdrop="static"
                     keyboard={false}
                  >
                     <Modal.Header closeButton>
-                    <Modal.Title>Question</Modal.Title>
+                    <Modal.Title>Order Submitted</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    Your Order was submitted, and you still have Order(s) pending, Would you like to continue in your Cart or would you like to go to your Orders
+                    You still have Order(s) pending, Would you like to continue in your Cart or would you like to go to your Orders
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Keep in Cart
                     </Button>
-                    <Button variant="danger" src={`/orders/${user._id}`}>
+                    <Button variant="danger" href={`/orders/${user._id}`}>
                         Go to Orders
                     </Button>
                     </Modal.Footer>
