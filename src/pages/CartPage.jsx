@@ -191,7 +191,6 @@ const CartPage = () => {
         return prod.product.business.name
     });
     buzsNames = [...new Set(businessNameArr)]
-    console.log(buzs);
     
         return (
             <div className='container p-0'>

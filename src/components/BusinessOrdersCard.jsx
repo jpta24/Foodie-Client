@@ -20,9 +20,13 @@ const BusinessOrdersCard = ({order,handleStatusOrder, handleModal}) => {
         </div>
         <div className="p-1 col-11 col-md-10 d-flex flex-column justify-content-between">
             <dir className='p-1 m-1'>
-                <p className='p-1 m-0 text-start' style={{fontSize:'0.95em', fontWeight:'bolder'}}>For: {order.note.name}</p>
+                <p className='p-1 m-0 text-start d-flex justify-content-between' style={{fontSize:'0.95em', fontWeight:'bolder'}}>
+                <span>For: {order.note.name}</span><span>Order {order._id.slice(10).toUpperCase()}</span> 
+                </p>
                 <div className='p-1'>
                     {order.products.map(eachProduct=>{
+                        console.log(order._id)
+                        console.log(eachProduct.product.name)
                         return<p key={uuidv4()} className='m-0 text-start d-flex justify-content-between'>
                         <span className='col-8'>{`- (${eachProduct.quantity}) ${eachProduct.product.name}`}</span><span>{order.business.currency} {(eachProduct.product.price * eachProduct.quantity).toFixed(2)}</span></p>
                     })}
@@ -34,8 +38,10 @@ const BusinessOrdersCard = ({order,handleStatusOrder, handleModal}) => {
                 </p>
                 {order.note.street && <p className='m-0 text-start'>Address: {order.note.street}</p>}
                 {order.note.note && <p className='text-bold m-0 text-start'>Note: {order.note.note}</p>}
+                <p className='text-bold m-0 text-start'>Delivery Service: {order.format}</p>
                 <hr/>
                 <p className='text-bold m-0 text-start'>Summary: {order.business.currency} {order.summary.toFixed(2)}</p>
+                <p className='text-bold m-0 text-start'>Payment Method: <span className='text-bold'>{order.paymentMethod}</span></p>
                 <p className='text-bold m-0 text-start'>Status: {order.status} 
                     
                 </p>

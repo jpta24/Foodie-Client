@@ -113,7 +113,7 @@ const BusinessOrders = () => {
         </div>
     }else{
         return (
-            <div>L<Loading/></div>
+            <div><Loading/></div>
         )
     }
 }
