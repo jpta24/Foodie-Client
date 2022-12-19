@@ -77,7 +77,7 @@ const Business = () => {
                 setShow(modalInitialState)
             }).catch((error) => {
                 console.log(error);
-                const errorDescription = error;
+                const errorDescription = error.response.data.message;
                 toast.error(errorDescription, { theme: 'dark' });
                 // eslint-disable-next-line no-lone-blocks
                 {window.innerWidth < 450 ? 

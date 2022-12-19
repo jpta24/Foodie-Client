@@ -31,7 +31,7 @@ const Login = () => {
 				navigate(`/dashboard/${user._id}`);
 			})
 			.catch((error) => {
-				const errorDescription = error.response;
+				const errorDescription = error.response.data.message;
 				// eslint-disable-next-line no-lone-blocks
 				{window.innerWidth < 450 ? 
 					toast.error("Sorry, read the error message !", {
