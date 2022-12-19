@@ -25,8 +25,6 @@ const BusinessOrdersCard = ({order,handleStatusOrder, handleModal}) => {
                 </p>
                 <div className='p-1'>
                     {order.products.map(eachProduct=>{
-                        console.log(order._id)
-                        console.log(eachProduct.product.name)
                         return<p key={uuidv4()} className='m-0 text-start d-flex justify-content-between'>
                         <span className='col-8'>{`- (${eachProduct.quantity}) ${eachProduct.product.name}`}</span><span>{order.business.currency} {(eachProduct.product.price * eachProduct.quantity).toFixed(2)}</span></p>
                     })}

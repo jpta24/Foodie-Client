@@ -109,6 +109,10 @@ const Business = () => {
       }, [])
 
     if (business!=='') {
+        let owner = false
+        if(user){
+            owner = business.owner === user._id ? true : false
+        }
         const currency = business.currency
             
         return (
@@ -148,13 +152,13 @@ const Business = () => {
                 {window.innerWidth < 450 ? 
                     <div    className="col-12 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness} handleModal={handleModal}/>
+                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness} handleModal={handleModal} owner={owner}/>
                         })}
                     </div>
                      : 
                     <div className=" col-md-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
                         {business.products.filter(prodAct =>prodAct.status !== 'paused').filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness} handleModal={handleModal}/>
+                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness} handleModal={handleModal} owner={owner}/>
                         })}
                     </div>}
                     {cart && user && cart.length > 0 && 

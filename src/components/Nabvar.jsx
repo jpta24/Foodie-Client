@@ -26,7 +26,7 @@ const Nabvar2 = () => {
             {/* <Nav.Link href="/markets">Markets 🏪</Nav.Link> */}
                 {isLoggedIn && (
                     <>
-                        <Nav.Link href="/dashboard">Dashboard 📉</Nav.Link>
+                        <Nav.Link href={`/dashboard/${user._id}`}>Dashboard 📉</Nav.Link>
                         <Button href={`/cart/${user._id}`} variant="outline-success" className='mx-2 my-1 position-relative' >Cart 🛒
                             {cart && cart.length > 0 &&
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">

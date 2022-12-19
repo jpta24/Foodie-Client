@@ -37,7 +37,7 @@ function App() {
         <Route exact path="/login" element={<IsAnon><LoginPage /></IsAnon>} />  
         <Route exact path="/signup/:businessName" element={<IsAnon><SignupBizPage /></IsAnon>} />
         <Route exact path="/login/:businessName" element={<IsAnon><LoginBizPage /></IsAnon>} />  
-        <Route exact path="/dashboard" element={<IsPrivate><Dashboard /></IsPrivate>} />
+        <Route exact path="/dashboard/:userID" element={<IsPrivate><Dashboard /></IsPrivate>} />
         <Route exact path="/profile/:userID" element={<IsPrivate><ProfilePage /></IsPrivate>} />
         <Route exact path="/create-business" element={<IsPrivate><CreateBusiness /></IsPrivate>} />
         <Route exact path="/cart/:userID" element={<IsPrivate><CartPage /></IsPrivate>} />

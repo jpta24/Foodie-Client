@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
 	const navigate = useNavigate();
-	const { storeToken, authenticateUser } = useContext(AuthContext);
+	const { storeToken, authenticateUser, user } = useContext(AuthContext);
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -28,10 +28,10 @@ const Login = () => {
 				storeToken(response.data.authToken); 
 				;// store in my localStorage the authToken
 				authenticateUser(); // verify token is valid to get the user information from the server
-				navigate('/dashboard');
+				navigate(`/dashboard/${user._id}`);
 			})
 			.catch((error) => {
-				const errorDescription = error.response.data.message;
+				const errorDescription = error.response;
 				// eslint-disable-next-line no-lone-blocks
 				{window.innerWidth < 450 ? 
 					toast.error("Sorry, read the error message !", {

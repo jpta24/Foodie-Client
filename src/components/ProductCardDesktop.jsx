@@ -8,12 +8,11 @@ import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
 
-const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusiness,handleModal}) => {
+const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusiness,handleModal,owner}) => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { getCartData } = useContext(CartContext);
-
-    const owner = user.business._id === product.business ? true : false
+    
     const prodIsActive = product.status === 'paused' ? false : true
     const paused ='⏸'
     const play = '▶'

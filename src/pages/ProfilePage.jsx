@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {  useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
@@ -11,8 +11,25 @@ import ProfileCard from '../components/ProfileCard';
 import iconsCloud from '../data/icons.json'
 
 const ProfilePage = () => {
-	const { user } = useContext(AuthContext);
     const { userID } = useParams();
+	const { user:userAuth } = useContext(AuthContext);
+
+    const [user, setUser] = useState('')
+
+	useEffect(() => {
+		const storedToken = localStorage.getItem("authToken"); 
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${userID}`,{headers: {Authorization: `Bearer ${storedToken}`}})
+          .then(response=>{
+            
+              setUser(response.data)
+          })
+          .catch((error) => {
+              console.log({error});
+            })
+      
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [])
+    
     const navigate = useNavigate();
 
     const initialState = {
@@ -31,14 +48,13 @@ const ProfilePage = () => {
     const [errorMessage, setErrorMessage] = useState(undefined);
     const [incommingMessage, setIncommingMessage] = useState(undefined);
 
-    if (user._id !== userID) {
-         navigate(`/profile/${user._id}`)
+    if (userAuth._id !== userID) {
+         navigate(`/profile/${userAuth._id}`)
     }
 
     const handleChange = (rolClicked) => {
         const newState = {...initialState}
         newState[rolClicked]= true
-        console.log(newState)
         setRol(newState)
     }
 

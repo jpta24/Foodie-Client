@@ -35,7 +35,6 @@ const CreateProduct = () => {
 	};
     
     const [product, setProduct] = useState(initialState)
-    console.log(product.mainImg);
     const [menucategoriessearch, setmenucategoriessearch] = useState('')
     
     const [productingredientsearch, setproductingredientsearch] = useState('')
