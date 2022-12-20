@@ -28,10 +28,12 @@ const Login = () => {
 				storeToken(response.data.authToken); 
 				;// store in my localStorage the authToken
 				authenticateUser(); // verify token is valid to get the user information from the server
+				console.log(user);
 				navigate(`/dashboard/${user._id}`);
 			})
 			.catch((error) => {
-				const errorDescription = error.response.data.message;
+				console.log(error);
+				const errorDescription = error.response;
 				// eslint-disable-next-line no-lone-blocks
 				{window.innerWidth < 450 ? 
 					toast.error("Sorry, read the error message !", {

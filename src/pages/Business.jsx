@@ -86,9 +86,6 @@ const Business = () => {
                     }) : toast.error(errorDescription, { theme: 'dark' });}
             });
     }
-    
-    
-
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
           .then(response=>{
@@ -110,8 +107,18 @@ const Business = () => {
 
     if (business!=='') {
         let owner = false
+        const businessStored = localStorage.getItem("businesses") ? JSON.parse(localStorage.getItem("businesses"))  : []
+        if(!businessStored.includes(business._id)){
+            localStorage.setItem('businesses',JSON.stringify([...businessStored,business._id]) );    
+        }
         if(user){
             owner = business.owner === user._id ? true : false
+            axios
+            .put(`${process.env.REACT_APP_SERVER_URL}/users/business/${user._id}`, businessStored,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then()
+            .catch((err)=>{
+                console.log(err)
+            })
         }
         const currency = business.currency
             
