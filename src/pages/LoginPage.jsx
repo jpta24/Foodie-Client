@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 
@@ -7,8 +6,7 @@ import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-	const navigate = useNavigate();
-	const { storeToken, authenticateUser, user } = useContext(AuthContext);
+	const { storeToken, authenticateUser } = useContext(AuthContext);
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -21,24 +19,24 @@ const Login = () => {
 		axios
 			.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
 			.then((response) => {
-				
 				// Request to the server's endpoint `/auth/login` returns a response
 				// with the JWT string ->  response.data.authToken
 				// console.log('JWT token', response.data.authToken );
-				storeToken(response.data.authToken); 
-				;// store in my localStorage the authToken
+				storeToken(response.data.authToken); // store in my localStorage the authToken
 				authenticateUser(); // verify token is valid to get the user information from the server
-				console.log(user);
-				navigate(`/dashboard/${user._id}`);
 			})
 			.catch((error) => {
 				console.log(error);
 				const errorDescription = error.response;
 				// eslint-disable-next-line no-lone-blocks
-				{window.innerWidth < 450 ? 
-					toast.error("Sorry, read the error message !", {
-						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-					}) : toast.error('Sorry, read the error message', { theme: 'dark' });}
+				{
+					window.innerWidth < 450
+						? toast.error('Sorry, read the error message !', {
+								position: toast.POSITION.BOTTOM_CENTER,
+								theme: 'dark',
+						  })
+						: toast.error('Sorry, read the error message', { theme: 'dark' });
+				}
 				setErrorMessage(errorDescription);
 			});
 	};

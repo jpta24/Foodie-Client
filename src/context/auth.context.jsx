@@ -1,10 +1,14 @@
 import { createContext, useState, useEffect,useContext } from "react";
+
+import { useNavigate } from 'react-router-dom';
 import {CartContext} from '../context/cart.context'
 import axios from "axios";
  
 const AuthContext = createContext();
  
 function AuthProviderWrapper(props) {
+  
+	const navigate = useNavigate();
   
   const { getCartData, setCart } = useContext(CartContext);
     // 1. State variables are initialized
@@ -37,7 +41,9 @@ function AuthProviderWrapper(props) {
             setIsLoggedIn(true);
             setIsLoading(false);
             setUser(user);    
-            getCartData()    
+            getCartData() 
+            navigate(`/redirect`)
+            return user   
           })
           .catch((error) => {
             // If the server sends an error response (invalid token) 
