@@ -32,11 +32,24 @@ const CreateBusiness = () => {
 			inplace: false
     	},
 		payment:{
-			cash:true,
-			card: false,
-			pp: false,
-			pagoMovil: false,
-			zelle: false
+			cash:{
+				accepted:true
+			},
+			card: {
+				accepted:false
+			},
+			pp: {
+				accepted:false,
+				email:''
+			},
+			pagoMovil: {
+				accepted:false,
+				ci:''
+			},
+			zelle: {
+				accepted:false,
+				email:''
+			}
 		},
     	type:{
 			prepared:false,
@@ -52,7 +65,7 @@ const CreateBusiness = () => {
 
 	const [business, setBusiness] = useState(initialState);
 
-  const [menucategoriessearch, setmenucategoriessearch] = useState('')
+  	const [menucategoriessearch, setmenucategoriessearch] = useState('')
 
 	const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -254,86 +267,148 @@ const CreateBusiness = () => {
 							</Form.Group>
 						</div>
             			<hr />
-						<div className='d-flex justify-content-between'>
+						<div className='d-flex justify-content-between flex-wrap'>
 						<Form.Group
-								className='mb-3 col-4 d-flex flex-column align-items-start'
-								controlId='formCurrency'
+							className='mb-3 col-12 col-md-4 d-flex flex-column align-items-start'
+							controlId='formCurrency'
+						>
+							<Form.Label>Currency</Form.Label>
+							<Form.Control
+								type='text'
+								placeholder='Simbol'
+								name='currency'
+								value={business.currency}
+								onChange={(e) => {
+									setBusiness(setBusiness({...business, [e.target.name]:e.target.value}));
+								}}
+							/>
+						</Form.Group>
+						<Form.Group
+							className='mb-3 col-7 d-flex flex-column align-items-start'
+							controlId='formPaymentMethods'
+						>
+							<Form.Label>Payment Methods</Form.Label>
+							<div className='d-flex flex-column col-12'>
+							<Form.Group
+							className='col-md-8 d-flex align-items-start'
 							>
-								<Form.Label>Currency</Form.Label>
-								<Form.Control
-									type='text'
-									placeholder='Simbol'
-									name='currency'
-									value={business.currency}
-									onChange={(e) => {
-										setBusiness(setBusiness({...business, [e.target.name]:e.target.value}));
+								<Form.Check
+									inline
+									label='Cash'
+									name='cash'
+									type='checkbox'
+									id={`inline-$'checkbox'-1`}
+									checked={business.payment.cash.accepted}
+									onChange={(e)=>{
+									setBusiness({...business, payment : {...business.payment, cash:!business.payment.cash} })
 									}}
 								/>
 							</Form.Group>
 							<Form.Group
-								className='mb-3 col-7 d-flex flex-column'
-								controlId='formPaymentMethods'
+							className='col-md-8 d-flex align-items-start'
 							>
-								<Form.Label>Payment Methods</Form.Label>
-								<div className='d-flex flex-wrap col-12'>
-									<Form.Check
-										inline
-										label='Cash'
-										name='cash'
-										type='checkbox'
-										id={`inline-$'checkbox'-1`}
-										checked={business.payment.cash}
-										onChange={(e)=>{
-										setBusiness({...business, payment : {...business.payment, cash:!business.payment.cash} })
-										}}
-									/>
-									<Form.Check
-										inline
-										label='Credit Card'
-										name='card'
-										type='checkbox'
-										id={`inline-$'checkbox'-1`}
-										checked={business.payment.card}
-										onChange={(e)=>{
-										setBusiness({...business, payment : {...business.payment, card:!business.payment.card} })
-										}}
-									/>
-									<Form.Check
-										inline
-										label='PayPal'
-										name='pp'
-										type='checkbox'
-										id={`inline-$'checkbox'-1`}
-										checked={business.payment.pp}
-										onChange={(e)=>{
-										setBusiness({...business, payment : {...business.payment, pp:!business.payment.pp} })
-										}}
-									/>
-									<Form.Check
-										inline
-										label='PagoMovil'
-										name='pagoMovil'
-										type='checkbox'
-										id={`inline-$'checkbox'-1`}
-										checked={business.payment.pagoMovil}
-										onChange={(e)=>{
-										setBusiness({...business, payment : {...business.payment, pagoMovil:!business.payment.pagoMovil} })
-										}}
-									/>
-									<Form.Check
-										inline
-										label='Zelle'
-										name='zelle'
-										type='checkbox'
-										id={`inline-$'checkbox'-1`}
-										checked={business.payment.zelle}
-										onChange={(e)=>{
-										setBusiness({...business, payment : {...business.payment, zelle:!business.payment.zelle} })
-										}}
-									/>
+								<Form.Check
+									inline
+									label='Credit Card'
+									name='card'
+									type='checkbox'
+									id={`inline-$'checkbox'-1`}
+									checked={business.payment.card.accepted}
+									onChange={(e)=>{
+									setBusiness({...business, payment : {...business.payment, card:!business.payment.card} })
+									}}
+								/>
 								
-								</div>
 							</Form.Group>
+							<Form.Group
+							className='col-md-8 d-flex align-items-start'
+							>
+								<Form.Check
+									inline
+									className='py-1 col-5 text-start'
+									label='PayPal'
+									name='pp'
+									type='checkbox'
+									id={`inline-$'checkbox'-1`}
+									checked={business.payment.pp.accepted}
+									onChange={(e)=>{
+									setBusiness({...business, payment : {...business.payment, pp:!business.payment.pp} })
+									}}
+								/>
+								<Form.Control
+									className='py-1 col-8'
+									type='text'
+									placeholder='PayPal email address'
+									name='pp'
+									value={business.payment.pp.email}
+									onChange={(e) => {
+										setBusiness({...business, payment: {...business.payment, pp:{...business.payment.pp, email:e.target.value}}});
+									}}
+								/>
+							</Form.Group>
+							<Form.Group
+							className='col-md-8 d-flex align-items-start'
+							>
+								<Form.Check
+									inline
+									className='py-1 col-5 text-start'
+									label='PagoMovil'
+									name='pagoMovil'
+									type='checkbox'
+									id={`inline-$'checkbox'-1`}
+									checked={business.payment.pagoMovil.accepted}
+									onChange={(e)=>{
+									setBusiness({...business, payment : {...business.payment, pagoMovil:!business.payment.pagoMovil} })
+									}}
+								/>
+								<Form.Control
+									className='py-1 col-8'
+									type='text'
+									placeholder='PagoMovil ID number'
+									name='pagoMovil'
+									value={business.payment.pagoMovil.ci}
+									onChange={(e) => {
+										setBusiness({...business, payment: {...business.payment, pagoMovil:{...business.payment.pagoMovil, ci:e.target.value}}});
+									}}
+								/>
+							</Form.Group>
+							<Form.Group
+							className='col-md-8 d-flex align-items-start'
+							>
+								<Form.Check
+									inline
+									className='py-1 col-5 text-start'
+									label='Zelle'
+									name='zelle'
+									type='checkbox'
+									id={`inline-$'checkbox'-1`}
+									checked={business.payment.zelle.accepted}
+									onChange={(e)=>{
+									setBusiness({...business, payment : {...business.payment, zelle:!business.payment.zelle} })
+									}}
+								/>
+								<Form.Control
+									className='py-1 col-8'
+									type='text'
+									placeholder='Zelle email address'
+									name='zelle'
+									value={business.payment.zelle.email}
+									onChange={(e) => {
+										setBusiness({...business, payment: {...business.payment, zelle:{...business.payment.zelle, email:e.target.value}}});
+									}}
+								/>
+							</Form.Group>
+
+
+
+								
+								
+								
+								
+								
+							
+							</div>
+						</Form.Group>
 						</div>
 						<hr />
 						<div className='d-flex justify-content-around'>
