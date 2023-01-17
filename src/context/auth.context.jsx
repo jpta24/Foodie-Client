@@ -24,7 +24,7 @@ function AuthProviderWrapper(props) {
         localStorage.setItem('authToken', token);
     }
 
-    const authenticateUser = () => {      
+    const authenticateUser = (url) => {      
         // Get the stored token from the localStorage
         const storedToken = localStorage.getItem('authToken'); // will return either the token or null
         // If the token exists in the localStorage
@@ -42,7 +42,8 @@ function AuthProviderWrapper(props) {
             setIsLoading(false);
             setUser(user);    
             getCartData() 
-            navigate(`/redirect`)
+            if(url){navigate(url)}
+            
             return user   
           })
           .catch((error) => {

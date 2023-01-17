@@ -23,7 +23,7 @@ const Login = () => {
 				// with the JWT string ->  response.data.authToken
 				// console.log('JWT token', response.data.authToken );
 				storeToken(response.data.authToken); // store in my localStorage the authToken
-				authenticateUser(); // verify token is valid to get the user information from the server
+				authenticateUser('/redirect'); // verify token is valid to get the user information from the server
 			})
 			.catch((error) => {
 				console.log(error);

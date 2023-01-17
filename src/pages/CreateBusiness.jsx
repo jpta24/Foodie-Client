@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import menuCategories from '../data/categories.json'
@@ -27,7 +27,10 @@ const CreateBusiness = () => {
 		},
 		currency:'',
 		format: {
-			delivery:false,
+			delivery:{
+				delivery:false,
+				price:0
+			},
 			pickup: true,
 			inplace: false
     	},
@@ -87,7 +90,7 @@ const CreateBusiness = () => {
 		axios
 			.post(`${process.env.REACT_APP_SERVER_URL}/business`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then((response) => {
-        const nameEncoded = response.data.business.name.split(' ').join('-')
+        	const nameEncoded = response.data.business.name.split(' ').join('-')
 				navigate(`/${nameEncoded}/dashboard`);
 			// eslint-disable-next-line no-lone-blocks
 			{window.innerWidth < 450 ? 
@@ -279,12 +282,12 @@ const CreateBusiness = () => {
 								name='currency'
 								value={business.currency}
 								onChange={(e) => {
-									setBusiness(setBusiness({...business, [e.target.name]:e.target.value}));
+									setBusiness({...business, [e.target.name]:e.target.value});
 								}}
 							/>
 						</Form.Group>
 						<Form.Group
-							className='mb-3 col-7 d-flex flex-column align-items-start'
+							className='mb-3 col-md-7 col-8 d-flex flex-column align-items-start'
 							controlId='formPaymentMethods'
 						>
 							<Form.Label>Payment Methods</Form.Label>
@@ -398,15 +401,6 @@ const CreateBusiness = () => {
 									}}
 								/>
 							</Form.Group>
-
-
-
-								
-								
-								
-								
-								
-							
 							</div>
 						</Form.Group>
 						</div>
@@ -417,7 +411,7 @@ const CreateBusiness = () => {
 								controlId='formBasicBusinessCountry'
 							>
 								<Form.Label>Product Types</Form.Label>
-								<div>
+								<div className='text-start'>
 									<Form.Check
 										inline
 										label='Prepared'
@@ -454,24 +448,15 @@ const CreateBusiness = () => {
 								</div>
 							</Form.Group>
 							<Form.Group
-								className='mb-3 col-md-5 d-flex flex-column'
+								className='mb-3 col-md-7 d-flex flex-column'
 								controlId='formBasicBusinessCountry'
 							>
 								<Form.Label>Delivery Format</Form.Label>
-								<div>
+								<div className='d-md-flex justify-content-end'>
+								
 								<Form.Check
 									inline
-									label='Delivery'
-									name='delivery'
-									type='checkbox'
-									id={`inline-$'checkbox'-1`}
-									checked={business.format.delivery}
-									onChange={(e)=>{
-									setBusiness({...business, format : {...business.format, delivery:!business.format.delivery} })
-									}}
-								/>
-								<Form.Check
-									inline
+									className='py-1 mr-1 text-start'
 									label='Pick-up'
 									name='pickup'
 									type='checkbox'
@@ -483,6 +468,7 @@ const CreateBusiness = () => {
 								/>
 								<Form.Check
 									inline
+									className='py-1 mr-1 text-start'
 									label='In-place'
 									name='inplace'
 									type='checkbox'
@@ -492,6 +478,36 @@ const CreateBusiness = () => {
 									setBusiness({...business, format : {...business.format, inplace:!business.format.inplace} })
 									}}
 								/>
+								
+								<Form.Check
+									inline
+									className='py-1 mx-0 text-start'
+									label='Delivery'
+									name='delivery'
+									type='checkbox'
+									id={`inline-$'checkbox'-1`}
+									checked={business.format.delivery.delivery}
+									onChange={(e)=>{
+									setBusiness({...business, format : {...business.format, delivery:{...business.format.delivery, delivery:!business.format.delivery.delivery}}})
+									}}
+								/>
+								<div className="col-md-4 col-8 mx-auto">
+									<InputGroup className="mb-3">
+										<InputGroup.Text>{business.currency || '$'}</InputGroup.Text>
+										<Form.Control
+										className='py-1'
+										type='number'
+										placeholder='Delivery Price'
+										name='price'
+										value={business.format.delivery.price}
+										onChange={(e) => {
+											setBusiness({...business, format: {...business.format, delivery:{...business.format.delivery, price:e.target.value}}});
+										}}
+									/>
+									</InputGroup>
+									
+								</div>
+								
 								</div>
 							</Form.Group>
 						</div>
