@@ -40,7 +40,7 @@ const Dashboard = () => {
 				
                 <DashboardCard href={`/cart/${user._id}`} button='Cart' src={iconsCloud[0].cart} />
                 <DashboardCard href={`/orders/${user._id}`} button='Orders' src={iconsCloud[0].orders}/>
-				<DashboardCard href='/mySavedBusiness' button='♥ Business' src={iconsCloud[0].savedBuz}/>
+				<DashboardCard href='/myVisitedBusiness' button='♥ Business' src={iconsCloud[0].savedBuz}/>
                 <DashboardCard href='/mySavedProducts' button='♥ Products' src={iconsCloud[0].savedProducts}/>
 			</Row>
 		</div>
