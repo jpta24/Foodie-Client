@@ -1,72 +1,40 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/auth.context';
+import { useState,useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import menuCategories from '../data/categories.json'
-import iconsCloud from '../data/icons.json'
+import Loading from '../components/Loading';
 
-const CreateBusiness = () => {
-	const navigate = useNavigate();
+const EditBusiness = () => {
+    const navigate = useNavigate();
+    const { businessName } = useParams();
+    
+    let businessNameEncoded = businessName.split(' ').join('-')
 
-	const { user } = useContext(AuthContext);
+	const [business, setBusiness] = useState('');
+    
+    const storedToken = localStorage.getItem("authToken"); 
 
-	const initialState = {
-		name: '',
-		logoUrl: iconsCloud[0].defaultBusinessLogo,
-		address: {
-			city: '',
-			street: '',
-			telephone:0,
-			email:'',
-			postCode: 0,
-			country: '',
-		},
-		currency:'',
-		format: {
-			delivery:{
-				delivery:false,
-				price:0
-			},
-			pickup: true,
-			inplace: false
-    	},
-		payment:{
-			cash:{
-				accepted:true
-			},
-			card: {
-				accepted:false
-			},
-			pp: {
-				accepted:false,
-				email:''
-			},
-			pagoMovil: {
-				accepted:false,
-				ci:''
-			},
-			zelle: {
-				accepted:false,
-				email:''
-			}
-		},
-    	type:{
-			prepared:false,
-			packed: false,
-			frozen: false
-		},
-		categories: ['General'],
-		bgUrl: iconsCloud[0].defaultBusinessBG,
-		pdfMenu: '',
-		employees: [],
-		owner: user._id,
-	};
-
-	const [business, setBusiness] = useState(initialState);
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
+          .then(response=>{
+              setBusiness(response.data.business)
+          })
+          .catch((error) => {
+              console.log({error});
+              // eslint-disable-next-line no-lone-blocks
+              {window.innerWidth < 450 ? 
+                toast.error("Sorry you are being redirected !", {
+                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
+              navigate('/')
+              })
+      
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [])
 
   	const [menucategoriessearch, setmenucategoriessearch] = useState('')
 
@@ -88,15 +56,14 @@ const CreateBusiness = () => {
 		// If POST request is successful redirect to Business/Dashboard page
 		// If the request resolves with an error, set the error message in the state
 		axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/business`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
+			.put(`${process.env.REACT_APP_SERVER_URL}/business/edit/${businessNameEncoded}`, requestBody, {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then((response) => {
-        	const nameEncoded = response.data.business.name.split(' ').join('-')
-				navigate(`/${nameEncoded}/dashboard`);
+        	navigate(`/${businessNameEncoded}/dashboard`);
 			// eslint-disable-next-line no-lone-blocks
 			{window.innerWidth < 450 ? 
-				toast.success("Business successfully created !", {
+				toast.success("Business successfully edited !", {
 					position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-				}) : toast.success('Business successfully created', { theme: 'dark' });}
+				}) : toast.success('Business successfully edited', { theme: 'dark' });}
 			})
 			.catch((error) => {
         		console.log({error});
@@ -136,9 +103,10 @@ const CreateBusiness = () => {
       .catch(err => console.log("Error while uploading the file: ", err));
   };
   
-	return (
+  if (business) {
+    return (
 		<div className='container'>
-			<h1>Let's create a Business!</h1>
+			<h1>Let's edit the Business!</h1>
 			<div className='row justify-content-center p-4 mb-4'>
 				<div className='col-md-8 '>
 					<Form onSubmit={handleBusinessSubmit}>
@@ -577,18 +545,20 @@ const CreateBusiness = () => {
 								/>
 							</Form.Group>
 						</div>
-           				<hr />
-            			<p>Create your Business to start adding products and/or employees</p>
             			{errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						
-						<Button variant='primary' size="lg" type='submit' className='mx-2 my-1 col-8 col-md-4'>
-							Create the Business
+						<Button variant='success' size="lg" type='submit' className='mx-2 my-1 col-8 col-md-4'>
+							Edit the Business
 						</Button>
 					</Form>
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+  } else {
+    <Loading/>
+  }
+	
+}
 
-export default CreateBusiness;
+export default EditBusiness

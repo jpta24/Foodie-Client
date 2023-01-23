@@ -3,7 +3,7 @@ import {  useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { QRCode } from 'react-qrcode-logo';
-import { Button } from 'react-bootstrap';
+import { Modal,Button } from 'react-bootstrap';
 
 import { toast } from 'react-toastify';
 import BusinessViewCard from '../components/BusinessViewCard';
@@ -38,6 +38,39 @@ const BusinessView = () => {
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const modalInitialState = {
+        show:false,
+        businessName:'',
+        businessID:''
+    }
+
+    const [show, setShow] = useState(modalInitialState)
+
+    const handleClose = () => setShow(modalInitialState);
+    const handleModal = (businessName,businessID) => {
+        setShow({show:true,businessName,businessID})
+    }
+    const deleteBusiness =()=>{
+        axios
+            .delete(`${process.env.REACT_APP_SERVER_URL}/business/delete/${show.businessID}`,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            .then(() => {
+            //     return axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
+            // }).then(response=>{
+            //     setBusiness(response.data.business)
+            //     setShow(modalInitialState)
+            navigate(`/dashboard/${user._id}`)
+            }).catch((error) => {
+                console.log(error);
+                const errorDescription = error.response.data.message;
+                toast.error(errorDescription, { theme: 'dark' });
+                // eslint-disable-next-line no-lone-blocks
+                {window.innerWidth < 450 ? 
+                    toast.error(errorDescription, {
+                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
+                    }) : toast.error(errorDescription, { theme: 'dark' });}
+            });
+    }
     
     if (business!=='') {
         if(business.owner !== user._id){
@@ -113,9 +146,21 @@ const BusinessView = () => {
                 <div className="row d-flex flex-row my-2 justify-content-center">
                     <div className="col-md-8 d-flex flex-row my-2 justify-content-center">
                     <div className='col-6 d-flex justify-content-start flex-column align-items-start' >
-                        <h1>{business.name}</h1>
+                        <div className="d-flex justify-content-between col-12">
+                            <h1 className='text-start'>{business.name}</h1>
+                            <div>
+                                <Link to={`/edit-business/${businessNameEncoded}`}>
+                                    <span style={{cursor:"pointer"}}  className='mx-1'>🖊</span>
+                                </Link>
+                                <span style={{cursor:"pointer"}} className='mx-1' 
+                                    onClick={()=>{handleModal(business.name,business._id)}}
+                                >❌</span>
+                            </div>
+                            
+                        </div>
+                        
         
-                        <p>{`${business.address.street}, ${business.address.city}, ${business.address.country }`}</p>
+                        <p className='text-start'>{`${business.address.street}, ${business.address.city}, ${business.address.country }`}</p>
                         <span>Delivery Methods:</span>
                         <div className='d-flex'>
                              {formatsArr.map(format => {
@@ -170,6 +215,28 @@ const BusinessView = () => {
                         <BusinessViewCard href={`/${businessNameEncoded}/orders`} button='Orders' src={iconsCloud[0].orders} />
                     </div>
                 </div>
+                <Modal
+                show={show.show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                <Modal.Title>Delete Business</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                   {`You are about to delete the "${show.businessName}" business, this action has no way back.`} <br/>
+                   Are you sure, you want to delete it?
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Cancel
+                </Button>
+                <Button variant="danger" onClick={deleteBusiness}>
+                    Delete
+                </Button>
+                </Modal.Footer>
+            </Modal>
 
             </div>
           )
