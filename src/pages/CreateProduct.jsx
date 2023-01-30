@@ -102,6 +102,8 @@ const CreateProduct = () => {
         // imageUrl => this name has to be the same as in the model since we pass
         // req.body to .create() method when creating a new movie in '/api/movies' POST route
         uploadData.append("imageUrl", e.target.files[0]);
+        
+	    console.log(uploadData.get('imageUrl'))
      
         uploadImage(uploadData)
           .then(response => {
