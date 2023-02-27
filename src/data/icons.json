@@ -44,6 +44,9 @@
         "defaultBusinessLogo":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1668202329/foodie-gallery/logoUrl_uvg32a.png",
         "noImageIcon":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1670401896/foodie-gallery/no-image-icon_cky1rj.jpg",
         "dashboard":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1671532672/foodie-gallery/dashboard_koxmhh.png",
-        "businessDashboard":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1671532673/foodie-gallery/businessDashboard_wzo7sw.png"
-}
+        "businessDashboard":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1671532673/foodie-gallery/businessDashboard_wzo7sw.png",
+        "homeFeatures":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677502755/foodie-gallery/features_lad632.png",
+        "homeImg":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677504018/foodie-gallery/homeImg_uuiwqz.png",
+        "jean":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677519967/foodie-gallery/profile-pic_3_ekzzrj.png"
+    }
 ]

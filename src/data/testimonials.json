@@ -1,0 +1,33 @@
+[
+    {
+        "_id":"1",
+        "txt":"FOODIE has been a game-changer for my catering business. I can now easily manage my orders and payments through my online store, and the QR code and URL features make it simple for my customers to find and order from me. Highly recommend!",
+        "business":"Emily, owner of Emily's Catering Co.",
+        "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/emily_vov6ps.png"
+        
+    },{
+        "_id":"2",
+        "txt":"As a food blogger, FOODIE has allowed me to monetize my recipes and create an additional revenue stream. I love the flexibility of the platform and the ability to customize my store to match my brand. It's been an amazing experience!",
+        "business":"Sarah, creator of Sarah's Kitchen Blog",
+        "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/satah_h1j6dz.png"
+        
+    },{
+        "_id":"3",
+        "txt":"FOODIE has made it so easy for me to reach new customers and expand my business. I've seen a significant increase in sales since I started using the platform, and the user-friendly interface makes managing my online store a breeze.",
+        "business":"Carlos, owner of Carlos's Empanadas",
+        "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/carlos_scwpu6.png"
+        
+    },{
+        "_id":"4",
+        "txt":"I've been using FOODIE to sell my homemade sauces and marinades, and it's been a great experience. The platform is affordable and easy to use, and the customer support team is always available to help with any questions I have. Highly recommend for any culinary entrepreneurs!",
+        "business":"Maria, owner of Maria's Sauces",
+        "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/maria_gd6tkf.png"
+        
+    },{
+        "_id":"5",
+        "txt":"Thanks to FOODIE, I was able to launch my own line of specialty snacks and reach a wider audience. The platform's payment and shipping options make it simple for me to manage orders and ensure timely delivery. I'm so grateful for this opportunity!",
+        "business":"Juan, creator of Juan's Snacks.",
+        "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/juan_xo9mfu.png"
+        
+    }
+]

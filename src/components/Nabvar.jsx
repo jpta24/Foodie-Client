@@ -20,7 +20,7 @@ const Nabvar2 = () => {
         <Navbar.Collapse className='d-flex-lg justify-content-between '>
             <Nav>
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="#about-us">About Us</Nav.Link>
+                <Nav.Link href="/about-us">About Us</Nav.Link>
             </Nav>
             <Nav className='navbar-nav mb-2 mb-lg-0 me-4'>
             {/* <Nav.Link href="/markets">Markets 🏪</Nav.Link> */}

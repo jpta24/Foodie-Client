@@ -24,6 +24,7 @@ import SignupBizPage from "./pages/SignupBizPage";
 import EditProduct from "./pages/EditProduct";
 import RedirectPage from "./pages/RedirectPage";
 import EditBusiness from "./pages/EditBusiness";
+import About from "./pages/AboutUs";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
     </div>
       <Routes>      
         <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/about-us" element={<About />} />
         <Route exact path="/signup" element={<IsAnon><SignupPage /></IsAnon>} />
         <Route exact path="/login" element={<IsAnon><LoginPage /></IsAnon>} />  
         <Route exact path="/signup/:businessName" element={<IsAnon><SignupBizPage /></IsAnon>} />
