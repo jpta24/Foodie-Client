@@ -17,6 +17,7 @@ const About = () => {
             <br/><br/>
 
             Originally from Venezuela, I am currently based in Berlin, Germany, where I continue to pursue my passion for developing innovative solutions and creating engaging user experiences. I strive to approach each project with a combination of creativity and analytical thinking, and I am always eager to learn and improve my skills.
+            
             <br/><br/>
 
             Whether you're looking to build a new website, launch a mobile app, or tackle a complex engineering project, I'm here to help bring your ideas to life. Let's work together to build something great!</p>
