@@ -1,7 +1,12 @@
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
+
 import { Carousel, Container, Row, Col } from "react-bootstrap";
 import testimonials from "../data/testimonials.json";
+import languages from '../data/language.json'
 
 const TestimonialsCarousel = () => {
+  const {language:lang} = useContext(AuthContext);
 
     return (
         <section id="testimonios" className="py-2">

@@ -1,26 +1,50 @@
 [
     {
         "_id":"1",
-        "txt":"FOODIE has been a game-changer for my catering business. I can now easily manage my orders and payments through my online store, and the QR code and URL features make it simple for my customers to find and order from me. Highly recommend!",
-        "business":"Emily, owner of Emily's Catering Co.",
+        "txt":{
+            "En":"FOODIE has been a game-changer for my catering business. I can now easily manage my orders and payments through my online store, and the QR code and URL features make it simple for my customers to find and order from me. Highly recommend!",
+            "Es":"FOODIE ha cambiado las reglas del juego para mi negocio de catering. Ahora puedo administrar fácilmente mis pedidos y pagos a través de mi tienda en línea, y las funciones de código QR y URL facilitan que mis clientes me encuentren y me hagan pedidos. ¡Altamente recomendado!"
+        },
+        "business":{
+            "En":"Emily, owner of Emily's Catering Co.",
+            "Es":"Emily, propietaria de Emily's Catering Co."
+        },
         "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/emily_vov6ps.png"
         
     },{
         "_id":"2",
-        "txt":"As a food blogger, FOODIE has allowed me to monetize my recipes and create an additional revenue stream. I love the flexibility of the platform and the ability to customize my store to match my brand. It's been an amazing experience!",
-        "business":"Sarah, creator of Sarah's Kitchen Blog",
+        "txt":{
+            "En":"As a food blogger, FOODIE has allowed me to monetize my recipes and create an additional revenue stream. I love the flexibility of the platform and the ability to customize my store to match my brand. It's been an amazing experience!",
+            "Es":"Como blogger de alimentos, FOODIE me ha permitido monetizar mis recetas y crear un flujo de ingresos adicional. Me encanta la flexibilidad de la plataforma y la capacidad de personalizar mi tienda para que coincida con mi marca. ¡Ha sido una experiencia increíble!"
+        },
+        "business":{
+            "En":"Sarah, creator of Sarah's Kitchen Blog",
+            "Es":"Sarah, propietaria de Sarah's Kitchen Blog"
+        },
         "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/satah_h1j6dz.png"
         
     },{
         "_id":"3",
-        "txt":"FOODIE has made it so easy for me to reach new customers and expand my business. I've seen a significant increase in sales since I started using the platform, and the user-friendly interface makes managing my online store a breeze.",
-        "business":"Carlos, owner of Carlos's Empanadas",
+        "txt":{
+            "En":"FOODIE has made it so easy for me to reach new customers and expand my business. I've seen a significant increase in sales since I started using the platform, and the user-friendly interface makes managing my online store a breeze.",
+            "Es":"FOODIE me ha facilitado mucho llegar a nuevos clientes y expandir mi negocio. He visto un aumento significativo en las ventas desde que comencé a usar la plataforma, y la interfaz fácil de usar hace que administrar mi tienda en línea sea muy fácil."
+        },
+        "business":{
+            "En":"Carlos, owner of Carlos's Empanadas",
+            "Es":"Carlos, propietario de Las Empanadas de Carlos."
+        },
         "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/carlos_scwpu6.png"
         
     },{
         "_id":"4",
-        "txt":"I've been using FOODIE to sell my homemade sauces and marinades, and it's been a great experience. The platform is affordable and easy to use, and the customer support team is always available to help with any questions I have. Highly recommend for any culinary entrepreneurs!",
-        "business":"Maria, owner of Maria's Sauces",
+        "txt":{
+            "En":"I've been using FOODIE to sell my homemade sauces and marinades, and it's been a great experience. The platform is affordable and easy to use, and the customer support team is always available to help with any questions I have. Highly recommend for any culinary entrepreneurs!",
+            "Es":"He estado usando FOODIE para vender mis salsas y marinados caseros, y ha sido una gran experiencia. La plataforma es asequible y fácil de usar, y el equipo de atención al cliente siempre está disponible para ayudarme con cualquier pregunta que tenga. ¡Muy recomendable para cualquier emprendedor culinario!"
+        },
+        "business":{
+            "En":"Maria, owner of Maria's Sauces",
+            "Es":"Maria, propietaria de Maria's Sauces"
+        },
         "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/maria_gd6tkf.png"
         
     },{

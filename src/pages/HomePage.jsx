@@ -1,12 +1,23 @@
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import Footer from "../components/Footer";
 import TestimonialsCarousel from "../components/HomeCarousel";
 
+
+// import LanguageDetector from '../config/LanguageDetector';
+
 import iconsCloud from '../data/icons.json'
+import languages from '../data/language.json'
 
 // import iconsCloud from '../data/icons.json'
 
 function HomePage() {
+  
+  const {language:lang} = useContext(AuthContext);
+  // const language = LanguageDetector.cacheUserLanguage();
+  // const currency = LanguageDetector.options.getDetectedLanguage()['currency'];
+  // console.log(`El idioma es: ${language} y la moneda es: ${currency}`);
   return (
     <div className="container" style={{overflow:"auto"}}>
       {/* Header Section */}
@@ -14,8 +25,8 @@ function HomePage() {
           <Container className="pb-5">
             <Row>
               <Col md={7}>
-                <h1 className="col-11 my-md-5 my-4" style={window.innerWidth < 450 ? {fontSize:"30px"} : {fontSize:"45px"}}> <strong>FOODIE:</strong> the e-commerce platform designed for chefs and culinary entrepreneurs who want to take their food business to the next level.</h1>
-                <Button size="lg" className="px-4" variant="primary" href="/signup">Open an Account</Button>
+                <h1 className="col-11 my-md-5 my-4" style={window.innerWidth < 450 ? {fontSize:"30px"} : {fontSize:"45px"}}> <strong>FOODIE:</strong> {languages[0][lang].home.slogan}</h1>
+                <Button size="lg" className="px-4" variant="primary" href="/signup">{languages[0][lang].home.btnSlg}</Button>
               </Col>
               <Col md={5}>
                 <Image src={iconsCloud[0].homeImg} className="my-5" fluid />
@@ -33,8 +44,8 @@ function HomePage() {
                 <Image src={iconsCloud[0].homeFeatures} fluid />
               </Col>
               <Col md={7}>
-                <h2>Features and Benefits of FOODIE</h2>
-                <h5>Here, you can easily create an online store for your food products and reach more customers everywhere. The platform offers a variety of tools and features, such as the ability to customize your online store, manage your products and orders, and offer flexible payment and delivery options. In addition, FOODIE also allows you to generate a unique QR code and URL for your online store, making it easy for your customers to find and purchase your products. With FOODIE, you have everything you need to successfully and efficiently grow your culinary business online.</h5>
+                <h2>{languages[0][lang].home.feaTitle} FOODIE</h2>
+                <h5>{languages[0][lang].home.feaContent}</h5>
               </Col>
             </Row>
           </Container>
@@ -45,40 +56,40 @@ function HomePage() {
           <Container>
             <Row className="d-flex justify-content-around">
               <Col md={4} className="card py-4 cardBg">
-                <h3>Free Plan</h3>
+                <h3>{languages[0][lang].home.freeTitle}</h3>
                 <h5>-</h5>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">Up to 10 products</li>
-                  <li className="list-group-item">Monthly sales up to $500</li>
-                  <li className="list-group-item">ads on store</li>
-                  <li className="list-group-item">Zelle and cash payments accepted</li>
-                  <li className="list-group-item">5% commission fees</li>
+                  <li className="list-group-item">{languages[0][lang].home.free1}</li>
+                  <li className="list-group-item">{languages[0][lang].home.free2}</li>
+                  <li className="list-group-item">{languages[0][lang].home.free3}</li>
+                  <li className="list-group-item">{languages[0][lang].home.free4}</li>
+                  <li className="list-group-item">{languages[0][lang].home.free5}</li>
                 </ul>
-                <Button variant="primary"  className="my-3">Select Plan</Button>
+                <Button variant="primary"  className="my-3">{languages[0][lang].home.btnSelect}</Button>
               </Col>
               <Col md={4} className="card py-4 cardBg">
-                <h3>Basic Plan</h3>
-                <h5>$5</h5>
+                <h3>{languages[0][lang].home.basicTitle}</h3>
+                <h5>$5{languages[0][lang].home.perMon}</h5>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">Up to 50 products</li>
-                  <li className="list-group-item">Monthly sales up to $2,000</li>
-                  <li className="list-group-item">No ads</li>
-                  <li className="list-group-item">PayPal and credit card payment options</li>
-                  <li className="list-group-item">2% commission fees</li>
+                <li className="list-group-item">{languages[0][lang].home.basic1}</li>
+                  <li className="list-group-item">{languages[0][lang].home.basic2}</li>
+                  <li className="list-group-item">{languages[0][lang].home.basic3}</li>
+                  <li className="list-group-item">{languages[0][lang].home.basic4}</li>
+                  <li className="list-group-item">{languages[0][lang].home.basic5}</li>
                 </ul>
-                <Button variant="primary" className="my-3">Select Plan</Button>
+                <Button variant="primary"  className="my-3">{languages[0][lang].home.btnSelect}</Button>
               </Col>
               <Col md={4} className="card py-4 cardBg">
-                <h3>Premium Plan</h3>
-                <h5>$10</h5>
+                <h3>{languages[0][lang].home.premTitle}</h3>
+                <h5>$10{languages[0][lang].home.perMon}</h5>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">Unlimited products</li>
-                  <li className="list-group-item">Unlimited sales</li>
-                  <li className="list-group-item">No ads</li>
-                  <li className="list-group-item">PayPal and credit card payment options</li>
-                  <li className="list-group-item">1% commission fees</li>
+                <li className="list-group-item">{languages[0][lang].home.prem1}</li>
+                  <li className="list-group-item">{languages[0][lang].home.prem2}</li>
+                  <li className="list-group-item">{languages[0][lang].home.prem3}</li>
+                  <li className="list-group-item">{languages[0][lang].home.prem4}</li>
+                  <li className="list-group-item">{languages[0][lang].home.prem5}</li>
                 </ul>
-                <Button variant="primary"  className="my-3">Select Plan</Button>
+                <Button variant="primary"  className="my-3">{languages[0][lang].home.btnSelect}</Button>
               </Col>
             </Row>
           </Container>

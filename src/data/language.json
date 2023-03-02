@@ -1,0 +1,50 @@
+[
+    {
+        "En":{
+            "aboutus":{
+                "greeting":"¡Hi! I'm Jean Pierre",
+                "aboutText1":"I'm a retired US Marine Corps Officer turned Civil Engineer, and now a Full Stack Web and Native App Developer. I have a strong leadership background and have led multidisciplinary teams throughout my career. My skillset includes effective communication, team collaboration, logical thinking, and project management.",
+                "aboutText2":"Originally from Venezuela, I am currently based in Berlin, Germany, where I continue to pursue my passion for developing innovative solutions and creating engaging user experiences. I strive to approach each project with a combination of creativity and analytical thinking, and I am always eager to learn and improve my skills.",
+                "aboutText3":"Whether you're looking to build a new website, launch a mobile app, or tackle a complex engineering project, I'm here to help bring your ideas to life. Let's work together to build something great!"
+            },
+            "home":{
+                "slogan":" the e-commerce platform designed for chefs and culinary entrepreneurs who want to take their food business to the next level.",
+                "btnSlg":"Open an Account",
+                "feaTitle":"Features and Benefits of ",
+                "feaContent":"Here, you can easily create an online store for your food products and reach more customers everywhere. The platform offers a variety of tools and features, such as the ability to customize your online store, manage your products and orders, and offer flexible payment and delivery options. In addition, FOODIE also allows you to generate a unique QR code and URL for your online store, making it easy for your customers to find and purchase your products. With FOODIE, you have everything you need to successfully and efficiently grow your culinary business online.",
+                "freeTitle": "Free Plan",
+                "free1":"Up to 10 products",
+                "free2":"Monthly sales up to $500",
+                "free3":"ads on store",
+                "free4":"Zelle and cash payments accepted",
+                "free5":"5% commission fees",
+                "perMon":"/month",
+                "btnSelect":"Select Plan",
+                "basicTitle": "Basic Plan",
+                "basic1":"Up to 50 products",
+                "basic2":"Monthly sales up to $2,000",
+                "basic3":"No ads",
+                "basic4":"PayPal and credit card payment options",
+                "basic5":"2% commission fees",
+                "premTitle": "Premium Plan",
+                "prem1":"Unlimited products",
+                "prem2":"Unlimited sales",
+                "prem3":"No ads",
+                "prem4":"PayPal and credit card payment options",
+                "prem5":"1% commission fees",
+                "testimonials":{
+                    "title":"Testimonials"
+                }
+            }
+            
+        },
+        "Es":{
+            "aboutus":{
+                "greeting":"¡Hola! soy Jean Pierre",
+                "aboutText1":"Soy un oficial retirado de la Infantería de Marina, convertido en ingeniero civil y ahora en desarrollador de aplicaciones web y móviles de pila completa. Tengo una sólida formación en liderazgo y he dirigido equipos multidisciplinarios a lo largo de mi carrera. Mi conjunto de habilidades incluye comunicación efectiva, colaboración en equipo, pensamiento lógico y gestión de proyectos.",
+                "aboutText2":"Originario de Venezuela, actualmente estoy basado en Berlín, Alemania, donde continúo persiguiendo mi pasión por desarrollar soluciones innovadoras y crear experiencias de usuario atractivas. Me esfuerzo por abordar cada proyecto con una combinación de creatividad y pensamiento analítico, y siempre estoy ansioso por aprender y mejorar mis habilidades.",
+                "aboutText3":"Whether you're looking to build a new website, launch a mobile app, or tackle a complex engineering project, I'm here to help bring your ideas to life. Let's work together to build something great!"
+            }
+        }
+    }
+]

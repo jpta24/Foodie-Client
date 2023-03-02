@@ -82,9 +82,13 @@ function AuthProviderWrapper(props) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
  
-      // 2. Provider component that will share 'value' to the rest of the component tree
+    // LANGUAGE
+    const [language, setLanguage] = useState('En')
+    const changeLanguage = (lang)=> {
+      setLanguage(lang)
+    }
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser }}>
+    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser, language, changeLanguage }}>
       {props.children}
     </AuthContext.Provider>
   )

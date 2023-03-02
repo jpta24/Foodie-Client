@@ -1,4 +1,4 @@
-import { Button, Nav, Navbar } from 'react-bootstrap'
+import { Button, Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap'
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import { CartContext } from '../context/cart.context';
@@ -6,8 +6,12 @@ import { CartContext } from '../context/cart.context';
 import iconsCloud from '../data/icons.json'
 
 const Nabvar2 = () => {
-    const { isLoggedIn, logOutUser, user } = useContext(AuthContext);
+    const { isLoggedIn, logOutUser, user, language, changeLanguage } = useContext(AuthContext);
     const { cart } = useContext(CartContext)
+
+    
+    const titleLang = language === 'En' ? 'En 🇬🇧' : 'Es 🇪🇸'
+    
 
   return (
     <Navbar className='px-4' bg="dark" variant="dark" sticky="top" expand="sm" collapseOnSelect>
@@ -24,6 +28,16 @@ const Nabvar2 = () => {
             </Nav>
             <Nav className='navbar-nav mb-2 mb-lg-0 me-4'>
             {/* <Nav.Link href="/markets">Markets 🏪</Nav.Link> */}
+                <DropdownButton 
+                    id="dropdown-basic-button" 
+                    title={titleLang} 
+                    className='mx-2 my-1 flags' 
+                    variant="outline-secondary"
+                >
+                    <Dropdown.Item onClick={()=>changeLanguage('En')}>En 🇬🇧</Dropdown.Item>
+                    <Dropdown.Item onClick={()=>changeLanguage('Es')}>Es 🇪🇸</Dropdown.Item>
+                </DropdownButton>
+
                 {isLoggedIn && (
                     <>
                         <Nav.Link href={`/dashboard/${user._id}`}>Dashboard 📉</Nav.Link>
