@@ -150,3 +150,19 @@ a {
 scrollbar-width: none;  
 }
 
+@font-face {
+  font-family: NotoColorEmojiLimited;
+  unicode-range: U+1F1E6-1F1FF;
+  src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
+}
+
+.flags {
+  font-family: 'NotoColorEmojiLimited', -apple-system, BlinkMacSystemFont, 
+  'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 
+  'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.dropdown-menu {
+  --bs-dropdown-min-width: 0 !important;
+}
+

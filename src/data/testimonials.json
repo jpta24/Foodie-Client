@@ -49,8 +49,14 @@
         
     },{
         "_id":"5",
-        "txt":"Thanks to FOODIE, I was able to launch my own line of specialty snacks and reach a wider audience. The platform's payment and shipping options make it simple for me to manage orders and ensure timely delivery. I'm so grateful for this opportunity!",
-        "business":"Juan, creator of Juan's Snacks.",
+        "txt":{
+            "En":"Thanks to FOODIE, I was able to launch my own line of specialty snacks and reach a wider audience. The platform's payment and shipping options make it simple for me to manage orders and ensure timely delivery. I'm so grateful for this opportunity!",
+            "Es":"Gracias a FOODIE, pude lanzar mi propia línea de snacks especiales y llegar a un público más amplio. Las opciones de pago y envío de la plataforma me simplifican la gestión de pedidos y garantizan la entrega oportuna. ¡Estoy muy agradecido por esta oportunidad!"
+        },
+        "business":{
+            "En":"Juan, creator of Juan's Snacks.",
+            "Es":"Juan, creador de Juan's Snacks."
+        },
         "image":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677513292/foodie-gallery/juan_xo9mfu.png"
         
     }

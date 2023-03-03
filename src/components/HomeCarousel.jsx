@@ -3,7 +3,6 @@ import { AuthContext } from '../context/auth.context';
 
 import { Carousel, Container, Row, Col } from "react-bootstrap";
 import testimonials from "../data/testimonials.json";
-import languages from '../data/language.json'
 
 const TestimonialsCarousel = () => {
   const {language:lang} = useContext(AuthContext);
@@ -30,8 +29,8 @@ const TestimonialsCarousel = () => {
                                 alt={testimonio.business}
                             />
                         </div>
-                        <h5 className="text-dark">{testimonio.txt}</h5>
-                        <p className="text-dark">{testimonio.business}</p>
+                        <h5 className="text-dark">{testimonio.txt[lang]}</h5>
+                        <p className="text-dark">{testimonio.business[lang]}</p>
                       
                       </div>
                       

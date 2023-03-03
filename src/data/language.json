@@ -34,6 +34,14 @@
                 "prem5":"1% commission fees",
                 "testimonials":{
                     "title":"Testimonials"
+                },
+                "footer":{
+                    "contactus":"Contact Us",
+                    "country":"Germany",
+                    "followus":"Follow Us",
+                    "terms":"Terms of Service",
+                    "privacy":"Privacy Policy",
+                    "conditions":"Terms and Conditions"
                 }
             }
             
@@ -43,8 +51,45 @@
                 "greeting":"¡Hola! soy Jean Pierre",
                 "aboutText1":"Soy un oficial retirado de la Infantería de Marina, convertido en ingeniero civil y ahora en desarrollador de aplicaciones web y móviles de pila completa. Tengo una sólida formación en liderazgo y he dirigido equipos multidisciplinarios a lo largo de mi carrera. Mi conjunto de habilidades incluye comunicación efectiva, colaboración en equipo, pensamiento lógico y gestión de proyectos.",
                 "aboutText2":"Originario de Venezuela, actualmente estoy basado en Berlín, Alemania, donde continúo persiguiendo mi pasión por desarrollar soluciones innovadoras y crear experiencias de usuario atractivas. Me esfuerzo por abordar cada proyecto con una combinación de creatividad y pensamiento analítico, y siempre estoy ansioso por aprender y mejorar mis habilidades.",
-                "aboutText3":"Whether you're looking to build a new website, launch a mobile app, or tackle a complex engineering project, I'm here to help bring your ideas to life. Let's work together to build something great!"
-            }
+                "aboutText3":"Ya sea que esté buscando construir un nuevo sitio web, lanzar una aplicación móvil o abordar un proyecto de ingeniería complejo, estoy aquí para ayudarlo a dar vida a sus ideas. ¡Trabajemos juntos para construir algo genial!"
+            },
+            "home":{
+                "slogan":"la plataforma de e-commerce diseñada para chefs y emprendedores culinarios que desean llevar su negocio de alimentos al siguiente nivel.",
+                "btnSlg":"Abrir una cuenta",
+                "feaTitle":"Características y beneficios de ",
+                "feaContent":"Aquí, puede crear fácilmente una tienda en línea para sus productos alimenticios y llegar a más clientes en todas partes. La plataforma ofrece una variedad de herramientas y características, como la capacidad de personalizar su tienda en línea, administrar sus productos y pedidos y ofrecer opciones flexibles de pago y entrega. Además, FOODIE también le permite generar un código QR y una URL únicos para su tienda en línea, lo que facilita que sus clientes encuentren y compren sus productos. Con FOODIE, tiene todo lo que necesita para hacer crecer su negocio culinario en línea de manera exitosa y eficiente.",
+                "freeTitle": "Plan gratuito",
+                "free1":"Hasta 10 productos",
+                "free2":"Ventas mensuales de hasta $500",
+                "free3":"anuncios en la tienda",
+                "free4":"Se aceptan pagos con Zelle y efectivo",
+                "free5":"Tarifas de comisión del 5%",
+                "perMon":"/mes",
+                "btnSelect":"Seleccionar plan",
+                "basicTitle": "Plan básico",
+                "basic1":"Hasta 50 productos",
+                "basic2":"Ventas mensuales de hasta $2,000",
+                "basic3":"Sin anuncios",
+                "basic4":"Opciones de pago con PayPal y tarjeta",
+                "basic5":"Tarifas de comisión del 2%",
+                "premTitle": "Plan premium",
+                "prem1":"Productos ilimitados",
+                "prem2":"Ventas ilimitadas",
+                "prem3":"Sin anuncios",
+                "prem4":"Opciones de pago con PayPal y tarjeta",
+                "prem5":"Tarifas de comisión del 1%",
+                "testimonials":{
+                "title":"Testimonios"
+                },
+                "footer":{
+                "contactus":"Contáctenos",
+                "country":"Alemania",
+                "followus":"Síganos",
+                "terms":"Términos de servicio",
+                "privacy":"Política de privacidad",
+                "conditions":"Términos y condiciones"
+                }
+                }
         }
     }
 ]
