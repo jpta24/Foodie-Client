@@ -43,6 +43,52 @@
                     "privacy":"Privacy Policy",
                     "conditions":"Terms and Conditions"
                 }
+            },
+            "signup":{
+                "greeting":"Let's get Started !",
+                "username":"Username",
+                "email":"Email",
+                "password":"Password",
+                "signup":"Sign Up",
+                "account":"Already have an account?",
+                "login":"Log In"
+            },
+            "tostify":{
+                "userSucc":"User successfully created",
+                "userError":"User could not be created",
+                "readError":"Sorry, read the error message",
+                "appSent":"Application Sent !"
+            },
+            "login":{
+                "greetingTitle":"Welcome back",
+                "greetingText":"Enter your credentials to access your account",
+                "username":"Username",
+                "password":"Password",
+                "login":"Log In",
+                "noAccount":"Don't have an account?",
+                "signup":"Sign Up"
+            },
+            "dashboard":{
+                "title":"Dashboard",
+                "btnBusiness":"Business",
+                "btnAddBusiness":"+ Business",
+                "btnCart":"Cart",
+                "btnOrders":"Orders",
+                "btnSavedBusiness":"♥ Business",
+                "btnSavedProducts":"♥ Products"
+
+            },
+            "profile":{
+                "incommingMsg":"Business's owner would let you know about your application",
+                "editProfile":"Edit Profile",
+                "email":"E-mail",
+                "rol":"Rol",
+                "changeRol":"Change Rol",
+                "admin":"Admin",
+                "employee":"Employee",
+                "formName":"Enter the Business's Name you're applying to:",
+                "phName":"Enter a Name for your Business",
+                "apply":"Apply"
             }
             
         },
@@ -89,7 +135,20 @@
                 "privacy":"Política de privacidad",
                 "conditions":"Términos y condiciones"
                 }
-                }
+            },
+            "signup":{
+                "greeting":"¡Empecemos!",
+                "username":"username",
+                "email":"Email",
+                "password":"Contraseña",
+                "signup":"Registrarme",
+                "account":"¿Ya tienes una cuenta?",
+                "login":"Iniciar sesión"
+            },
+            "tostify":{
+                "userSucc":"Usuario creado exitosamente",
+                "userError":"No se pudo crear el usuario"
+            }
         }
     }
 ]

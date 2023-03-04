@@ -6,7 +6,10 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
+import languages from '../data/language.json'
+
 const LoginBizPage = () => {
+	const {language:lang} = useContext(AuthContext);
     const { businessName } = useParams();
     const navigate = useNavigate();
 	const { storeToken, authenticateUser } = useContext(AuthContext);
@@ -32,10 +35,14 @@ const LoginBizPage = () => {
 			.catch((error) => {
 				const errorDescription = error.response.data.message;
 				// eslint-disable-next-line no-lone-blocks
-				{window.innerWidth < 450 ? 
-					toast.error("Sorry, read the error message !", {
-						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-					}) : toast.error('Sorry, read the error message', { theme: 'dark' });}
+				{
+					window.innerWidth < 450
+						? toast.error(`${languages[0][lang].tostify.readError}`, {
+								position: toast.POSITION.BOTTOM_CENTER,
+								theme: 'dark',
+						  })
+						: toast.error(`${languages[0][lang].tostify.readError}`, { theme: 'dark' });
+				}
 				
 				setErrorMessage(errorDescription);
 			});
@@ -43,15 +50,15 @@ const LoginBizPage = () => {
 
 	return (
 		<div className='container'>
-			<h1>Welcome back</h1>
-			<p>Enter your credentials to access your account</p>
+			<h1>{languages[0][lang].login.greetingTitle}</h1>
+			<p>{languages[0][lang].login.greetingText}</p>
 
 			<div className='row justify-content-md-center p-4'>
 				<div className='col-md-6 col-lg-5 '>
 					<form className='form-control' onSubmit={handleLoginSubmit}>
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputUser01' className='form-label'>
-								Username
+							{languages[0][lang].login.username}
 							</label>
 							<input
 								name='username'
@@ -67,7 +74,7 @@ const LoginBizPage = () => {
 
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputPassword01' className='form-label'>
-								Password
+							{languages[0][lang].login.password}
 							</label>
 							<input
 								name='password'
@@ -83,18 +90,18 @@ const LoginBizPage = () => {
 						{errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						<div className='col-12 my-3'>
 							<Button type='submit' className='col-4'>
-								Log In
+							{languages[0][lang].login.login}
 							</Button>
 						</div>
 					</form>
 					<hr />
-					<p>Don't have an account?</p>
+					<p>{languages[0][lang].login.noAccount}</p>
 					<Button
-						href={`/signup/${businessName}`}
+						href='/signup'
 						variant='outline-primary'
 						className='mx-2 my-1 col-4'
 					>
-						Sign Up
+						{languages[0][lang].login.signup}
 					</Button>
 				</div>
 			</div>

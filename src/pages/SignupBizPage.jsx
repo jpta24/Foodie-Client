@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 import { useNavigate,useParams } from 'react-router-dom';
 import axios from 'axios';
+
+import languages from '../data/language.json'
 
 import { Button } from 'react-bootstrap'
 import { toast } from 'react-toastify';
 
 const SignupBizPage = () => {
+	const {language:lang} = useContext(AuthContext);
     const { businessName } = useParams();
     const navigate = useNavigate();
 
@@ -31,24 +35,24 @@ const SignupBizPage = () => {
 				navigate(`/login/${businessName}`);
 				// eslint-disable-next-line no-lone-blocks
 				{window.innerWidth < 450 ? 
-					toast.success("User successfully created !", {
+					toast.success(`${languages[0][lang].tostify.userSucc}`, {
 						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-					}) : toast.success('User successfully created', { theme: 'dark' });}
+					}) : toast.success(`${languages[0][lang].tostify.userSucc}`, { theme: 'dark' });}
 			})
 			.catch((error) => {
 				const errorDescription = error.response.data.message;
 				// eslint-disable-next-line no-lone-blocks
 				{window.innerWidth < 450 ? 
-					toast.error("User could not be Created !", {
+					toast.error(`${languages[0][lang].tostify.userError}`, {
 						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-					}) : toast.error('User could not be Created', { theme: 'dark' });}
+					}) : toast.error(`${languages[0][lang].tostify.userError}`, { theme: 'dark' });}
 				setErrorMessage(errorDescription);
 			});
 	};
 
 	return (
 		<div className='container'>
-			<h1>Let's get Started !</h1>
+			<h1>{languages[0][lang].signup.greeting}</h1>
 			<div className='row justify-content-md-center p-4'>
 				<div className='col-md-6 col-lg-5 '>
 					<form className='form-control' onSubmit={handleSignupSubmit}>
@@ -60,7 +64,7 @@ const SignupBizPage = () => {
 
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputUser01' className='form-label'>
-								Username
+							{languages[0][lang].signup.username}
 							</label>
 							<input
 								name='username'
@@ -76,7 +80,7 @@ const SignupBizPage = () => {
 
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputEmail01' className='form-label'>
-								Email
+							{languages[0][lang].signup.email}
 							</label>
 							<input
 								name='email'
@@ -92,7 +96,7 @@ const SignupBizPage = () => {
 
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputPassword01' className='form-label'>
-								Password
+							{languages[0][lang].signup.password}
 							</label>
 							<input
 								name='password'
@@ -108,13 +112,13 @@ const SignupBizPage = () => {
                         {errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						<div className='col-12 my-3'>
 							<button type='submit' className='btn btn-primary col-4'>
-								Sign up
+							{languages[0][lang].signup.signup}
 							</button>
 						</div>
 					</form>
                     <hr />
-                    <p>Already have an account?</p>
-                    <Button href={`/login/${businessName}`}  variant='outline-primary' className='mx-2 my-1 col-4'>Log In</Button>
+                    <p>{languages[0][lang].signup.account}</p>
+                    <Button href='/login'  variant='outline-primary' className='mx-2 my-1 col-4'>{languages[0][lang].signup.login}</Button>
 				</div>
 			</div>
 			
