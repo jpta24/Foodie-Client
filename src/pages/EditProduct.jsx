@@ -8,10 +8,11 @@ import { Form, InputGroup, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json'
+import languages from '../data/language.json'
 import Loading from '../components/Loading';
 
 const EditProduct = () => {
-    const { user } = useContext(AuthContext);
+    const { user,language:lang } = useContext(AuthContext);
     const { businessName, productID } = useParams();
     const navigate = useNavigate();
     const storedToken = localStorage.getItem("authToken"); 
@@ -35,9 +36,9 @@ const EditProduct = () => {
               console.log({error});
               // eslint-disable-next-line no-lone-blocks
               {window.innerWidth < 450 ? 
-                toast.error("Sorry you are being redirected !", {
+                toast.error(`${languages[0][lang].tostify.redirect}`, {
                     position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
+                }) : toast.error(`${languages[0][lang].tostify.redirect}`, { theme: 'dark' });}
               navigate('/')
               })
       
@@ -64,9 +65,9 @@ const EditProduct = () => {
 				const errorDescription = error.response.data.message;
                 // eslint-disable-next-line no-lone-blocks
               {window.innerWidth < 450 ? 
-                toast.error("Product could not be Edited !", {
+                toast.error(`${languages[0][lang].tostify.prodEditError}`, {
                     position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error('Product could not be Edited', { theme: 'dark' });}
+                }) : toast.error(`${languages[0][lang].tostify.prodEditError}`, { theme: 'dark' });}
 				setErrorMessage(errorDescription);
 			});
 	};
@@ -126,7 +127,7 @@ const EditProduct = () => {
                     </div>
                 </div>
                 <h1>{product.business.name}</h1>
-                <h3>Edit the fields you need!</h3>
+                <h3>{languages[0][lang].createProduct.greetingEdit}</h3>
                 <div className='row justify-content-center p-4 mb-4'>
 				    <div className='col-md-8 '>
                         <Form onSubmit={handleEditProduct}>
@@ -147,10 +148,10 @@ const EditProduct = () => {
                                     className='mb-3 col-md-6 d-flex flex-column align-items-start'
                                     controlId='formBasicProductName'
                                 >
-                                    <Form.Label>Product Name</Form.Label>
+                                    <Form.Label>{languages[0][lang].createProduct.name}</Form.Label>
                                     <Form.Control
                                         type='text'
-                                        placeholder='Enter a Name for the Product'
+                                        placeholder={languages[0][lang].createProduct.namePh}
                                         name='name'
                                         value={product.name}
                                         onChange={(e) => {
@@ -163,7 +164,7 @@ const EditProduct = () => {
                                     className='mb-3 col-md-5 d-flex flex-column align-items-start'
                                     controlId='formBasicProductName'
                                 >
-                                    <Form.Label>Product Image</Form.Label>
+                                    <Form.Label>{languages[0][lang].createProduct.image}</Form.Label>
                                     <Form.Control
                                         type='file'
                                         onChange={(e) => handleFileUpload(e,'mainImg')}
@@ -176,12 +177,12 @@ const EditProduct = () => {
 								className='mb-3 col-12 d-flex flex-column align-items-start'
 								controlId='formBasicProductName'
 							>
-								<Form.Label>Description</Form.Label>
+								<Form.Label>{languages[0][lang].createProduct.description}</Form.Label>
 								<Form.Control
                                     as="textarea" 
                                     rows={3}
 									type='text'
-									placeholder='Enter a Name for the Product'
+									placeholder={languages[0][lang].createProduct.descriptionPh}
 									name='description'
 									value={product.description}
 									onChange={(e) => {
@@ -195,7 +196,7 @@ const EditProduct = () => {
 								className='mb-3 col-md-5 d-flex flex-column'
 								controlId='formBasicBusinessCountry'
 							>
-                                <Form.Label>Product Types</Form.Label>
+                                <Form.Label>{languages[0][lang].createProduct.type}</Form.Label>
                                     <div>
                                         {Object.entries(product.business.type).map(eachType => {
                                             return eachType[1] && (<Form.Check
@@ -218,12 +219,12 @@ const EditProduct = () => {
 								className='mb-3 col-md-5 d-flex flex-column align-items-start'
 								controlId='formBasicProductPrice'
 							>
-								<Form.Label>Price</Form.Label>
+								<Form.Label>{languages[0][lang].createProduct.price}</Form.Label>
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>{product.business.currency}</InputGroup.Text>
                                     <Form.Control
 									type='number'
-									placeholder='use dot for decimals'
+									placeholder={languages[0][lang].createProduct.pricePh}
 									name='price'
 									value={product.price}
 									onChange={(e) => {
@@ -235,12 +236,12 @@ const EditProduct = () => {
 							</Form.Group>
                         </div>
                         <Form.Group className='mb-3 col-md-5 d-flex flex-column align-items-start'>
-                            <Form.Label >Product Status</Form.Label>
+                            <Form.Label >{languages[0][lang].createProduct.status}</Form.Label>
                             <Form.Control
                                 as="select" value={product.status} onChange={(e) =>{
                                 setProduct({...product,status:e.currentTarget.value})}}>
-                                    <option value="active">Active</option>
-                                    <option value="paused">Paused</option>
+                                    <option value="active">{languages[0][lang].createProduct.active}</option>
+                                    <option value="paused">{languages[0][lang].createProduct.paused}</option>
                             </Form.Control>
                         </Form.Group>
                         
@@ -248,7 +249,7 @@ const EditProduct = () => {
                             className='mb-3 d-flex flex-column align-items-start'
                             controlId='formBasicProductCategories'
                         >
-							<Form.Label>Product Categories</Form.Label>
+							<Form.Label>{languages[0][lang].createProduct.categories}</Form.Label>
                             <Form.Label className='card p-2 col-12 d-flex flex-row'>
                             {product.categories.map(cat => {
                                 return <span key={uuidv4()} name={cat} className="badge rounded-pill bg-success m-1" onClick={(e) => {
@@ -262,7 +263,7 @@ const EditProduct = () => {
 
                             <Form.Control
                                 type='text'
-                                placeholder='Ex: Specialties, Snacks, Dessert, Drinks, etc'
+                                placeholder={languages[0][lang].createProduct.categoriesPh}
                                 value={menucategoriessearch}
                                 onChange={(e)=>{
                                     setmenucategoriessearch( e.target.value )
@@ -298,7 +299,7 @@ const EditProduct = () => {
                             className='mb-3 d-flex flex-column align-items-start'
                             controlId='formBasicProductIngredients'
                         >
-							<Form.Label>Product Ingredientes</Form.Label>
+							<Form.Label>{languages[0][lang].createProduct.ingredients}</Form.Label>
                             <Form.Label className='card p-2 col-12 d-flex flex-row' ><br/>
                             {product.ingredients.map(cat => {
                                 return <span key={uuidv4()} name={cat} className="badge rounded-pill bg-danger m-1" onClick={(e) => {
@@ -311,7 +312,7 @@ const EditProduct = () => {
                             </Form.Label>
                             <Form.Control
                                 type='text'
-                                placeholder='use "," to add the ingredient'
+                                placeholder={languages[0][lang].createProduct.ingredientsPh}
                                 value={productingredientsearch}
                                 onChange={(e)=>{
 
@@ -327,7 +328,7 @@ const EditProduct = () => {
                         {errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						
 						<Button variant='primary' size="lg" type='submit' className='mx-2 my-1 col-8 col-md-4'>
-							Edit Product
+                        {languages[0][lang].createProduct.btnEdit}
 						</Button>
                        
                         

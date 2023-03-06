@@ -1,10 +1,12 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useContext, } from 'react';
+import { AuthContext } from '../context/auth.context';
 import {  useParams, useNavigate } from 'react-router-dom';
 
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 import { toast } from 'react-toastify';
+import languages from '../data/language.json'
 
 import { v4 as uuidv4 } from 'uuid';
 import BusinessOrdersCard from '../components/BusinessOrdersCard';
@@ -12,6 +14,7 @@ import Loading from '../components/Loading';
 import OrderStatus from '../components/OrderStatus';
 
 const BusinessOrders = () => {
+	const {language:lang} = useContext(AuthContext);
     const initialState = {
         show: false,
         contact:'seller',
@@ -47,9 +50,9 @@ const BusinessOrders = () => {
               console.log({error});
               // eslint-disable-next-line no-lone-blocks
               {window.innerWidth < 450 ? 
-                toast.error("Sorry you are being redirected !", {
+                toast.error(`${languages[0][lang].tostify.redirect}`, {
                     position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
+                }) : toast.error(`${languages[0][lang].tostify.redirect}`, { theme: 'dark' });}
               navigate('/')
               })
       
@@ -80,8 +83,8 @@ const BusinessOrders = () => {
             <div className="row d-flex flex-row rounded border border-light">
                 <div className="col-12 col-md-10">
                     <div className="col-12 d-flex flex-column justify-content-center align-items-center p-2 mt-2 form-control">
-                        <h1>Hi, {business.name}</h1>
-                        <h3>These are your Orders:</h3>
+                        <h1>{languages[0][lang].businessOrders.hi}, {business.name}</h1>
+                        <h3>{languages[0][lang].businessOrders.orders}</h3>
                         <OrderStatus statues={statues} setStatus={setStatus} status={status}/>
                         <div className="col-12 cartProducts">
                                {business.orders.filter(filt=>{return filt.status===status.toLocaleLowerCase() || status==='All Orders'}).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).map(order=>{
@@ -99,14 +102,14 @@ const BusinessOrders = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                <Modal.Title>Contact {show.contact === 'us' ? 'Us' : 'Seller'}</Modal.Title>
+                <Modal.Title>{languages[0][lang].businessOrders.mTitle} {show.contact === 'us' ? `${languages[0][lang].businessOrders.us}` : `${languages[0][lang].businessOrders.seller}`}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {show.msg} {show.order!=='' && show.contact === 'seller' && `${show.order.business.address.email} or ${show.order.business.address.telephone}` }
+                    {show.msg} {show.order!=='' && show.contact === 'seller' && `${show.order.business.address.email} ${languages[0][lang].businessOrders.or} ${show.order.business.address.telephone}` }
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                {languages[0][lang].businessOrders.close}
                 </Button>
                 </Modal.Footer>
             </Modal>

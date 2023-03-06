@@ -74,7 +74,10 @@
                 "editBuzError":"Business could not be Edited",
                 "orderPlaced":"Order Placed",
                 "orderError":"Order could not be placed",
-                "copy":"Link copied to Clipboard"
+                "copy":"Link copied to Clipboard",
+                "newProduct":"Product successfully created",
+                "productError":"Product could not be Created",
+                "prodEditError":"Product could not be Edited"
             },
             "login":{
                 "greetingTitle":"Welcome back",
@@ -208,6 +211,50 @@
                 "categories:":"Categories:",
                 "mTitle":"Delete Business",
                 "mBody2":"business this action has no way back."
+            },
+            "createProduct":{
+                "greeting":"Let's create a Product!",
+                "greetingEdit":"Edit the fields you need!",
+                "name":"Product Name",
+                "namePh":"Enter a Name for the Product",
+                "image":"Product Image",
+                "description":"Description",
+                "descriptionPh":"Enter a Name for the Product",
+                "type":"Product Types",
+                "price":"Price",
+                "pricePh":"use dot for decimals",
+                "status":"Product Status",
+                "active":"Active",
+                "paused":"Paused",
+                "categories":"Product Categories",
+                "categoriesPh":"Ex: Specialties, Snacks, Dessert, Drinks, etc",
+                "ingredients":"Product Ingredientes",
+                "ingredientsPh":"use ',' to add the ingredient",
+                "btnCreate":"Create Product",
+                "btnEdit":"Edit Product"
+            },
+            "businessOrders":{
+                "hi":"Hi",
+                "orders":"These are your Orders:","mTitle":"Contact",
+                "us":"Us",
+                "seller":"Seller",
+                "or":"or",
+                "close":"Close"
+            },
+            "businessOrderCard":{
+                "for":"For:",
+                "order":"Order",
+                "name":"Name",
+                "phone":"Phone",
+                "address":"Address:",
+                "note":"Note",
+                "delivery":"Delivery Service:",
+                "summary":"Summary:",
+                "paymentMethod":"Payment Method:",
+                "status":"Status:",
+                "confirm":"Confirm",
+                "cancel":"Cancerl Order",
+                "contactus":"Contact Us"
             },
             "cloudinaryError":"Error while uploading the file:"
             

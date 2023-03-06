@@ -1,9 +1,12 @@
-import React from 'react'
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 import { Button } from 'react-bootstrap';
+import languages from '../data/language.json'
 
 import { v4 as uuidv4 } from 'uuid';
 
 const BusinessOrdersCard = ({order,handleStatusOrder, handleModal}) => {
+	const {language:lang} = useContext(AuthContext);
     return (
     <div className='rounded d-flex flex-row card col-11 align-items-center justify-content-around my-1 mx-auto shadow'>
         <div className="col-md-1 d-none d-md-block m-1">
@@ -21,7 +24,7 @@ const BusinessOrdersCard = ({order,handleStatusOrder, handleModal}) => {
         <div className="p-1 col-11 col-md-10 d-flex flex-column justify-content-between">
             <dir className='p-1 m-1'>
                 <p className='p-1 m-0 text-start d-flex justify-content-between' style={{fontSize:'0.95em', fontWeight:'bolder'}}>
-                <span>For: {order.note.name}</span><span>Order {order._id.slice(10).toUpperCase()}</span> 
+                <span>{languages[0][lang].BusinessOrderCard.for} {order.note.name}</span><span>{languages[0][lang].BusinessOrderCard.order} {order._id.slice(10).toUpperCase()}</span> 
                 </p>
                 <div className='p-1'>
                     {order.products.map(eachProduct=>{
@@ -31,27 +34,27 @@ const BusinessOrdersCard = ({order,handleStatusOrder, handleModal}) => {
                 </div>
                 <hr/>
                 <p className='m-0 text-start d-flex flex-wrap justify-content-between'>
-                    <span>Name: {order.note.name}</span>
-                    <span>Phone: {order.note.phone}</span>
+                    <span>{languages[0][lang].BusinessOrderCard.name}: {order.note.name}</span>
+                    <span>{languages[0][lang].BusinessOrderCard.phone}: {order.note.phone}</span>
                 </p>
-                {order.note.street && <p className='m-0 text-start'>Address: {order.note.street}</p>}
-                {order.note.note && <p className='text-bold m-0 text-start'>Note: {order.note.note}</p>}
-                <p className='text-bold m-0 text-start'>Delivery Service: {order.format}</p>
+                {order.note.street && <p className='m-0 text-start'>{languages[0][lang].BusinessOrderCard.address} {order.note.street}</p>}
+                {order.note.note && <p className='text-bold m-0 text-start'>{languages[0][lang].BusinessOrderCard.note}: {order.note.note}</p>}
+                <p className='text-bold m-0 text-start'>{languages[0][lang].BusinessOrderCard.delivery} {order.format}</p>
                 <hr/>
-                <p className='text-bold m-0 text-start'>Summary: {order.business.currency} {order.summary.toFixed(2)}</p>
-                <p className='text-bold m-0 text-start'>Payment Method: <span className='text-bold'>{order.paymentMethod}</span></p>
-                <p className='text-bold m-0 text-start'>Status: {order.status} 
+                <p className='text-bold m-0 text-start'>{languages[0][lang].BusinessOrderCard.summary} {order.business.currency} {order.summary.toFixed(2)}</p>
+                <p className='text-bold m-0 text-start'>{languages[0][lang].BusinessOrderCard.paymentMethod} <span className='text-bold'>{order.paymentMethod}</span></p>
+                <p className='text-bold m-0 text-start'>{languages[0][lang].BusinessOrderCard.status} {order.status} 
                     
                 </p>
                 <div className='col-12 d-flex flex-row flex-wrap justify-content-around'>
                     {order.status === 'pending' && 
                     <>
-                    <Button variant='success' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleStatusOrder(order,'confirmed')}>Confirm</Button>
-                    <Button variant='outline-success' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleStatusOrder(order,'cancelled')}>Cancel Order</Button> 
+                    <Button variant='success' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleStatusOrder(order,'confirmed')}>{languages[0][lang].BusinessOrderCard.confirm}</Button>
+                    <Button variant='outline-success' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleStatusOrder(order,'cancelled')}>{languages[0][lang].BusinessOrderCard.cancel}</Button> 
                    
                     </>} 
                         
-                        <Button variant='outline-secondary' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleModal('Please send an email to: contact@foodie.com',order,'us')}>Contact Us</Button>
+                        <Button variant='outline-secondary' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleModal('Please send an email to: contact@foodie.com',order,'us')}>{languages[0][lang].BusinessOrderCard.contactus}</Button>
                         {/* <Button variant='outline-secondary' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleModal('Please send an email to: contact@foodie.com',order,'us')}>Contact Us</Button>
                         <Button variant='outline-secondary' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleModal('Please send an email to: contact@foodie.com',order,'us')}>Contact Us</Button> */}
                 </div>
