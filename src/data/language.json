@@ -71,7 +71,10 @@
                 "errorBusiness":"Business could not be Created",
                 "redirect":"Sorry you are being redirected",
                 "editBusiness":"Business successfully edited",
-                "editBuzError":"Business could not be Edited"
+                "editBuzError":"Business could not be Edited",
+                "orderPlaced":"Order Placed",
+                "orderError":"Order could not be placed",
+                "copy":"Link copied to Clipboard"
             },
             "login":{
                 "greetingTitle":"Welcome back",
@@ -148,6 +151,63 @@
                 "error":"Please provide a Name, telephone and valid email",
                 "title":"Let's edit the Business!",
                 "btnEdit":"Edit the Business"
+            },
+            "cart":{
+                "error":"Please provide a recipient, phone contact",
+                "hi":"Hi",
+                "empty":"Your Cart is Empty!",
+                "yourCart":"This is your Cart for",
+                "summary":"Summary:",
+                "deliveryFormat":"Delivery Format",
+                "name":"Name",
+                "recipientPh":"Recipient",
+                "phone":"Telephone",
+                "phonePh":"add a phone number",
+                "address":"Address",
+                "addressPh":"Street, building number and Floor",
+                "note":"Note",
+                "notePh":"add any note, if need it",
+                "paymentMethod":"Payment Method",
+                "btnOrder":"Place your Order!",
+                "mTitle":"Order Submitted",
+                "mBody":"You still have Order(s) pending, Would you like to continue in your Cart or would you like to go to your Orders",
+                "btnKeep":"Keep in Cart",
+                "btnOrders":"Go to Orders"
+            },
+            "orders":{
+                "hi":"Hi",
+                "orders":"These are your Orders:",
+                "mTitle":"Contact",
+                "us":"Us",
+                "seller":"Seller",
+                "or":"or",
+                "close":"Close"
+            },
+            "redirect":{
+                "where":"Where would you like to go now?",
+                "dashboard":"Dashboard",
+                "personal":"Personal",
+                "business":"Business",
+                "stores":"or your visited stores"
+
+            },
+            "business":{
+                "gotocart":"Go to Cart",
+                "mTitle":"Delete Product",
+                "mBody1":"You are about to delete the",
+                "mBody2":"product this action has no way back.",
+                "mBody3":"Are you sure, you want to delete it?",
+                "btnCancel":"Cancel",
+                "btnDelete":"Delete",
+                "addProduct":"Add Product"
+            },
+            "businessView":{
+                "delivery":"Delivery Methods:",
+                "products":"Products Types:",
+                "copy":"Copy Link",
+                "categories:":"Categories:",
+                "mTitle":"Delete Business",
+                "mBody2":"business this action has no way back."
             },
             "cloudinaryError":"Error while uploading the file:"
             

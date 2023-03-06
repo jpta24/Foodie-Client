@@ -9,9 +9,11 @@ import { toast } from 'react-toastify';
 import BusinessViewCard from '../components/BusinessViewCard';
 
 import iconsCloud from '../data/icons.json'
+import languages from '../data/language.json'
 import Loading from '../components/Loading';
 
 const BusinessView = () => {
+	const {language:lang} = useContext(AuthContext);
     const { user } = useContext(AuthContext);
     const { businessName } = useParams();
     const navigate = useNavigate();
@@ -30,9 +32,9 @@ const BusinessView = () => {
             console.log({error});
             // eslint-disable-next-line no-lone-blocks
             {window.innerWidth < 450 ? 
-              toast.error("Sorry you are being redirected !", {
+              toast.error(`${languages[0][lang].tostify.redirect}`, {
                   position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-              }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
+              }) : toast.error(`${languages[0][lang].tostify.redirect}`, { theme: 'dark' });}
             navigate('/')
             })
     
@@ -161,13 +163,13 @@ const BusinessView = () => {
                         
         
                         <p className='text-start'>{`${business.address.street}, ${business.address.city}, ${business.address.country }`}</p>
-                        <span>Delivery Methods:</span>
+                        <span>{languages[0][lang].businessView.delivery}</span>
                         <div className='d-flex'>
                              {formatsArr.map(format => {
                                 return <span key={format} className="badge rounded-pill bg-danger m-1" >{format}</span>
                                     })} 
                         </div>
-                        <span>Products Types:</span>
+                        <span>{languages[0][lang].businessView.products}</span>
                         <div className='d-flex'>
                              {typesArr.map(type => {
                                 return <span key={type} className="badge rounded-pill bg-primary m-1" >{type}</span>
@@ -187,19 +189,19 @@ const BusinessView = () => {
                             navigator.clipboard.writeText(link)
                             // eslint-disable-next-line no-lone-blocks
                             {window.innerWidth < 450 ? 
-                            toast.success("Link copied to Clipboard !", {
+                            toast.success(`${languages[0][lang].tostify.copy}`, {
                                 position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                            }) : toast.success('Link copied to Clipboard', { theme: 'dark' });}
+                            }) : toast.success(`${languages[0][lang].tostify.copy}`, { theme: 'dark' });}
                             
                             
-                            }}>Copy Link</Button>
+                            }}>{languages[0][lang].businessView.copy}</Button>
                     </div>     
                     </div>
                     
                 </div>
                 <div className="row d-flex flex-row my-2 justify-content-center">
                     <div className="col-md-8 d-flex justify-content-start flex-column align-items-start">
-                        <span>Categories:</span>
+                        <span>{languages[0][lang].businessView.categories}</span>
                         <div className='d-flex flex-wrap'>
                         
                              {arrCategories.map(cat => {
@@ -222,18 +224,18 @@ const BusinessView = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                <Modal.Title>Delete Business</Modal.Title>
+                <Modal.Title>{languages[0][lang].businessView.mTitle}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                   {`You are about to delete the "${show.businessName}" business, this action has no way back.`} <br/>
-                   Are you sure, you want to delete it?
+                   {`${languages[0][lang].business.mBody1} "${show.businessName}" ${languages[0][lang].businessView.mbody2}`} <br/>
+                   {languages[0][lang].business.mBody3}
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Cancel
+                {languages[0][lang].business.btnCancel}
                 </Button>
                 <Button variant="danger" onClick={deleteBusiness}>
-                    Delete
+                {languages[0][lang].business.btnDelete}
                 </Button>
                 </Modal.Footer>
             </Modal>

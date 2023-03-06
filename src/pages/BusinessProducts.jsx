@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Modal, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import languages from '../data/language.json'
 
 import ProductCard from '../components/ProductCard';
 import ProductCardDesktop from '../components/ProductCardDesktop';
@@ -14,6 +15,7 @@ import iconsCloud from '../data/icons.json'
 import Loading from '../components/Loading';
 
 const BusinessProducts = () => {
+	const {language:lang} = useContext(AuthContext);
     const { user } = useContext(AuthContext);
     const { businessName } = useParams();
     const navigate = useNavigate();
@@ -63,9 +65,9 @@ const BusinessProducts = () => {
               console.log({error});
               // eslint-disable-next-line no-lone-blocks
               {window.innerWidth < 450 ? 
-                toast.error("Sorry you are being redirected !", {
+                toast.error(`${languages[0][lang].tostify.redirect}`, {
                     position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
+                }) : toast.error(`${languages[0][lang].tostify.redirect}`, { theme: 'dark' });}
               navigate('/')
               })
       
@@ -107,7 +109,7 @@ const BusinessProducts = () => {
                 <div className="row p-0">
                     <div className="d-flex flex-column justify-content-center align-items-center">
                         <h1>{business.name}</h1>
-                        <Button variant='outline-primary' size='lg' className='col-6 col-md-2 m-2' href={`/${businessNameEncoded}/create-product`}> ➕ Add Product</Button>
+                        <Button variant='outline-primary' size='lg' className='col-6 col-md-2 m-2' href={`/${businessNameEncoded}/create-product`}> ➕ {languages[0][lang].business.addProduct}</Button>
                     </div>
                 </div>
                 <div className="row p-0 justify-content-center">
@@ -132,18 +134,18 @@ const BusinessProducts = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                <Modal.Title>Delete Product</Modal.Title>
+                <Modal.Title>{languages[0][lang].business.mTitle}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                   {`You are about to delete the "${show.productName}" product this action has no way back.`} <br/>
-                   Are you sure, you want to delete it?
+                   {`${languages[0][lang].business.mBody1} "${show.productName}" ${languages[0][lang].business.mbody2}`} <br/>
+                    {languages[0][lang].business.mBody3}
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Cancel
+                    {languages[0][lang].business.btnCancel}
                 </Button>
                 <Button variant="danger" onClick={deleteProduct}>
-                    Delete
+                    {languages[0][lang].business.btnDelete}
                 </Button>
                 </Modal.Footer>
             </Modal>

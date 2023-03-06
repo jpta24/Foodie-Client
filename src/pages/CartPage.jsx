@@ -13,11 +13,13 @@ import CartCard from '../components/CartCard';
 import { v4 as uuidv4 } from 'uuid';
 import PayMethod from '../components/PayMethod';
 import iconsCloud from '../data/icons.json'
+import languages from '../data/language.json'
+
 import Loading from '../components/Loading';
 import FormatDelivery from '../components/FormatDelivery';
 
-
 const CartPage = () => {
+	const {language:lang} = useContext(AuthContext);
     const { user } = useContext(AuthContext);
     const { cart,setCart, getCartData, setUSer } = useContext(CartContext);
 	const navigate = useNavigate();
@@ -93,7 +95,7 @@ const CartPage = () => {
 
     const handlePlaceOrder =()=>{
         if (address.name === '' || address.phone === '') {
-            return setErrorMessage('Please provide a recipient, phone contact')
+            return setErrorMessage(`${languages[0][lang].cart.error}`)
         } else {
             const storedToken = localStorage.getItem("authToken"); 
 
@@ -122,9 +124,9 @@ const CartPage = () => {
                 .then((response) => {
                     // eslint-disable-next-line no-lone-blocks
                     {window.innerWidth < 450 ? 
-                        toast.success("Order Placed !", {
+                        toast.success(`${languages[0][lang].tostify.orderPlaced}`, {
                             position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                        }) : toast.success('Order Placed', { theme: 'dark' });}
+                        }) : toast.success(`${languages[0][lang].tostify.orderPlaced}`, { theme: 'dark' });}
                     setCart(null)
                     getCartData()
                     const userUpdated = response.data;
@@ -143,9 +145,9 @@ const CartPage = () => {
                     console.log(errorDescription);
                     // eslint-disable-next-line no-lone-blocks
                 {window.innerWidth < 450 ? 
-                    toast.error("Order could not be placed !", {
+                    toast.error(`${languages[0][lang].tostify.orderError}`, {
                         position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    }) : toast.error('Order could not be placed', { theme: 'dark' });}
+                    }) : toast.error(`${languages[0][lang].tostify.orderError}`, { theme: 'dark' });}
                 });    
         }
         
@@ -197,8 +199,8 @@ const CartPage = () => {
                 <div className="row d-flex flex-row rounded border border-light">
                     <div className="col-12 col-md-7">
                         <div className="col-11 d-flex flex-column p-2 my-2 form-control">
-                            <h1>Hi, {user.username}</h1>
-                            <h3>{cart.length===0?'Your Cart is Empty!': `This is your Cart for ${buzsNames[business]}`}</h3>
+                            <h1>{languages[0][lang].cart.hi}, {user.username}</h1>
+                            <h3>{cart.length===0?`${languages[0][lang].cart.empty}`: `${languages[0][lang].cart.yourCart} ${buzsNames[business]}`}</h3>
                             <div className="col-12 cartProducts">
                                 {cart.filter(buzFilt=>buzFilt.product.business._id===buzs[business]).map(product => {
                                 return <CartCard key={uuidv4()} product={product} updateSummary={updateSummary} currency={currency} />
@@ -225,9 +227,9 @@ const CartPage = () => {
                     </div>
                     <div className="col-12 col-md-5">
                     <div className="col-11 d-flex flex-column p-2 mt-2 py-3 form-control bg-success cartSummary">
-                            <h2 className='fw-bold text-light'> Summary: {currency} {summary.toFixed(2)}</h2>
+                            <h2 className='fw-bold text-light'> {languages[0][lang].cart.summary} {currency} {summary.toFixed(2)}</h2>
 
-                            <h4 className='mb-0'>Delivery Format</h4>
+                            <h4 className='mb-0'>{languages[0][lang].cart.deliveryFormat}</h4>
                             <div className='d-flex px-2 mx-2 justify-content-around'>
                             { cart.length!== 0 && Object.entries(cart.filter(buzFilt=>buzFilt.product.business._id===buzs[business])[0].product.business.format).filter(format=>format[1]===true).map(elem=>{
                                 return <FormatDelivery key={uuidv4()} onclick={()=>{setDelivery(elem[0])}} src={delivery === elem[0] ? iconsCloud[0][`${elem[0]}Active`] : iconsCloud[0][`${elem[0]}Inactive`]}/>
@@ -240,11 +242,11 @@ const CartPage = () => {
                                         className='mb-1 col-6 px-2 d-flex flex-column align-items-start'
                                         controlId='formBasicAddressName'
                                     >
-                                        <Form.Label className='mb-0'>Name</Form.Label>
+                                        <Form.Label className='mb-0'>{languages[0][lang].cart.name}</Form.Label>
                                         <Form.Control
                                             className='py-0'
                                             type='text'
-                                            placeholder='Recipient'
+                                            placeholder={languages[0][lang].cart.recipientPh}
                                             name='name'
                                             value={address.name}
                                             onChange={(e) => {
@@ -257,11 +259,11 @@ const CartPage = () => {
                                         className='mb-1 col-6 px-2 d-flex flex-column align-items-start'
                                         controlId='formBasicphone'
                                     >
-                                        <Form.Label className='mb-0'>Phone</Form.Label>
+                                        <Form.Label className='mb-0'>{languages[0][lang].cart.phone}</Form.Label>
                                         <Form.Control
                                             className='py-0'
                                             type='tel'
-                                            placeholder='add a phone number'
+                                            placeholder={languages[0][lang].cart.phoneph}
                                             name='phone'
                                             value={address.phone}
                                             onChange={(e) => {
@@ -276,11 +278,11 @@ const CartPage = () => {
                                     className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
                                     controlId='formBasicAddressStreet'
                                 >
-                                    <Form.Label className='mb-0'>Address</Form.Label>
+                                    <Form.Label className='mb-0'>{languages[0][lang].cart.address}</Form.Label>
                                     <Form.Control
                                         className='py-0'
                                         type='text'
-                                        placeholder='Street, building number and Floor'
+                                        placeholder={languages[0][lang].cart.addressPh}
                                         name='street'
                                         value={address.street}
                                         onChange={(e) => {
@@ -293,11 +295,11 @@ const CartPage = () => {
                                     className='mb-1 col-12 px-2 d-flex flex-column align-items-start'
                                     controlId='formBasicNote'
                                 >
-                                    <Form.Label className='mb-0'>Note</Form.Label>
+                                    <Form.Label className='mb-0'>{languages[0][lang].cart.note}</Form.Label>
                                     <Form.Control
                                         className='py-0'
                                         type='text'
-                                        placeholder='add any note, if need it'
+                                        placeholder={languages[0][lang].cart.notePh}
                                         name='note'
                                         value={address.note}
                                         onChange={(e) => {
@@ -308,7 +310,7 @@ const CartPage = () => {
                                 {errorMessage && <p className='text-warning fs-6 mb-0 pb-0'>{errorMessage}</p>}
                             </div>   
 
-                            <h4 className='mb-0'>Payment Method</h4>
+                            <h4 className='mb-0'>{languages[0][lang].cart.paymentMethod}</h4>
                             <div className='d-flex px-2 mx-2 justify-content-around flex-wrap'>
                             {cart.length!== 0 && Object.entries(cart.filter(buzFilt=>buzFilt.product.business._id===buzs[business])[0].product.business.payment).filter(pay=>pay[1]===true).map(elem=>{
                                 return <PayMethod key={uuidv4()} onclick={()=>{setPayment(elem[0])}} src={payment === elem[0] ? iconsCloud[0][`${elem[0]}Active`] : iconsCloud[0][`${elem[0]}Inactive`]}/>
@@ -320,7 +322,7 @@ const CartPage = () => {
                             
                             <div className="col-12">
                             {cart.length!==0 && <Button variant='primary' size="lg" type='submit' className='mx-2 my-1 col-8 col-md-6' onClick={handlePlaceOrder}>
-                                    Place your Order!
+                            {languages[0][lang].cart.btnOrder}
                                 </Button>}
                                 
                                 
@@ -339,17 +341,17 @@ const CartPage = () => {
                     keyboard={false}
                  >
                     <Modal.Header closeButton>
-                    <Modal.Title>Order Submitted</Modal.Title>
+                    <Modal.Title>{languages[0][lang].cart.mTitle}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    You still have Order(s) pending, Would you like to continue in your Cart or would you like to go to your Orders
+                    {languages[0][lang].cart.mBody}
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Keep in Cart
+                    {languages[0][lang].cart.btnKeep}
                     </Button>
                     <Button variant="danger" href={`/orders/${user._id}`}>
-                        Go to Orders
+                    {languages[0][lang].cart.btnOrders}
                     </Button>
                     </Modal.Footer>
                 </Modal>
@@ -360,8 +362,8 @@ const CartPage = () => {
             <div className="row d-flex flex-row rounded border border-light">
                 <div className="col-12 col-md-7">
                     <div className="col-11 d-flex flex-column p-2 mt-2 form-control">
-                        <h1>Hi, {user.username}</h1>
-                        <h3>Your Cart is Empty!</h3>
+                        <h1>{languages[0][lang].cart.hi}, {user.username}</h1>
+                        <h3>{languages[0][lang].cart.empty}</h3>
                     </div>
                 </div>
             </div>

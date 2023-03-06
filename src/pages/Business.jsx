@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Modal, Button } from 'react-bootstrap';
 
 import { toast } from 'react-toastify';
+import languages from '../data/language.json'
 
 import ProductCard from '../components/ProductCard';
 import ProductCardDesktop from '../components/ProductCardDesktop';
@@ -16,6 +17,7 @@ import BusinessMenu from '../components/BusinessMenu';
 import Loading from '../components/Loading';
 
 const Business = () => {
+	const {language:lang} = useContext(AuthContext);
     
     const { cart } = useContext(CartContext)
     const { user } = useContext(AuthContext)
@@ -95,9 +97,9 @@ const Business = () => {
               console.log({error});
               // eslint-disable-next-line no-lone-blocks
               {window.innerWidth < 450 ? 
-                toast.error("Sorry you are being redirected !", {
+                toast.error(`${languages[0][lang].tostify.redirect}`, {
                     position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
+                }) : toast.error(`${languages[0][lang].tostify.redirect}`, { theme: 'dark' });}
               
               navigate('/')
               })
@@ -175,7 +177,7 @@ const Business = () => {
                                 {cart.map(prod=>prod.quantity).reduce((acc,val)=>{return acc + val},0)}
                                 </span>
                                 🛒</span>
-                            <span>Go to Cart ({summary} {currency})</span>
+                            <span>{languages[0][lang].business.gotocart} ({summary} {currency})</span>
                             <span className='px-2'>  </span>
                         </Link>
                          }
@@ -188,18 +190,18 @@ const Business = () => {
                     keyboard={false}
                  >
                     <Modal.Header closeButton>
-                    <Modal.Title>Delete Product</Modal.Title>
+                    <Modal.Title>{languages[0][lang].business.mTitle}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    {`You are about to delete the "${show.productName}" product this action has no way back.`} <br/>
-                    Are you sure, you want to delete it?
+                    {`${languages[0][lang].business.mBody1} "${show.productName}" ${languages[0][lang].business.mbody2}`} <br/>
+                    {languages[0][lang].business.mBody3}
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Cancel
+                    {languages[0][lang].business.btnCancel}
                     </Button>
                     <Button variant="danger" onClick={deleteProduct}>
-                        Delete
+                    {languages[0][lang].business.btnDelete}
                     </Button>
                     </Modal.Footer>
                 </Modal>
