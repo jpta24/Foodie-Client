@@ -1,6 +1,15 @@
 [
     {
         "En":{
+            "navbar":{
+                "home":"Home",
+                "about":" About Us",
+                "dashboard":"Dashboard",
+                "cart":"Cart",
+                "logout":"Log Out",
+                "login":"Log In",
+                "signup":"Sign Up"
+            },
             "aboutus":{
                 "greeting":"¡Hi! I'm Jean Pierre",
                 "aboutText1":"I'm a retired US Marine Corps Officer turned Civil Engineer, and now a Full Stack Web and Native App Developer. I have a strong leadership background and have led multidisciplinary teams throughout my career. My skillset includes effective communication, team collaboration, logical thinking, and project management.",
@@ -57,7 +66,12 @@
                 "userSucc":"User successfully created",
                 "userError":"User could not be created",
                 "readError":"Sorry, read the error message",
-                "appSent":"Application Sent !"
+                "appSent":"Application Sent !",
+                "newBusiness":"Business successfully created",
+                "errorBusiness":"Business could not be Created",
+                "redirect":"Sorry you are being redirected",
+                "editBusiness":"Business successfully edited",
+                "editBuzError":"Business could not be Edited"
             },
             "login":{
                 "greetingTitle":"Welcome back",
@@ -89,10 +103,65 @@
                 "formName":"Enter the Business's Name you're applying to:",
                 "phName":"Enter a Name for your Business",
                 "apply":"Apply"
-            }
+            },
+            "createBusiness":{
+                "error":"Please provide a Name, telephone and valid email",
+                "title":"Let's create a Business!",
+                "name":"Business Name",
+                "namePH":"Enter a Name for your Business",
+                "logo":"Business Logo",
+                "address":"Address",
+                "addressPH":"Enter an Address for your Business",
+                "city":"City",
+                "postcode":"Post Code",
+                "country":"Country",
+                "email":"E-mail",
+                "phone":"Telephone",
+                "currency":"Currency",
+                "currencyPh":"Simbol",
+                "paymentMethods":"Payment Methods",
+                "cash":"Cash",
+                "cd":"Credit Card",
+                "pp":"PayPal",
+                "ppMailPh":"PayPal email address",
+                "pm":"Pago Movil",
+                "pmPh":"PagoMovil ID number",
+                "zelle":"Zelle",
+                "zellePh":"Zelle email address",
+                "prodType":"Product Type",
+                "prepared":"Prepared",
+                "packed":"Packed",
+                "frozen":"Frozen",
+                "deliveryFormat":"Delivery Format",
+                "pickup":"Pick-Up",
+                "inplace":"In-Place",
+                "delivery":"Delivery",
+                "deliveryPrice":"Delivery Price",
+                "categories":"Catalog Categories",
+                "categoriesPh":"Ex: Specialties, Snacks, Dessert, Drinks, etc",
+                "background":"Backgroung Image",
+                "menuPdf":"Menu PDF (optional)",
+                "note":"Create your Business to start adding products and/or employees",
+                "btnCreate":"Create the Business"
+            },
+            "editBusiness":{
+                "error":"Please provide a Name, telephone and valid email",
+                "title":"Let's edit the Business!",
+                "btnEdit":"Edit the Business"
+            },
+            "cloudinaryError":"Error while uploading the file:"
             
         },
         "Es":{
+            "navbar":{
+                "home":"Home",
+                "about":"Nosotros",
+                "dashboard":"Dashboard",
+                "cart":"Cesta",
+                "logout":"Salir",
+                "login":"Log In",
+                "signup":"Registrarse"
+            },
             "aboutus":{
                 "greeting":"¡Hola! soy Jean Pierre",
                 "aboutText1":"Soy un oficial retirado de la Infantería de Marina, convertido en ingeniero civil y ahora en desarrollador de aplicaciones web y móviles de pila completa. Tengo una sólida formación en liderazgo y he dirigido equipos multidisciplinarios a lo largo de mi carrera. Mi conjunto de habilidades incluye comunicación efectiva, colaboración en equipo, pensamiento lógico y gestión de proyectos.",

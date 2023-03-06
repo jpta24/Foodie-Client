@@ -1,4 +1,5 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect, useContext  } from 'react';
+import { AuthContext } from '../context/auth.context';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -7,8 +8,10 @@ import { toast } from 'react-toastify';
 
 import menuCategories from '../data/categories.json'
 import Loading from '../components/Loading';
+import languages from '../data/language.json'
 
 const EditBusiness = () => {
+	const {language:lang} = useContext(AuthContext);
     const navigate = useNavigate();
     const { businessName } = useParams();
     
@@ -27,9 +30,9 @@ const EditBusiness = () => {
               console.log({error});
               // eslint-disable-next-line no-lone-blocks
               {window.innerWidth < 450 ? 
-                toast.error("Sorry you are being redirected !", {
+                toast.error(`${languages[0][lang].tostify.redirect}`, {
                     position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error('Sorry you are being redirected', { theme: 'dark' });}
+                }) : toast.error(`${languages[0][lang].tostify.redirect}`, { theme: 'dark' });}
               navigate('/')
               })
       
@@ -47,7 +50,7 @@ const EditBusiness = () => {
 			business.currency = '$'
 		}
 		if (business.name === '' || business.address.telephone === 0 || business.address.email==='') {
-            return setErrorMessage('Please provide a Name, telephone and valid email')
+            return setErrorMessage(`${languages[0][lang].editBusiness.error}`)
         } else {
 		// Create an object representing the request body
 		const requestBody = business;
@@ -61,18 +64,18 @@ const EditBusiness = () => {
         	navigate(`/${businessNameEncoded}/dashboard`);
 			// eslint-disable-next-line no-lone-blocks
 			{window.innerWidth < 450 ? 
-				toast.success("Business successfully edited !", {
+				toast.success(`${languages[0][lang].tostify.editBusiness}`, {
 					position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-				}) : toast.success('Business successfully edited', { theme: 'dark' });}
+				}) : toast.success(`${languages[0][lang].tostify.editBusiness}`, { theme: 'dark' });}
 			})
 			.catch((error) => {
         		console.log({error});
 				const errorDescription = error.response.data.message;
 				// eslint-disable-next-line no-lone-blocks
 				{window.innerWidth < 450 ? 
-					toast.error("Business could not be Created !", {
+					toast.error(`${languages[0][lang].tostify.editBuzError}`, {
 						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-					}) : toast.error('Business could not be Created', { theme: 'dark' });}
+					}) : toast.error(`${languages[0][lang].tostify.editBuzError}`, { theme: 'dark' });}
 						setErrorMessage(errorDescription);
 					});
 				};	
@@ -100,13 +103,13 @@ const EditBusiness = () => {
         setBusiness({...business, [field]:response.fileUrl});
         
       })
-      .catch(err => console.log("Error while uploading the file: ", err));
+      .catch(err => console.log(`${languages[0][lang].cloudinaryError}`, err));
   };
   
   if (business) {
     return (
 		<div className='container'>
-			<h1>Let's edit the Business!</h1>
+			<h1>{languages[0][lang].editBusiness.title}</h1>
 			<div className='row justify-content-center p-4 mb-4'>
 				<div className='col-md-8 '>
 					<Form onSubmit={handleBusinessSubmit}>
@@ -115,10 +118,10 @@ const EditBusiness = () => {
 								className='mb-3 col-md-6 d-flex flex-column align-items-start'
 								controlId='formBasicBusinessName'
 							>
-								<Form.Label>Business Name</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.name}</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='Enter a Name for your Business'
+									placeholder={languages[0][lang].createBusiness.namePH}
 									name='name'
 									value={business.name}
 									onChange={(e) => {
@@ -131,7 +134,7 @@ const EditBusiness = () => {
 								className='mb-3 col-md-5 d-flex flex-column align-items-start'
 								controlId='formBasicBusinessName'
 							>
-								<Form.Label>Business Logo</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.logo}</Form.Label>
 								<Form.Control
 									type='file'
                   					onChange={(e) => handleFileUpload(e,'logoUrl')}
@@ -143,10 +146,10 @@ const EditBusiness = () => {
 								className='mb-3 col-md-6 d-flex flex-column align-items-start'
 								controlId='formBasicBusinessAddress'
 							>
-								<Form.Label>Address</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.address}</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='Enter an Address for your Business'
+									placeholder={languages[0][lang].createBusiness.addressPH}
 									name='street'
 									value={business.address.street}
 									onChange={(e) => {
@@ -159,10 +162,10 @@ const EditBusiness = () => {
 								className='mb-3 col-md-5 d-flex flex-column align-items-start'
 								controlId='formBasicBusinessCity'
 							>
-								<Form.Label>City</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.city}</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='City'
+									placeholder={languages[0][lang].createBusiness.city}
 									name='city'
 									value={business.address.city}
 									onChange={(e) => {
@@ -176,10 +179,10 @@ const EditBusiness = () => {
 								className='mb-3 col-md-6 d-flex flex-column align-items-start'
 								controlId='formBasicBusinessPostCode'
 							>
-								<Form.Label>PostCode</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.postcode}</Form.Label>
 								<Form.Control
 									type='number'
-									placeholder='PostCode'
+									placeholder={languages[0][lang].createBusiness.postcode}
 									name='postCode'
 									value={business.address.postCode}
 									onChange={(e) => {
@@ -192,10 +195,10 @@ const EditBusiness = () => {
 								className='mb-3 col-md-5 d-flex flex-column align-items-start'
 								controlId='formBasicBusinessCountry'
 							>
-								<Form.Label>Country</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.country}</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='Country'
+									placeholder={languages[0][lang].createBusiness.country}
 									name='country'
 									value={business.address.country}
 									onChange={(e) => {
@@ -209,10 +212,10 @@ const EditBusiness = () => {
 								className='mb-3 col-md-6 d-flex flex-column align-items-start'
 								controlId='formBasicBusinessEmail'
 							>
-								<Form.Label>E-mail</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.email}</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='E-mail'
+									placeholder={languages[0][lang].createBusiness.email}
 									name='email'
 									value={business.address.email}
 									onChange={(e) => {
@@ -225,10 +228,10 @@ const EditBusiness = () => {
 								className='mb-3 col-md-5 d-flex flex-column align-items-start'
 								controlId='formBasicBusinessTelephone'
 							>
-								<Form.Label>Telephone</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.phone}</Form.Label>
 								<Form.Control
 									type='number'
-									placeholder='Telephone'
+									placeholder={languages[0][lang].createBusiness.phone}
 									name='telephone'
 									value={business.address.telephone}
 									onChange={(e) => {
@@ -243,10 +246,10 @@ const EditBusiness = () => {
 							className='mb-3 col-12 col-md-4 d-flex flex-column align-items-start'
 							controlId='formCurrency'
 						>
-							<Form.Label>Currency</Form.Label>
+							<Form.Label>{languages[0][lang].createBusiness.currency}</Form.Label>
 							<Form.Control
 								type='text'
-								placeholder='Simbol'
+								placeholder={languages[0][lang].createBusiness.currencyPh}
 								name='currency'
 								value={business.currency}
 								onChange={(e) => {
@@ -258,14 +261,14 @@ const EditBusiness = () => {
 							className='mb-3 col-md-7 col-8 d-flex flex-column align-items-start'
 							controlId='formPaymentMethods'
 						>
-							<Form.Label>Payment Methods</Form.Label>
+							<Form.Label>{languages[0][lang].createBusiness.paymentMethods}</Form.Label>
 							<div className='d-flex flex-column col-12'>
 							<Form.Group
 							className='col-md-8 d-flex align-items-start'
 							>
 								<Form.Check
 									inline
-									label='Cash'
+									label={languages[0][lang].createBusiness.cash}
 									name='cash'
 									type='checkbox'
 									id={`inline-$'checkbox'-1`}
@@ -280,7 +283,7 @@ const EditBusiness = () => {
 							>
 								<Form.Check
 									inline
-									label='Credit Card'
+									label={languages[0][lang].createBusiness.cd}
 									name='card'
 									type='checkbox'
 									id={`inline-$'checkbox'-1`}
@@ -297,7 +300,7 @@ const EditBusiness = () => {
 								<Form.Check
 									inline
 									className='py-1 col-5 text-start'
-									label='PayPal'
+									label={languages[0][lang].createBusiness.pp}
 									name='pp'
 									type='checkbox'
 									id={`inline-$'checkbox'-1`}
@@ -309,7 +312,7 @@ const EditBusiness = () => {
 								<Form.Control
 									className='py-1 col-8'
 									type='text'
-									placeholder='PayPal email address'
+									placeholder={languages[0][lang].createBusiness.ppMailPh}
 									name='pp'
 									value={business.payment.pp.email}
 									onChange={(e) => {
@@ -323,7 +326,7 @@ const EditBusiness = () => {
 								<Form.Check
 									inline
 									className='py-1 col-5 text-start'
-									label='PagoMovil'
+									label={languages[0][lang].createBusiness.pm}
 									name='pagoMovil'
 									type='checkbox'
 									id={`inline-$'checkbox'-1`}
@@ -335,7 +338,7 @@ const EditBusiness = () => {
 								<Form.Control
 									className='py-1 col-8'
 									type='text'
-									placeholder='PagoMovil ID number'
+									placeholder={languages[0][lang].createBusiness.pmPh}
 									name='pagoMovil'
 									value={business.payment.pagoMovil.ci}
 									onChange={(e) => {
@@ -349,7 +352,7 @@ const EditBusiness = () => {
 								<Form.Check
 									inline
 									className='py-1 col-5 text-start'
-									label='Zelle'
+									label={languages[0][lang].createBusiness.zelle}
 									name='zelle'
 									type='checkbox'
 									id={`inline-$'checkbox'-1`}
@@ -361,7 +364,7 @@ const EditBusiness = () => {
 								<Form.Control
 									className='py-1 col-8'
 									type='text'
-									placeholder='Zelle email address'
+									placeholder={languages[0][lang].createBusiness.zellePh}
 									name='zelle'
 									value={business.payment.zelle.email}
 									onChange={(e) => {
@@ -378,11 +381,11 @@ const EditBusiness = () => {
 								className='mb-3 col-md-5 d-flex flex-column'
 								controlId='formBasicBusinessCountry'
 							>
-								<Form.Label>Product Types</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.prodType}</Form.Label>
 								<div className='text-start'>
 									<Form.Check
 										inline
-										label='Prepared'
+										label={languages[0][lang].createBusiness.prepared}
 										name='prepared'
 										type='checkbox'
 										id={`inline-$'checkbox'-1`}
@@ -393,7 +396,7 @@ const EditBusiness = () => {
 									/>
 									<Form.Check
 										inline
-										label='Packed'
+										label={languages[0][lang].createBusiness.packed}
 										name='packed'
 										type='checkbox'
 										id={`inline-$'checkbox'-2`}
@@ -404,7 +407,7 @@ const EditBusiness = () => {
 									/>
 									<Form.Check
 										inline
-										label='Frozen'
+										label={languages[0][lang].createBusiness.frozen}
 										name='frozen'
 										type='checkbox'
 										id={`inline-$'checkbox'-3`}
@@ -419,13 +422,13 @@ const EditBusiness = () => {
 								className='mb-3 col-md-7 d-flex flex-column'
 								controlId='formBasicBusinessCountry'
 							>
-								<Form.Label>Delivery Format</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.deliveryFormat}</Form.Label>
 								<div className='d-md-flex justify-content-end'>
 								
 								<Form.Check
 									inline
 									className='py-1 mr-1 text-start'
-									label='Pick-up'
+									label={languages[0][lang].createBusiness.pickup}
 									name='pickup'
 									type='checkbox'
 									id={`inline-$'checkbox'-2`}
@@ -437,7 +440,7 @@ const EditBusiness = () => {
 								<Form.Check
 									inline
 									className='py-1 mr-1 text-start'
-									label='In-place'
+									label={languages[0][lang].createBusiness.inplace}
 									name='inplace'
 									type='checkbox'
 									id={`inline-$'checkbox'-3`}
@@ -450,7 +453,7 @@ const EditBusiness = () => {
 								<Form.Check
 									inline
 									className='py-1 mx-0 text-start'
-									label='Delivery'
+									label={languages[0][lang].createBusiness.delivery}
 									name='delivery'
 									type='checkbox'
 									id={`inline-$'checkbox'-1`}
@@ -465,7 +468,7 @@ const EditBusiness = () => {
 										<Form.Control
 										className='py-1'
 										type='number'
-										placeholder='Delivery Price'
+										placeholder={languages[0][lang].createBusiness.deliveryPrice}
 										name='price'
 										value={business.format.delivery.price}
 										onChange={(e) => {
@@ -483,7 +486,7 @@ const EditBusiness = () => {
 							className='mb-3 d-flex flex-column align-items-start'
 							controlId='formBasicBusinessCountry'
 						>
-							<Form.Label>Catalog Categories</Form.Label>
+							<Form.Label>{languages[0][lang].createBusiness.categories}</Form.Label>
                 			<Form.Label className='card p-2 col-12 d-flex flex-row'>
 								{business.categories.map(cat => {
 									return <span key={cat} name={cat} className="badge rounded-pill bg-success m-1" onClick={(e) => {
@@ -496,7 +499,7 @@ const EditBusiness = () => {
                 			</Form.Label>
 							<Form.Control
 								type='text'
-								placeholder='Ex: Specialties, Snacks, Dessert, Drinks, etc'
+								placeholder={languages[0][lang].createBusiness.categoriesPh}
 								value={menucategoriessearch}
 								onChange={(e)=>{
 									setmenucategoriessearch( e.target.value )
@@ -528,7 +531,7 @@ const EditBusiness = () => {
             				<Form.Group
 								className='mb-3 col-md-5 d-flex flex-column align-items-start'
 							>
-								<Form.Label>Backgroung Image</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.background}</Form.Label>
 								<Form.Control
 									type='file'
 									onChange={(e) => handleFileUpload(e,'bgUrl')}
@@ -538,7 +541,7 @@ const EditBusiness = () => {
 							<Form.Group
 								className='mb-3 col-md-5 d-flex flex-column align-items-start'
 							>
-								<Form.Label>Menu PDF (optional)</Form.Label>
+								<Form.Label>{languages[0][lang].createBusiness.menuPdf}</Form.Label>
 								<Form.Control
 									type='file'
 									onChange={(e) => handleFileUpload(e,'pdfMenu')}
@@ -548,7 +551,7 @@ const EditBusiness = () => {
             			{errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						
 						<Button variant='success' size="lg" type='submit' className='mx-2 my-1 col-8 col-md-4'>
-							Edit the Business
+						{languages[0][lang].editBusiness.btnEdit}
 						</Button>
 					</Form>
 				</div>

@@ -4,6 +4,7 @@ import { AuthContext } from '../context/auth.context';
 import { CartContext } from '../context/cart.context';
 
 import iconsCloud from '../data/icons.json'
+import languages from '../data/language.json'
 
 const Nabvar2 = () => {
     const { isLoggedIn, logOutUser, user, language, changeLanguage } = useContext(AuthContext);
@@ -23,8 +24,8 @@ const Nabvar2 = () => {
         <Navbar.Toggle className="coloring" />
         <Navbar.Collapse className='d-flex-lg justify-content-between '>
             <Nav>
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/about-us">About Us</Nav.Link>
+                <Nav.Link href="/">{languages[0][language].navbar.home}</Nav.Link>
+                <Nav.Link href="/about-us">{languages[0][language].navbar.about}</Nav.Link>
             </Nav>
             <Nav className='navbar-nav mb-2 mb-lg-0 me-4'>
             {/* <Nav.Link href="/markets">Markets 🏪</Nav.Link> */}
@@ -40,15 +41,15 @@ const Nabvar2 = () => {
 
                 {isLoggedIn && (
                     <>
-                        <Nav.Link href={`/dashboard/${user._id}`}>Dashboard 📉</Nav.Link>
-                        <Button href={`/cart/${user._id}`} variant="outline-success" className='mx-2 my-1 position-relative' >Cart 🛒
+                        <Nav.Link href={`/dashboard/${user._id}`}>{languages[0][language].navbar.dashboard} 📉</Nav.Link>
+                        <Button href={`/cart/${user._id}`} variant="outline-success" className='mx-2 my-1 position-relative' >{languages[0][language].navbar.cart} 🛒
                             {cart && cart.length > 0 &&
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-dark">
                                 {cart.map(prod=>prod.quantity).reduce((acc,val)=>{return acc + val},0)}
                                 <span className="visually-hidden">unread messages</span>
                             </span>}
                         </Button>
-                        <Button className='mx-2 my-1' onClick={logOutUser}>Log Out</Button>
+                        <Button className='mx-2 my-1' onClick={logOutUser}>{languages[0][language].navbar.logout}</Button>
                     </>
                 )}
                 {!isLoggedIn && (
@@ -61,8 +62,8 @@ const Nabvar2 = () => {
                                 <span className="visually-hidden">unread messages</span>
                             </span>}
                         </Button> */}
-                        <Button href='/login'  variant='outline-primary' className='mx-2 my-1'>Log In</Button>
-                        <Button href='/signup'  className='mx-2 my-1'>Sign Up</Button>
+                        <Button href='/login'  variant='outline-primary' className='mx-2 my-1'>{languages[0][language].navbar.login}</Button>
+                        <Button href='/signup'  className='mx-2 my-1'>{languages[0][language].navbar.login}</Button>
                         
                     </>
                 )}
