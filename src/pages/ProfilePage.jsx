@@ -9,8 +9,10 @@ import { toast } from 'react-toastify';
 import ProfileCard from '../components/ProfileCard';
 
 import iconsCloud from '../data/icons.json'
+import languages from '../data/language.json'
 
-const ProfilePage = () => {
+const ProfilePage = () => { 
+	const {language:lang} = useContext(AuthContext);
     const { userID } = useParams();
 	const { user:userAuth } = useContext(AuthContext);
 
@@ -78,12 +80,12 @@ const ProfilePage = () => {
 		axios
 			.put(`${process.env.REACT_APP_SERVER_URL}/users/rol/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
 			.then(() => {
-                setIncommingMessage("Business's owner would let you know about your application")
+                setIncommingMessage(`${languages[0][lang].profile.inCommingMsg}`)
                 // eslint-disable-next-line no-lone-blocks
                 {window.innerWidth < 450 ? 
-                    toast.success("Application Sent !", {
+                    toast.success(`${languages[0][lang].tostify.appSent}`, {
                         position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    }) : toast.success('Application Sent', { theme: 'dark' });}
+                    }) : toast.success(`${languages[0][lang].tostify.appSent}`, { theme: 'dark' });}
 			})
 			.catch((error) => {
 				const errorDescription = error.response.data.message;
@@ -109,20 +111,20 @@ const ProfilePage = () => {
             <div className='col-8 col-md-6 d-flex flex-column align-items-start'>
                 <div className='d-flex col-12 justify-content-between'>
                     <h2>{user.username}</h2> 
-                    <Button variant='outline-primary' size='sm' className='col-5 col-md-4 m-2 '>Edit Profile</Button>
+                    <Button variant='outline-primary' size='sm' className='col-5 col-md-4 m-2 '>{languages[0][lang].profile.editProfile}</Button>
                 </div>
                 <section className='d-flex flex-column align-items-start col-10 col-md-10'>
-                    <p>E-mail: <span className='font-weight-bold'>{user.email}</span></p>
-                    <p>Rol: <span className='font-weight-bold'>{user.rol}</span></p>
+                    <p>{languages[0][lang].profile.email} <span className='font-weight-bold'>{user.email}</span></p>
+                    <p>{languages[0][lang].profile.rol} <span className='font-weight-bold'>{user.rol}</span></p>
                 </section>    
             </div>
         </Row>
         <Row className='justify-content-center'>
-            <h5 className='my-2'>Change Rol</h5>
+            <h5 className='my-2'>{languages[0][lang].profile.changeRol}</h5>
             <Row xs={2} md={2} className='g-4 px-3 my-0 justify-content-center'>
                 <ProfileCard onclick={()=>{handleChange('user')}} button='User' src={rol.user ? iconsCloud[0].userActive: iconsCloud[0].userInactive}/>
-                <ProfileCard onclick={()=>{handleChange('admin')}} button='Admin' src={rol.admin ? iconsCloud[0].adminActive: iconsCloud[0].adminInactive}/>
-                <ProfileCard onclick={()=>{handleChange('employee')}} button='Employee' src={rol.employee ? iconsCloud[0].employeeActive: iconsCloud[0].employeeInactive}/>
+                <ProfileCard onclick={()=>{handleChange('admin')}} button={languages[0][lang].profile.admin} src={rol.admin ? iconsCloud[0].adminActive: iconsCloud[0].adminInactive}/>
+                <ProfileCard onclick={()=>{handleChange('employee')}} button={languages[0][lang].profile.employee} src={rol.employee ? iconsCloud[0].employeeActive: iconsCloud[0].employeeInactive}/>
             </Row>
             
                 <Form onSubmit={handleBuzNameSubmit} className='pb-2'>
@@ -131,10 +133,10 @@ const ProfilePage = () => {
                         className='mb-3 col-md-6 d-flex flex-column align-items-start'
                         controlId='formBasicBusinessName'
                     >
-                        <Form.Label className='mx-2'>Enter the Business's Name you're applying to:</Form.Label>
+                        <Form.Label className='mx-2'>{languages[0][lang].profile.formName}</Form.Label>
                         <Form.Control
                             type='text'
-                            placeholder='Enter a Name for your Business'
+                            placeholder={languages[0][lang].profile.phName}
                             value={buzname}
                             onChange={(e) => {
                                 setBuzname(e.target.value);
@@ -146,7 +148,7 @@ const ProfilePage = () => {
                 {errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						
 						<Button variant='primary' size="lg" type='submit' className='m-2 col-8 col-md-4'>
-							Apply
+                        {languages[0][lang].profile.apply}
 						</Button>
                         
                     {incommingMessage && <p className='text-success'>{incommingMessage}</p>}
