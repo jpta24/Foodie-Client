@@ -9,12 +9,11 @@ import languages from '../data/language.json'
 const Nabvar2 = () => {
     const { isLoggedIn, logOutUser, user, language, changeLanguage } = useContext(AuthContext);
     const { cart } = useContext(CartContext)
-
     
-    const titleLang = language === 'En' ? 'En 🇬🇧' : 'Es 🇪🇸'
-    
+    const titleLang = language === 'En' ? 'En 🇬🇧' : language === 'De' ? 'De 🇩🇪' : 'Es 🇪🇸'
 
-  return (
+    if (languages) {
+        return (
     <Navbar className='px-4' bg="dark" variant="dark" sticky="top" expand="sm" collapseOnSelect>
         <Navbar.Brand>
             <img src={iconsCloud[0].foodieIcon} width="40px" height="40px" alt='altLogo'/>{' '}
@@ -36,7 +35,9 @@ const Nabvar2 = () => {
                     variant="outline-secondary"
                 >
                     <Dropdown.Item onClick={()=>changeLanguage('En')}>En 🇬🇧</Dropdown.Item>
+                    <Dropdown.Item onClick={()=>changeLanguage('De')}>De 🇩🇪</Dropdown.Item>
                     <Dropdown.Item onClick={()=>changeLanguage('Es')}>Es 🇪🇸</Dropdown.Item>
+
                 </DropdownButton>
 
                 {isLoggedIn && (
@@ -63,7 +64,7 @@ const Nabvar2 = () => {
                             </span>}
                         </Button> */}
                         <Button href='/login'  variant='outline-primary' className='mx-2 my-1'>{languages[0][language].navbar.login}</Button>
-                        <Button href='/signup'  className='mx-2 my-1'>{languages[0][language].navbar.login}</Button>
+                        <Button href='/signup'  className='mx-2 my-1'>{languages[0][language].navbar.signup}</Button>
                         
                     </>
                 )}
@@ -72,6 +73,8 @@ const Nabvar2 = () => {
 
     </Navbar>
   )
+    }
+  
 }
 
 export default Nabvar2

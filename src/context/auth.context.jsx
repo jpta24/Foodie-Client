@@ -44,7 +44,10 @@ function AuthProviderWrapper(props) {
             getCartData() 
             if(url){navigate(url)}
             
-            return user   
+            return axios.get(`${process.env.REACT_APP_SERVER_URL}/users/language/${user._id}`,{ headers: { Authorization: `Bearer ${storedToken}`} })   
+          }).then((response)=>{
+            const lang = response.data
+            setLanguage(lang.lang)
           })
           .catch((error) => {
             // If the server sends an error response (invalid token) 
@@ -85,8 +88,37 @@ function AuthProviderWrapper(props) {
     // LANGUAGE
     const [language, setLanguage] = useState('En')
     const changeLanguage = (lang)=> {
-      setLanguage(lang)
+      
+      localStorage.setItem("lang",lang)
+      if (user) {
+        const storedToken = localStorage.getItem('authToken'); 
+        const requestBody = { lang }
+          axios.put(
+            `${process.env.REACT_APP_SERVER_URL}/users/language/${user._id}`, requestBody,
+            { headers: { Authorization: `Bearer ${storedToken}`} }
+          ).then(()=>{
+            setLanguage(lang)
+          }).catch((err)=>{console.log(err)})
+      } else {
+        setLanguage(lang)
+      }
     }
+    useEffect(() => {
+      if (user) {
+        const storedToken = localStorage.getItem('authToken'); 
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/user/language/${user._id}`,{ headers: { Authorization: `Bearer ${storedToken}`} })
+        .then((response)=>{
+          const lang = response.data
+          setLanguage(lang.lang)
+        }).catch((err)=>{console.log(err)})
+      }else{
+        const lang = localStorage.getItem("lang") || "En"
+        setLanguage(lang)
+      }
+      
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    
   return (
     <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser, language, changeLanguage }}>
       {props.children}

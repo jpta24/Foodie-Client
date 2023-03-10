@@ -17,7 +17,7 @@ const TestimonialsCarousel = () => {
             </Row>
             <Row>
               <Col>
-                <Carousel interval={10000} pauseOnHover={true} indicators={false} className="col-md-7 col-11 mx-auto">
+                <Carousel interval={10000} pauseonhover='true' indicators={false} className="col-md-7 col-11 mx-auto">
                   {testimonials.map((testimonio) => (
                     <Carousel.Item key={testimonio._id} >
 
