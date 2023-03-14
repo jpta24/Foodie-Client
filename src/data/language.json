@@ -271,6 +271,10 @@
                 "cancel":"Cancerl Order",
                 "contactus":"Contact Us"
             },
+            "productDetails":{
+                "ingredients":"Ingredients",
+                "addToCart":"Add to Cart"
+            },
             "cloudinaryError":"Error while uploading the file:"
             
         },
@@ -544,6 +548,10 @@
                 "cancel":"Cancelar Pedido",
                 "contactus":"Contacta con nosotros"
             },
+            "productDetails": {
+                "ingredients": "Ingredientes",
+                "addToCart": "Agregar al carrito"
+            },
             "cloudinaryError":"Error al cargar el archivo:"
             
         },
@@ -815,6 +823,10 @@
                 "confirm":"Bestätigen",
                 "cancel":"Bestellung abbrechen",
                 "contactus":"Kontaktiere uns"
+            },
+            "productDetails": {
+                "ingredients": "Zutaten",
+                "addToCart": "In den Warenkorb legen"
             },
             "cloudinaryError":"Fehler beim Hochladen der Datei:"
         }

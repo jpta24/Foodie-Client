@@ -4,7 +4,6 @@ import { AuthContext } from '../context/auth.context';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { Card, Button } from 'react-bootstrap';
 import { IoCloseSharp } from 'react-icons/io5'
 
 import languages from '../data/language.json'
@@ -18,6 +17,7 @@ const ProductDetails = (props) => {
 
   const { productID } = useParams();
   const [product, setProduct] = useState(null)
+  console.log(languages[0][lang].productDetails);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken"); 
@@ -56,14 +56,14 @@ if(product){
                 <h1 className='mt-lg-5 mb-2'>{product.name}</h1>
                 <h5 className='my-2'>Rating {rating}</h5>
                 <p className='my-3'>{product.description}</p>
-                <h6>Ingredients</h6>
+                <h6>{languages[0][lang].productDetails.ingredients}</h6>
                 <div className='p-2 col-12 d-flex flex-row mb-3' >
                   {product.ingredients.map(cat => {
                     return <span key={uuidv4()} name={cat} className="badge rounded-pill bg-danger m-1" >{cat}</span>
                 })}  
                 </div>
                 <h2 className='mb-3'>{product.business.currency} {product.price.toFixed(2)}</h2>
-                <div className='bg-primary col-lg-5 col-5 px-2 py-2 text-center rounded-pill my-3'>Add to Cart</div>
+                <div className='bg-primary col-lg-7 col-9 px-2 py-2 text-center rounded-pill my-3'>{languages[0][lang].productDetails.addToCart}</div>
               </div>
             </div>
           </div>
