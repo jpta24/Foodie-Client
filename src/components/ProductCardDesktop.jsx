@@ -97,7 +97,8 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusine
   return (
     <div className='rounded d-flex flex-row card col-4 align-items-center justify-content-between m-1 shadow'>
         <div className="col-4 m-2">
-            <div className={`p-2 rounded-circle border border-dark d-flex justify-items-center m-auto ${!prodIsActive && 'opacity-50'}`} 
+            <Link to={`/product/${product._id}`}>
+                <div className={`p-2 rounded-circle border border-dark d-flex justify-items-center m-auto ${!prodIsActive && 'opacity-50'}`} 
                 style={{  
                     height: '100px',
                     width: '100px',
@@ -106,7 +107,9 @@ const ProductCardDesktop = ({product,businessNameEncoded,currency,cart,setBusine
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                 }}>
-            </div>
+                </div>
+            </Link>
+            
         </div>
         <div className="p-1 col-7 d-flex flex-column justify-content-between">
             <dir className='p-0 m-1'>

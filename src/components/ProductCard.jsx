@@ -97,7 +97,8 @@ const ProductCard = ({product,businessNameEncoded,currency,cart,setBusiness,hand
 
   return (
     <div className='rounded d-flex flex-column card col-5 align-items-center justify-content-between m-1 shadow'>
-        <div className={`p-2 rounded-circle border border-dark d-flex justify-items-center mt-2 shadow-sm ${!prodIsActive && 'opacity-50'}`} 
+        <Link to={`/product/${product._id}`}>
+            <div className={`p-2 rounded-circle border border-dark d-flex justify-items-center mt-2 shadow-sm ${!prodIsActive && 'opacity-50'}`} 
             style={{  
                 height: '100px',
                 width: '100px',
@@ -106,7 +107,9 @@ const ProductCard = ({product,businessNameEncoded,currency,cart,setBusiness,hand
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
             }}>
-        </div>
+            </div>
+        </Link>
+        
         <dir className='p-0 m-1'>
             <div className={`p-0 m-0 ${owner === false && 'd-none'} text-end`}>
                 <span style={{cursor:"pointer"}} className='mx-1' onClick={handleProductStatus}>{prodIsActive ? paused : play}</span>
