@@ -77,7 +77,8 @@
                 "copy":"Link copied to Clipboard",
                 "newProduct":"Product successfully created",
                 "productError":"Product could not be Created",
-                "prodEditError":"Product could not be Edited"
+                "prodEditError":"Product could not be Edited",
+                "editUser":"User successfully Edited"
             },
             "login":{
                 "greetingTitle":"Welcome back",
@@ -108,7 +109,11 @@
                 "employee":"Employee",
                 "formName":"Enter the Business's Name you're applying to:",
                 "phName":"Enter a Name for your Business",
-                "apply":"Apply"
+                "apply":"Apply",
+                "name":"Full Name",
+                "phone":"Phone",
+                "btnEdit":"Edit Profile",
+                "image":"Change Image"
             },
             "createBusiness":{
                 "error":"Please provide a Name, telephone and valid email",
@@ -355,7 +360,8 @@
                 "copy":"Enlace copiado al portapapeles",
                 "newProduct":"Producto creado correctamente",
                 "productError":"No se pudo crear el producto",
-                "prodEditError":"No se pudo editar el producto"
+                "prodEditError": "No se pudo editar el producto",
+                "editUser": "Usuario editado con éxito"
             },
             "login":{
                 "greetingTitle":"Bienvenido de nuevo",
@@ -385,7 +391,11 @@
                 "employee":"Empleado",
                 "formName":"Ingresa el nombre del negocio al que estás aplicando:",
                 "phName":"Ingresa un nombre para tu negocio",
-                "apply":"Aplicar"
+                "apply":"Aplicar",
+                "name": "Nombre completo",
+                "phone": "Teléfono",
+                "btnEdit": "Editar perfil",
+                "image": "Cambiar imagen"
             },
             "createBusiness":{
                 "error":"Por favor proporciona un nombre, teléfono y correo electrónico válido",
@@ -632,7 +642,8 @@
                 "copy":"Link in die Zwischenablage kopiert",
                 "newProduct":"Produkt erfolgreich erstellt",
                 "productError":"Produkt konnte nicht erstellt werden",
-                "prodEditError":"Produkt konnte nicht bearbeitet werden"
+                "prodEditError": "Das Produkt konnte nicht bearbeitet werden",
+                "editUser": "Benutzer erfolgreich bearbeitet"
             },
             "login":{
                 "greetingTitle":"Willkommen zurück",
@@ -662,7 +673,11 @@
                 "employee":"Mitarbeiter",
                 "formName":"Geben Sie den Namen des Geschäfts ein, auf das Sie sich bewerben:",
                 "phName":"Geben Sie einen Namen für Ihr Unternehmen ein",
-                "apply":"Bewerben"
+                "apply":"Bewerben",
+                "Name":"Vollständiger Name",
+                "phone":"Telefon",
+                "btnEdit":"Profil bearbeiten",
+                "image":"Bild ändern"
             },
             "createBusiness":{
                 "error":"Bitte geben Sie einen Namen, eine Telefonnummer und eine gültige E-Mail-Adresse an",

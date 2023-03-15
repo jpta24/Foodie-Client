@@ -25,6 +25,7 @@ import EditProduct from "./pages/EditProduct";
 import RedirectPage from "./pages/RedirectPage";
 import EditBusiness from "./pages/EditBusiness";
 import About from "./pages/AboutUs";
+import EditProfilePage from "./pages/EditProfile";
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
         <Route exact path="/login/:businessName" element={<IsAnon><LoginBizPage /></IsAnon>} />  
         <Route exact path="/dashboard/:userID" element={<IsPrivate><Dashboard /></IsPrivate>} />
         <Route exact path="/profile/:userID" element={<IsPrivate><ProfilePage /></IsPrivate>} />
-        <Route exact path="/create-business" element={<IsPrivate><CreateBusiness /></IsPrivate>} />        
+        <Route exact path="/edit-profile/:userID" element={<IsPrivate><EditProfilePage /></IsPrivate>} /> 
+        <Route exact path="/create-business" element={<IsPrivate><CreateBusiness /></IsPrivate>} />           
         <Route exact path="/edit-business/:businessName" element={<IsPrivate><EditBusiness /></IsPrivate>} />
         <Route exact path="/cart/:userID" element={<IsPrivate><CartPage /></IsPrivate>} />
         <Route exact path="/orders/:userID" element={<IsPrivate><OrdersPage /></IsPrivate>} />

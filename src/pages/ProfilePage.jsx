@@ -111,11 +111,13 @@ const ProfilePage = () => {
             <div className='col-8 col-md-6 d-flex flex-column align-items-start'>
                 <div className='d-flex col-12 justify-content-between'>
                     <h2>{user.username}</h2> 
-                    <Button variant='outline-primary' size='sm' className='col-5 col-md-4 m-2 '>{languages[0][lang].profile.editProfile}</Button>
+                    <Button variant='outline-primary' size='sm' className='col-5 col-md-4 m-2' href={`/edit-profile/${user._id}`}>{languages[0][lang].profile.editProfile}</Button>
                 </div>
                 <section className='d-flex flex-column align-items-start col-10 col-md-10'>
-                    <p>{languages[0][lang].profile.email} <span className='font-weight-bold'>{user.email}</span></p>
-                    <p>{languages[0][lang].profile.rol} <span className='font-weight-bold'>{user.rol}</span></p>
+                    <p><strong>{languages[0][lang].profile.email}</strong>: <span className='font-weight-bold'>{user.email}</span></p>
+                    <p><strong>{languages[0][lang].profile.rol}</strong>: <span className='font-weight-bold'>{user.rol}</span></p>
+                    <p><strong>{languages[0][lang].profile.name}</strong>: <span className='font-weight-bold'>{user.name || ''}</span></p>
+                    <p><strong>{languages[0][lang].profile.phone}</strong>: <span className='font-weight-bold'>{user.phone || ''}</span></p>
                 </section>    
             </div>
         </Row>
