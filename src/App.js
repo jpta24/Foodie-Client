@@ -27,6 +27,8 @@ import EditBusiness from "./pages/EditBusiness";
 import About from "./pages/AboutUs";
 import EditProfilePage from "./pages/EditProfile";
 
+import Test from "./pages/Test";
+
 function App() {
   return (
     <div className="App">
@@ -60,6 +62,7 @@ function App() {
         <Route exact path="/:businessName/edit-product/:productID" element={<IsPrivate><EditProduct/></IsPrivate>} />
         <Route exact path="/:businessName/orders" element={<IsPrivate><BusinessOrders /></IsPrivate>} />
         <Route exact path="/errorPage" element={<ErrorPage />} /> 
+        <Route exact path="/test" element={<Test />} /> 
       </Routes>
       
     </div>
