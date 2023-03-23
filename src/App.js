@@ -28,6 +28,7 @@ import About from "./pages/AboutUs";
 import EditProfilePage from "./pages/EditProfile";
 
 import Test from "./pages/Test";
+import MembershipPage from "./pages/MembershipPage";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route exact path="/product/:productID" element={<ProductDetails />} />
         <Route exact path="/redirect" element={<IsPrivate><RedirectPage /></IsPrivate>} />
         <Route exact path="/mySavedProducts" element={<IsPrivate><RedirectPage /></IsPrivate>} />
+        <Route exact path="/:businessName/memberships" element={<MembershipPage />} />
         <Route exact path="/myVisitedBusiness" element={<IsPrivate><RedirectPage /></IsPrivate>} />
         <Route exact path="/:businessName" element={<Business />} />
         <Route exact path="/:businessName/dashboard" element={<IsPrivate><BusinessView /></IsPrivate>} />

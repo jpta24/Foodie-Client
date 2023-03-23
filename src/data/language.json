@@ -35,12 +35,12 @@
 				"basic3": "No ads",
 				"basic4": "PayPal and credit card payment options",
 				"basic5": "2% commission fees",
-				"premTitle": "Premium Plan",
-				"prem1": "Unlimited products",
-				"prem2": "Unlimited sales",
-				"prem3": "No ads",
-				"prem4": "PayPal and credit card payment options",
-				"prem5": "1% commission fees",
+				"premiumTitle": "Premium Plan",
+				"premium1": "Unlimited products",
+				"premium2": "Unlimited sales",
+				"premium3": "No ads",
+				"premium4": "PayPal and credit card payment options",
+				"premium5": "1% commission fees",
 				"testimonials": {
 					"title": "Testimonials"
 				},
@@ -78,7 +78,9 @@
 				"newProduct": "Product successfully created",
 				"productError": "Product could not be Created",
 				"prodEditError": "Product could not be Edited",
-				"editUser": "User successfully Edited"
+				"editUser": "User successfully Edited",
+                "updateMembership":"Plan successfully updated",
+                "errorMembership": "Plan could not be Updated"
 			},
 			"login": {
 				"greetingTitle": "Welcome back",
@@ -285,6 +287,15 @@
 				"ingredients": "Ingredients",
 				"addToCart": "Add to Cart"
 			},
+            "membership":{
+                "title":"Discover Your Options",
+                "mTitle":"Confirmation",
+                "mBody":"Are you sure you want to change your Plan to:",
+                "btnConfirm":"Confirm",
+                "btnCancel":"Cancel",
+                "freeTrial":"1 month Free Trial",
+                "actualPlan":"Actual Plan"
+            },
 			"cloudinaryError": "Error while uploading the file:"
 		},
 		"Es": {
@@ -322,12 +333,12 @@
 				"basic3": "Sin anuncios",
 				"basic4": "Opciones de pago con PayPal y con tarjeta",
 				"basic5": "Comisión del 2%",
-				"premTitle": "Plan Premium",
-				"prem1": "Productos ilimitados",
-				"prem2": "Ventas ilimitadas",
-				"prem3": "Sin anuncios",
-				"prem4": "Opciones de pago con PayPal y con tarjeta",
-				"prem5": "Comisión del 1%",
+				"premiumTitle": "Plan Premium",
+				"premium1": "Productos ilimitados",
+				"premium2": "Ventas ilimitadas",
+				"premium3": "Sin anuncios",
+				"premium4": "Opciones de pago con PayPal y con tarjeta",
+				"premium5": "Comisión del 1%",
 				"testimonials": {
 					"title": "Testimonios"
 				},
@@ -608,12 +619,12 @@
 				"basic3": "Keine Anzeigen",
 				"basic4": "PayPal- und Kreditkartenzahlungsoptionen",
 				"basic5": "2% Provision",
-				"premTitle": "Premium-Plan",
-				"prem1": "Unbegrenzte Produkte",
-				"prem2": "Unbegrenzter Verkauf",
-				"prem3": "Keine Anzeigen",
-				"prem4": "PayPal- und Kreditkartenzahlungsoptionen",
-				"prem5": "1% Provision",
+				"premiumTitle": "Premium-Plan",
+				"premium1": "Unbegrenzte Produkte",
+				"premium2": "Unbegrenzter Verkauf",
+				"premium3": "Keine Anzeigen",
+				"premium4": "PayPal- und Kreditkartenzahlungsoptionen",
+				"premium5": "1% Provision",
 				"testimonials": {
 					"title": "Bewertungen"
 				},
