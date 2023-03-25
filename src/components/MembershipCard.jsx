@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap';
 import languages from '../data/language.json';
 import { HiBadgeCheck } from 'react-icons/hi';
 
-function MembershipCard({ string, price, openModal, business }) {
+function MembershipCard({ string, price, btnFunction, business }) {
 	const { language: lang } = useContext(AuthContext);
 
 	const info = {
@@ -47,7 +47,7 @@ function MembershipCard({ string, price, openModal, business }) {
 				className='my-3 mx-auto col-12'
 				onClick={() => {
 					business.membership.plan !== string &&
-						openModal(
+                    btnFunction(
 							business.membership.usedTrial === false && string === 'premium'
 								? 'trial'
 								: string

@@ -100,19 +100,15 @@ function MembershipPage() {
 			});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [user]);
 
-	if (business !== '') {
+	if (business !== '' && user) {
 		if (business.owner !== user._id) {
 			navigate('/');
 		}
 		return (
-			<div>
-				<h1 className='m-3'>{languages[0][lang].membership.title}</h1>
-				{!business.membership.usedTrial && (
-					<p>{languages[0][lang].membership.freeTrial}</p>
-				)}
-				<MembershipTable openModal={openModal} business={business} />
+			<div className='container'>
+				<MembershipTable btnFunction={openModal} business={business} />
 				<Modal
 					show={show}
 					onHide={handleClose}
@@ -127,7 +123,8 @@ function MembershipPage() {
 						<strong>
 							{capitalize(
 								selectedPlan === 'trial' ? 'Free Trial' : selectedPlan
-							)} Plan
+							)}{' '}
+							Plan
 						</strong>
 					</Modal.Body>
 					<Modal.Footer>
