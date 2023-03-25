@@ -378,7 +378,9 @@
 				"newProduct": "Producto creado correctamente",
 				"productError": "No se pudo crear el producto",
 				"prodEditError": "No se pudo editar el producto",
-				"editUser": "Usuario editado con éxito"
+				"editUser": "Usuario editado con éxito",
+                "updateMembership": "Plan actualizado correctamente",
+"errorMembership": "No se pudo actualizar el plan"
 			},
 			"login": {
 				"greetingTitle": "Bienvenido de nuevo",
@@ -584,6 +586,17 @@
 				"ingredients": "Ingredientes",
 				"addToCart": "Agregar al carrito"
 			},
+            "membership":{
+                "title":"Descubre tus opciones",
+                "freeTrial":"¡Desbloquea todo el potencial de nuestra plataforma con un período de prueba gratuito de un mes del Plan Premium!",
+                "cText":"Todo lo que necesitas para expandir tu negocio",
+                "mTitle":"Confirmación",
+                "mBody":"¿Estás seguro de que deseas cambiar tu plan a:",
+                "btnConfirm":"Confirmar elección",
+                "btnCancel":"Cancelar",
+                "freeTrialBtn":"Prueba gratuita de 1 mes",
+                "actualPlan":"Plan actual"
+                },
 			"cloudinaryError": "Error al cargar el archivo:"
 		},
 		"De": {
@@ -664,7 +677,9 @@
 				"newProduct": "Produkt erfolgreich erstellt",
 				"productError": "Produkt konnte nicht erstellt werden",
 				"prodEditError": "Das Produkt konnte nicht bearbeitet werden",
-				"editUser": "Benutzer erfolgreich bearbeitet"
+				"editUser": "Benutzer erfolgreich bearbeitet",
+                "updateMembership": "Plan actualizado correctamente",
+"errorMembership": "No se pudo actualizar el plan"
 			},
 			"login": {
 				"greetingTitle": "Willkommen zurück",
@@ -871,6 +886,17 @@
 				"ingredients": "Zutaten",
 				"addToCart": "In den Warenkorb legen"
 			},
+            "membership":{
+                "title":"Entdecken Sie Ihre Möglichkeiten",
+                "freeTrial":"Entsperren Sie das volle Potenzial unserer Plattform mit einem 1-monatigen kostenlosen Test des Premium-Plans!",
+                "cText":"Alles, was Sie benötigen, um Ihr Geschäft auszuweiten",
+                "mTitle":"Bestätigung",
+                "mBody":"Sind Sie sicher, dass Sie Ihren Plan ändern möchten auf:",
+                "btnConfirm":"Bestätigen Sie Ihre Wahl",
+                "btnCancel":"Abbrechen",
+                "freeTrialBtn":"1 Monat kostenloser Test",
+                "actualPlan":"Aktueller Plan"
+                },
 			"cloudinaryError": "Fehler beim Hochladen der Datei:"
 		}
 	}
