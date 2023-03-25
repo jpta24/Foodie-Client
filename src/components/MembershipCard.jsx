@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap';
 import languages from '../data/language.json';
 import { HiBadgeCheck } from 'react-icons/hi';
 
-function MembershipCard({ string, price, openModal, activePlan }) {
+function MembershipCard({ string, price, openModal, business }) {
 	const { language: lang } = useContext(AuthContext);
 
 	const info = {
@@ -27,7 +27,7 @@ function MembershipCard({ string, price, openModal, activePlan }) {
 					{price !== '-' && languages[0][lang].home.perMon}
 				</span>
 			</p>
-			<p className='h6'>All you need to expand your Business</p>
+			<p className='h6'>{languages[0][lang].membership.cText}</p>
 			<hr />
 			{Object.values(info).map((plan) => {
 				return (
@@ -38,21 +38,26 @@ function MembershipCard({ string, price, openModal, activePlan }) {
 			})}
 			<Button
 				variant={
-					activePlan.plan === string
+					business.membership.plan === string
 						? 'secondary'
-						: activePlan.usedTrial === false && string === 'premium'
+						: business.membership.usedTrial === false && string === 'premium'
 						? 'primary'
 						: 'outline-primary'
 				}
 				className='my-3 mx-auto col-12'
 				onClick={() => {
-					activePlan.plan !== string && openModal(string);
+					business.membership.plan !== string &&
+						openModal(
+							business.membership.usedTrial === false && string === 'premium'
+								? 'trial'
+								: string
+						);
 				}}
 			>
-				{activePlan.plan === string
+				{business.membership.plan === string
 					? languages[0][lang].membership.actualPlan
-					: activePlan.usedTrial === false && string === 'premium'
-					? languages[0][lang].membership.freeTrial
+					: business.membership.usedTrial === false && string === 'premium'
+					? languages[0][lang].membership.freeTrialBtn
 					: languages[0][lang].home.btnSelect}
 			</Button>
 		</div>

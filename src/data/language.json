@@ -289,11 +289,13 @@
 			},
             "membership":{
                 "title":"Discover Your Options",
+                "freeTrial":"Unlock the Full Potential of our Plataform with a 1-month Free Trial of the Premium Plan!",
+                "cText":"All you need to expand your Business",
                 "mTitle":"Confirmation",
                 "mBody":"Are you sure you want to change your Plan to:",
-                "btnConfirm":"Confirm",
+                "btnConfirm":"Confirm your choice",
                 "btnCancel":"Cancel",
-                "freeTrial":"1 month Free Trial",
+                "freeTrialBtn":"1 month Free Trial",
                 "actualPlan":"Actual Plan"
             },
 			"cloudinaryError": "Error while uploading the file:"
