@@ -26,6 +26,7 @@ function HomePage() {
 		},
 		name: null,
 	};
+
 	const [business, setBusiness] = useState(initialState);
 
 	const btnFunctionMembership = (string) => {
@@ -33,7 +34,7 @@ function HomePage() {
 			let businessNameEncoded = business.name.split(' ').join('-');
 			navigate(`/${businessNameEncoded}/memberships`);
 		} else if (userID) {
-			navigate(`/dashboard/${userID._id}`);
+			navigate(`/create-business`);
 		} else {
 			navigate(`/signup`);
 		}
@@ -47,7 +48,10 @@ function HomePage() {
 					headers: { Authorization: `Bearer ${storedToken}` },
 				})
 				.then((response) => {
-					setBusiness(response.data);
+					if (response.data.name) {
+						setBusiness(response.data);
+					}
+					
 				})
 				.catch((error) => {
 					console.log({ error });

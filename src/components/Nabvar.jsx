@@ -15,7 +15,7 @@ const Nabvar2 = () => {
     if (languages) {
         return (
     <Navbar className='px-4' bg="dark" variant="dark" sticky="top" expand="sm" collapseOnSelect>
-        <Navbar.Brand href="/home">
+        <Navbar.Brand href="/">
             <img src={iconsCloud[0].foodieIcon} width="40px" height="40px" alt='altLogo'/>{' '}
             Foodie
         </Navbar.Brand>
