@@ -11,7 +11,7 @@ import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import MembershipTable from '../components/MembershipTable';
 
-import { handleFileUpload } from "../utils/functions";
+import { handleFileUpload } from '../utils/functions';
 
 const CreateBusiness = () => {
 	const navigate = useNavigate();
@@ -144,26 +144,26 @@ const CreateBusiness = () => {
 				});
 		}
 	};
-	const [currentBusinessImg, setCurrentBusinessImg] = useState(null)
+	const [currentBusinessImg, setCurrentBusinessImg] = useState(null);
 
-	const [currentBgImg, setCurrentBgImg] = useState(null)
+	const [currentBgImg, setCurrentBgImg] = useState(null);
 
-	const [currentPdf, setCurrentPdf] = useState(null)
+	const [currentPdf, setCurrentPdf] = useState(null);
 
-    const imgSetterFunctionLogo = (field,string) =>{
-		setBusiness({ ...business, [field]: string })
-        setCurrentBusinessImg(string)
-	}
+	const imgSetterFunctionLogo = (field, string) => {
+		setBusiness({ ...business, [field]: string });
+		setCurrentBusinessImg(string);
+	};
 
-    const imgSetterFunctionBg = (field,string) =>{
-		setBusiness({ ...business, [field]: string })
-        setCurrentBgImg(string)
-	}
+	const imgSetterFunctionBg = (field, string) => {
+		setBusiness({ ...business, [field]: string });
+		setCurrentBgImg(string);
+	};
 
-    const imgSetterFunctionPdf = (field,string) =>{
-		setBusiness({ ...business, [field]: string })
-        setCurrentPdf(string)
-	}
+	const imgSetterFunctionPdf = (field, string) => {
+		setBusiness({ ...business, [field]: string });
+		setCurrentPdf(string);
+	};
 
 	const btnFunctionMembership = (string) => {
 		setBusiness({
@@ -175,7 +175,7 @@ const CreateBusiness = () => {
 			membership: { ...preBusiness.membership, plan: string },
 		});
 	};
-	
+
 	return (
 		<div className='container'>
 			<h1>{languages[0][lang].createBusiness.title}</h1>
@@ -213,7 +213,14 @@ const CreateBusiness = () => {
 								</Form.Label>
 								<Form.Control
 									type='file'
-									onChange={(e) => handleFileUpload(e,currentBusinessImg, imgSetterFunctionLogo, 'logoUrl')}
+									onChange={(e) =>
+										handleFileUpload(
+											e,
+											currentBusinessImg,
+											imgSetterFunctionLogo,
+											'logoUrl'
+										)
+									}
 								/>
 							</Form.Group>
 						</div>
@@ -776,7 +783,14 @@ const CreateBusiness = () => {
 								</Form.Label>
 								<Form.Control
 									type='file'
-									onChange={(e) => handleFileUpload(e,currentBgImg, imgSetterFunctionBg, 'bgUrl')}
+									onChange={(e) =>
+										handleFileUpload(
+											e,
+											currentBgImg,
+											imgSetterFunctionBg,
+											'bgUrl'
+										)
+									}
 								/>
 							</Form.Group>
 
@@ -786,7 +800,14 @@ const CreateBusiness = () => {
 								</Form.Label>
 								<Form.Control
 									type='file'
-									onChange={(e) => handleFileUpload(e,currentPdf, imgSetterFunctionPdf, 'pdfMenu')}
+									onChange={(e) =>
+										handleFileUpload(
+											e,
+											currentPdf,
+											imgSetterFunctionPdf,
+											'pdfMenu'
+										)
+									}
 								/>
 							</Form.Group>
 						</div>
