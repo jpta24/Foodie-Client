@@ -11,6 +11,8 @@ import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import MembershipTable from '../components/MembershipTable';
 
+import { handleFileUpload } from "../utils/functions";
+
 const CreateBusiness = () => {
 	const navigate = useNavigate();
 
@@ -142,6 +144,26 @@ const CreateBusiness = () => {
 				});
 		}
 	};
+	const [currentBusinessImg, setCurrentBusinessImg] = useState(null)
+
+	const [currentBgImg, setCurrentBgImg] = useState(null)
+
+	const [currentPdf, setCurrentPdf] = useState(null)
+
+    const imgSetterFunctionLogo = (field,string) =>{
+		setBusiness({ ...business, [field]: string })
+        setCurrentBusinessImg(string)
+	}
+
+    const imgSetterFunctionBg = (field,string) =>{
+		setBusiness({ ...business, [field]: string })
+        setCurrentBgImg(string)
+	}
+
+    const imgSetterFunctionPdf = (field,string) =>{
+		setBusiness({ ...business, [field]: string })
+        setCurrentPdf(string)
+	}
 
 	const btnFunctionMembership = (string) => {
 		setBusiness({
@@ -153,32 +175,7 @@ const CreateBusiness = () => {
 			membership: { ...preBusiness.membership, plan: string },
 		});
 	};
-
-	const uploadImage = (file) => {
-		return axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/api/upload`, file)
-			.then((res) => res.data)
-			.catch((err) => console.log(err));
-	};
-
-	const handleFileUpload = (e, field) => {
-		// console.log("The file to be uploaded is: ", e.target.files[0]);
-		const uploadData = new FormData();
-		// imageUrl => this name has to be the same as in the model since we pass
-		// req.body to .create() method when creating a new movie in '/api/movies' POST route
-		uploadData.append('imageUrl', e.target.files[0]);
-
-		uploadImage(uploadData)
-			.then((response) => {
-				// console.log(response.fileUrl);
-				// response carries "fileUrl" which we can use to update the state
-				setBusiness({ ...business, [field]: response.fileUrl });
-			})
-			.catch((err) =>
-				console.log(`${languages[0][lang].cloudinaryError}`, err)
-			);
-	};
-
+	
 	return (
 		<div className='container'>
 			<h1>{languages[0][lang].createBusiness.title}</h1>
@@ -216,7 +213,7 @@ const CreateBusiness = () => {
 								</Form.Label>
 								<Form.Control
 									type='file'
-									onChange={(e) => handleFileUpload(e, 'logoUrl')}
+									onChange={(e) => handleFileUpload(e,currentBusinessImg, imgSetterFunctionLogo, 'logoUrl')}
 								/>
 							</Form.Group>
 						</div>
@@ -779,7 +776,7 @@ const CreateBusiness = () => {
 								</Form.Label>
 								<Form.Control
 									type='file'
-									onChange={(e) => handleFileUpload(e, 'bgUrl')}
+									onChange={(e) => handleFileUpload(e,currentBgImg, imgSetterFunctionBg, 'bgUrl')}
 								/>
 							</Form.Group>
 
@@ -789,7 +786,7 @@ const CreateBusiness = () => {
 								</Form.Label>
 								<Form.Control
 									type='file'
-									onChange={(e) => handleFileUpload(e, 'pdfMenu')}
+									onChange={(e) => handleFileUpload(e,currentPdf, imgSetterFunctionPdf, 'pdfMenu')}
 								/>
 							</Form.Group>
 						</div>
