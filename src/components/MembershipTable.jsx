@@ -6,7 +6,6 @@ import languages from '../data/language.json';
 function MembershipTable({ btnFunction, business }) {
 	const { language: lang } = useContext(AuthContext);
 	
-	console.log(business);
 	return (
 		<div>
 			<h1 className='m-3'>{languages[0][lang].membership.title}</h1>
