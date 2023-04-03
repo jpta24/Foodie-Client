@@ -19,6 +19,8 @@ import languages from '../data/language.json';
 import Loading from '../components/Loading';
 import FormatDelivery from '../components/FormatDelivery';
 
+import { handleFileUpload } from "../utils/functions";
+
 const CartPage = () => {
 	const { language: lang } = useContext(AuthContext);
 	const { user } = useContext(AuthContext);
@@ -32,6 +34,12 @@ const CartPage = () => {
 	const [showZelle, setShowZelle] = useState(false);
 
 	const [paymentImg, setPaymentImg] = useState(null);
+	const [currentPaymentImg, setCurrentPaymentImg] = useState(null)
+
+    const imgSetterFunction = (field,string) =>{
+		setPaymentImg(string )
+        setCurrentPaymentImg(string)
+	}
 
 	const handleClose = () => setShow(false);
 	const handleClosePP = () => setShowPP(false);
@@ -169,31 +177,6 @@ const CartPage = () => {
 					}
 				});
 		}
-	};
-
-	const uploadImage = (file) => {
-		return axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/api/upload`, file)
-			.then((res) => res.data)
-			.catch((err) => console.log(err));
-	};
-
-	const handleFileUpload = (e) => {
-		// console.log("The file to be uploaded is: ", e.target.files[0]);
-		const uploadData = new FormData();
-		// imageUrl => this name has to be the same as in the model since we pass
-		// req.body to .create() method when creating a new movie in '/api/movies' POST route
-		uploadData.append('imageUrl', e.target.files[0]);
-
-		console.log(uploadData.get('imageUrl'));
-
-		uploadImage(uploadData)
-			.then((response) => {
-				// console.log(response.fileUrl);
-				// response carries "fileUrl" which we can use to update the state
-				setPaymentImg(response.fileUrl);
-			})
-			.catch((err) => console.log('Error while uploading the file: ', err));
 	};
 
 	if (user && cart) {
@@ -574,7 +557,7 @@ const CartPage = () => {
 							controlId='formBasicProductName'
 						>
 							<Form.Label>{languages[0][lang].cart.image}</Form.Label>
-							<Form.Control type='file' onChange={(e) => handleFileUpload(e)} />
+							<Form.Control type='file' onChange={(e) => handleFileUpload(e,currentPaymentImg, imgSetterFunction,'mainImg')} />
 						</Form.Group>
 					</Modal.Body>
 					<Modal.Footer>
