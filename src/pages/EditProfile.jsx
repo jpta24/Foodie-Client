@@ -30,7 +30,6 @@ const EditProfilePage = () => {
         axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${userID}`,{headers: {Authorization: `Bearer ${storedToken}`}})
           .then(response=>{
               setUser(response.data)
-              setCurrentUserImg(response.data.avatarUrl)
           })
           .catch((error) => {
               console.log({error});
