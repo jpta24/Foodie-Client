@@ -9,44 +9,28 @@ import { toast } from 'react-toastify';
 import iconsCloud from '../data/icons.json'
 import languages from '../data/language.json'
 
+import { handleFileUpload } from "../utils/functions";
+
 const EditProfilePage = () => { 
 	const {language:lang} = useContext(AuthContext);
     const { userID } = useParams();
 	const { user:userAuth } = useContext(AuthContext);
 
     const [user, setUser] = useState('')
-    
-    const uploadImage = (file) => {
-        return  axios.post(`${process.env.REACT_APP_SERVER_URL}/api/upload`, file)
-          .then(res => res.data)
-          .catch(err=>console.log(err));
-      };
 
-    const handleFileUpload = (e,field) => {
-        // console.log("The file to be uploaded is: ", e.target.files[0]);
-        const uploadData = new FormData();
-        // imageUrl => this name has to be the same as in the model since we pass
-        // req.body to .create() method when creating a new movie in '/api/movies' POST route
-        uploadData.append("imageUrl", e.target.files[0]);
-        
-	    console.log(uploadData.get('imageUrl'))
-     
-        uploadImage(uploadData)
-          .then(response => {
-            // console.log(response.fileUrl);
-            // response carries "fileUrl" which we can use to update the state
-            setUser({...user, [field]:response.fileUrl});
-            
-          })
-          .catch(err => console.log("Error while uploading the file: ", err));
-      };
+    const [currentUserImg, setCurrentUserImg] = useState(null)
+
+    const imgSetterFunction = (field,string) =>{
+		setUser({...user, [field]:string});
+        setCurrentUserImg(string)
+	}
 
 	useEffect(() => {
 		const storedToken = localStorage.getItem("authToken"); 
         axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${userID}`,{headers: {Authorization: `Bearer ${storedToken}`}})
           .then(response=>{
-            
               setUser(response.data)
+              setCurrentUserImg(response.data.avatarUrl)
           })
           .catch((error) => {
               console.log({error});
@@ -141,7 +125,7 @@ const EditProfilePage = () => {
                         <Form.Label>{languages[0][lang].profile.image}</Form.Label>
                         <Form.Control
                             type='file'
-                            onChange={(e) => handleFileUpload(e,'avatarUrl')}
+                            onChange={(e) => handleFileUpload(e,currentUserImg, imgSetterFunction,'avatarUrl')}
                         />
                     </Form.Group>
                     <Button variant='primary' size="lg" type='submit' className='mx-2 my-1 col-8 col-md-4'>
