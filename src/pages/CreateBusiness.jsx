@@ -1,15 +1,15 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import { toast } from 'react-toastify';
 
 import menuCategories from '../data/categories.json';
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import MembershipTable from '../components/MembershipTable';
+import { postAPI } from '../utils/api';
+import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 import { handleFileUpload } from '../utils/functions';
 
@@ -90,7 +90,6 @@ const CreateBusiness = () => {
 
 	const handleBusinessSubmit = (e) => {
 		e.preventDefault();
-		const storedToken = localStorage.getItem('authToken');
 		if (business.currency === '') {
 			business.currency = '$';
 		}
@@ -101,47 +100,19 @@ const CreateBusiness = () => {
 		) {
 			return setErrorMessage(`${languages[0][lang].createBusiness.error}`);
 		} else {
-			// Create an object representing the request body
 			const requestBody = business;
 
-			// Make an axios request to the API
-			// If POST request is successful redirect to Business/Dashboard page
-			// If the request resolves with an error, set the error message in the state
-			axios
-				.post(`${process.env.REACT_APP_SERVER_URL}/business`, requestBody, {
-					headers: { Authorization: `Bearer ${storedToken}` },
-				})
-				.then((response) => {
-					const nameEncoded = response.data.business.name.split(' ').join('-');
-					navigate(`/${nameEncoded}/dashboard`);
-					// eslint-disable-next-line no-lone-blocks
-					{
-						window.innerWidth < 450
-							? toast.success(`${languages[0][lang].tostify.newBusiness}`, {
-									position: toast.POSITION.BOTTOM_CENTER,
-									theme: 'dark',
-							  })
-							: toast.success(`${languages[0][lang].tostify.newBusiness}`, {
-									theme: 'dark',
-							  });
-					}
-				})
-				.catch((error) => {
-					console.log({ error });
-					const errorDescription = error.response.data.message;
-					// eslint-disable-next-line no-lone-blocks
-					{
-						window.innerWidth < 450
-							? toast.error(`${languages[0][lang].tostify.errorBusiness}`, {
-									position: toast.POSITION.BOTTOM_CENTER,
-									theme: 'dark',
-							  })
-							: toast.error(`${languages[0][lang].tostify.errorBusiness}`, {
-									theme: 'dark',
-							  });
-					}
-					setErrorMessage(errorDescription);
-				});
+			const url = `business`;
+			const thenFunction = (response) => {
+				const nameEncoded = response.data.business.name.split(' ').join('-');
+				navigate(`/${nameEncoded}/dashboard`);
+				toastifySuccess(`${languages[0][lang].tostify.newBusiness}`);
+			};
+			const errorFunction = (error) => {
+				toastifyError(`${languages[0][lang].tostify.errorBusiness}`);
+				setErrorMessage(error.response.data.message);
+			};
+			postAPI(url, requestBody, thenFunction, errorFunction);
 		}
 	};
 	const [currentBusinessImg, setCurrentBusinessImg] = useState(null);

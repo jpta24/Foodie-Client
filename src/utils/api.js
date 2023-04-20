@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const businessNameEncoded = 'blala';
-const url = `business/${businessNameEncoded}`;
-
 const storedToken = localStorage.getItem('authToken');
+
+
+// import { getAPI, postAPI } from '../utils/api';
+// import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 export const getAPI = async (url, thenFunction, catchFunction) => {
 	try {
@@ -15,6 +16,7 @@ export const getAPI = async (url, thenFunction, catchFunction) => {
 		);
 		thenFunction(response);
 	} catch (error) {
+        console.log(error);
 		catchFunction(error);
 	}
 };
@@ -33,6 +35,17 @@ export const postAPI = async (url, requestBody, thenFunction, catchFunction) => 
 		catchFunction(error);
 	}
 };
+
+    //          const url = `products`
+    // 			const thenFunction = (response) =>{
+    // 				setProduct({ ...initialState, business: business._id });
+    // 				toastifySuccess(`${languages[0][lang].tostify.newProduct}`)
+    // 			}
+    // 			const errorFunction = (error) => {
+    // 				toastifyError(`${languages[0][lang].tostify.productError}`)
+    // 				setErrorMessage(error.response.data.message)
+    // 			}
+    // 			postAPI(url,requestBody,thenFunction,errorFunction)
 
 export const putAPI = async (url, requestBody, thenFunction, catchFunction) => {
 	try {

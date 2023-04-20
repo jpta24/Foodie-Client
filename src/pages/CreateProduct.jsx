@@ -1,15 +1,15 @@
 import { useState, useContext, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Form, InputGroup, Button } from 'react-bootstrap';
-import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import Loading from '../components/Loading';
+import { getAPI, postAPI } from '../utils/api';
+import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 import { handleFileUpload } from '../utils/functions';
 
@@ -17,7 +17,6 @@ const CreateProduct = () => {
 	const { user, language: lang } = useContext(AuthContext);
 	const { businessName } = useParams();
 	const navigate = useNavigate();
-	const storedToken = localStorage.getItem('authToken');
 
 	let businessNameEncoded = businessName.split(' ').join('-');
 
@@ -43,78 +42,34 @@ const CreateProduct = () => {
 	const [productingredientsearch, setproductingredientsearch] = useState('');
 
 	useEffect(() => {
-		axios
-			.get(
-				`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,
-				{ headers: { Authorization: `Bearer ${storedToken}` } }
-			)
-			.then((response) => {
-				setBusiness(response.data.business);
-				setProduct({ ...product, business: response.data.business._id });
-			})
-			.catch((error) => {
-				console.log({ error });
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.redirect}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.redirect}`, {
-								theme: 'dark',
-						  });
-				}
-				navigate('/');
-			});
-
+		const url = `business/${businessNameEncoded}`;
+		const thenFunction = (response) => {
+			setBusiness(response.data.business);
+			setProduct({ ...product, business: response.data.business._id });
+		};
+		const errorFunction = () => {
+			toastifyError(`${languages[0][lang].tostify.redirect}`);
+			navigate('/');
+		};
+		getAPI(url, thenFunction, errorFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleProductSubmit = (e) => {
 		e.preventDefault();
-		const storedToken = localStorage.getItem('authToken');
 
-		// Create an object representing the request body
 		const requestBody = product;
 
-		// Make an axios request to the API
-		// If POST request is successful redirect to Business/Dashboard page
-		// If the request resolves with an error, set the error message in the state
-		axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/products`, requestBody, {
-				headers: { Authorization: `Bearer ${storedToken}` },
-			})
-			.then((response) => {
-				setProduct({ ...initialState, business: business._id });
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.success(`${languages[0][lang].tostify.newProduct}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.success(`${languages[0][lang].tostify.newProduct}`, {
-								theme: 'dark',
-						  });
-				}
-			})
-			.catch((error) => {
-				console.log({ error });
-				const errorDescription = error.response.data.message;
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.productError}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.productError}`, {
-								theme: 'dark',
-						  });
-				}
-				setErrorMessage(errorDescription);
-			});
+		const url = `products`;
+		const thenFunction = (response) => {
+			setProduct({ ...initialState, business: business._id });
+			toastifySuccess(`${languages[0][lang].tostify.newProduct}`);
+		};
+		const errorFunction = (error) => {
+			toastifyError(`${languages[0][lang].tostify.productError}`);
+			setErrorMessage(error.response.data.message);
+		};
+		postAPI(url, requestBody, thenFunction, errorFunction);
 	};
 	const [currentProductImg, setCurrentProductImg] = useState(null);
 

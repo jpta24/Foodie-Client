@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { CartContext } from '../context/cart.context';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
-import { toast } from 'react-toastify';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 import { Button, Form, Modal } from 'react-bootstrap';
@@ -15,6 +13,8 @@ import { v4 as uuidv4 } from 'uuid';
 import PayMethod from '../components/PayMethod';
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
+import { putAPI } from '../utils/api';
+import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 import Loading from '../components/Loading';
 import FormatDelivery from '../components/FormatDelivery';
@@ -97,7 +97,6 @@ const CartPage = () => {
 		if (address.name === '' || address.phone === '') {
 			return setErrorMessage(`${languages[0][lang].cart.error}`);
 		} else {
-			const storedToken = localStorage.getItem('authToken');
 
 			const productsOrder = cart
 				.filter((buzFilt) => {
@@ -131,25 +130,10 @@ const CartPage = () => {
 				order,
 			};
 
-			axios
-				.put(
-					`${process.env.REACT_APP_SERVER_URL}/users/order/${user._id}`,
-					requestBody,
-					{ headers: { Authorization: `Bearer ${storedToken}` } }
-				)
-				.then((response) => {
-					// eslint-disable-next-line no-lone-blocks
-					{
-						window.innerWidth < 450
-							? toast.success(`${languages[0][lang].tostify.orderPlaced}`, {
-									position: toast.POSITION.BOTTOM_CENTER,
-									theme: 'dark',
-							  })
-							: toast.success(`${languages[0][lang].tostify.orderPlaced}`, {
-									theme: 'dark',
-							  });
-					}
-					setCart(null);
+			const url = `users/order/${user._id}`
+			const thenFunction = (response) =>{
+				toastifySuccess(`${languages[0][lang].tostify.orderPlaced}`)
+				setCart(null);
 					getCartData();
 					const userUpdated = response.data;
 					setUSer(userUpdated);
@@ -159,23 +143,12 @@ const CartPage = () => {
 					} else {
 						navigate(`/orders/${user._id}`);
 					}
-				})
-				.catch((error) => {
-					console.log({ error });
-					const errorDescription = error.response.data.message;
-					console.log(errorDescription);
-					// eslint-disable-next-line no-lone-blocks
-					{
-						window.innerWidth < 450
-							? toast.error(`${languages[0][lang].tostify.orderError}`, {
-									position: toast.POSITION.BOTTOM_CENTER,
-									theme: 'dark',
-							  })
-							: toast.error(`${languages[0][lang].tostify.orderError}`, {
-									theme: 'dark',
-							  });
-					}
-				});
+			}
+			const errorFunction = (error) => {
+				toastifyError(`${languages[0][lang].tostify.orderError}`)
+			}
+			putAPI(url,requestBody,thenFunction,errorFunction)
+
 		}
 	};
 
