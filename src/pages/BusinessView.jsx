@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 import { QRCode } from 'react-qrcode-logo';
 import { Modal, Button } from 'react-bootstrap';
 
@@ -11,43 +10,29 @@ import BusinessViewCard from '../components/BusinessViewCard';
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import Loading from '../components/Loading';
+import { getAPI, deleteAPI } from '../utils/api';
+import { toastifyError } from '../utils/tostify';
 
 const BusinessView = () => {
 	const { language: lang } = useContext(AuthContext);
 	const { user } = useContext(AuthContext);
 	const { businessName } = useParams();
 	const navigate = useNavigate();
-	const storedToken = localStorage.getItem('authToken');
 
 	let businessNameEncoded = businessName.split(' ').join('-');
 
 	const [business, setBusiness] = useState('');
 
 	useEffect(() => {
-		axios
-			.get(
-				`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,
-				{ headers: { Authorization: `Bearer ${storedToken}` } }
-			)
-			.then((response) => {
-				setBusiness(response.data.business);
-			})
-			.catch((error) => {
-				console.log({ error });
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.redirect}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.redirect}`, {
-								theme: 'dark',
-						  });
-				}
-				navigate('/');
-			});
-
+		const url = `business/${businessNameEncoded}`;
+		const thenFunction = (response) => {
+			setBusiness(response.data.business);
+		};
+		const errorFunction = () => {
+			toastifyError(`${languages[0][lang].tostify.redirect}`);
+			navigate('/');
+		};
+		getAPI(url, thenFunction, errorFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -64,32 +49,16 @@ const BusinessView = () => {
 		setShow({ show: true, businessName, businessID });
 	};
 	const deleteBusiness = () => {
-		axios
-			.delete(
-				`${process.env.REACT_APP_SERVER_URL}/business/delete/${show.businessID}`,
-				{ headers: { Authorization: `Bearer ${storedToken}` } }
-			)
-			.then(() => {
-				//     return axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
-				// }).then(response=>{
-				//     setBusiness(response.data.business)
-				//     setShow(modalInitialState)
-				navigate(`/dashboard/${user._id}`);
-			})
-			.catch((error) => {
-				console.log(error);
-				const errorDescription = error.response.data.message;
-				toast.error(errorDescription, { theme: 'dark' });
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(errorDescription, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(errorDescription, { theme: 'dark' });
-				}
-			});
+		const url = `business/delete/${show.businessID}`;
+		const thenFunction = (response) => {
+			navigate(`/dashboard/${user._id}`);
+		};
+		const errorFunction = (error) => {
+			toastifyError(error.response.data.message);
+		};
+		deleteAPI(url, thenFunction, errorFunction);
+
+
 	};
 
 	if (business !== '') {
