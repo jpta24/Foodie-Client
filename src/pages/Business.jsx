@@ -6,8 +6,6 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Modal, Button } from 'react-bootstrap';
-
-import { toast } from 'react-toastify';
 import languages from '../data/language.json'
 
 import ProductCard from '../components/ProductCard';
@@ -15,6 +13,8 @@ import ProductCardDesktop from '../components/ProductCardDesktop';
 
 import BusinessMenu from '../components/BusinessMenu';
 import Loading from '../components/Loading';
+import { getAPI, putAPI, deleteAPI } from '../utils/api';
+import { toastifyError } from '../utils/tostify';
 
 const Business = () => {
 	const {language:lang} = useContext(AuthContext);
@@ -70,40 +70,31 @@ const Business = () => {
         setShow({show:true,productName,productID})
     }
     const deleteProduct =()=>{
-        axios
-            .delete(`${process.env.REACT_APP_SERVER_URL}/products/delete/${show.productID}`,  {headers: {Authorization: `Bearer ${storedToken}`}})
-            .then(() => {
-                return axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
-            }).then(response=>{
-                setBusiness(response.data.business)
-                setShow(modalInitialState)
-            }).catch((error) => {
-                console.log(error);
-                const errorDescription = error.response.data.message;
-                toast.error(errorDescription, { theme: 'dark' });
-                // eslint-disable-next-line no-lone-blocks
-                {window.innerWidth < 450 ? 
-                    toast.error(errorDescription, {
-                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    }) : toast.error(errorDescription, { theme: 'dark' });}
-            });
+		const url = `products/delete/${show.productID}`;
+        const urlGet = `business/${businessNameEncoded}`
+        const thenGetFunction = (response) => {
+            setBusiness(response.data.business)
+            setShow(modalInitialState)
+        }
+		const thenFunction = (response) => {
+            getAPI(urlGet,thenGetFunction, errorFunction)
+		};
+		const errorFunction = (error) => {
+			toastifyError(error.response.data.message);
+		};
+		deleteAPI(url, thenFunction, errorFunction);
     }
+    
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
-          .then(response=>{
-              setBusiness(response.data.business)
-          })
-          .catch((error) => {
-              console.log({error});
-              // eslint-disable-next-line no-lone-blocks
-              {window.innerWidth < 450 ? 
-                toast.error(`${languages[0][lang].tostify.redirect}`, {
-                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error(`${languages[0][lang].tostify.redirect}`, { theme: 'dark' });}
-              
-              navigate('/')
-              })
-      
+        const url = `business/${businessNameEncoded}`;
+		const thenFunction = (response) => {
+            setBusiness(response.data.business)
+		};
+		const errorFunction = () => {
+			toastifyError(`${languages[0][lang].tostify.redirect}`);
+			navigate('/');
+		};
+		getAPI(url, thenFunction, errorFunction);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
@@ -115,12 +106,13 @@ const Business = () => {
         }
         if(user){
             owner = business.owner === user._id ? true : false
-            axios
-            .put(`${process.env.REACT_APP_SERVER_URL}/users/business/${user._id}`, businessStored,  {headers: {Authorization: `Bearer ${storedToken}`}})
-            .then()
-            .catch((err)=>{
-                console.log(err)
-            })
+            putAPI(`users/business/${user._id}`,businessStored)
+            // axios
+            // .put(`${process.env.REACT_APP_SERVER_URL}/users/business/${user._id}`, businessStored,  {headers: {Authorization: `Bearer ${storedToken}`}})
+            // .then()
+            // .catch((err)=>{
+            //     console.log(err)
+            // })
         }
         const currency = business.currency
             

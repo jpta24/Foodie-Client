@@ -3,15 +3,14 @@ import { AuthContext } from '../context/auth.context';
 import {  useParams, useNavigate } from 'react-router-dom';
 
 import { Modal, Button } from 'react-bootstrap';
-import axios from 'axios';
-
-import { toast } from 'react-toastify';
 import languages from '../data/language.json'
 
 import { v4 as uuidv4 } from 'uuid';
 import BusinessOrdersCard from '../components/BusinessOrdersCard';
 import Loading from '../components/Loading';
 import OrderStatus from '../components/OrderStatus';
+import { getAPI, putAPI } from '../utils/api';
+import { toastifyError } from '../utils/tostify';
 
 const BusinessOrders = () => {
 	const {language:lang} = useContext(AuthContext);
@@ -26,7 +25,6 @@ const BusinessOrders = () => {
     // const { user } = useContext(CartContext);
     const { businessName } = useParams();
     const navigate = useNavigate();
-    const storedToken = localStorage.getItem("authToken"); 
 
     let businessNameEncoded = businessName.split(' ').join('-')
 
@@ -42,20 +40,15 @@ const BusinessOrders = () => {
     }
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
-          .then(response=>{
-              setBusiness(response.data.business)
-          })
-          .catch((error) => {
-              console.log({error});
-              // eslint-disable-next-line no-lone-blocks
-              {window.innerWidth < 450 ? 
-                toast.error(`${languages[0][lang].tostify.redirect}`, {
-                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error(`${languages[0][lang].tostify.redirect}`, { theme: 'dark' });}
-              navigate('/')
-              })
-      
+        const url = `business/${businessNameEncoded}`;
+		const thenFunction = (response) => {
+            setBusiness(response.data.business)
+		};
+		const errorFunction = () => {
+			toastifyError(`${languages[0][lang].tostify.redirect}`);
+			navigate('/');
+		};
+		getAPI(url, thenFunction, errorFunction);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
@@ -64,18 +57,12 @@ const BusinessOrders = () => {
             status:status
         } 
 
-        axios
-            .put(`${process.env.REACT_APP_SERVER_URL}/orders/statusBusiness/${order._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
-            .then((response) => {
-                // If the server verifies that JWT token is valid  
-                const businessUpdated = response.data;;
-               // Update state variables        
-                
-                setBusiness(businessUpdated); 
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+        const url = `orders/statusBusiness/${order._id}`;
+		const thenFunction = (response) => {
+			const businessUpdated = response.data;
+                setBusiness(businessUpdated)
+		};
+		putAPI(url, requestBody, thenFunction);
     }
 
     if (business) {

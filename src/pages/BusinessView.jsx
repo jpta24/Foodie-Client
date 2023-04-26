@@ -57,8 +57,6 @@ const BusinessView = () => {
 			toastifyError(error.response.data.message);
 		};
 		deleteAPI(url, thenFunction, errorFunction);
-
-
 	};
 
 	if (business !== '') {
