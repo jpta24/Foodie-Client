@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import {  useParams, useNavigate, Link  } from 'react-router-dom'; 
 import { CartContext } from '../context/cart.context';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Modal, Button } from 'react-bootstrap';
@@ -29,7 +28,6 @@ const Business = () => {
     
     const { businessName } = useParams();
     const navigate = useNavigate();
-    const storedToken = localStorage.getItem("authToken"); 
 
     let businessNameEncoded = businessName.split(' ').join('-')
 

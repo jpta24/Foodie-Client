@@ -1,13 +1,13 @@
 import { useState, useEffect,useContext } from 'react';
 import {  useParams  } from 'react-router-dom'; 
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 
 import { Row } from 'react-bootstrap';
 import DashboardCard from '../components/DashboardCard';
 
 import iconsCloud from '../data/icons.json'
 import languages from '../data/language.json'
+import { getAPI} from '../utils/api';
 
 const Dashboard = () => {
 	const {language:lang} = useContext(AuthContext);
@@ -15,15 +15,11 @@ const Dashboard = () => {
 	const [user, setUser] = useState('')
 
 	useEffect(() => {
-		const storedToken = localStorage.getItem("authToken"); 
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${userID}`,{headers: {Authorization: `Bearer ${storedToken}`}})
-          .then(response=>{
-              setUser(response.data)
-          })
-          .catch((error) => {
-              console.log({error});
-            })
-      
+		const url = `users/${userID}`;
+		const thenFunction = (response) => {
+            setUser(response.data)
+		};
+		getAPI(url, thenFunction);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 	

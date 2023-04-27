@@ -1,16 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import { toast } from 'react-toastify';
 
 import menuCategories from '../data/categories.json';
 import Loading from '../components/Loading';
 import languages from '../data/language.json';
 
 import { handleFileUpload } from '../utils/functions';
+import { getAPI, putAPI } from '../utils/api';
+import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 const EditBusiness = () => {
 	const { language: lang } = useContext(AuthContext);
@@ -21,33 +21,16 @@ const EditBusiness = () => {
 
 	const [business, setBusiness] = useState('');
 
-	const storedToken = localStorage.getItem('authToken');
-
 	useEffect(() => {
-		axios
-			.get(
-				`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,
-				{ headers: { Authorization: `Bearer ${storedToken}` } }
-			)
-			.then((response) => {
-				setBusiness(response.data.business);
-			})
-			.catch((error) => {
-				console.log({ error });
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.redirect}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.redirect}`, {
-								theme: 'dark',
-						  });
-				}
-				navigate('/');
-			});
-
+		const url = `business/${businessNameEncoded}`;
+		const thenFunction = (response) => {
+            setBusiness(response.data.business)
+		};
+		const errorFunction = () => {
+			toastifyError(`${languages[0][lang].tostify.redirect}`);
+			navigate('/');
+		};
+		getAPI(url, thenFunction, errorFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -57,7 +40,6 @@ const EditBusiness = () => {
 
 	const handleBusinessSubmit = (e) => {
 		e.preventDefault();
-		const storedToken = localStorage.getItem('authToken');
 		if (business.currency === '') {
 			business.currency = '$';
 		}
@@ -68,48 +50,17 @@ const EditBusiness = () => {
 		) {
 			return setErrorMessage(`${languages[0][lang].editBusiness.error}`);
 		} else {
-			// Create an object representing the request body
 			const requestBody = business;
-
-			// Make an axios request to the API
-			// If POST request is successful redirect to Business/Dashboard page
-			// If the request resolves with an error, set the error message in the state
-			axios
-				.put(
-					`${process.env.REACT_APP_SERVER_URL}/business/edit/${businessNameEncoded}`,
-					requestBody,
-					{ headers: { Authorization: `Bearer ${storedToken}` } }
-				)
-				.then((response) => {
-					navigate(`/${businessNameEncoded}/dashboard`);
-					// eslint-disable-next-line no-lone-blocks
-					{
-						window.innerWidth < 450
-							? toast.success(`${languages[0][lang].tostify.editBusiness}`, {
-									position: toast.POSITION.BOTTOM_CENTER,
-									theme: 'dark',
-							  })
-							: toast.success(`${languages[0][lang].tostify.editBusiness}`, {
-									theme: 'dark',
-							  });
-					}
-				})
-				.catch((error) => {
-					console.log({ error });
-					const errorDescription = error.response.data.message;
-					// eslint-disable-next-line no-lone-blocks
-					{
-						window.innerWidth < 450
-							? toast.error(`${languages[0][lang].tostify.editBuzError}`, {
-									position: toast.POSITION.BOTTOM_CENTER,
-									theme: 'dark',
-							  })
-							: toast.error(`${languages[0][lang].tostify.editBuzError}`, {
-									theme: 'dark',
-							  });
-					}
-					setErrorMessage(errorDescription);
-				});
+			const url = `business/edit/${businessNameEncoded}`
+			const thenFunction = (response) =>{
+				navigate(`/${businessNameEncoded}/dashboard`);
+				toastifySuccess(`${languages[0][lang].tostify.editBusiness}`)
+			}
+			const errorFunction = (error) => {
+				toastifyError(`${languages[0][lang].tostify.editBuzError}`)
+				setErrorMessage(error.response.data.message)
+			}
+			putAPI(url,requestBody,thenFunction,errorFunction)
 		}
 	};
 
