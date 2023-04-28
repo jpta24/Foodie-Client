@@ -1,23 +1,22 @@
 import { useState, useContext, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Form, InputGroup, Button } from 'react-bootstrap';
-import { toast } from 'react-toastify';
 
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import Loading from '../components/Loading';
 
 import { handleFileUpload } from '../utils/functions';
+import { getAPI, putAPI } from '../utils/api';
+import { toastifyError } from '../utils/tostify';
 
 const EditProduct = () => {
 	const { user, language: lang } = useContext(AuthContext);
 	const { businessName, productID } = useParams();
 	const navigate = useNavigate();
-	const storedToken = localStorage.getItem('authToken');
 
 	let businessNameEncoded = businessName.split(' ').join('-');
 
@@ -30,67 +29,30 @@ const EditProduct = () => {
 	const [productingredientsearch, setproductingredientsearch] = useState('');
 
 	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_SERVER_URL}/products/${productID}`, {
-				headers: { Authorization: `Bearer ${storedToken}` },
-			})
-			.then((response) => {
-				setProduct(response.data.product);
-			})
-			.catch((error) => {
-				console.log({ error });
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.redirect}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.redirect}`, {
-								theme: 'dark',
-						  });
-				}
-				navigate('/');
-			});
-
+		const url = `products/${productID}`;
+		const thenFunction = (response) => {
+            setProduct(response.data.product);
+		};
+		const errorFunction = () => {
+			toastifyError(`${languages[0][lang].tostify.redirect}`);
+			navigate('/');
+		};
+		getAPI(url, thenFunction, errorFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleEditProduct = (e) => {
 		e.preventDefault();
-		const storedToken = localStorage.getItem('authToken');
-
-		// Create an object representing the request body
 		const requestBody = product;
-
-		// Make an axios request to the API
-		// If POST request is successful redirect to Business/Dashboard page
-		// If the request resolves with an error, set the error message in the state
-		axios
-			.put(
-				`${process.env.REACT_APP_SERVER_URL}/products/edit/${product._id}`,
-				requestBody,
-				{ headers: { Authorization: `Bearer ${storedToken}` } }
-			)
-			.then(() => {
-				navigate(`/${businessNameEncoded}/products`);
-			})
-			.catch((error) => {
-				console.log({ error });
-				const errorDescription = error.response.data.message;
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.prodEditError}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.prodEditError}`, {
-								theme: 'dark',
-						  });
-				}
-				setErrorMessage(errorDescription);
-			});
+		const url = `products/edit/${product._id}`
+		const thenFunction = (response) =>{
+			navigate(`/${businessNameEncoded}/products`);
+		}
+		const errorFunction = (error) => {
+			toastifyError(`${languages[0][lang].tostify.prodEditError}`)
+			setErrorMessage(error.response.data.message)
+		}
+		putAPI(url,requestBody,thenFunction,errorFunction)
 	};
 
 	const [currentProductImg, setCurrentProductImg] = useState(null);

@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 
 import { Modal, Button } from 'react-bootstrap';
 
-import { toast } from 'react-toastify';
 import languages from '../data/language.json';
 import { capitalize } from '../utils/functions';
+import { putAPI, getAPI } from '../utils/api';
+import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 import MembershipTable from '../components/MembershipTable';
 import Loading from '../components/Loading';
@@ -25,80 +25,35 @@ function MembershipPage() {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 
-	const storedToken = localStorage.getItem('authToken');
 	const openModal = (plan) => {
 		setSelectedPlan(plan);
 		setShow(true);
 	};
 	const handleChangeMembership = () => {
-		const storedToken = localStorage.getItem('authToken');
-
 		const requestBody = {
 			selectedPlan,
 			usedTrial: business.membership.usedTrial,
 		};
-
-		axios
-			.put(
-				`${process.env.REACT_APP_SERVER_URL}/business/membership/${businessNameEncoded}`,
-				requestBody,
-				{ headers: { Authorization: `Bearer ${storedToken}` } }
-			)
-			.then((response) => {
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.success(`${languages[0][lang].tostify.updateMembership}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.success(`${languages[0][lang].tostify.updateMembership}`, {
-								theme: 'dark',
-						  });
-				}
-
-				navigate(`/${businessNameEncoded}/dashboard`);
-			})
-			.catch((error) => {
-				console.log({ error });
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.errorMembership}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.errorMembership}`, {
-								theme: 'dark',
-						  });
-				}
-			});
+		const url = `business/membership/${businessNameEncoded}`;
+		const thenFunction = (response) => {
+			toastifySuccess(`${languages[0][lang].tostify.updateMembership}`);
+			navigate(`/${businessNameEncoded}/dashboard`);
+		};
+		const errorFunction = (error) => {
+			toastifyError(`${languages[0][lang].tostify.errorMembership}`);
+		};
+		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
 	useEffect(() => {
-		axios
-			.get(
-				`${process.env.REACT_APP_SERVER_URL}/business/membership/${businessNameEncoded}`,
-				{ headers: { Authorization: `Bearer ${storedToken}` } }
-			)
-			.then((response) => {
-				setBusiness(response.data);
-			})
-			.catch((error) => {
-				console.log({ error });
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.redirect}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.redirect}`, {
-								theme: 'dark',
-						  });
-				}
-				navigate('/');
-			});
-
+		const url = `business/membership/${businessNameEncoded}`;
+		const thenFunction = (response) => {
+			setBusiness(response.data);
+		};
+		const errorFunction = () => {
+			toastifyError(`${languages[0][lang].tostify.redirect}`);
+			navigate('/');
+		};
+		getAPI(url, thenFunction, errorFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user]);
 

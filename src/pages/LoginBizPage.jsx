@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import { useNavigate,useParams } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 
 import { Button } from 'react-bootstrap';
-import { toast } from 'react-toastify';
 
 import languages from '../data/language.json'
+import { postAPI } from '../utils/api';
+import {  toastifyError } from '../utils/tostify';
 
 const LoginBizPage = () => {
 	const {language:lang} = useContext(AuthContext);
@@ -22,30 +22,20 @@ const LoginBizPage = () => {
 		e.preventDefault();
 		const requestBody = { username, password };
 
-		axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
-			.then((response) => {
-				// Request to the server's endpoint `/auth/login` returns a response
+		const url = `auth/login`
+		const thenFunction = (response) =>{
+			// Request to the server's endpoint `/auth/login` returns a response
 				// with the JWT string ->  response.data.authToken
 				// console.log('JWT token', response.data.authToken );
 				storeToken(response.data.authToken); // store in my localStorage the authToken
 				authenticateUser(); // verify token is valid to get the user information from the server
 				navigate(`/${businessName}`);
-			})
-			.catch((error) => {
-				const errorDescription = error.response.data.message;
-				// eslint-disable-next-line no-lone-blocks
-				{
-					window.innerWidth < 450
-						? toast.error(`${languages[0][lang].tostify.readError}`, {
-								position: toast.POSITION.BOTTOM_CENTER,
-								theme: 'dark',
-						  })
-						: toast.error(`${languages[0][lang].tostify.readError}`, { theme: 'dark' });
-				}
-				
-				setErrorMessage(errorDescription);
-			});
+		}
+		const errorFunction = (error) => {
+			toastifyError(`${languages[0][lang].tostify.readError}`)
+			setErrorMessage(error.response.data.message)
+		}
+		postAPI(url,requestBody,thenFunction,errorFunction)
 	};
 
 	return (

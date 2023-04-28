@@ -2,19 +2,14 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
-import axios from 'axios';
-
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import TestimonialsCarousel from '../components/HomeCarousel';
-
-// import LanguageDetector from '../config/LanguageDetector';
+import MembershipTable from '../components/MembershipTable';
 
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
-import MembershipTable from '../components/MembershipTable';
-
-// import iconsCloud from '../data/icons.json'
+import { getAPI } from '../utils/api';
 
 function HomePage() {
 	const { language: lang, user: userID } = useContext(AuthContext);
@@ -42,22 +37,14 @@ function HomePage() {
 
 	useEffect(() => {
 		if (userID) {
-			const storedToken = localStorage.getItem('authToken');
-			axios
-				.get(`${process.env.REACT_APP_SERVER_URL}/users/home/${userID._id}`, {
-					headers: { Authorization: `Bearer ${storedToken}` },
-				})
-				.then((response) => {
-					if (response.data.name) {
-						setBusiness(response.data);
-					}
-					
-				})
-				.catch((error) => {
-					console.log({ error });
-				});
+			const url = `users/home/${userID._id}`;
+			const thenFunction = (response) => {
+				if (response.data.name) {
+					setBusiness(response.data);
+				}
+			};
+			getAPI(url, thenFunction);
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userID]);
 	return (
