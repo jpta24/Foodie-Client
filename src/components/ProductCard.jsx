@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import {CartContext} from '../context/cart.context'
 import { Link,useNavigate } from "react-router-dom";
-import axios from 'axios';
 
-import { toast } from 'react-toastify';
+import { getAPI, putAPI } from '../utils/api';
+import { toastifyError } from '../utils/tostify';
 
 import iconsCloud from '../data/icons.json'
 
@@ -17,7 +17,6 @@ const ProductCard = ({product,businessNameEncoded,currency,cart,setBusiness,hand
     const paused ='⏸'
     const play = '▶'
 
-    const storedToken = localStorage.getItem("authToken"); 
 
     const handleAddQtyToCart = () =>{
         const requestBody = {
@@ -25,14 +24,11 @@ const ProductCard = ({product,businessNameEncoded,currency,cart,setBusiness,hand
                 product:product._id,
             }
         } 
-        axios
-            .put(`${process.env.REACT_APP_SERVER_URL}/users/addQtyCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
-            .then(() => {
-                getCartData()
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+        const url = `users/addQtyCart/${user._id}`;
+		const thenFunction = (response) => {
+			getCartData();
+		};
+		putAPI(url, requestBody, thenFunction);
     }
 
     const handleAddToCart = () =>{
@@ -46,25 +42,14 @@ const ProductCard = ({product,businessNameEncoded,currency,cart,setBusiness,hand
                         quantity:1
                     }
                 } 
-                axios
-                    .put(`${process.env.REACT_APP_SERVER_URL}/users/addCart/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
-                    .then(() => {
-                        // eslint-disable-next-line no-lone-blocks
-                        // {window.innerWidth < 450 ? 
-                        //     toast.success("Item(s) added to Cart !", {
-                        //         position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                        //     }) : toast.success('Item(s) added to Cart', { theme: 'dark' });}
-                        getCartData()
-                    })
-                    .catch((error) => {
-                        const errorDescription = error.response.data.message;
-                        toast.error(errorDescription, { theme: 'dark' });
-                        // eslint-disable-next-line no-lone-blocks
-                        {window.innerWidth < 450 ? 
-                            toast.error(errorDescription, {
-                                position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                            }) : toast.error(errorDescription, { theme: 'dark' });}
-                    });
+                const url = `users/addCart/${user._id}`
+                const thenFunction = (response) =>{
+                    getCartData()
+                }
+                const errorFunction = (error) => {
+                    toastifyError(error.response.data.message)
+                }
+                putAPI(url,requestBody,thenFunction,errorFunction)
             }
             
         } else {
@@ -77,22 +62,19 @@ const ProductCard = ({product,businessNameEncoded,currency,cart,setBusiness,hand
         const requestBody = {
             status:newStatus
         } 
-        axios
-            .put(`${process.env.REACT_APP_SERVER_URL}/products/status/${product._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
-            .then((response) => {
-                return axios.get(`${process.env.REACT_APP_SERVER_URL}/business/${businessNameEncoded}`,{headers: {Authorization: `Bearer ${storedToken}`}})
-            }).then(response=>{
-                setBusiness(response.data.business)
-            }).catch((error) => {
-                console.log(error);
-                const errorDescription = error.response.data.message;
-                toast.error(errorDescription, { theme: 'dark' });
-                // eslint-disable-next-line no-lone-blocks
-                {window.innerWidth < 450 ? 
-                    toast.error(errorDescription, {
-                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    }) : toast.error(errorDescription, { theme: 'dark' });}
-            });
+        const url = `products/status/${product._id}`
+        
+        const urlGet = `business/${businessNameEncoded}`
+        const thenGetFunction = (response) =>{
+            setBusiness(response.data.business)
+        }
+        const thenFunction = (response) =>{
+            getAPI(urlGet,thenGetFunction, errorFunction)
+        }
+        const errorFunction = (error) => {
+            toastifyError(error.response.data.message)
+        }
+        putAPI(url,requestBody,thenFunction,errorFunction)
     }
 
   return (

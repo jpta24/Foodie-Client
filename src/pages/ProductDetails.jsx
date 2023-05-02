@@ -7,7 +7,7 @@ import { IoCloseSharp } from 'react-icons/io5'
 
 import languages from '../data/language.json'
 import Loading from '../components/Loading';
-import { getAPI, } from '../utils/api';
+import { getAPI } from '../utils/api';
 
 
 const ProductDetails = (props) => {

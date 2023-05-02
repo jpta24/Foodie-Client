@@ -36,6 +36,23 @@ export const postAPI = async (url, requestBody, thenFunction, catchFunction) => 
 	}
 };
 
+    // import { getAPI, postAPI } from '../utils/api';
+    // import { toastifySuccess, toastifyError } from '../utils/tostify';
+
+    ///////////////////////// GET ///////
+
+    // const url = `business/${businessNameEncoded}`;
+	// 	const thenFunction = (response) => {
+    //         setBusiness(response.data.business)
+	// 	};
+	// 	const errorFunction = () => {
+	// 		toastifyError(`${languages[0][lang].tostify.redirect}`);
+	// 		navigate('/');
+	// 	};
+	// 	getAPI(url, thenFunction, errorFunction);
+
+    ///////////////////////// POST ///////
+
     //          const url = `products`
     // 			const thenFunction = (response) =>{
     // 				setProduct({ ...initialState, business: business._id });
