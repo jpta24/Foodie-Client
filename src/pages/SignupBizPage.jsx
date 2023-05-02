@@ -1,25 +1,25 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
-import { useNavigate,useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import languages from '../data/language.json'
+import languages from '../data/language.json';
 
-import { Button } from 'react-bootstrap'
-import { toast } from 'react-toastify';
+import { Button } from 'react-bootstrap';
+
+import { postAPI } from '../utils/api';
+import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 const SignupBizPage = () => {
-	const {language:lang} = useContext(AuthContext);
-    const { businessName } = useParams();
-    const navigate = useNavigate();
+	const { language: lang } = useContext(AuthContext);
+	const { businessName } = useParams();
+	const navigate = useNavigate();
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const [email, setEmail] = useState('')
-    // const [rol, setRol] = useState('user')
-    // const [avatarUrl, setAvatarUrl] = useState('/userActive.png')
+	const [email, setEmail] = useState('');
+	// const [rol, setRol] = useState('user')
+	// const [avatarUrl, setAvatarUrl] = useState('/userActive.png')
 	const [errorMessage, setErrorMessage] = useState(undefined);
-
 
 	const handleSignupSubmit = (e) => {
 		e.preventDefault();
@@ -29,25 +29,16 @@ const SignupBizPage = () => {
 		// Make an axios request to the API
 		// If POST request is successful redirect to login page
 		// If the request resolves with an error, set the error message in the state
-		axios
-			.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, requestBody)
-			.then((response) => {
-				navigate(`/login/${businessName}`);
-				// eslint-disable-next-line no-lone-blocks
-				{window.innerWidth < 450 ? 
-					toast.success(`${languages[0][lang].tostify.userSucc}`, {
-						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-					}) : toast.success(`${languages[0][lang].tostify.userSucc}`, { theme: 'dark' });}
-			})
-			.catch((error) => {
-				const errorDescription = error.response.data.message;
-				// eslint-disable-next-line no-lone-blocks
-				{window.innerWidth < 450 ? 
-					toast.error(`${languages[0][lang].tostify.userError}`, {
-						position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-					}) : toast.error(`${languages[0][lang].tostify.userError}`, { theme: 'dark' });}
-				setErrorMessage(errorDescription);
-			});
+		const url = `auth/signup`;
+		const thenFunction = (response) => {
+			navigate(`/login/${businessName}`);
+			toastifySuccess(`${languages[0][lang].tostify.userSucc}`);
+		};
+		const errorFunction = (error) => {
+			toastifyError(`${languages[0][lang].tostify.userError}`);
+			setErrorMessage(error.response.data.message);
+		};
+		postAPI(url, requestBody, thenFunction, errorFunction);
 	};
 
 	return (
@@ -64,7 +55,7 @@ const SignupBizPage = () => {
 
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputUser01' className='form-label'>
-							{languages[0][lang].signup.username}
+								{languages[0][lang].signup.username}
 							</label>
 							<input
 								name='username'
@@ -80,7 +71,7 @@ const SignupBizPage = () => {
 
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputEmail01' className='form-label'>
-							{languages[0][lang].signup.email}
+								{languages[0][lang].signup.email}
 							</label>
 							<input
 								name='email'
@@ -90,40 +81,45 @@ const SignupBizPage = () => {
 								value={email}
 								onChange={(e) => {
 									setEmail(e.target.value);
-                                }}
+								}}
 							/>
 						</div>
 
 						<div className='col-md-12 d-flex flex-column align-items-start justify-content-start my-2'>
 							<label htmlFor='inputPassword01' className='form-label'>
-							{languages[0][lang].signup.password}
+								{languages[0][lang].signup.password}
 							</label>
 							<input
 								name='password'
 								type='password'
 								className='form-control'
 								id='inputPassword01'
-                                value={password}
+								value={password}
 								onChange={(e) => {
 									setPassword(e.target.value);
-                                }}
+								}}
 							/>
 						</div>
-                        {errorMessage && <p className='text-danger'>{errorMessage}</p>}
+						{errorMessage && <p className='text-danger'>{errorMessage}</p>}
 						<div className='col-12 my-3'>
 							<button type='submit' className='btn btn-primary col-4'>
-							{languages[0][lang].signup.signup}
+								{languages[0][lang].signup.signup}
 							</button>
 						</div>
 					</form>
-                    <hr />
-                    <p>{languages[0][lang].signup.account}</p>
-                    <Button href='/login'  variant='outline-primary' className='mx-2 my-1 col-4'>{languages[0][lang].signup.login}</Button>
+					<hr />
+					<p>{languages[0][lang].signup.account}</p>
+					<Button
+						href='/login'
+						variant='outline-primary'
+						className='mx-2 my-1 col-4'
+					>
+						{languages[0][lang].signup.login}
+					</Button>
 				</div>
 			</div>
-			
 		</div>
 	);
 };
 
-export default SignupBizPage
+export default SignupBizPage;

@@ -1,15 +1,15 @@
 import { useState, useContext, useEffect } from 'react';
 import {  useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import axios from 'axios';
 
 import { Row, Button, Form } from 'react-bootstrap';
-import { toast } from 'react-toastify';
 
 import ProfileCard from '../components/ProfileCard';
 
 import iconsCloud from '../data/icons.json'
 import languages from '../data/language.json'
+import { getAPI, putAPI } from '../utils/api';
+import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 const ProfilePage = () => { 
 	const {language:lang} = useContext(AuthContext);
@@ -19,16 +19,11 @@ const ProfilePage = () => {
     const [user, setUser] = useState('')
 
 	useEffect(() => {
-		const storedToken = localStorage.getItem("authToken"); 
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${userID}`,{headers: {Authorization: `Bearer ${storedToken}`}})
-          .then(response=>{
-            
-              setUser(response.data)
-          })
-          .catch((error) => {
-              console.log({error});
-            })
-      
+        const url = `users/${userID}`;
+		const thenFunction = (response) => {
+            setUser(response.data)
+		};
+		getAPI(url, thenFunction );
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
     
@@ -62,7 +57,6 @@ const ProfilePage = () => {
 
     const handleBuzNameSubmit = (e) => {
 		e.preventDefault();
-        const storedToken = localStorage.getItem("authToken"); 
 
         let newRol =''
         Object.entries(rol).forEach(eachrol=>{
@@ -74,36 +68,22 @@ const ProfilePage = () => {
             rol:newRol,
             buzname
         } 
-		// Make an axios request to the API
-		// If POST request is successful redirect to Business/Dashboard page
-		// If the request resolves with an error, set the error message in the state
-		axios
-			.put(`${process.env.REACT_APP_SERVER_URL}/users/rol/${user._id}`, requestBody,  {headers: {Authorization: `Bearer ${storedToken}`}})
-			.then(() => {
-                setIncommingMessage(`${languages[0][lang].profile.inCommingMsg}`)
-                // eslint-disable-next-line no-lone-blocks
-                {window.innerWidth < 450 ? 
-                    toast.success(`${languages[0][lang].tostify.appSent}`, {
-                        position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                    }) : toast.success(`${languages[0][lang].tostify.appSent}`, { theme: 'dark' });}
-			})
-			.catch((error) => {
-				const errorDescription = error.response.data.message;
-                // eslint-disable-next-line no-lone-blocks
-              {window.innerWidth < 450 ? 
-                toast.error(errorDescription, {
-                    position: toast.POSITION.BOTTOM_CENTER, theme: 'dark'
-                }) : toast.error(errorDescription, { theme: 'dark' });}
-				setErrorMessage(errorDescription);
-			});
+
+        const url = `users/rol/${user._id}`
+        const thenFunction = (response) =>{
+            setIncommingMessage(`${languages[0][lang].profile.inCommingMsg}`)
+            toastifySuccess(`${languages[0][lang].tostify.appSent}`)
+        }
+        const errorFunction = (error) => {
+            toastifyError(error.response.data.message)
+            setErrorMessage(error.response.data.message)
+        }
+        putAPI(url,requestBody,thenFunction,errorFunction)
 	};
 
 
   return (
     <div className='container'>
-        {/* <Row className='justify-content-end'>
-            <Button variant='outline-primary' size='sm' className='col-3 col-md-2 m-2 '>Edit Profile</Button>
-        </Row> */}
         <Row className='d-flex flex-row justify-content-center pt-3'>
             <div className='col-3 col-md-2 justify-content-center align-items-center mx-2'>
                 <img src={user.avatarUrl || iconsCloud[0].userDefault} alt='altProfile' className='w-100 rounded-circle border border-dark p-2 d-block'/>

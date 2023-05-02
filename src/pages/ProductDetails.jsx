@@ -2,12 +2,12 @@ import { useState, useEffect, useContext } from 'react';
 import {  Link, useParams  } from 'react-router-dom'; 
 import { AuthContext } from '../context/auth.context';
 
-import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { IoCloseSharp } from 'react-icons/io5'
 
 import languages from '../data/language.json'
 import Loading from '../components/Loading';
+import { getAPI, } from '../utils/api';
 
 
 const ProductDetails = (props) => {
@@ -15,14 +15,13 @@ const ProductDetails = (props) => {
 
   const { productID } = useParams();
   const [product, setProduct] = useState(null)
-  console.log(languages[0][lang].productDetails);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken"); 
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/products/${productID}`,{headers: {Authorization: `Bearer ${storedToken}`}})
-          .then(response=>{
-              setProduct(response.data.product)
-          })
+    const url = `products/${productID}`;
+    const thenFunction = (response) => {
+        setProduct(response.data.product)
+    };
+    getAPI(url, thenFunction);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
