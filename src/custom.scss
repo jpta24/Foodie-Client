@@ -166,3 +166,26 @@ scrollbar-width: none;
   --bs-dropdown-min-width: 0 !important;
 }
 
+.test{
+  background-color: #121116;
+  height: 300px;
+  color: white;
+  display: flex;
+  flex: 1;
+}
+
+.test-card {
+  background-color: #282832;
+  
+  font-size: 10px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.card-text-desc {
+  color:#5b5a63
+}
+
