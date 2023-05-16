@@ -1,124 +1,123 @@
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
 
 // Create your own map
 $custom-colors: (
-  "f-primary": #900,
-  "f-secondary": green
+	'f-primary': #900,
+	'f-secondary': green,
 );
 
 body {
-  height: auto;
-  align-items: center;
-  background-image: linear-gradient(to right,#F1FAFF, #8EEDFF) !important
+	height: auto;
+	align-items: center;
+	background-image: linear-gradient(to right, #f1faff, #8eedff) !important;
 }
 
 .App {
-  text-align: center;
-  /* background-image: linear-gradient(to right,#7ff3e98a, #f7f9f99e);*/ 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background-size: cover;
+	text-align: center;
+	/* background-image: linear-gradient(to right,#7ff3e98a, #f7f9f99e);*/
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+	background-size: cover;
 }
 
 body * {
-  // z-index: 2;
+	// z-index: 2;
 }
 
 .background-shapes {
-  content: "";
-  position: absolute;
-  z-index: -2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 5076px;
-  background-size: 100%;
-  animation: 180s infiniteScroll linear infinite;
-  background-repeat-x: repeat;
-  background-image:
-  url(https://cdn2.hubspot.net/hubfs/53/Pricing%202017%20Assets/marketing/Header_Circles-1.svg);
-  -webkit-animation: 180s infiniteScroll linear infinite;
-  -webkit-animation: 180s infiniteScroll linear infinite;
+	content: '';
+	position: absolute;
+	z-index: -2;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 5076px;
+	background-size: 100%;
+	animation: 180s infiniteScroll linear infinite;
+	background-repeat-x: repeat;
+	background-image: url(https://cdn2.hubspot.net/hubfs/53/Pricing%202017%20Assets/marketing/Header_Circles-1.svg);
+	-webkit-animation: 180s infiniteScroll linear infinite;
+	-webkit-animation: 180s infiniteScroll linear infinite;
 }
 
 @-webkit-keyframes infiniteScroll {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
+	0% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
 
-  100% {
-    -webkit-transform: translate3d(0, -1692px, 0);
-    transform: translate3d(0, -1692px, 0);
-  }
+	100% {
+		-webkit-transform: translate3d(0, -1692px, 0);
+		transform: translate3d(0, -1692px, 0);
+	}
 }
 
 @keyframes infiniteScroll {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
+	0% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
 
-  100% {
-    -webkit-transform: translate3d(0, -1692px, 0);
-    transform: translate3d(0, -1692px, 0);
-  }
+	100% {
+		-webkit-transform: translate3d(0, -1692px, 0);
+		transform: translate3d(0, -1692px, 0);
+	}
 }
 
 .card:hover {
-  transform: scale(1.01);
-  -webkit-transform: scale(1.01);
-  -moz-transform: scale(1.01);
-  -ms-transform: scale(1.01);
-  -o-transform: scale(1.01);
-  transition: all 0.3s linear !important;
-  -webkit-transition: all 0.3s linear !important;
-  -moz-transition: all 0.3s linear !important;
-  -ms-transition: all 0.3s linear !important;
-  -o-transition: all 0.3s linear !important;
+	transform: scale(1.01);
+	-webkit-transform: scale(1.01);
+	-moz-transform: scale(1.01);
+	-ms-transform: scale(1.01);
+	-o-transform: scale(1.01);
+	transition: all 0.3s linear !important;
+	-webkit-transition: all 0.3s linear !important;
+	-moz-transition: all 0.3s linear !important;
+	-ms-transition: all 0.3s linear !important;
+	-o-transition: all 0.3s linear !important;
 }
 
 .cardBg {
-  background-color: rgba(255, 255, 255, 0.053) !important;
+	background-color: rgba(255, 255, 255, 0.053) !important;
 }
 
 .cartProducts {
-  max-height: 64vh;
-  overflow: auto;
+	max-height: 64vh;
+	overflow: auto;
 }
 
 .cartSummary {
-  height: 86vh;
+	height: 86vh;
 }
 @media screen and (max-width: 400px) {
-  .cartSummary {
-    height: fit-content;
-  }
+	.cartSummary {
+		height: fit-content;
+	}
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+	width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+	background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+	background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+	background: #555;
 }
 // Merge the maps
 $theme-colors: map-merge($theme-colors, $custom-colors);
@@ -127,95 +126,189 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import '~bootstrap/scss/bootstrap.scss';
 
 .Toastify__toast-container--top-right {
-  top: 1.5em;
-  right: 1.5em; 
+	top: 1.5em;
+	right: 1.5em;
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .categories {
-  overflow-y: scroll;
+	overflow-y: scroll;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .categories::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .categories {
--ms-overflow-style: none;  
-scrollbar-width: none;  
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 
 @font-face {
-  font-family: NotoColorEmojiLimited;
-  unicode-range: U+1F1E6-1F1FF;
-  src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
+	font-family: NotoColorEmojiLimited;
+	unicode-range: U+1F1E6-1F1FF;
+	src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
 }
 
 .flags {
-  font-family: 'NotoColorEmojiLimited', -apple-system, BlinkMacSystemFont, 
-  'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 
-  'Segoe UI Emoji', 'Segoe UI Symbol';
+	font-family: 'NotoColorEmojiLimited', -apple-system, BlinkMacSystemFont,
+		'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+		'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 .dropdown-menu {
-  --bs-dropdown-min-width: 0 !important;
+	--bs-dropdown-min-width: 0 !important;
 }
 
-.test{
-  background-color: #121116;
-  height: 300px;
-  color: white;
-  display: flex;
-  flex: 1;
+.test {
+	background-color: #121116;
+	height: 300px;
+	color: white;
+	display: flex;
+	flex: 1;
 }
 
 .card-container {
-    width: 190px;
+	color: white;
+	width: 190px;
+	position: relative;
+	padding-top: 50px;
 }
-.test-card {
-  background-color: #282832;
-  font-size: 10px;
-  border-radius:25px;
-  -webkit-border-radius:25px;
-  -moz-border-radius:25px;
-  -ms-border-radius:25px;
-  -o-border-radius:25px;
+
+.card-controls {
+  position: absolute;
+	top: -27px;
+  right: 0px;
+}
+.card-icon {
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	background-color: #282832;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	position: absolute;
+	top: 0px;
+}
+
+.card-icon1 {
+	left: 0px;
+}
+
+.card-icon2 {
+	right: 0px;
+}
+
+.card-img {
+	max-width: 145px;
+	max-height: 145px;
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 1));
+	-webkit-filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.9));
+}
+
+.card-section {
+	background-color: #282832;
+	font-size: 10px;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	-ms-border-radius: 25px;
+	-o-border-radius: 25px;
+	padding-top: 100px !important;
+}
+.card-title {
+	font-size: 1rem;
+	font-weight: 500;
+	max-width: 158px;
+	height: 23px;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .card-text-desc {
-  margin-top: 0.3rem;
-  color:#5b5a63
+	margin-top: 0.3rem;
+	color: #91909a;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	height: 4.3em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.card-preis {
+	font-size: 1.25rem;
+	max-width: 75px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 1.2;
+	font-weight: 500;
+	max-width: 158px;
 }
 
-.card-weigth{
-  background-color: #16151B;
-  padding: 4px 12px;
-  font-size: 9px;
-  height: 16px;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+.card-weigth {
+	background-color: #16151b;
+	padding: 3px 12px;
+	font-size: 8px;
+	height: 16px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
 }
 
 .card-add {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  background-color: #15E666;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 17px;
-  font-weight: bold;
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	background-color: #15e666;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 9px;
+	font-weight: bold;
+}
+
+.card-added {
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	background-color: #fe4a67;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 9px;
+	font-weight: bold;
 }
