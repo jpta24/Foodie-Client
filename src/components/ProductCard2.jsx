@@ -16,9 +16,9 @@ const ProductCard2 = ({
 	setBusiness,
 	handleModal,
 	owner,
-    userSaved
+	userSaved,
+    handleSavedProductStatus
 }) => {
-    console.log(product);
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);
 	const { getCartData } = useContext(CartContext);
@@ -84,6 +84,10 @@ const ProductCard2 = ({
 		};
 		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
+	const isProdSaved = userSaved.savedProducts?.includes(product._id);
+    
+	
+
 	return (
 		<div className={`m-3 card-container ${!prodIsActive && 'opacity-50'}`}>
 			<dir className='p-0 m-1 card-controls'>
@@ -112,22 +116,25 @@ const ProductCard2 = ({
 				</div>
 			</dir>
 			<span className='card-icon card-icon1'>🔥</span>
-			<span className='card-icon card-icon2'>{userSaved.savedProducts?.includes(product._id)?'❤':'🤍'}</span>
+			<span className='card-icon card-icon2' onClick={()=>handleSavedProductStatus(product._id)}>{isProdSaved ? '❤' : '🤍'}</span>
 			<div className='card-img-container'>
 				<img className='card-img' src={product.mainImg} alt='' />
 			</div>
 
 			<div className='card-section p-3 text-start'>
 				<span className='card-title'>{product.name}</span>
-				<p className='card-text-desc'>
-					{product.description}
-				</p>
+				<p className='card-text-desc'>{product.description}</p>
 				<div className='d-flex justify-content-between'>
-					<span className='card-preis'>{currency}{product.price.toFixed(2)}</span>
+					<span className='card-preis'>
+						{currency}
+						{product.price.toFixed(2)}
+					</span>
 					<div className='my-auto'>
 						<span className='card-weigth'>290g</span>
 					</div>
-					<span className='card-add' onClick={handleAddToCart}>➕</span>
+					<span className='card-add' onClick={handleAddToCart}>
+						➕
+					</span>
 				</div>
 			</div>
 		</div>
