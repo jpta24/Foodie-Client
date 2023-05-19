@@ -339,3 +339,53 @@ a {
 	font-size: 9px;
 	font-weight: bold;
 }
+
+@media (max-width: 600px) {
+  .card-container {
+    width: 136px;
+    padding-top: 35px;
+  }
+  
+  .card-icon {
+    height: 25px;
+    width: 25px;
+    font-size: 12px;
+  }
+  
+  .card-img-container {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .card-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .card-section {
+    padding-top: 45px !important;
+  }
+  .card-title {
+    font-size: 0.78rem;
+    max-width:108px
+  }
+
+  .card-preis {
+    font-size: 1rem;
+    max-width:100px
+  }
+  
+  .card-weigth {
+    padding: 3px 6px;
+    font-size: 5px;
+  }
+
+  .card-add {
+    cursor:pointer;
+    height: 20px;
+    width: 20px;
+    font-size: 7px;
+  }
+  
+}

@@ -84,6 +84,7 @@ const ProductCard2 = ({
 		};
 		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
+    console.log(userSaved);
 	const isProdSaved = userSaved.savedProducts?.includes(product._id);
     
 	
