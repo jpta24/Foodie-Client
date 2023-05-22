@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
-import {  useParams, useNavigate, Link  } from 'react-router-dom'; 
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { CartContext } from '../context/cart.context';
 import { AuthContext } from '../context/auth.context';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Modal, Button } from 'react-bootstrap';
-import languages from '../data/language.json'
+import languages from '../data/language.json';
 
-import ProductCard from '../components/ProductCard';
+import ProductCard2 from '../components/ProductCard2';
 import ProductCardDesktop from '../components/ProductCardDesktop';
 
 import BusinessMenu from '../components/BusinessMenu';
@@ -16,193 +16,277 @@ import { getAPI, putAPI, deleteAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
 
 const Business = () => {
-	const {language:lang} = useContext(AuthContext);
-    
-    const { cart } = useContext(CartContext)
-    const { user } = useContext(AuthContext)
-    let summary
-    if (cart!==null && cart.length > 0 ) {
-        const amounts = cart.map(item=>item.product.price*item.quantity)
-        summary = amounts.reduce((acc,val)=>{return acc+val}).toFixed(2)
-    } 
-    
-    const { businessName } = useParams();
-    const navigate = useNavigate();
+	const { language: lang } = useContext(AuthContext);
 
-    let businessNameEncoded = businessName.split(' ').join('-')
+	const { cart } = useContext(CartContext);
+	const { user } = useContext(AuthContext);
+	let summary;
+	if (cart !== null && cart.length > 0) {
+		const amounts = cart.map((item) => item.product.price * item.quantity);
+		summary = amounts
+			.reduce((acc, val) => {
+				return acc + val;
+			})
+			.toFixed(2);
+	}
 
-    const [business, setBusiness] = useState('')
-    // const [searchProduct, setSearchProduct] = useState('')
-    
-    
-    // let initialMenu = {}
-    let arrCategories = []
-    if (business.products) {
-        business.products.forEach(prod=>{
-            prod.categories.forEach(cate=>{
-                if(!arrCategories.includes(cate)){
-                arrCategories.push(cate) 
-                // initialMenu[cate]=false
-                } 
-            })
-        })
-    }
-    // const updatedCategory = {...initialMenu,General:true}
-    const [category, setCategory] = useState( 'General')
-    // let activeCategory = 'General'
+	const { businessName } = useParams();
+	const navigate = useNavigate();
 
-    const handleCategory = (cat) => {
-        // const newCatState = {...initialMenu,[cat]:true}
-        setCategory(cat)
-    }
+	let businessNameEncoded = businessName.split(' ').join('-');
 
-    const modalInitialState = {
-        show:false,
-        productName:'',
-        productID:''
-    }
-    const [show, setShow] = useState(modalInitialState)
+	const [business, setBusiness] = useState('');
+	// const [searchProduct, setSearchProduct] = useState('')
+	const [userSaved, setUserSaved] = useState('');
 
-    const handleClose = () => setShow(modalInitialState);
-    const handleModal = (productName,productID) => {
-        setShow({show:true,productName,productID})
-    }
-    const deleteProduct =()=>{
+	// let initialMenu = {}
+	let arrCategories = [];
+	if (business.products) {
+		business.products.forEach((prod) => {
+			prod.categories.forEach((cate) => {
+				if (!arrCategories.includes(cate)) {
+					arrCategories.push(cate);
+					// initialMenu[cate]=false
+				}
+			});
+		});
+	}
+	// const updatedCategory = {...initialMenu,General:true}
+	const [category, setCategory] = useState('General');
+	// let activeCategory = 'General'
+
+	const handleCategory = (cat) => {
+		// const newCatState = {...initialMenu,[cat]:true}
+		setCategory(cat);
+	};
+
+	const modalInitialState = {
+		show: false,
+		productName: '',
+		productID: '',
+	};
+	const [show, setShow] = useState(modalInitialState);
+
+	const handleClose = () => setShow(modalInitialState);
+	const handleModal = (productName, productID) => {
+		setShow({ show: true, productName, productID });
+	};
+	const deleteProduct = () => {
 		const url = `products/delete/${show.productID}`;
-        const urlGet = `business/${businessNameEncoded}`
-        const thenGetFunction = (response) => {
-            setBusiness(response.data.business)
-            setShow(modalInitialState)
-        }
+		const urlGet = `business/${businessNameEncoded}`;
+		const thenGetFunction = (response) => {
+			setBusiness(response.data.business);
+			setShow(modalInitialState);
+		};
 		const thenFunction = (response) => {
-            getAPI(urlGet,thenGetFunction, errorFunction)
+			getAPI(urlGet, thenGetFunction, errorFunction);
 		};
 		const errorFunction = (error) => {
 			toastifyError(error.response.data.message);
 		};
 		deleteAPI(url, thenFunction, errorFunction);
-    }
-    
-    useEffect(() => {
-        const url = `business/${businessNameEncoded}`;
+	};
+
+	const handleSavedProductStatus = (productID) => {
+		const url = `users/savedProduct/${user._id}`;
+        const requestBody = {
+			productID: productID,
+		};
 		const thenFunction = (response) => {
-            setBusiness(response.data.business)
+			setUserSaved(response.data);
+		};
+		const errorFunction = (error) => {
+			console.log(error)
+		};
+		putAPI(url, requestBody, thenFunction, errorFunction);
+	};
+
+	useEffect(() => {
+		const url = `business/${businessNameEncoded}`;
+		const thenFunction = (response) => {
+			setBusiness(response.data.business);
 		};
 		const errorFunction = () => {
 			toastifyError(`${languages[0][lang].tostify.redirect}`);
 			navigate('/');
 		};
 		getAPI(url, thenFunction, errorFunction);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-    if (business!=='') {
-        let owner = false
-        const businessStored = localStorage.getItem("businesses") ? JSON.parse(localStorage.getItem("businesses"))  : []
-        if(!businessStored.includes(business._id)){
-            localStorage.setItem('businesses',JSON.stringify([...businessStored,business._id]) );    
-        }
-        if(user){
-            owner = business.owner === user._id ? true : false
-            putAPI(`users/business/${user._id}`,businessStored)
-            // axios
-            // .put(`${process.env.REACT_APP_SERVER_URL}/users/business/${user._id}`, businessStored,  {headers: {Authorization: `Bearer ${storedToken}`}})
-            // .then()
-            // .catch((err)=>{
-            //     console.log(err)
-            // })
-        }
-        const currency = business.currency
-            
-        return (
-            <div className='container-fluid'>
-                <div className="row p-0">
-                    <div className="d-flex flex-column align-items-center justify-content-between" 
-                    style={{  
-                        backgroundImage: `url('${business.bgUrl}')`,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        height: '150px'
-                    }}>
-                        <div className='d-flex col-12 justify-content-start'>
-                            
-                            
-                        </div>
-                        <div className='d-flex justify-content-center align-items-end'>
-                            <div className='rounded-circle border border-dark bg-dark d-flex justify-content-center align-items-center' style={{  
-                            height: '90px',
-                            width: '90px'
-                            }}>
-                                <img src={business.logoUrl} alt='altLogo' width={65}  /> 
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div className="row p-0">
-                    <div className="d-flex flex-column justify-content-center align-items-center">
-                        <h1>{business.name}</h1>
-                        <BusinessMenu handleCategory={handleCategory} category={category} arrCategories={arrCategories}/>
-                    </div>
-                </div>
-                <div className="row p-0 justify-content-center">
+	useEffect(() => {
+		if (user) {
+			const url = `users/saved/${user._id}`;
+			const thenFunction = (response) => {
+				setUserSaved(response.data);
+			};
+			const errorFunction = (error) => {
+				console.log(error);
+			};
+			getAPI(url, thenFunction, errorFunction);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user]);
 
-                {window.innerWidth < 450 ? 
-                    <div    className="col-12 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
-                        {business.products.filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCard key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness} handleModal={handleModal} owner={owner}/>
-                        })}
-                    </div>
-                     : 
-                    <div className=" col-md-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch ">
-                        {business.products.filter(prodAct =>prodAct.status !== 'paused').filter(prod =>prod.categories.includes(category)).map(product =>{
-                            return <ProductCardDesktop key={uuidv4()} product={product} businessNameEncoded={businessNameEncoded} currency={currency} cart={cart} setBusiness={setBusiness} handleModal={handleModal} owner={owner}/>
-                        })}
-                    </div>}
-                    {cart && user && cart.length > 0 && 
-                        <Link    to={`/cart/${user._id}`} className='fixed-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between'>
-                            <span className='px-2 position-relative'>
-                                <span className="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark">
-                                {cart.map(prod=>prod.quantity).reduce((acc,val)=>{return acc + val},0)}
-                                </span>
-                                🛒</span>
-                            <span>{languages[0][lang].business.gotocart} ({summary} {currency})</span>
-                            <span className='px-2'>  </span>
-                        </Link>
-                         }
-                    
-                </div>
-                <Modal
-                    show={show.show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                 >
-                    <Modal.Header closeButton>
-                    <Modal.Title>{languages[0][lang].business.mTitle}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    {`${languages[0][lang].business.mBody1} "${show.productName}" ${languages[0][lang].business.mbody2}`} <br/>
-                    {languages[0][lang].business.mBody3}
-                    </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                    {languages[0][lang].business.btnCancel}
-                    </Button>
-                    <Button variant="danger" onClick={deleteProduct}>
-                    {languages[0][lang].business.btnDelete}
-                    </Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
+	if (business !== '') {
+		let owner = false;
+		const businessStored = localStorage.getItem('businesses')
+			? JSON.parse(localStorage.getItem('businesses'))
+			: [];
+		if (!businessStored.includes(business._id)) {
+			localStorage.setItem(
+				'businesses',
+				JSON.stringify([...businessStored, business._id])
+			);
+		}
+		if (user) {
+			owner = business.owner === user._id ? true : false;
+			putAPI(`users/business/${user._id}`, businessStored);
+			// axios
+			// .put(`${process.env.REACT_APP_SERVER_URL}/users/business/${user._id}`, businessStored,  {headers: {Authorization: `Bearer ${storedToken}`}})
+			// .then()
+			// .catch((err)=>{
+			//     console.log(err)
+			// })
+		}
+		const currency = business.currency;
 
-        )
-    }else {
-        return (
-            <div><Loading/></div>
-        )
-    }
-}
+		return (
+			<div className='container-fluid'>
+				<div className='row p-0'>
+					<div
+						className='d-flex flex-column align-items-center justify-content-between'
+						style={{
+							backgroundImage: `url('${business.bgUrl}')`,
+							backgroundPosition: 'center',
+							backgroundSize: 'cover',
+							backgroundRepeat: 'no-repeat',
+							height: '150px',
+						}}
+					>
+						<div className='d-flex col-12 justify-content-start'></div>
+						<div className='d-flex justify-content-center align-items-end'>
+							<div
+								className='rounded-circle border border-dark bg-dark d-flex justify-content-center align-items-center'
+								style={{
+									height: '90px',
+									width: '90px',
+								}}
+							>
+								<img src={business.logoUrl} alt='altLogo' width={65} />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className='row p-0'>
+					<div className='d-flex flex-column justify-content-center align-items-center'>
+						<h1>{business.name}</h1>
+						<BusinessMenu
+							handleCategory={handleCategory}
+							category={category}
+							arrCategories={arrCategories}
+						/>
+					</div>
+				</div>
+				<div className='row p-0 justify-content-center'>
+					{window.innerWidth < 450 ? (
+						<div className='col-12 pb-5 d-flex flex-wrap justify-content-center align-items-stretch '>
+							{business.products
+								.filter((prod) => prod.categories.includes(category))
+								.map((product) => {
+									return (
+										<ProductCard2
+											key={uuidv4()}
+											product={product}
+											businessNameEncoded={businessNameEncoded}
+											currency={currency}
+											cart={cart}
+											setBusiness={setBusiness}
+											handleModal={handleModal}
+											owner={owner}
+											userSaved={userSaved}
+                                            handleSavedProductStatus={handleSavedProductStatus}
+										/>
+									);
+								})}
+						</div>
+					) : (
+						<div className=' col-md-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch '>
+							{business.products
+								.filter((prodAct) => prodAct.status !== 'paused')
+								.filter((prod) => prod.categories.includes(category))
+								.map((product) => {
+									return (
+										<ProductCard2
+											key={uuidv4()}
+											product={product}
+											businessNameEncoded={businessNameEncoded}
+											currency={currency}
+											cart={cart}
+											setBusiness={setBusiness}
+											handleModal={handleModal}
+											owner={owner}
+											userSaved={userSaved}
+                                            handleSavedProductStatus={handleSavedProductStatus}
+										/>
+									);
+								})}
+						</div>
+					)}
+					{cart && user && cart.length > 0 && (
+						<Link
+							to={`/cart/${user._id}`}
+							className='fixed-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between'
+						>
+							<span className='px-2 position-relative'>
+								<span className='position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark'>
+									{cart
+										.map((prod) => prod.quantity)
+										.reduce((acc, val) => {
+											return acc + val;
+										}, 0)}
+								</span>
+								🛒
+							</span>
+							<span>
+								{languages[0][lang].business.gotocart} ({summary} {currency})
+							</span>
+							<span className='px-2'> </span>
+						</Link>
+					)}
+				</div>
+				<Modal
+					show={show.show}
+					onHide={handleClose}
+					backdrop='static'
+					keyboard={false}
+				>
+					<Modal.Header closeButton>
+						<Modal.Title>{languages[0][lang].business.mTitle}</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{`${languages[0][lang].business.mBody1} "${show.productName}" ${languages[0][lang].business.mbody2}`}{' '}
+						<br />
+						{languages[0][lang].business.mBody3}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant='secondary' onClick={handleClose}>
+							{languages[0][lang].business.btnCancel}
+						</Button>
+						<Button variant='danger' onClick={deleteProduct}>
+							{languages[0][lang].business.btnDelete}
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			</div>
+		);
+	} else {
+		return (
+			<div>
+				<Loading />
+			</div>
+		);
+	}
+};
 
-export default Business
+export default Business;
