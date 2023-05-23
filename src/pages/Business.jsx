@@ -89,14 +89,14 @@ const Business = () => {
 
 	const handleSavedProductStatus = (productID) => {
 		const url = `users/savedProduct/${user._id}`;
-        const requestBody = {
+		const requestBody = {
 			productID: productID,
 		};
 		const thenFunction = (response) => {
 			setUserSaved(response.data);
 		};
 		const errorFunction = (error) => {
-			console.log(error)
+			console.log(error);
 		};
 		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
@@ -105,6 +105,7 @@ const Business = () => {
 		const url = `business/${businessNameEncoded}`;
 		const thenFunction = (response) => {
 			setBusiness(response.data.business);
+            console.log(business);
 		};
 		const errorFunction = () => {
 			toastifyError(`${languages[0][lang].tostify.redirect}`);
@@ -151,6 +152,29 @@ const Business = () => {
 		}
 		const currency = business.currency;
 
+		const handleHighlightedProduct = (productID) => {
+			if (1 <= 5) {
+				const url = `business/highlightedProducts/${business._id}`;
+				const requestBody = {
+					productID: productID,
+				};
+				const thenFunction = (response) => {
+					setBusiness(response.data);
+				};
+				const errorFunction = (error) => {
+					console.log(error);
+				};
+				putAPI(url, requestBody, thenFunction, errorFunction);
+			} else {
+				console.log('have 5 item selected');
+			}
+		};
+
+		const businessHighlightedProducts = {
+			highlightedProducts: business.highlightedProducts,
+			handleHighlightedProduct: handleHighlightedProduct,
+		};
+
 		return (
 			<div className='container-fluid'>
 				<div className='row p-0'>
@@ -189,50 +213,28 @@ const Business = () => {
 					</div>
 				</div>
 				<div className='row p-0 justify-content-center'>
-					{window.innerWidth < 450 ? (
-						<div className='col-12 pb-5 d-flex flex-wrap justify-content-center align-items-stretch '>
-							{business.products
-								.filter((prod) => prod.categories.includes(category))
-								.map((product) => {
-									return (
-										<ProductCard2
-											key={uuidv4()}
-											product={product}
-											businessNameEncoded={businessNameEncoded}
-											currency={currency}
-											cart={cart}
-											setBusiness={setBusiness}
-											handleModal={handleModal}
-											owner={owner}
-											userSaved={userSaved}
-                                            handleSavedProductStatus={handleSavedProductStatus}
-										/>
-									);
-								})}
-						</div>
-					) : (
-						<div className=' col-md-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch '>
-							{business.products
-								.filter((prodAct) => prodAct.status !== 'paused')
-								.filter((prod) => prod.categories.includes(category))
-								.map((product) => {
-									return (
-										<ProductCard2
-											key={uuidv4()}
-											product={product}
-											businessNameEncoded={businessNameEncoded}
-											currency={currency}
-											cart={cart}
-											setBusiness={setBusiness}
-											handleModal={handleModal}
-											owner={owner}
-											userSaved={userSaved}
-                                            handleSavedProductStatus={handleSavedProductStatus}
-										/>
-									);
-								})}
-						</div>
-					)}
+					<div className='col-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch '>
+						{business.products
+							.filter((prod) => prod.categories.includes(category))
+							.map((product) => {
+								return (
+									<ProductCard2
+										key={uuidv4()}
+										product={product}
+										businessNameEncoded={businessNameEncoded}
+										currency={currency}
+										cart={cart}
+										setBusiness={setBusiness}
+										handleModal={handleModal}
+										owner={owner}
+										userSaved={userSaved}
+										handleSavedProductStatus={handleSavedProductStatus}
+										businessHighlightedProducts={businessHighlightedProducts}
+									/>
+								);
+							})}
+					</div>
+
 					{cart && user && cart.length > 0 && (
 						<Link
 							to={`/cart/${user._id}`}
