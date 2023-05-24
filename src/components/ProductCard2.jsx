@@ -17,7 +17,8 @@ const ProductCard2 = ({
 	handleModal,
 	owner,
 	userSaved,
-    handleSavedProductStatus
+	handleSavedProductStatus,
+	businessHighlightedProducts,
 }) => {
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);
@@ -84,11 +85,11 @@ const ProductCard2 = ({
 		};
 		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
-    console.log(userSaved);
-	const isProdSaved = userSaved.savedProducts?.includes(product._id);
-    
-	
 
+	const isProdSaved =
+		userSaved.savedProducts === undefined
+			? false
+			: userSaved.savedProducts?.includes(product._id);
 	return (
 		<div className={`m-3 card-container ${!prodIsActive && 'opacity-50'}`}>
 			<dir className='p-0 m-1 card-controls'>
@@ -116,8 +117,40 @@ const ProductCard2 = ({
 					</span>
 				</div>
 			</dir>
-			<span className='card-icon card-icon1'>🔥</span>
-			<span className='card-icon card-icon2' onClick={()=>handleSavedProductStatus(product._id)}>{isProdSaved ? '❤' : '🤍'}</span>
+			{businessHighlightedProducts.highlightedProducts?.includes(
+				product._id
+			) ? (
+				<span
+					className='card-icon card-icon1'
+					onClick={() => {
+						owner &&
+							businessHighlightedProducts.handleHighlightedProduct(product._id);
+					}}
+				>
+					🔥
+				</span>
+			) : (
+				owner && (
+					<span
+						className='card-icon card-icon1'
+						onClick={() => {
+							owner &&
+								businessHighlightedProducts.handleHighlightedProduct(
+									product._id
+								);
+						}}
+					></span>
+				)
+			)}
+			{/* <span className='card-icon card-icon1'>🔥</span> */}
+			<span
+				className='card-icon card-icon2'
+				onClick={() =>
+					userSaved !== '' && handleSavedProductStatus(product._id)
+				}
+			>
+				{isProdSaved ? '❤' : '🤍'}
+			</span>
 			<div className='card-img-container'>
 				<img className='card-img' src={product.mainImg} alt='' />
 			</div>
