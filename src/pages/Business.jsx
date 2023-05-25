@@ -105,7 +105,6 @@ const Business = () => {
 		const url = `business/${businessNameEncoded}`;
 		const thenFunction = (response) => {
 			setBusiness(response.data.business);
-            console.log(business);
 		};
 		const errorFunction = () => {
 			toastifyError(`${languages[0][lang].tostify.redirect}`);
@@ -143,17 +142,14 @@ const Business = () => {
 		if (user) {
 			owner = business.owner === user._id ? true : false;
 			putAPI(`users/business/${user._id}`, businessStored);
-			// axios
-			// .put(`${process.env.REACT_APP_SERVER_URL}/users/business/${user._id}`, businessStored,  {headers: {Authorization: `Bearer ${storedToken}`}})
-			// .then()
-			// .catch((err)=>{
-			//     console.log(err)
-			// })
 		}
 		const currency = business.currency;
 
 		const handleHighlightedProduct = (productID) => {
-			if (1 <= 5) {
+			if (
+				business.highlightedProducts.includes(productID) ||
+				business.highlightedProducts.length < 5
+			) {
 				const url = `business/highlightedProducts/${business._id}`;
 				const requestBody = {
 					productID: productID,
@@ -166,7 +162,7 @@ const Business = () => {
 				};
 				putAPI(url, requestBody, thenFunction, errorFunction);
 			} else {
-				console.log('have 5 item selected');
+				console.log('items:' + business.highlightedProducts.length);
 			}
 		};
 
