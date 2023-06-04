@@ -5,9 +5,10 @@ import { CartContext } from '../context/cart.context';
 
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
+import SwitchMode from './SwitchDarkMode';
 
 const Nabvar2 = () => {
-	const { isLoggedIn, logOutUser, user, language, changeLanguage } =
+	const { isLoggedIn, logOutUser, user, language, changeLanguage,isDark,handleMode } =
 		useContext(AuthContext);
 	const { cart } = useContext(CartContext);
 
@@ -44,23 +45,26 @@ const Nabvar2 = () => {
 					</Nav>
 					<Nav className='navbar-nav mb-2 mb-lg-0 me-4'>
 						{/* <Nav.Link href="/markets">Markets 🏪</Nav.Link> */}
-						<DropdownButton
-							id='dropdown-basic-button'
-							title={titleLang}
-							className='mx-2 my-1 flags'
-							variant='outline-secondary'
-						>
-							<Dropdown.Item onClick={() => changeLanguage('En')}>
-								En 🇬🇧
-							</Dropdown.Item>
-							<Dropdown.Item onClick={() => changeLanguage('De')}>
-								De 🇩🇪
-							</Dropdown.Item>
-							<Dropdown.Item onClick={() => changeLanguage('Es')}>
-								Es 🇪🇸
-							</Dropdown.Item>
-						</DropdownButton>
+						<div className='d-flex justify-content-center'>
+							<SwitchMode isDark={isDark} handleMode={handleMode}/>
 
+							<DropdownButton
+								id='dropdown-basic-button'
+								title={titleLang}
+								className='mx-2 my-1 flags'
+								variant='outline-secondary'
+							>
+								<Dropdown.Item onClick={() => changeLanguage('En')}>
+									En 🇬🇧
+								</Dropdown.Item>
+								<Dropdown.Item onClick={() => changeLanguage('De')}>
+									De 🇩🇪
+								</Dropdown.Item>
+								<Dropdown.Item onClick={() => changeLanguage('Es')}>
+									Es 🇪🇸
+								</Dropdown.Item>
+							</DropdownButton>
+						</div>
 						{isLoggedIn && (
 							<>
 								<Nav.Link href={`/dashboard/${user._id}`}>

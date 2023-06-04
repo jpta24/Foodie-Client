@@ -12,7 +12,7 @@ import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
 
 function HomePage() {
-	const { language: lang, user: userID } = useContext(AuthContext);
+	const { language: lang, user: userID, isDark } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const initialState = {
 		membership: {
@@ -48,7 +48,7 @@ function HomePage() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userID]);
 	return (
-		<div className='container' style={{ overflow: 'auto' }}>
+		<div className={`container ${isDark ? 'text-light': ''}`} style={{ overflow: 'auto' }}>
 			{/* Header Section */}
 			<section className='header-section my-5'>
 				<Container className='pb-5'>
@@ -63,7 +63,7 @@ function HomePage() {
 								}
 							>
 								{' '}
-								<strong>FOODIE:</strong> {languages[0][lang].home.slogan}
+								<strong className='text-danger'>FOODIE:</strong> {languages[0][lang].home.slogan}
 							</h1>
 							<Button
 								size='lg'
@@ -89,7 +89,7 @@ function HomePage() {
 							<Image src={iconsCloud[0].homeFeatures} fluid />
 						</Col>
 						<Col md={7}>
-							<h2>{languages[0][lang].home.feaTitle} FOODIE</h2>
+							<h2 className='text-danger'>{languages[0][lang].home.feaTitle} FOODIE</h2>
 							<h5>{languages[0][lang].home.feaContent}</h5>
 						</Col>
 					</Row>

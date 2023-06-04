@@ -8,7 +8,6 @@ import { Modal, Button } from 'react-bootstrap';
 import languages from '../data/language.json';
 
 import ProductCard2 from '../components/ProductCard2';
-import ProductCardDesktop from '../components/ProductCardDesktop';
 
 import BusinessMenu from '../components/BusinessMenu';
 import Loading from '../components/Loading';
@@ -16,7 +15,7 @@ import { getAPI, putAPI, deleteAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
 
 const Business = () => {
-	const { language: lang } = useContext(AuthContext);
+	const { language: lang,isDark } = useContext(AuthContext);
 
 	const { cart } = useContext(CartContext);
 	const { user } = useContext(AuthContext);
@@ -172,7 +171,7 @@ const Business = () => {
 		};
 
 		return (
-			<div className='container-fluid'>
+			<div className={`container-fluid ${isDark ? 'text-light': ''}`}>
 				<div className='row p-0'>
 					<div
 						className='d-flex flex-column align-items-center justify-content-between'
@@ -200,11 +199,12 @@ const Business = () => {
 				</div>
 				<div className='row p-0'>
 					<div className='d-flex flex-column justify-content-center align-items-center'>
-						<h1>{business.name}</h1>
+						<h1 className={isDark && 'text-danger'}>{business.name}</h1>
 						<BusinessMenu
 							handleCategory={handleCategory}
 							category={category}
 							arrCategories={arrCategories}
+							isDark={isDark}
 						/>
 					</div>
 				</div>

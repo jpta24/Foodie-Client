@@ -4,11 +4,11 @@ import { AuthContext } from '../context/auth.context';
 import languages from '../data/language.json';
 
 function MembershipTable({ btnFunction, business }) {
-	const { language: lang } = useContext(AuthContext);
+	const { language: lang,isDark } = useContext(AuthContext);
 	
 	return (
 		<div>
-			<h1 className='m-3'>{languages[0][lang].membership.title}</h1>
+			<h1 className='m-3 text-danger'>{languages[0][lang].membership.title}</h1>
 			{!business.membership.usedTrial && (
 				<p>{languages[0][lang].membership.freeTrial}</p>
 			)}

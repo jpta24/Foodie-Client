@@ -5,14 +5,14 @@ import { Carousel, Container, Row, Col } from "react-bootstrap";
 import testimonials from "../data/testimonials.json";
 
 const TestimonialsCarousel = () => {
-  const {language:lang} = useContext(AuthContext);
+  const {language:lang,isDark} = useContext(AuthContext);
 
     return (
         <section id="testimonios" className="py-2">
           <Container>
             <Row className="mb-1">
               <Col>
-                <h2 className="text-center mb-1 fw-bold">Testimonials</h2>
+                <h2 className="text-center mb-1 fw-bold text-danger">Testimonials</h2>
               </Col>
             </Row>
             <Row>
@@ -29,8 +29,8 @@ const TestimonialsCarousel = () => {
                                 alt={testimonio.business}
                             />
                         </div>
-                        <h5 className="text-dark">{testimonio.txt[lang]}</h5>
-                        <p className="text-dark">{testimonio.business[lang]}</p>
+                        <h5 className={`${isDark ? 'text-light': 'text-dark'}`}>{testimonio.txt[lang]}</h5>
+                        <p className={`${isDark ? 'text-light': 'text-dark'}`}>{testimonio.business[lang]}</p>
                       
                       </div>
                       

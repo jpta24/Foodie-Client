@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { useContext } from 'react';
+import { AuthContext } from './context/auth.context';
 
 import { ToastContainer } from 'react-toastify';
 import IsAnon from "./components/IsAnon";
@@ -31,9 +33,11 @@ import Test from "./pages/Test";
 import MembershipPage from "./pages/MembershipPage";
 
 function App() {
+  const {isDark } =
+		useContext(AuthContext);
   return (
     <div className="App">
-    <div className="background-shapes"></div>
+    <div className={isDark? 'dark-Bg' : 'background-shapes'}></div>
     <Navbar/>
     <div>
     <ToastContainer className='my-5 ztoast'/>
