@@ -171,7 +171,7 @@ const Business = () => {
 		};
 
 		return (
-			<div className={`container-fluid ${isDark ? 'text-light': ''}`}>
+			<div className={`container-fluid`}>
 				<div className='row p-0'>
 					<div
 						className='d-flex flex-column align-items-center justify-content-between'

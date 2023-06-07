@@ -41,8 +41,8 @@ const Signup = () => {
 	};
 
 	return (
-		<div className='container'>
-			<h1>{languages[0][lang].signup.greeting}</h1>
+		<div className={`container`}>
+			<h1 className='text-danger'>{languages[0][lang].signup.greeting}</h1>
 			<div className='row justify-content-md-center p-4'>
 				<div className='col-md-6 col-lg-5 '>
 					<form className='form-control' onSubmit={handleSignupSubmit}>

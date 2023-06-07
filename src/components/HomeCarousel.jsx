@@ -5,7 +5,7 @@ import { Carousel, Container, Row, Col } from "react-bootstrap";
 import testimonials from "../data/testimonials.json";
 
 const TestimonialsCarousel = () => {
-  const {language:lang,isDark} = useContext(AuthContext);
+  const {language:lang} = useContext(AuthContext);
 
     return (
         <section id="testimonios" className="py-2">
@@ -29,8 +29,8 @@ const TestimonialsCarousel = () => {
                                 alt={testimonio.business}
                             />
                         </div>
-                        <h5 className={`${isDark ? 'text-light': 'text-dark'}`}>{testimonio.txt[lang]}</h5>
-                        <p className={`${isDark ? 'text-light': 'text-dark'}`}>{testimonio.business[lang]}</p>
+                        <h5>{testimonio.txt[lang]}</h5>
+                        <p>{testimonio.business[lang]}</p>
                       
                       </div>
                       

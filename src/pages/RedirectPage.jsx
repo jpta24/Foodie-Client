@@ -29,7 +29,7 @@ const RedirectPage = () => {
 	if (user) {
 		return (
 			<div>
-				<h1 className='m-2'>{`${languages[0][lang].orders.hi} ${user.username},`}</h1>
+				<h1 className='m-2 text-danger'>{`${languages[0][lang].orders.hi} ${user.username},`}</h1>
 				<h3 className='m-2'>{languages[0][lang].redirect.where}</h3>
 				<div className='d-flex justify-content-around flex-wrap col-12 col-md-8 mx-auto'>
 					<div className='d-flex flex-column-md flex-wrap align-items-center justify-content-around col-12 col-md-3 mx-auto'>
@@ -43,7 +43,7 @@ const RedirectPage = () => {
 								variant='top'
 								src={iconsCloud[0].dashboard}
 							/>
-							<Button variant='outline-success' size='sm'>
+							<Button variant='outline-primary' size='sm'>
 								{languages[0][lang].redirect.personal}
 							</Button>
 						</Link>
@@ -57,7 +57,7 @@ const RedirectPage = () => {
 									variant='top'
 									src={iconsCloud[0].businessDashboard}
 								/>
-								<Button variant='outline-success' size='sm'>
+								<Button variant='outline-primary' size='sm'>
 									{languages[0][lang].redirect.business}
 								</Button>
 							</Link>

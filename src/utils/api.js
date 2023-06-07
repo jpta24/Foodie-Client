@@ -2,11 +2,18 @@ import axios from 'axios';
 
 const storedToken = localStorage.getItem('authToken');
 
+const catchFunctionDefault = (error)=>{
+	console.log(error)
+}
+const thenFunctionDefault = ()=>{
+	return ('')
+}
+
 
 // import { getAPI, postAPI } from '../utils/api';
 // import { toastifySuccess, toastifyError } from '../utils/tostify';
 
-export const getAPI = async (url, thenFunction, catchFunction) => {
+export const getAPI = async (url, thenFunction = thenFunctionDefault, catchFunction = catchFunctionDefault) => {
 	try {
 		const response = await axios.get(
 			`${process.env.REACT_APP_SERVER_URL}/${url}`,
@@ -21,7 +28,7 @@ export const getAPI = async (url, thenFunction, catchFunction) => {
 	}
 };
 
-export const postAPI = async (url, requestBody, thenFunction, catchFunction) => {
+export const postAPI = async (url, requestBody, thenFunction = thenFunctionDefault, catchFunction = catchFunctionDefault) => {
 	try {
 		const response = await axios.post(
 			`${process.env.REACT_APP_SERVER_URL}/${url}`,
@@ -64,7 +71,7 @@ export const postAPI = async (url, requestBody, thenFunction, catchFunction) => 
     // 			}
     // 			postAPI(url,requestBody,thenFunction,errorFunction)
 
-export const putAPI = async (url, requestBody, thenFunction, catchFunction) => {
+export const putAPI = async (url, requestBody, thenFunction = thenFunctionDefault, catchFunction = catchFunctionDefault) => {
 	try {
 		const response = await axios.put(
 			`${process.env.REACT_APP_SERVER_URL}/${url}`,
@@ -79,7 +86,7 @@ export const putAPI = async (url, requestBody, thenFunction, catchFunction) => {
 	}
 };
 
-export const deleteAPI = async (url, thenFunction, catchFunction) => {
+export const deleteAPI = async (url, thenFunction = thenFunctionDefault, catchFunction = catchFunctionDefault) => {
 	try {
 		const response = await axios.delete(
 			`${process.env.REACT_APP_SERVER_URL}/${url}`,

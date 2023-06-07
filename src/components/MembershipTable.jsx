@@ -4,7 +4,7 @@ import { AuthContext } from '../context/auth.context';
 import languages from '../data/language.json';
 
 function MembershipTable({ btnFunction, business }) {
-	const { language: lang,isDark } = useContext(AuthContext);
+	const { language: lang } = useContext(AuthContext);
 	
 	return (
 		<div>

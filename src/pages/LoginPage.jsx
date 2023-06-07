@@ -36,8 +36,8 @@ const Login = () => {
 	};
 
 	return (
-		<div className='container'>
-			<h1>{languages[0][lang].login.greetingTitle}</h1>
+		<div className={`container`}>
+			<h1 className='text-danger'>{languages[0][lang].login.greetingTitle}</h1>
 			<p>{languages[0][lang].login.greetingText}</p>
 
 			<div className='row justify-content-md-center p-4'>

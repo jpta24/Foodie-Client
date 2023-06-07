@@ -8,7 +8,7 @@ import languages from '../data/language.json'
 const About = () => {
   const {language:lang,isDark} = useContext(AuthContext);
   return (
-    <Container className={`my-5 ${isDark ? 'text-light': ''}`}>
+    <Container className={`my-5`}>
       <Row className="justify-content-center align-items-center">
         <Col xs={12} md={4} className="text-center">
           <Image src={iconsCloud[0].jean} alt="MyPhoto" fluid roundedCircle className='border border-dark border-4 rounded-circle' />

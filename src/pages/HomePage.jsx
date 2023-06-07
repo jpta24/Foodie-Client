@@ -12,7 +12,7 @@ import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
 
 function HomePage() {
-	const { language: lang, user: userID, isDark } = useContext(AuthContext);
+	const { language: lang, user: userID } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const initialState = {
 		membership: {
@@ -48,7 +48,7 @@ function HomePage() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userID]);
 	return (
-		<div className={`container ${isDark ? 'text-light': ''}`} style={{ overflow: 'auto' }}>
+		<div className={`container`} style={{ overflow: 'auto' }}>
 			{/* Header Section */}
 			<section className='header-section my-5'>
 				<Container className='pb-5'>
