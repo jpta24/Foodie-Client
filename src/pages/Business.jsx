@@ -66,10 +66,14 @@ const Business = () => {
 	};
 	const [show, setShow] = useState(modalInitialState);
 
+	
+
 	const handleClose = () => setShow(modalInitialState);
 	const handleModal = (productName, productID) => {
 		setShow({ show: true, productName, productID });
 	};
+	const [modalHL, setmodalHL] = useState(false)
+
 	const deleteProduct = () => {
 		const url = `products/delete/${show.productID}`;
 		const urlGet = `business/${businessNameEncoded}`;
@@ -144,10 +148,12 @@ const Business = () => {
 		}
 		const currency = business.currency;
 
+		const limitHL = business.membership.plan === 'free' ? 3 : business.membership === 'basic' ? 10 : Infinity
+
 		const handleHighlightedProduct = (productID) => {
 			if (
 				business.highlightedProducts.includes(productID) ||
-				business.highlightedProducts.length < 5
+				business.highlightedProducts.length < limitHL
 			) {
 				const url = `business/highlightedProducts/${business._id}`;
 				const requestBody = {
@@ -161,7 +167,7 @@ const Business = () => {
 				};
 				putAPI(url, requestBody, thenFunction, errorFunction);
 			} else {
-				console.log('items:' + business.highlightedProducts.length);
+				setmodalHL(true)
 			}
 		};
 
@@ -169,6 +175,8 @@ const Business = () => {
 			highlightedProducts: business.highlightedProducts,
 			handleHighlightedProduct: handleHighlightedProduct,
 		};
+
+		
 
 		return (
 			<div className={`container-fluid`}>
@@ -273,6 +281,32 @@ const Business = () => {
 						</Button>
 						<Button variant='danger' onClick={deleteProduct}>
 							{languages[0][lang].business.btnDelete}
+						</Button>
+					</Modal.Footer>
+				</Modal>
+				{/* MODAL FOR LIMIT HIGHLIGHTED */}
+				<Modal
+					show={modalHL}
+					onHide={()=>setmodalHL(false)}
+					backdrop='static'
+					keyboard={false}
+				>
+					<Modal.Header closeButton>
+						<Modal.Title>{languages[0][lang].business.mHLtitle}</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{`${languages[0][lang].business.mHLtext1} (${limitHL}).`}{' '}
+						<br />
+						{languages[0][lang].business.mHLtext2}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant='secondary' onClick={()=>setmodalHL(false)}>
+							{languages[0][lang].business.btnCancel}
+						</Button>
+						<Button variant='danger' onClick={()=>{
+							navigate(`/${businessNameEncoded}/memberships`);
+						}}>
+							{languages[0][lang].business.btnMembership}
 						</Button>
 					</Modal.Footer>
 				</Modal>

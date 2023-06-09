@@ -15,7 +15,7 @@ const RedirectCard = ({ business }) => {
 				}}
 			>
 				<div className='d-flex col-12 justify-content-start'>
-					<h5 className='bg-light bg-opacity-50 mx-auto rounded px-2'>{business.name}</h5>
+					<h5 className='bg-light bg-opacity-50 mx-auto rounded px-2 text-danger'>{business.name}</h5>
 				</div>
 				<div className='d-flex justify-content-center align-items-end'>
 					<div

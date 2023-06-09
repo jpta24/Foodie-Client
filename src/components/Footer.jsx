@@ -11,7 +11,7 @@ function Footer() {
   return (
     <footer className="py-1">
     <hr />
-      <Container>
+      <div>
         <Row>
           <Col md={4}>
             <h5>{languages[0][lang].home.footer.contactus}</h5>
@@ -53,7 +53,7 @@ function Footer() {
             </ul>
           </Col>
         </Row>
-      </Container>
+      </div>
     </footer>
   );
 }

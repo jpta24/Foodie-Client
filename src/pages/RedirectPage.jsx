@@ -28,7 +28,7 @@ const RedirectPage = () => {
 	}, []);
 	if (user) {
 		return (
-			<div>
+			<div className='container-fluid'>
 				<h1 className='m-2 text-danger'>{`${languages[0][lang].orders.hi} ${user.username},`}</h1>
 				<h3 className='m-2'>{languages[0][lang].redirect.where}</h3>
 				<div className='d-flex justify-content-around flex-wrap col-12 col-md-8 mx-auto'>

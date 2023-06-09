@@ -136,6 +136,10 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
 
+.container, .container-fluid {
+	min-height: calc(100vh - 66px);
+}
+
 .Toastify__toast-container--top-right {
 	top: 1.5em;
 	right: 1.5em;
@@ -238,8 +242,8 @@ a {
 
 .card-controls {
 	position: absolute;
-	top: -27px;
-	right: 0px;
+	bottom: -5px;
+	right: 46px;
 }
 .card-icon {
 	height: 32px;

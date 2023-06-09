@@ -82,7 +82,7 @@ const EditProduct = () => {
 					>
 						<div className='d-flex col-12 justify-content-start'>
 							<Link className='m-2' to={`/${businessNameEncoded}/products`}>
-								<span className='bg-dark rounded-circle border m-2 '>
+								<span className='m-2 '>
 									<img src={iconsCloud[0].backIcon} alt='backIcon' width={35} />
 								</span>
 							</Link>
@@ -100,7 +100,7 @@ const EditProduct = () => {
 						</div>
 					</div>
 				</div>
-				<h1>{product.business.name}</h1>
+				<h1 className='text-danger'>{product.business.name}</h1>
 				<h3>{languages[0][lang].createProduct.greetingEdit}</h3>
 				<div className='row justify-content-center p-4 mb-4'>
 					<div className='col-md-8 '>

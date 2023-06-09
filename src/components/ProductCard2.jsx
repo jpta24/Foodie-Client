@@ -6,8 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAPI, putAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
 
-import iconsCloud from '../data/icons.json';
-
 const ProductCard2 = ({
 	product,
 	businessNameEncoded,
@@ -18,7 +16,7 @@ const ProductCard2 = ({
 	owner,
 	userSaved,
 	handleSavedProductStatus,
-	businessHighlightedProducts,
+	businessHighlightedProducts
 }) => {
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);

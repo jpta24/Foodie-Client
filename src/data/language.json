@@ -17,7 +17,7 @@
 				"aboutText3": "Whether you're looking to build a new website, launch a mobile app, or tackle a complex engineering project, I'm here to help bring your ideas to life. Let's work together to build something great!"
 			},
 			"home": {
-				"slogan": " the e-commerce platform designed for chefs and culinary entrepreneurs who want to take their food business to the next level.",
+				"slogan": " The e-commerce platform to take your culinary business to the next level.",
 				"btnSlg": "Open an Account",
 				"feaTitle": "Features and Benefits of ",
 				"feaContent": "Here, you can easily create an online store for your food products and reach more customers everywhere. The platform offers a variety of tools and features, such as the ability to customize your online store, manage your products and orders, and offer flexible payment and delivery options. In addition, FOODIE also allows you to generate a unique QR code and URL for your online store, making it easy for your customers to find and purchase your products. With FOODIE, you have everything you need to successfully and efficiently grow your culinary business online.",
@@ -27,6 +27,7 @@
 				"free3": "ads on store",
 				"free4": "Zelle and cash payments accepted",
 				"free5": "5% commission fees",
+				"free6": "3 🔥 products",
 				"perMon": "/month",
 				"btnSelect": "Select Plan",
 				"basicTitle": "Basic Plan",
@@ -35,12 +36,14 @@
 				"basic3": "No ads",
 				"basic4": "PayPal and credit card payment options",
 				"basic5": "2% commission fees",
+				"basic6": "10 🔥 products",
 				"premiumTitle": "Premium Plan",
 				"premium1": "Unlimited products",
-				"premium2": "Unlimited sales",
+				"premium2": "Unlimited monthly sales",
 				"premium3": "No ads",
 				"premium4": "PayPal and credit card payment options",
 				"premium5": "1% commission fees",
+				"premium6": "Unlimited 🔥 products",
 				"testimonials": {
 					"title": "Testimonials"
 				},
@@ -228,7 +231,11 @@
 				"mBody3": "Are you sure, you want to delete it?",
 				"btnCancel": "Cancel",
 				"btnDelete": "Delete",
-				"addProduct": "Add Product"
+				"addProduct": "Add Product",
+				"mHLtitle":"Maximum Highlight Limit Reached",
+				"mHLtext1":"You have reached the maximum limit for Highlighted Products in your current plan",
+				"mHLtext2":"Upgrade your subscription or deselect other Highlighted Products to highlight this product.",
+				"btnMembership":"Go to Membership"
 			},
 			"businessView": {
 				"delivery": "Delivery Methods:",
@@ -317,7 +324,7 @@
 				"aboutText3": "Ya sea que esté buscando construir un nuevo sitio web, lanzar una aplicación móvil o abordar un proyecto de ingeniería complejo, estoy aquí para ayudarlo a dar vida a sus ideas. ¡Trabajemos juntos para construir algo genial!"
 			},
 			"home": {
-				"slogan": " la plataforma de comercio electrónico diseñada para chefs y emprendedores culinarios que quieren llevar su negocio de alimentos al siguiente nivel.",
+				"slogan": " La plataforma de e-commerce para llevar al siguiente nivel tu negocio culinario.",
 				"btnSlg": "Abrir una cuenta",
 				"feaTitle": "Características y beneficios",
 				"feaContent": "Aquí, puedes crear fácilmente una tienda en línea para tus productos de alimentos y llegar a más clientes en todas partes. La plataforma ofrece una variedad de herramientas y características, como la capacidad de personalizar tu tienda en línea, gestionar tus productos y pedidos, y ofrecer opciones flexibles de pago y entrega. Además, FOODIE también te permite generar un código QR único y una URL para tu tienda en línea, lo que facilita que tus clientes encuentren y compren tus productos. Con FOODIE, tienes todo lo que necesitas para hacer crecer tu negocio culinario en línea de manera exitosa y eficiente.",
@@ -327,6 +334,7 @@
 				"free3": "Anuncios en la tienda",
 				"free4": "Pagos con Zelle y efectivo aceptados",
 				"free5": "Comisión del 5%",
+				"free6": "3 productos 🔥 ",
 				"perMon": "/mes",
 				"btnSelect": "Seleccionar Plan",
 				"basicTitle": "Plan Básico",
@@ -335,12 +343,14 @@
 				"basic3": "Sin anuncios",
 				"basic4": "Opciones de pago con PayPal y con tarjeta",
 				"basic5": "Comisión del 2%",
+				"basic6": "10 productos 🔥 ",
 				"premiumTitle": "Plan Premium",
 				"premium1": "Productos ilimitados",
-				"premium2": "Ventas ilimitadas",
+				"premium2": "Ventas mensuales sin limites ",
 				"premium3": "Sin anuncios",
 				"premium4": "Opciones de pago con PayPal y con tarjeta",
 				"premium5": "Comisión del 1%",
+				"premium6": "Productos ilimitados 🔥 Highlighted ",
 				"testimonials": {
 					"title": "Testimonios"
 				},
@@ -616,7 +626,7 @@
 				"aboutText3": "Ob Sie eine neue Website erstellen, eine mobile App starten oder ein komplexes Ingenieurprojekt angehen möchten, ich stehe Ihnen zur Verfügung, um Ihre Ideen zum Leben zu erwecken. Lassen Sie uns gemeinsam etwas Großartiges aufbauen!"
 			},
 			"home": {
-				"slogan": " Die E-Commerce-Plattform für Köche und kulinarische Unternehmer, die ihr Lebensmittelgeschäft auf die nächste Stufe bringen möchten.",
+				"slogan": " Die E-Commerce Platform für den Einstieg in Ihr kulinarisches Geschäft.",
 				"btnSlg": "Konto eröffnen",
 				"feaTitle": "Funktionen und Vorteile von ",
 				"feaContent": "Hier können Sie ganz einfach einen Online-Shop für Ihre Lebensmittelprodukte erstellen und überall mehr Kunden erreichen. Die Plattform bietet eine Vielzahl von Tools und Funktionen, wie die Möglichkeit, Ihren Online-Shop anzupassen, Ihre Produkte und Bestellungen zu verwalten und flexible Zahlungs- und Lieferoptionen anzubieten. Darüber hinaus ermöglicht FOODIE Ihnen auch die Erzeugung eines einzigartigen QR-Codes und einer URL für Ihren Online-Shop, so dass es für Ihre Kunden einfach ist, Ihre Produkte zu finden und zu kaufen. Mit FOODIE haben Sie alles, was Sie benötigen, um Ihr kulinarisches Geschäft erfolgreich und effizient online zu erweitern.",
@@ -626,6 +636,7 @@
 				"free3": "Anzeigen im Shop",
 				"free4": "Zahlungen per Zelle und Bargeld akzeptiert",
 				"free5": "5% Provision",
+				"free6": "3 🔥 Produckte",
 				"perMon": "/Monat",
 				"btnSelect": "Plan auswählen",
 				"basicTitle": "Basic-Plan",
@@ -634,12 +645,14 @@
 				"basic3": "Keine Anzeigen",
 				"basic4": "PayPal- und Kreditkartenzahlungsoptionen",
 				"basic5": "2% Provision",
+				"basic6": "10 🔥 Produckte",
 				"premiumTitle": "Premium-Plan",
 				"premium1": "Unbegrenzte Produkte",
-				"premium2": "Unbegrenzter Verkauf",
+				"premium2": "Unbegrenzte monatliche Verkaufe",
 				"premium3": "Keine Anzeigen",
 				"premium4": "PayPal- und Kreditkartenzahlungsoptionen",
 				"premium5": "1% Provision",
+				"premium6": "Unbegrenzte 🔥 Produkte ",
 				"testimonials": {
 					"title": "Bewertungen"
 				},

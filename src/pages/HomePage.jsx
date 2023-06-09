@@ -51,7 +51,7 @@ function HomePage() {
 		<div className={`container`} style={{ overflow: 'auto' }}>
 			{/* Header Section */}
 			<section className='header-section my-5'>
-				<Container className='pb-5'>
+				<div className='pb-5'>
 					<Row>
 						<Col md={7}>
 							<h1
@@ -78,12 +78,12 @@ function HomePage() {
 							<Image src={iconsCloud[0].homeImg} className='my-5' fluid />
 						</Col>
 					</Row>
-				</Container>
+				</div>
 			</section>
 
 			{/* Features Section */}
 			<section className='features-section my-4'>
-				<Container>
+				<div>
 					<Row className='d-flex justify-content-around pb-4'>
 						<Col md={4}>
 							<Image src={iconsCloud[0].homeFeatures} fluid />
@@ -93,7 +93,7 @@ function HomePage() {
 							<h5>{languages[0][lang].home.feaContent}</h5>
 						</Col>
 					</Row>
-				</Container>
+				</div>
 			</section>
 
 			{/* Membership Plans Section */}

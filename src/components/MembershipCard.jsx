@@ -12,6 +12,7 @@ function MembershipCard({ string, price, btnFunction, business }) {
 
 	const info = {
 		plan1: languages[0][lang].home[`${string}1`],
+		plan6: languages[0][lang].home[`${string}6`],
 		plan2: languages[0][lang].home[`${string}2`],
 		plan3: languages[0][lang].home[`${string}3`],
 		plan4: languages[0][lang].home[`${string}4`],
