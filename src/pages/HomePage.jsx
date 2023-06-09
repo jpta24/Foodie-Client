@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
+import { Row, Col, Image, Button } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import TestimonialsCarousel from '../components/HomeCarousel';
 import MembershipTable from '../components/MembershipTable';

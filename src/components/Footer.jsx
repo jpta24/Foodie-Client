@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
