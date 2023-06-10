@@ -82,8 +82,8 @@
 				"productError": "Product could not be Created",
 				"prodEditError": "Product could not be Edited",
 				"editUser": "User successfully Edited",
-                "updateMembership":"Plan successfully updated",
-                "errorMembership": "Plan could not be Updated"
+				"updateMembership": "Plan successfully updated",
+				"errorMembership": "Plan could not be Updated"
 			},
 			"login": {
 				"greetingTitle": "Welcome back",
@@ -232,10 +232,11 @@
 				"btnCancel": "Cancel",
 				"btnDelete": "Delete",
 				"addProduct": "Add Product",
-				"mHLtitle":"Maximum Highlight Limit Reached",
-				"mHLtext1":"You have reached the maximum limit for Highlighted Products in your current plan",
-				"mHLtext2":"Upgrade your subscription or deselect other Highlighted Products to highlight this product.",
-				"btnMembership":"Go to Membership"
+				"mHLtitle": "Maximum Highlight Limit Reached",
+				"mHLtext1": "You have reached the maximum limit for Highlighted Products in your current plan",
+				"mHLtext2": "Upgrade your subscription or deselect other Highlighted Products to highlight this product.",
+				"btnMembership": "Go to Membership",
+				"bestSeller":"Best Seller"
 			},
 			"businessView": {
 				"delivery": "Delivery Methods:",
@@ -294,17 +295,17 @@
 				"ingredients": "Ingredients",
 				"addToCart": "Add to Cart"
 			},
-            "membership":{
-                "title":"Discover Your Options",
-                "freeTrial":"Unlock the Full Potential of our Plataform with a 1-month Free Trial of the Premium Plan!",
-                "cText":"All you need to expand your Business",
-                "mTitle":"Confirmation",
-                "mBody":"Are you sure you want to change your Plan to:",
-                "btnConfirm":"Confirm your choice",
-                "btnCancel":"Cancel",
-                "freeTrialBtn":"1 month Free Trial",
-                "actualPlan":"Actual Plan"
-            },
+			"membership": {
+				"title": "Discover Your Options",
+				"freeTrial": "Unlock the Full Potential of our Plataform with a 1-month Free Trial of the Premium Plan!",
+				"cText": "All you need to expand your Business",
+				"mTitle": "Confirmation",
+				"mBody": "Are you sure you want to change your Plan to:",
+				"btnConfirm": "Confirm your choice",
+				"btnCancel": "Cancel",
+				"freeTrialBtn": "1 month Free Trial",
+				"actualPlan": "Actual Plan"
+			},
 			"cloudinaryError": "Error while uploading the file:"
 		},
 		"Es": {
@@ -389,8 +390,8 @@
 				"productError": "No se pudo crear el producto",
 				"prodEditError": "No se pudo editar el producto",
 				"editUser": "Usuario editado con éxito",
-                "updateMembership": "Plan actualizado correctamente",
-"errorMembership": "No se pudo actualizar el plan"
+				"updateMembership": "Plan actualizado correctamente",
+				"errorMembership": "No se pudo actualizar el plan"
 			},
 			"login": {
 				"greetingTitle": "Bienvenido de nuevo",
@@ -537,7 +538,12 @@
 				"mBody3": "¿Está seguro de que desea eliminarlo?",
 				"btnCancel": "Cancelar",
 				"btnDelete": "Eliminar",
-				"addProduct": "Agregar Producto"
+				"addProduct": "Agregar Producto",
+				"mHLtitle": "Límite máximo de destacados alcanzado",
+				"mHLtext1": "Has alcanzado el límite máximo de productos destacados en tu plan actual",
+				"mHLtext2": "Actualiza tu suscripción o desmarca otros productos destacados para poder destacar este producto.",
+				"btnMembership": "Ir a la suscripción",
+				"bestSeller": "Más vendido"
 			},
 			"businessView": {
 				"delivery": "Métodos de Entrega:",
@@ -596,17 +602,17 @@
 				"ingredients": "Ingredientes",
 				"addToCart": "Agregar al carrito"
 			},
-            "membership":{
-                "title":"Descubre tus opciones",
-                "freeTrial":"¡Desbloquea todo el potencial de nuestra plataforma con un período de prueba gratuito de un mes del Plan Premium!",
-                "cText":"Todo lo que necesitas para expandir tu negocio",
-                "mTitle":"Confirmación",
-                "mBody":"¿Estás seguro de que deseas cambiar tu plan a:",
-                "btnConfirm":"Confirmar elección",
-                "btnCancel":"Cancelar",
-                "freeTrialBtn":"Prueba gratuita de 1 mes",
-                "actualPlan":"Plan actual"
-                },
+			"membership": {
+				"title": "Descubre tus opciones",
+				"freeTrial": "¡Desbloquea todo el potencial de nuestra plataforma con un período de prueba gratuito de un mes del Plan Premium!",
+				"cText": "Todo lo que necesitas para expandir tu negocio",
+				"mTitle": "Confirmación",
+				"mBody": "¿Estás seguro de que deseas cambiar tu plan a:",
+				"btnConfirm": "Confirmar elección",
+				"btnCancel": "Cancelar",
+				"freeTrialBtn": "Prueba gratuita de 1 mes",
+				"actualPlan": "Plan actual"
+			},
 			"cloudinaryError": "Error al cargar el archivo:"
 		},
 		"De": {
@@ -691,8 +697,8 @@
 				"productError": "Produkt konnte nicht erstellt werden",
 				"prodEditError": "Das Produkt konnte nicht bearbeitet werden",
 				"editUser": "Benutzer erfolgreich bearbeitet",
-                "updateMembership": "Plan actualizado correctamente",
-"errorMembership": "No se pudo actualizar el plan"
+				"updateMembership": "Plan actualizado correctamente",
+				"errorMembership": "No se pudo actualizar el plan"
 			},
 			"login": {
 				"greetingTitle": "Willkommen zurück",
@@ -840,7 +846,12 @@
 				"mBody3": "Sind Sie sicher, dass Sie es löschen möchten?",
 				"btnCancel": "Abbrechen",
 				"btnDelete": "Löschen",
-				"addProduct": "Produkt hinzufügen"
+				"addProduct": "Produkt hinzufügen",
+				"mHLtitle": "Maximales Hervorhebungslimit erreicht",
+				"mHLtext1": "Sie haben das maximale Limit für hervorgehobene Produkte in Ihrem aktuellen Plan erreicht",
+				"mHLtext2": "Aktualisieren Sie Ihr Abonnement oder deaktivieren Sie andere hervorgehobene Produkte, um dieses Produkt hervorzuheben.",
+				"btnMembership": "Zur Mitgliedschaft gehen",
+				"bestSeller": "Bestseller"
 			},
 			"businessView": {
 				"delivery": "Liefermethoden:",
@@ -899,17 +910,17 @@
 				"ingredients": "Zutaten",
 				"addToCart": "In den Warenkorb legen"
 			},
-            "membership":{
-                "title":"Entdecken Sie Ihre Möglichkeiten",
-                "freeTrial":"Entsperren Sie das volle Potenzial unserer Plattform mit einem 1-monatigen kostenlosen Test des Premium-Plans!",
-                "cText":"Alles, was Sie benötigen, um Ihr Geschäft auszuweiten",
-                "mTitle":"Bestätigung",
-                "mBody":"Sind Sie sicher, dass Sie Ihren Plan ändern möchten auf:",
-                "btnConfirm":"Bestätigen Sie Ihre Wahl",
-                "btnCancel":"Abbrechen",
-                "freeTrialBtn":"1 Monat kostenloser Test",
-                "actualPlan":"Aktueller Plan"
-                },
+			"membership": {
+				"title": "Entdecken Sie Ihre Möglichkeiten",
+				"freeTrial": "Entsperren Sie das volle Potenzial unserer Plattform mit einem 1-monatigen kostenlosen Test des Premium-Plans!",
+				"cText": "Alles, was Sie benötigen, um Ihr Geschäft auszuweiten",
+				"mTitle": "Bestätigung",
+				"mBody": "Sind Sie sicher, dass Sie Ihren Plan ändern möchten auf:",
+				"btnConfirm": "Bestätigen Sie Ihre Wahl",
+				"btnCancel": "Abbrechen",
+				"freeTrialBtn": "1 Monat kostenloser Test",
+				"actualPlan": "Aktueller Plan"
+			},
 			"cloudinaryError": "Fehler beim Hochladen der Datei:"
 		}
 	}

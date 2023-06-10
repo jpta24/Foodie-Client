@@ -13,9 +13,10 @@ import BusinessMenu from '../components/BusinessMenu';
 import Loading from '../components/Loading';
 import { getAPI, putAPI, deleteAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
+import PromotionCard from '../components/PromotionCard';
 
 const Business = () => {
-	const { language: lang,isDark } = useContext(AuthContext);
+	const { language: lang, isDark } = useContext(AuthContext);
 
 	const { cart } = useContext(CartContext);
 	const { user } = useContext(AuthContext);
@@ -66,13 +67,11 @@ const Business = () => {
 	};
 	const [show, setShow] = useState(modalInitialState);
 
-	
-
 	const handleClose = () => setShow(modalInitialState);
 	const handleModal = (productName, productID) => {
 		setShow({ show: true, productName, productID });
 	};
-	const [modalHL, setmodalHL] = useState(false)
+	const [modalHL, setmodalHL] = useState(false);
 
 	const deleteProduct = () => {
 		const url = `products/delete/${show.productID}`;
@@ -148,7 +147,12 @@ const Business = () => {
 		}
 		const currency = business.currency;
 
-		const limitHL = business.membership.plan === 'free' ? 3 : business.membership === 'basic' ? 10 : Infinity
+		const limitHL =
+			business.membership.plan === 'free'
+				? 3
+				: business.membership === 'basic'
+				? 10
+				: Infinity;
 
 		const handleHighlightedProduct = (productID) => {
 			if (
@@ -167,7 +171,7 @@ const Business = () => {
 				};
 				putAPI(url, requestBody, thenFunction, errorFunction);
 			} else {
-				setmodalHL(true)
+				setmodalHL(true);
 			}
 		};
 
@@ -175,8 +179,6 @@ const Business = () => {
 			highlightedProducts: business.highlightedProducts,
 			handleHighlightedProduct: handleHighlightedProduct,
 		};
-
-		
 
 		return (
 			<div className={`container-fluid`}>
@@ -205,24 +207,59 @@ const Business = () => {
 						</div>
 					</div>
 				</div>
-				<div className='row p-0'>
-					<div className='d-flex flex-column justify-content-center align-items-center'>
-						<h1 className={isDark && 'text-danger'}>{business.name}</h1>
-						<BusinessMenu
-							handleCategory={handleCategory}
-							category={category}
-							arrCategories={arrCategories}
-							isDark={isDark}
-						/>
+				<div className='d-flex p-0'>
+					<div className=''>
+						<div className='row p-0'>
+							<div className='d-flex flex-column justify-content-center align-items-center'>
+								<h1 className={isDark && 'text-danger foodie-title'}>
+									{business.name}
+								</h1>
+								<BusinessMenu
+									handleCategory={handleCategory}
+									category={category}
+									arrCategories={arrCategories}
+									isDark={isDark}
+								/>
+							</div>
+						</div>
+						<div className='row p-0 justify-content-center'>
+							<div className='col-11 pb-5 d-flex flex-wrap justify-content-around align-items-stretch '>
+								{business.products
+									.filter((prod) => prod.categories.includes(category))
+									.map((product) => {
+										return (
+											<ProductCard2
+												key={uuidv4()}
+												product={product}
+												businessNameEncoded={businessNameEncoded}
+												currency={currency}
+												cart={cart}
+												setBusiness={setBusiness}
+												handleModal={handleModal}
+												owner={owner}
+												userSaved={userSaved}
+												handleSavedProductStatus={handleSavedProductStatus}
+												businessHighlightedProducts={
+													businessHighlightedProducts
+												}
+											/>
+										);
+									})}
+							</div>
+						</div>
 					</div>
-				</div>
-				<div className='row p-0 justify-content-center'>
-					<div className='col-10 pb-5 d-flex flex-wrap justify-content-center align-items-stretch '>
+					<div className='promotions d-flex flex-column align-items-center h4 mt-5'>
+						<span>{languages[0][lang].business.bestSeller}</span>
+
 						{business.products
-							.filter((prod) => prod.categories.includes(category))
+							.filter((prod) =>
+								businessHighlightedProducts.highlightedProducts.includes(
+									prod._id
+								)
+							)
 							.map((product) => {
 								return (
-									<ProductCard2
+									<PromotionCard
 										key={uuidv4()}
 										product={product}
 										businessNameEncoded={businessNameEncoded}
@@ -231,36 +268,33 @@ const Business = () => {
 										setBusiness={setBusiness}
 										handleModal={handleModal}
 										owner={owner}
-										userSaved={userSaved}
-										handleSavedProductStatus={handleSavedProductStatus}
-										businessHighlightedProducts={businessHighlightedProducts}
 									/>
 								);
 							})}
 					</div>
-
-					{cart && user && cart.length > 0 && (
-						<Link
-							to={`/cart/${user._id}`}
-							className='fixed-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between'
-						>
-							<span className='px-2 position-relative'>
-								<span className='position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark'>
-									{cart
-										.map((prod) => prod.quantity)
-										.reduce((acc, val) => {
-											return acc + val;
-										}, 0)}
-								</span>
-								🛒
-							</span>
-							<span>
-								{languages[0][lang].business.gotocart} ({summary} {currency})
-							</span>
-							<span className='px-2'> </span>
-						</Link>
-					)}
 				</div>
+
+				{cart && user && cart.length > 0 && (
+					<Link
+						to={`/cart/${user._id}`}
+						className='fixed-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between'
+					>
+						<span className='px-2 position-relative'>
+							<span className='position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark'>
+								{cart
+									.map((prod) => prod.quantity)
+									.reduce((acc, val) => {
+										return acc + val;
+									}, 0)}
+							</span>
+							🛒
+						</span>
+						<span>
+							{languages[0][lang].business.gotocart} ({summary} {currency})
+						</span>
+						<span className='px-2'> </span>
+					</Link>
+				)}
 				<Modal
 					show={show.show}
 					onHide={handleClose}
@@ -287,7 +321,7 @@ const Business = () => {
 				{/* MODAL FOR LIMIT HIGHLIGHTED */}
 				<Modal
 					show={modalHL}
-					onHide={()=>setmodalHL(false)}
+					onHide={() => setmodalHL(false)}
 					backdrop='static'
 					keyboard={false}
 				>
@@ -295,17 +329,19 @@ const Business = () => {
 						<Modal.Title>{languages[0][lang].business.mHLtitle}</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						{`${languages[0][lang].business.mHLtext1} (${limitHL}).`}{' '}
-						<br />
+						{`${languages[0][lang].business.mHLtext1} (${limitHL}).`} <br />
 						{languages[0][lang].business.mHLtext2}
 					</Modal.Body>
 					<Modal.Footer>
-						<Button variant='secondary' onClick={()=>setmodalHL(false)}>
+						<Button variant='secondary' onClick={() => setmodalHL(false)}>
 							{languages[0][lang].business.btnCancel}
 						</Button>
-						<Button variant='danger' onClick={()=>{
-							navigate(`/${businessNameEncoded}/memberships`);
-						}}>
+						<Button
+							variant='danger'
+							onClick={() => {
+								navigate(`/${businessNameEncoded}/memberships`);
+							}}
+						>
 							{languages[0][lang].business.btnMembership}
 						</Button>
 					</Modal.Footer>
