@@ -63,7 +63,7 @@ function HomePage() {
 								}
 							>
 								{' '}
-								<strong className='text-danger'>FOODIE:</strong> {languages[0][lang].home.slogan}
+								<strong className='text-danger foodie-title'>FOODIE:</strong> {languages[0][lang].home.slogan}
 							</h1>
 							<Button
 								size='lg'

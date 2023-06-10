@@ -25,14 +25,14 @@ const Nabvar2 = () => {
 				expand='sm'
 				collapseOnSelect
 			>
-				<Navbar.Brand href='/'>
+				<Navbar.Brand href='/' className='foodie-title d-flex align-items-center'>
 					<img
 						src={iconsCloud[0].foodieIcon}
 						width='40px'
 						height='40px'
 						alt='altLogo'
 					/>{' '}
-					Foodie
+					<span className='ps-2'>Foodie</span>
 				</Navbar.Brand>
 
 				<Navbar.Toggle className='coloring' />
