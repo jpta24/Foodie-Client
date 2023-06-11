@@ -256,6 +256,17 @@ const Business = () => {
 										prod._id
 									)
 								)
+								.sort((x, y) => {
+									const indexX =
+										businessHighlightedProducts.highlightedProducts.indexOf(
+											x._id
+										);
+									const indexY =
+										businessHighlightedProducts.highlightedProducts.indexOf(
+											y._id
+										);
+									return indexX - indexY;
+								})
 								.map((product) => {
 									return (
 										<PromotionCard

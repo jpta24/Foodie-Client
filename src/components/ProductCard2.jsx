@@ -89,9 +89,9 @@ const ProductCard2 = ({
 			? false
 			: userSaved.savedProducts?.includes(product._id);
 	return (
-		<div className={`m-3 card-container ${!prodIsActive && 'opacity-50'}`}>
+		<div className={`mx-1 my-1 card-container ${!prodIsActive ? 'opacity-50':''}`}>
 			<dir className='p-0 m-1 card-controls'>
-				<div className={`p-0 m-0 ${owner === false && 'd-none'} text-end`}>
+				<div className={`p-0 m-0 ${owner === false ? 'd-none':''} text-end`}>
 					<span
 						style={{ cursor: 'pointer' }}
 						className='mx-1'
@@ -140,14 +140,13 @@ const ProductCard2 = ({
 					></span>
 				)
 			)}
-			{/* <span className='card-icon card-icon1'>🔥</span> */}
 			<span
 				className='card-icon card-icon2'
 				onClick={() =>
 					userSaved !== '' && handleSavedProductStatus(product._id)
 				}
 			>
-				{isProdSaved ? '❤' : '🤍'}
+				{isProdSaved ? '❤' : '🖤'}
 			</span>
 			<div className='card-img-container'>
 				<img className='card-img' src={product.mainImg} alt='' />
