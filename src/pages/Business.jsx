@@ -208,12 +208,10 @@ const Business = () => {
 					</div>
 				</div>
 				<div className='d-flex p-0'>
-					<div className=''>
+					<div className='business-products'>
 						<div className='row p-0'>
 							<div className='d-flex flex-column justify-content-center align-items-center'>
-								<h1 className={isDark && 'text-danger foodie-title'}>
-									{business.name}
-								</h1>
+								<h1 className='text-danger foodie-title'>{business.name}</h1>
 								<BusinessMenu
 									handleCategory={handleCategory}
 									category={category}
@@ -248,30 +246,32 @@ const Business = () => {
 							</div>
 						</div>
 					</div>
-					<div className='promotions d-flex flex-column align-items-center h4 mt-5'>
-						<span>{languages[0][lang].business.bestSeller}</span>
+					{window.innerWidth > 750 && (
+						<div className='promotions d-flex flex-column align-items-center h4 mt-5'>
+							<span>{languages[0][lang].business.bestSeller}</span>
 
-						{business.products
-							.filter((prod) =>
-								businessHighlightedProducts.highlightedProducts.includes(
-									prod._id
+							{business.products
+								.filter((prod) =>
+									businessHighlightedProducts.highlightedProducts.includes(
+										prod._id
+									)
 								)
-							)
-							.map((product) => {
-								return (
-									<PromotionCard
-										key={uuidv4()}
-										product={product}
-										businessNameEncoded={businessNameEncoded}
-										currency={currency}
-										cart={cart}
-										setBusiness={setBusiness}
-										handleModal={handleModal}
-										owner={owner}
-									/>
-								);
-							})}
-					</div>
+								.map((product) => {
+									return (
+										<PromotionCard
+											key={uuidv4()}
+											product={product}
+											businessNameEncoded={businessNameEncoded}
+											currency={currency}
+											cart={cart}
+											setBusiness={setBusiness}
+											handleModal={handleModal}
+											owner={owner}
+										/>
+									);
+								})}
+						</div>
+					)}
 				</div>
 
 				{cart && user && cart.length > 0 && (
