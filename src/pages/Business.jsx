@@ -103,6 +103,20 @@ const Business = () => {
 		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
 
+	const handleSavedBusinessStatus = (productID) => {
+		const url = `users/savedBusiness/${user._id}`;
+		const requestBody = {
+			businessID: business._id,
+		};
+		const thenFunction = (response) => {
+			setUserSaved(response.data);
+		};
+		const errorFunction = (error) => {
+			console.log(error);
+		};
+		putAPI(url, requestBody, thenFunction, errorFunction);
+	};
+
 	useEffect(() => {
 		const url = `business/${businessNameEncoded}`;
 		const thenFunction = (response) => {
@@ -179,7 +193,7 @@ const Business = () => {
 			highlightedProducts: business.highlightedProducts,
 			handleHighlightedProduct: handleHighlightedProduct,
 		};
-
+		
 		return (
 			<div className={`container-fluid`}>
 				<div className='row p-0'>
@@ -211,7 +225,17 @@ const Business = () => {
 					<div className='business-products'>
 						<div className='row p-0'>
 							<div className='d-flex flex-column justify-content-center align-items-center'>
-								<h1 className='text-danger foodie-title'>{business.name}</h1>
+								<div className='d-flex'>
+									<h1 className='text-danger foodie-title'>{business.name}</h1>
+									<span
+										className='business-saved-icon my-2 mx-4'
+										onClick={() =>
+											userSaved !== '' && handleSavedProductStatus(business._id)
+										}
+									>
+										{(user!==undefined && userSaved.savedBusiness?.includes(business._id) ) ? '❤' : '🖤'}
+									</span>
+								</div>
 								<BusinessMenu
 									handleCategory={handleCategory}
 									category={category}
