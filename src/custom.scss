@@ -485,6 +485,24 @@ a {
 	text-overflow: ellipsis;
 }
 
+/* ////////////////////    BUSINESS   //////////////////////////////// */
+
+.business-saved-icon {
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	background-color: #282832;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	cursor: pointer;
+}
+
 @media (max-width: 600px) {
 	.card-container {
 		width: 136px;
