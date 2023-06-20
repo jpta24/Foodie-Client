@@ -19,7 +19,7 @@ const RedirectPage = () => {
 			? JSON.parse(localStorage.getItem('businesses'))
 			: [];
 
-		const url = `users/business/${userID._id}`;
+		const url = `users/visitedBusiness/${userID._id}`;
 		const thenFunction = (response) => {
 			setUser(response.data);
 		};
@@ -72,7 +72,7 @@ const RedirectPage = () => {
 								overflow: 'auto',
 							}}
 						>
-							{user.savedBusiness.map((buz) => (
+							{user.visitedBusiness.map((buz) => (
 								<RedirectCard key={uuidv4()} business={buz} />
 							))}
 						</div>

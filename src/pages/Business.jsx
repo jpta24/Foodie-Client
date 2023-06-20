@@ -103,10 +103,10 @@ const Business = () => {
 		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
 
-	const handleSavedBusinessStatus = (productID) => {
+	const handleSavedBusinessStatus = (businessID) => {
 		const url = `users/savedBusiness/${user._id}`;
 		const requestBody = {
-			businessID: business._id,
+			businessID: businessID,
 		};
 		const thenFunction = (response) => {
 			setUserSaved(response.data);
@@ -157,16 +157,16 @@ const Business = () => {
 		}
 		if (user) {
 			owner = business.owner === user._id ? true : false;
-			putAPI(`users/business/${user._id}`, businessStored);
+			putAPI(`users/visitedBusiness/${user._id}`, businessStored);
 		}
 		const currency = business.currency;
 
-		const limitHL =
-			business.membership.plan === 'free'
+		const limitHL = owner ? 
+			(business.membership.plan === 'free'
 				? 3
 				: business.membership === 'basic'
 				? 10
-				: Infinity;
+				: Infinity):null;
 
 		const handleHighlightedProduct = (productID) => {
 			if (
@@ -230,7 +230,7 @@ const Business = () => {
 									<span
 										className='business-saved-icon my-2 mx-4'
 										onClick={() =>
-											userSaved !== '' && handleSavedProductStatus(business._id)
+											userSaved !== '' && handleSavedBusinessStatus(business._id)
 										}
 									>
 										{(user!==undefined && userSaved.savedBusiness?.includes(business._id) ) ? '❤' : '🖤'}
