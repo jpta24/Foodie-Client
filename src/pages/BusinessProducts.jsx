@@ -7,9 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { Modal, Button } from 'react-bootstrap';
 import languages from '../data/language.json'
 
-import ProductCard from '../components/ProductCard';
-import ProductCardDesktop from '../components/ProductCardDesktop';
-
 import iconsCloud from '../data/icons.json'
 import Loading from '../components/Loading';
 import { deleteAPI, getAPI, putAPI} from '../utils/api';
