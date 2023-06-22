@@ -16,7 +16,7 @@ const ProductCard2 = ({
 	owner,
 	userSaved,
 	handleSavedProductStatus,
-	businessHighlightedProducts
+	businessHighlightedProducts,
 }) => {
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);
@@ -89,9 +89,13 @@ const ProductCard2 = ({
 			? false
 			: userSaved.savedProducts?.includes(product._id);
 	return (
-		<div className={`mx-1 my-1 card-container ${!prodIsActive ? 'opacity-50':''}`}>
+		<div
+			className={`mx-1 my-1 card-container ${
+				!prodIsActive ? 'opacity-50' : ''
+			}`}
+		>
 			<dir className='p-0 m-1 card-controls'>
-				<div className={`p-0 m-0 ${owner === false ? 'd-none':''} text-end`}>
+				<div className={`p-0 m-0 ${owner === false ? 'd-none' : ''} text-end`}>
 					<span
 						style={{ cursor: 'pointer' }}
 						className='mx-1'
@@ -148,9 +152,11 @@ const ProductCard2 = ({
 			>
 				{isProdSaved ? '❤' : '🖤'}
 			</span>
-			<div className='card-img-container'>
-				<img className='card-img' src={product.mainImg} alt='' />
-			</div>
+			<Link to={`/product/${product._id}`}>
+				<div className='card-img-container'>
+					<img className='card-img' src={product.mainImg} alt='' />
+				</div>
+			</Link>
 
 			<div className='card-section p-3 text-start'>
 				<span className='card-title'>{product.name}</span>
