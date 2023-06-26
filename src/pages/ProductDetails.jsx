@@ -58,7 +58,7 @@ const ProductDetails = (props) => {
 	};
 
 	if (userSaved) {
-        console.log(userSaved);
+        // console.log(userSaved);
 		isProdSaved =
 			userSaved.savedProducts === undefined
 				? false

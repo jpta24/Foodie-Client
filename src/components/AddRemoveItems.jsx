@@ -1,10 +1,5 @@
 import React from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
-
-import { getAPI, putAPI } from '../utils/api';
-import { toastifyError } from '../utils/tostify';
-
 const AddRemoveItems = ({ product,setProduct }) => {
 	return (
 		<div className='mb-1 col-6'>
