@@ -16,10 +16,9 @@ import { toastifyError } from '../utils/tostify';
 import PromotionCard from '../components/PromotionCard';
 
 const Business = () => {
-	const { language: lang, isDark } = useContext(AuthContext);
+	const { language: lang, isDark, user } = useContext(AuthContext);
 
 	const { cart } = useContext(CartContext);
-	const { user } = useContext(AuthContext);
 	let summary;
 	if (cart !== null && cart.length > 0) {
 		const amounts = cart.map((item) => item.product.price * item.quantity);
@@ -195,7 +194,7 @@ const Business = () => {
 		};
 		
 		return (
-			<div className={`container-fluid`}>
+			<div className={`container-fluid pb-3`}>
 				<div className='row p-0'>
 					<div
 						className='d-flex flex-column align-items-center justify-content-between'

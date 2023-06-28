@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { putAPI } from '../utils/api';
+import { toastifyError } from '../utils/tostify';
 
 export function capitalize(str) {
 	return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -26,4 +28,43 @@ export const handleFileUpload = (e, currentImgUrl, setterFunction, field) => {
 			setterFunction(field, response.fileUrl);
 		})
 		.catch((err) => console.log(`Error while uploading the file:`, err));
+};
+
+export const handleAddQtyToCart = (product,qty=1,user,getCartData) => {
+	const requestBody = {
+		cart: {
+			product: product._id,
+			quantity: qty,
+		},
+	};
+	const url = `users/addQtyCart/${user._id}`;
+	const thenFunction = (response) => {
+		getCartData();
+	};
+	putAPI(url, requestBody, thenFunction);
+};
+
+export const handleAddToCart = (product,qty=1,user,getCartData,cart,navigate) => {
+	if (user) {
+		if (cart.map((prod) => prod.product._id).includes(product._id)) {
+			handleAddQtyToCart(product,qty,user,getCartData,cart);
+		} else {
+			const requestBody = {
+				cart: {
+					product: product._id,
+					quantity: qty,
+				},
+			};
+			const url = `users/addCart/${user._id}`;
+			const thenFunction = (response) => {
+				getCartData();
+			};
+			const errorFunction = (error) => {
+				toastifyError(error.response.data.message);
+			};
+			putAPI(url, requestBody, thenFunction, errorFunction);
+		}
+	} else {
+		navigate(`/login`);
+	}
 };

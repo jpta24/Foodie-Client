@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoCloseSharp } from 'react-icons/io5';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,9 +16,16 @@ const ProductDetailMobile = ({
 	isProdSaved,
 	rating,
 	lang,
+	handleAddToCart,
+	user,
+	getCartData,
+	cart,
+	navigate,
+    summary,
+    currency
 }) => {
 	return (
-		<div className='container'>
+		<div className='container pb-5'>
 			<div className='row'>
 				<div className='detail-image-container d-flex flex-column justify-content-around align-items-center position-relative'>
 					<Link
@@ -39,25 +45,17 @@ const ProductDetailMobile = ({
 						<img className='detail-img' src={product.product.mainImg} alt='' />
 					</div>
 					<AddRemoveItems product={product} setProduct={setProduct} />
-					{/* <div
-            className='rounded-circle border border-dark mb-3 mx-auto shadow'
-            style={{
-              height: '300px',
-              width: '300px',
-              backgroundImage: `url('${product.product.mainImg}')`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-            }}
-          ></div> */}
 				</div>
 				<div className='text-start px-5 '>
 					<div className='d-flex justify-content-between mt-4 position-relative'>
-						<h1 className='mb-2'>{product.product.name}</h1>
+						<h1 className='mb-2 pe-4'>
+							{product.product.name.length < 41
+								? product.product.name
+								: product.product.name.slice(0, 35) + '...'}
+						</h1>
 						<span
 							className='card-icon card-icon2'
 							onClick={() =>
-								// console.log('hier')
 								userSaved !== '' &&
 								handleSavedProductStatus(product.product._id)
 							}
@@ -68,14 +66,13 @@ const ProductDetailMobile = ({
 					<div className='my-2 fs-6 text-secondary d-flex'>
 						Rating: <RatingProd rating={rating} />{' '}
 					</div>
-					{/* <ProdDetailsExpandText text={product.product.description}/> */}
 					<ProdDetailsExpandText
 						text={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor feugiat odio, ut tincidunt mi pellentesque in. Suspendisse potenti. asdasdas sdadsdasd'
+							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor feugiat odio, ut tincidunt mi pellentesque in. Suspendisse potenti. asdasdas sdadsdasd asñklnaskldnas mas slmclkas dlas m slmsaldknal asdlamsldkas alsdmañlmdalñ'
 						}
 					/>
-					<h6>{languages[0][lang].productDetails.ingredients}</h6>
-					<div className='p-2 col-12 d-flex flex-row mb'>
+					<h6 className='my-1'>{languages[0][lang].productDetails.ingredients}</h6>
+					<div className='px-2 col-12 d-flex flex-row mb categories'>
 						{product.product.ingredients.map((cat) => {
 							return (
 								<span
@@ -92,13 +89,41 @@ const ProductDetailMobile = ({
 					<div className='d-flex justify-content-between'>
 						<h2 className='py-3 mx-2'>
 							{product.product.business.currency}{' '}
-							{product.product.price.toFixed(2).length < 8 ? product.product.price.toFixed(2) : product.product.price.toFixed(2).slice(0,6)+ '...'}
+							{product.product.price.toFixed(2).length < 9
+								? product.product.price.toFixed(2)
+								: product.product.price.toFixed(2).slice(0, 6) + '...'}
 						</h2>
-						<div className='bg-primary col-lg-7 col-6 px-2 py-2 text-center rounded-pill my-3'>
+						<div
+							className='bg-primary col-lg-7 col-6 px-2 py-2 text-center rounded-pill my-3'
+							onClick={() => {
+								handleAddToCart(product.product, product.qty, user, getCartData, cart, navigate);
+							}}
+						>
 							{languages[0][lang].productDetails.addToCart}
 						</div>
 					</div>
 				</div>
+                {cart && user && cart.length > 0 && (
+					<Link
+						to={`/cart/${user._id}`}
+						className='fixed-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between'
+					>
+						<span className='px-2 position-relative'>
+							<span className='position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark'>
+								{cart
+									.map((prod) => prod.quantity)
+									.reduce((acc, val) => {
+										return acc + val;
+									}, 0)}
+							</span>
+							🛒
+						</span>
+						<span>
+							{languages[0][lang].business.gotocart} ({summary} {currency})
+						</span>
+						<span className='px-2'> </span>
+					</Link>
+				)}
 			</div>
 		</div>
 	);

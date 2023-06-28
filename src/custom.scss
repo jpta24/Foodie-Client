@@ -553,6 +553,17 @@ a {
 	object-fit: contain;
 }
 
+
+.p-expansible {
+	margin-top: 0.3rem;
+	color: #91909a;
+}
+  
+  .read-more {
+	color: red;
+  }
+  
+
 @media (max-width: 600px) {
 	.card-container {
 		width: 136px;

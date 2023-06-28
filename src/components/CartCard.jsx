@@ -23,6 +23,8 @@ const CartCard = ({ product, updateSummary, currency }) => {
 	//             console.log(error)
 	//         });
 	// }
+
+	//////////////////////// PRNDIENTE REVISAR ESTAS FUNCIONES de abajo CON LAS DEL FILE FUNTIONS //////////////////////
 	const handleAddQtyToCart = () => {
 		const requestBody = {
 			cart: {
@@ -59,7 +61,7 @@ const CartCard = ({ product, updateSummary, currency }) => {
 		};
 		putAPI(url, requestBody, thenFunction);
 	};
-
+//////////////////////// PRNDIENTE REVISAR ESTAS FUNCIONES de arriba CON LAS DEL FILE FUNTIONS //////////////////////
 	useEffect(() => {
 		updateSummary();
 		// eslint-disable-next-line react-hooks/exhaustive-deps

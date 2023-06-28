@@ -4,6 +4,7 @@ import { CartContext } from '../context/cart.context';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { getAPI, putAPI } from '../utils/api';
+import { handleAddToCart } from "../utils/functions";
 import { toastifyError } from '../utils/tostify';
 
 const ProductCard2 = ({
@@ -26,43 +27,44 @@ const ProductCard2 = ({
 	const paused = '⏸';
 	const play = '▶';
 
-	const handleAddQtyToCart = () => {
-		const requestBody = {
-			cart: {
-				product: product._id,
-			},
-		};
-		const url = `users/addQtyCart/${user._id}`;
-		const thenFunction = (response) => {
-			getCartData();
-		};
-		putAPI(url, requestBody, thenFunction);
-	};
+	// const handleAddQtyToCart = (qty=1) => {
+	// 	const requestBody = {
+	// 		cart: {
+	// 			product: product._id,
+	// 			quantity: qty,
+	// 		},
+	// 	};
+	// 	const url = `users/addQtyCart/${user._id}`;
+	// 	const thenFunction = (response) => {
+	// 		getCartData();
+	// 	};
+	// 	putAPI(url, requestBody, thenFunction);
+	// };
 
-	const handleAddToCart = () => {
-		if (user) {
-			if (cart.map((prod) => prod.product._id).includes(product._id)) {
-				handleAddQtyToCart();
-			} else {
-				const requestBody = {
-					cart: {
-						product: product._id,
-						quantity: 1,
-					},
-				};
-				const url = `users/addCart/${user._id}`;
-				const thenFunction = (response) => {
-					getCartData();
-				};
-				const errorFunction = (error) => {
-					toastifyError(error.response.data.message);
-				};
-				putAPI(url, requestBody, thenFunction, errorFunction);
-			}
-		} else {
-			navigate(`/login/${businessNameEncoded}`);
-		}
-	};
+	// const handleAddToCart = (qty=1) => {
+	// 	if (user) {
+	// 		if (cart.map((prod) => prod.product._id).includes(product._id)) {
+	// 			handleAddQtyToCart(qty);
+	// 		} else {
+	// 			const requestBody = {
+	// 				cart: {
+	// 					product: product._id,
+	// 					quantity: qty,
+	// 				},
+	// 			};
+	// 			const url = `users/addCart/${user._id}`;
+	// 			const thenFunction = (response) => {
+	// 				getCartData();
+	// 			};
+	// 			const errorFunction = (error) => {
+	// 				toastifyError(error.response.data.message);
+	// 			};
+	// 			putAPI(url, requestBody, thenFunction, errorFunction);
+	// 		}
+	// 	} else {
+	// 		navigate(`/login/${businessNameEncoded}`);
+	// 	}
+	// };
 
 	const handleProductStatus = () => {
 		const newStatus = prodIsActive ? 'paused' : 'active';
@@ -164,12 +166,12 @@ const ProductCard2 = ({
 				<div className='d-flex justify-content-between'>
 					<span className='card-preis'>
 						{currency}
-						{product.price.toFixed(2)}
+						{product.price.toFixed(2).length < 8 ? product.price.toFixed(2) : product.price.toFixed(2).slice(0,6)+ '...'}
 					</span>
 					<div className='my-auto'>
 						<span className='card-weigth'>290g</span>
 					</div>
-					<span className='card-add' onClick={handleAddToCart}>
+					<span className='card-add' onClick={()=>{handleAddToCart(product,1,user,getCartData,cart,navigate)}}>
 						➕
 					</span>
 				</div>

@@ -1,17 +1,18 @@
 import { useState, useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import { AuthContext } from '../context/auth.context';
+import { CartContext } from '../context/cart.context';
 
-import { v4 as uuidv4 } from 'uuid';
-import { IoCloseSharp } from 'react-icons/io5';
-
-import languages from '../data/language.json';
 import Loading from '../components/Loading';
 import { getAPI, putAPI } from '../utils/api';
-import iconsCloud from '../data/icons.json';
 import ProductDetailMobile from '../components/ProductDetailMobile';
 
-const ProductDetails = (props) => {
+import { handleAddToCart } from "../utils/functions";
+
+const ProductDetails = () => {
+	const navigate = useNavigate();
+	const { getCartData, cart } = useContext(CartContext);
 	const { language: lang, user } = useContext(AuthContext);
 
 	const { productID } = useParams();
@@ -20,7 +21,7 @@ const ProductDetails = (props) => {
 	useEffect(() => {
 		const url = `products/${productID}`;
 		const thenFunction = (response) => {
-			setProduct({product:response.data.product,qty:1});
+			setProduct({ product: response.data.product, qty: 1 });
 		};
 		getAPI(url, thenFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,9 +57,9 @@ const ProductDetails = (props) => {
 		};
 		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
-
-	if (userSaved) {
-        // console.log(userSaved);
+ let currency,summary
+	if (user && product) {
+        currency = product.product.business.currency;
 		isProdSaved =
 			userSaved.savedProducts === undefined
 				? false
@@ -67,17 +68,70 @@ const ProductDetails = (props) => {
 
 	const rating = 4.5;
 
+	// const handleAddQtyToCart = () => {
+	// 	const requestBody = {
+	// 		cart: {
+	// 			product: product._id,
+	// 		},
+	// 	};
+	// 	const url = `users/addQtyCart/${user._id}`;
+	// 	const thenFunction = (response) => {
+	// 		getCartData();
+	// 	};
+	// 	putAPI(url, requestBody, thenFunction);
+	// };
+
+	// const handleAddToCart = () => {
+	// 	if (user) {
+	// 		if (cart.map((prod) => prod.product._id).includes(product._id)) {
+	// 			handleAddQtyToCart();
+	// 		} else {
+	// 			const requestBody = {
+	// 				cart: {
+	// 					product: product._id,
+	// 					quantity: 1,
+	// 				},
+	// 			};
+	// 			const url = `users/addCart/${user._id}`;
+	// 			const thenFunction = (response) => {
+	// 				getCartData();
+	// 			};
+	// 			const errorFunction = (error) => {
+	// 				toastifyError(error.response.data.message);
+	// 			};
+	// 			putAPI(url, requestBody, thenFunction, errorFunction);
+	// 		}
+	// 	} else {
+	// 		navigate(`/login`);
+	// 	}
+	// };
+	if (cart !== null && cart.length > 0) {
+		const amounts = cart.map((item) => item.product.price * item.quantity);
+		summary = amounts
+			.reduce((acc, val) => {
+				return acc + val;
+			})
+			.toFixed(2);
+	}
+
 	if (product) {
 		return (
 			<>
 				<ProductDetailMobile
 					product={product}
-                    setProduct={setProduct}
+					setProduct={setProduct}
 					userSaved={userSaved}
 					handleSavedProductStatus={handleSavedProductStatus}
 					isProdSaved={isProdSaved}
 					rating={rating}
 					lang={lang}
+					handleAddToCart={handleAddToCart}
+                    user={user}
+                    getCartData={getCartData}
+                    cart={cart}
+                    navigate={navigate}
+                    currency={currency}
+                    summary={summary}
 				/>
 			</>
 			// {/* <div className='container'>
