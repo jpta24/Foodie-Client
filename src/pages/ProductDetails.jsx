@@ -8,7 +8,8 @@ import Loading from '../components/Loading';
 import { getAPI, putAPI } from '../utils/api';
 import ProductDetailMobile from '../components/ProductDetailMobile';
 
-import { handleAddToCart } from "../utils/functions";
+import { handleAddToCart } from '../utils/functions';
+import ProductDetailDesktop from '../components/ProductDetailDesktop';
 
 const ProductDetails = () => {
 	const navigate = useNavigate();
@@ -57,9 +58,9 @@ const ProductDetails = () => {
 		};
 		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
- let currency,summary
+	let currency, summary;
 	if (user && product) {
-        currency = product.product.business.currency;
+		currency = product.product.business.currency;
 		isProdSaved =
 			userSaved.savedProducts === undefined
 				? false
@@ -117,22 +118,41 @@ const ProductDetails = () => {
 	if (product) {
 		return (
 			<>
-				<ProductDetailMobile
-					product={product}
-					setProduct={setProduct}
-					userSaved={userSaved}
-					handleSavedProductStatus={handleSavedProductStatus}
-					isProdSaved={isProdSaved}
-					rating={rating}
-					lang={lang}
-					handleAddToCart={handleAddToCart}
-                    user={user}
-                    getCartData={getCartData}
-                    cart={cart}
-                    navigate={navigate}
-                    currency={currency}
-                    summary={summary}
-				/>
+				{window.innerWidth < 560 ? (
+					<ProductDetailMobile
+						product={product}
+						setProduct={setProduct}
+						userSaved={userSaved}
+						handleSavedProductStatus={handleSavedProductStatus}
+						isProdSaved={isProdSaved}
+						rating={rating}
+						lang={lang}
+						handleAddToCart={handleAddToCart}
+						user={user}
+						getCartData={getCartData}
+						cart={cart}
+						navigate={navigate}
+						currency={currency}
+						summary={summary}
+					/>
+				) : (
+					<ProductDetailDesktop 
+                        product={product}
+						setProduct={setProduct}
+						userSaved={userSaved}
+						handleSavedProductStatus={handleSavedProductStatus}
+						isProdSaved={isProdSaved}
+						rating={rating}
+						lang={lang}
+						handleAddToCart={handleAddToCart}
+						user={user}
+						getCartData={getCartData}
+						cart={cart}
+						navigate={navigate}
+						currency={currency}
+						summary={summary}
+                    />
+				)}
 			</>
 			// {/* <div className='container'>
 			// 	<div className='row'>

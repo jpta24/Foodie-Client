@@ -69,7 +69,7 @@ const ProductDetailMobile = ({
 					</div>
 					<ProdDetailsExpandText
 						text={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor feugiat odio, ut tincidunt mi pellentesque in. Suspendisse potenti. asdasdas sdadsdasd asñklnaskldnas mas slmclkas dlas m slmsaldknal asdlamsldkas alsdmañlmdalñ'
+							product.product.description
 						}
 					/>
 					<h6 className='my-1'>{languages[0][lang].productDetails.ingredients}</h6>

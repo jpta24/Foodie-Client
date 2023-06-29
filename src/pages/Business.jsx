@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/cart.context';
 import { AuthContext } from '../context/auth.context';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,7 +13,8 @@ import BusinessMenu from '../components/BusinessMenu';
 import Loading from '../components/Loading';
 import { getAPI, putAPI, deleteAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
-import PromotionCard from '../components/PromotionCard';
+import CartBanner from '../components/CartBanner';
+import PromotionBanner from '../components/PromotionBanner';
 
 const Business = () => {
 	const { language: lang, isDark, user } = useContext(AuthContext);
@@ -160,12 +161,13 @@ const Business = () => {
 		}
 		const currency = business.currency;
 
-		const limitHL = owner ? 
-			(business.membership.plan === 'free'
+		const limitHL = owner
+			? business.membership.plan === 'free'
 				? 3
 				: business.membership === 'basic'
 				? 10
-				: Infinity):null;
+				: Infinity
+			: null;
 
 		const handleHighlightedProduct = (productID) => {
 			if (
@@ -192,7 +194,7 @@ const Business = () => {
 			highlightedProducts: business.highlightedProducts,
 			handleHighlightedProduct: handleHighlightedProduct,
 		};
-		
+
 		return (
 			<div className={`container-fluid pb-3`}>
 				<div className='row p-0'>
@@ -229,10 +231,14 @@ const Business = () => {
 									<span
 										className='business-saved-icon my-2 mx-4'
 										onClick={() =>
-											userSaved !== '' && handleSavedBusinessStatus(business._id)
+											userSaved !== '' &&
+											handleSavedBusinessStatus(business._id)
 										}
 									>
-										{(user!==undefined && userSaved.savedBusiness?.includes(business._id) ) ? '❤' : '🖤'}
+										{user !== undefined &&
+										userSaved.savedBusiness?.includes(business._id)
+											? '❤'
+											: '🖤'}
 									</span>
 								</div>
 								<BusinessMenu
@@ -270,64 +276,26 @@ const Business = () => {
 						</div>
 					</div>
 					{window.innerWidth > 750 && (
-						<div className='promotions d-flex flex-column align-items-center h4 mt-5'>
-							<span>{languages[0][lang].business.bestSeller}</span>
-
-							{business.products
-								.filter((prod) =>
-									businessHighlightedProducts.highlightedProducts.includes(
-										prod._id
-									)
-								)
-								.sort((x, y) => {
-									const indexX =
-										businessHighlightedProducts.highlightedProducts.indexOf(
-											x._id
-										);
-									const indexY =
-										businessHighlightedProducts.highlightedProducts.indexOf(
-											y._id
-										);
-									return indexX - indexY;
-								})
-								.map((product) => {
-									return (
-										<PromotionCard
-											key={uuidv4()}
-											product={product}
-											businessNameEncoded={businessNameEncoded}
-											currency={currency}
-											cart={cart}
-											setBusiness={setBusiness}
-											handleModal={handleModal}
-											owner={owner}
-										/>
-									);
-								})}
+						<div className='mt-4'>
+							<PromotionBanner
+								maxHeight={'640px'}
+								business={business}
+								currency={currency}
+								lang={lang}
+								businessHighlightedProducts={businessHighlightedProducts}
+							/>
 						</div>
 					)}
 				</div>
 
 				{cart && user && cart.length > 0 && (
-					<Link
-						to={`/cart/${user._id}`}
-						className='fixed-bottom bg-success py-3 text-light fw-bold d-flex justify-content-between'
-					>
-						<span className='px-2 position-relative'>
-							<span className='position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger border border-dark'>
-								{cart
-									.map((prod) => prod.quantity)
-									.reduce((acc, val) => {
-										return acc + val;
-									}, 0)}
-							</span>
-							🛒
-						</span>
-						<span>
-							{languages[0][lang].business.gotocart} ({summary} {currency})
-						</span>
-						<span className='px-2'> </span>
-					</Link>
+					<CartBanner
+						cart={cart}
+						user={user}
+						summary={summary}
+						currency={currency}
+						lang={lang}
+					/>
 				)}
 				<Modal
 					show={show.show}
