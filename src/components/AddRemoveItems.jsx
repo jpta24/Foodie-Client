@@ -5,7 +5,7 @@ const AddRemoveItems = ({ product,setProduct }) => {
 		<div className='mb-1 col-6'>
         <h1>
 			<span
-				style={{ cursor: 'pointer' }}
+				style={{ cursor: 'pointer',zIndex:'1',position:'relative' }}
 				className='badge badge-lg rounded-pill bg-dark'
 			>
 				<span
