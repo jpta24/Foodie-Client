@@ -68,3 +68,28 @@ export const handleAddToCart = (product,qty=1,user,getCartData,cart,navigate) =>
 		navigate(`/login`);
 	}
 };
+
+export const handleRemoveToCart = (product,user,getCartData) => {
+	const requestBody = {
+		product: product._id,
+	};
+	const url = `users/removeCart/${user._id}`;
+	const thenFunction = (response) => {
+		getCartData();
+	};
+	putAPI(url, requestBody, thenFunction);
+};
+
+export const handleRemoveQtyToCart = (product,qty=1,user,getCartData) => {
+	const requestBody = {
+		cart: {
+			product: product._id,
+			quantity: qty,
+		},
+	};
+	const url = `users/removeQtyCart/${user._id}`;
+	const thenFunction = (response) => {
+		getCartData();
+	};
+	putAPI(url, requestBody, thenFunction);
+};

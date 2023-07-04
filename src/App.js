@@ -35,7 +35,7 @@ import MembershipPage from "./pages/MembershipPage";
 function App() {
   const {isDark } =	useContext(AuthContext);
   return (
-    <div className={`App ${isDark ? 'text-light': ''}`}>
+    <div className={`App ${isDark ? 'text-light': 'text-dark'}`}>
     <div className={isDark? 'dark-Bg' : 'background-shapes'}></div>
     <Navbar/>
     <div>
