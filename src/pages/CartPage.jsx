@@ -19,7 +19,7 @@ import { toastifySuccess, toastifyError } from '../utils/tostify';
 import Loading from '../components/Loading';
 import FormatDelivery from '../components/FormatDelivery';
 
-import { handleFileUpload } from "../utils/functions";
+import { handleFileUpload } from '../utils/functions';
 
 const CartPage = () => {
 	const { language: lang } = useContext(AuthContext);
@@ -34,12 +34,12 @@ const CartPage = () => {
 	const [showZelle, setShowZelle] = useState(false);
 
 	const [paymentImg, setPaymentImg] = useState(null);
-	const [currentPaymentImg, setCurrentPaymentImg] = useState(null)
+	const [currentPaymentImg, setCurrentPaymentImg] = useState(null);
 
-    const imgSetterFunction = (field,string) =>{
-		setPaymentImg(string )
-        setCurrentPaymentImg(string)
-	}
+	const imgSetterFunction = (field, string) => {
+		setPaymentImg(string);
+		setCurrentPaymentImg(string);
+	};
 
 	const handleClose = () => setShow(false);
 	const handleClosePP = () => setShowPP(false);
@@ -97,7 +97,6 @@ const CartPage = () => {
 		if (address.name === '' || address.phone === '') {
 			return setErrorMessage(`${languages[0][lang].cart.error}`);
 		} else {
-
 			const productsOrder = cart
 				.filter((buzFilt) => {
 					return (
@@ -130,25 +129,24 @@ const CartPage = () => {
 				order,
 			};
 
-			const url = `users/order/${user._id}`
-			const thenFunction = (response) =>{
-				toastifySuccess(`${languages[0][lang].tostify.orderPlaced}`)
+			const url = `users/order/${user._id}`;
+			const thenFunction = (response) => {
+				toastifySuccess(`${languages[0][lang].tostify.orderPlaced}`);
 				setCart(null);
-					getCartData();
-					const userUpdated = response.data;
-					setUSer(userUpdated);
+				getCartData();
+				const userUpdated = response.data;
+				setUSer(userUpdated);
 
-					if (buzs.length > 1) {
-						setShow(true);
-					} else {
-						navigate(`/orders/${user._id}`);
-					}
-			}
+				if (buzs.length > 1) {
+					setShow(true);
+				} else {
+					navigate(`/orders/${user._id}`);
+				}
+			};
 			const errorFunction = (error) => {
-				toastifyError(`${languages[0][lang].tostify.orderError}`)
-			}
-			putAPI(url,requestBody,thenFunction,errorFunction)
-
+				toastifyError(`${languages[0][lang].tostify.orderError}`);
+			};
+			putAPI(url, requestBody, thenFunction, errorFunction);
 		}
 	};
 
@@ -170,17 +168,20 @@ const CartPage = () => {
 
 		return (
 			<div className='container p-0'>
-				<div className='row d-flex flex-row rounded border border-light'>
+				<div className='row d-flex flex-row rounded border border-dark'>
 					<div className='col-12 col-md-7'>
-						<div className='col-11 d-flex flex-column p-2 my-2 form-control'>
-							<h1>
-								{languages[0][lang].cart.hi}, {user.username}
-							</h1>
-							<h3>
-								{cart.length === 0
-									? `${languages[0][lang].cart.empty}`
-									: `${languages[0][lang].cart.yourCart} ${buzsNames[business]}`}
-							</h3>
+						<div className='col-11 d-flex flex-column p-2 my-2 col-12 text-start'>
+							<div className='ms-4'>
+								<h1>
+									{languages[0][lang].cart.hi}, {user.username}
+								</h1>
+								<h3>
+									{cart.length === 0
+										? `${languages[0][lang].cart.empty}`
+										: `${languages[0][lang].cart.yourCart} ${buzsNames[business]}`}
+								</h3>
+							</div>
+
 							<div className='col-12 cartProducts'>
 								{cart
 									.filter((buzFilt) => {
@@ -255,7 +256,7 @@ const CartPage = () => {
 						</div>
 					</div>
 					<div className='col-12 col-md-5'>
-						<div className='col-11 d-flex flex-column p-2 mt-2 py-3 form-control bg-success cartSummary'>
+						<div className='col-11 d-flex flex-column p-2 mt-2 py-3 form-control bg-dark cartSummary border border-dark text-light'>
 							<h2 className='fw-bold text-light'>
 								{' '}
 								{languages[0][lang].cart.summary} {currency}{' '}
@@ -414,13 +415,13 @@ const CartPage = () => {
 										})}
 							</div>
 
-							<div className='col-12'>
+							<div className='col-12 my-2'>
 								{cart.length !== 0 && (
 									<Button
 										variant='primary'
 										size='lg'
 										type='submit'
-										className='mx-2 my-1 col-8 col-md-6'
+										className='mx-2 my-1 col-8 col-md-8 col-sm-6'
 										onClick={handlePayment}
 									>
 										{languages[0][lang].cart.btnOrder}
@@ -530,7 +531,17 @@ const CartPage = () => {
 							controlId='formBasicProductName'
 						>
 							<Form.Label>{languages[0][lang].cart.image}</Form.Label>
-							<Form.Control type='file' onChange={(e) => handleFileUpload(e,currentPaymentImg, imgSetterFunction,'mainImg')} />
+							<Form.Control
+								type='file'
+								onChange={(e) =>
+									handleFileUpload(
+										e,
+										currentPaymentImg,
+										imgSetterFunction,
+										'mainImg'
+									)
+								}
+							/>
 						</Form.Group>
 					</Modal.Body>
 					<Modal.Footer>
