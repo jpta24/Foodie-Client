@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { 
 	handleAddQtyToCart,handleRemoveQtyToCart,handleRemoveToCart} from '../utils/functions';
 
-import { putAPI } from '../utils/api';
-
 const CartCard = ({ product, updateSummary, currency }) => {
 	const { user } = useContext(AuthContext);
 	const { getCartData } = useContext(CartContext);
