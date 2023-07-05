@@ -12,7 +12,7 @@ const PromotionBanner = ({
 	businessHighlightedProducts,
 }) => {
 	return (
-		<div className='promotions d-flex flex-column align-items-center h4 pb-5'>
+		<div className='promotions d-flex flex-column align-items-center h4 pb-5' style={maxHeight ? {maxHeight:'100vh'}:{display:'flex'}}>
 			<span>{languages[0][lang].business.bestSeller}</span>
 
 			{business.products

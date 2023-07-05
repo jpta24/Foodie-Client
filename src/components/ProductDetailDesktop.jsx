@@ -146,7 +146,7 @@ const ProductDetailDesktop = ({
 
 					{window.innerWidth > 1100 && (
 						<PromotionBanner
-							maxHeight={'350px'}
+							maxHeight={false}
 							business={product.product.business}
 							currency={currency}
 							lang={lang}

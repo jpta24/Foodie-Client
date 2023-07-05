@@ -223,7 +223,7 @@ const Business = () => {
 					</div>
 				</div>
 				<div className='d-flex p-0'>
-					<div className='business-products'>
+					<div className='business-products flex-grow-1'>
 						<div className='row p-0'>
 							<div className='d-flex flex-column justify-content-center align-items-center'>
 								<div className='d-flex'>
@@ -278,7 +278,7 @@ const Business = () => {
 					{window.innerWidth > 750 && (
 						<div className='mt-4'>
 							<PromotionBanner
-								maxHeight={'640px'}
+								maxHeight={true}
 								business={business}
 								currency={currency}
 								lang={lang}
