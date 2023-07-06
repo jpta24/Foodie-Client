@@ -166,6 +166,8 @@ const CartPage = () => {
 		});
 		buzsNames = [...new Set(businessNameArr)];
 
+		// console.log(Object.entries(cart[0].product.business.format).map((elem)=>{return (elem[0]==='delivery'?[elem[0],elem[1].delivery]:elem)}));
+
 		return (
 			<div className='container p-0'>
 				<div className='row d-flex flex-row rounded border border-dark'>
@@ -274,6 +276,11 @@ const CartPage = () => {
 											);
 										})[0].product.business.format
 									)
+										.map((elem) => {
+											return elem[0] === 'delivery'
+												? [elem[0], elem[1].delivery]
+												: elem;
+										})
 										.filter((format) => format[1] === true)
 										.map((elem) => {
 											return (
