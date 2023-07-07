@@ -49,8 +49,8 @@ const OrdersPage = () => {
 		return (
 			<div className='container p-0'>
 				<div className='row d-flex flex-row rounded border border-light'>
-					<div className='col-12 col-md-10'>
-						<div className='col-12 d-flex flex-column justify-content-center align-items-center p-2 mt-2 form-control'>
+					<div className='col-12 col-md-10 mx-auto'>
+						<div className='col-12 d-flex flex-column justify-content-center align-items-center p-2 mt-2 '>
 							<h1>
 								{languages[0][lang].orders.hi}, {user.username}
 							</h1>
