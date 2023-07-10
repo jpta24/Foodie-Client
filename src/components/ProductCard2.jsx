@@ -4,7 +4,7 @@ import { CartContext } from '../context/cart.context';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { getAPI, putAPI } from '../utils/api';
-import { handleAddToCart } from "../utils/functions";
+import { handleAddToCart } from '../utils/functions';
 import { toastifyError } from '../utils/tostify';
 
 const ProductCard2 = ({
@@ -149,7 +149,9 @@ const ProductCard2 = ({
 			<span
 				className='card-icon card-icon2'
 				onClick={() =>
-					userSaved !== '' && handleSavedProductStatus(product._id)
+					userSaved !== ''
+						? handleSavedProductStatus(product._id)
+						: navigate('/login')
 				}
 			>
 				{isProdSaved ? '❤' : '🖤'}
@@ -166,12 +168,19 @@ const ProductCard2 = ({
 				<div className='d-flex justify-content-between'>
 					<span className='card-preis'>
 						{currency}
-						{product.price.toFixed(2).length < 8 ? product.price.toFixed(2) : product.price.toFixed(2).slice(0,6)+ '...'}
+						{product.price.toFixed(2).length < 8
+							? product.price.toFixed(2)
+							: product.price.toFixed(2).slice(0, 6) + '...'}
 					</span>
 					<div className='my-auto'>
 						<span className='card-weigth'>290g</span>
 					</div>
-					<span className='card-add' onClick={()=>{handleAddToCart(product,1,user,getCartData,cart,navigate)}}>
+					<span
+						className='card-add'
+						onClick={() => {
+							handleAddToCart(product, 1, user, getCartData, cart, navigate);
+						}}
+					>
 						➕
 					</span>
 				</div>

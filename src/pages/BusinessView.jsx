@@ -60,9 +60,13 @@ const BusinessView = () => {
 	};
 
 	if (business !== '') {
-		if (business.owner !== user._id) {
-			navigate('/');
+		let owner = false;
+		if (user) {
+			owner = business.owner === user._id;
 		}
+		// if (business.owner !== user._id) {
+		// 	navigate('/');
+		// }
 		const link = `https://foodie-de.netlify.app/${business.name}`;
 
 		let arrCategories = [];
@@ -135,22 +139,24 @@ const BusinessView = () => {
 						<div className='col-6 d-flex justify-content-start flex-column align-items-start'>
 							<div className='d-flex justify-content-between col-12'>
 								<h1 className='text-start'>{business.name}</h1>
-								<div>
-									<Link to={`/edit-business/${businessNameEncoded}`}>
-										<span style={{ cursor: 'pointer' }} className='mx-1'>
-											🖊
+								{owner && (
+									<div>
+										<Link to={`/edit-business/${businessNameEncoded}`}>
+											<span style={{ cursor: 'pointer' }} className='mx-1'>
+												🖊
+											</span>
+										</Link>
+										<span
+											style={{ cursor: 'pointer' }}
+											className='mx-1'
+											onClick={() => {
+												handleModal(business.name, business._id);
+											}}
+										>
+											❌
 										</span>
-									</Link>
-									<span
-										style={{ cursor: 'pointer' }}
-										className='mx-1'
-										onClick={() => {
-											handleModal(business.name, business._id);
-										}}
-									>
-										❌
-									</span>
-								</div>
+									</div>
+								)}
 							</div>
 
 							<p className='text-start'>{`${business.address.street}, ${business.address.city}, ${business.address.country}`}</p>
@@ -240,27 +246,38 @@ const BusinessView = () => {
 								);
 							})}
 						</div>
+						<span className='mt-3 mb-1'>
+							{languages[0][lang].businessView.description}
+						</span>
+						<p className='text-start'>
+							Description Here askjdnaskjldna kijasnddkljasnk sdkljasnbdlkjansk
+							as ksajldbaskjdbkjsankj asd ask sakjd asñkjd sakñjnk
+							sdkjasndkljsan skjansdkjnaskj{' '}
+						</p>
 					</div>
 				</div>
-				<div className='row d-flex flex-row my-2 justify-content-center'>
-					<div className='col-md-8 col-12 d-flex justify-content-start align-items-start'>
-						<BusinessViewCard
-							href={`/${businessNameEncoded}/products`}
-							button='Products'
-							src={iconsCloud[0].products}
-						/>
-						<BusinessViewCard
-							href={`/${businessNameEncoded}/employees`}
-							button='Employees'
-							src={iconsCloud[0].employeeManage}
-						/>
-						<BusinessViewCard
-							href={`/${businessNameEncoded}/orders`}
-							button='Orders'
-							src={iconsCloud[0].orders}
-						/>
+				{owner && (
+					<div className='row d-flex flex-row my-2 justify-content-center'>
+						<div className='col-md-8 col-12 d-flex justify-content-start align-items-start'>
+							<BusinessViewCard
+								href={`/${businessNameEncoded}/products`}
+								button='Products'
+								src={iconsCloud[0].products}
+							/>
+							<BusinessViewCard
+								href={`/${businessNameEncoded}/employees`}
+								button='Employees'
+								src={iconsCloud[0].employeeManage}
+							/>
+							<BusinessViewCard
+								href={`/${businessNameEncoded}/orders`}
+								button='Orders'
+								src={iconsCloud[0].orders}
+							/>
+						</div>
 					</div>
-				</div>
+				)}
+
 				<Modal
 					show={show.show}
 					onHide={handleClose}

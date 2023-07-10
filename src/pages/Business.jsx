@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { CartContext } from '../context/cart.context';
 import { AuthContext } from '../context/auth.context';
 import { v4 as uuidv4 } from 'uuid';
@@ -210,7 +210,8 @@ const Business = () => {
 					>
 						<div className='d-flex col-12 justify-content-start'></div>
 						<div className='d-flex justify-content-center align-items-end'>
-							<div
+							<Link
+								to={`/${businessNameEncoded}/dashboard`}
 								className='rounded-circle border border-dark bg-dark d-flex justify-content-center align-items-center'
 								style={{
 									height: '90px',
@@ -218,7 +219,7 @@ const Business = () => {
 								}}
 							>
 								<img src={business.logoUrl} alt='altLogo' width={65} />
-							</div>
+							</Link>
 						</div>
 					</div>
 				</div>
@@ -227,12 +228,18 @@ const Business = () => {
 						<div className='row p-0'>
 							<div className='d-flex flex-column justify-content-center align-items-center'>
 								<div className='d-flex'>
-									<h1 className='text-danger foodie-title'>{business.name}</h1>
+									<Link
+										to={`/${businessNameEncoded}/dashboard`}
+										className='text-danger foodie-title h1'
+									>
+										{business.name}
+									</Link>
 									<span
 										className='business-saved-icon my-2 mx-4'
 										onClick={() =>
-											userSaved !== '' &&
-											handleSavedBusinessStatus(business._id)
+											userSaved !== '' ?
+											handleSavedBusinessStatus(business._id):
+											navigate('/login')
 										}
 									>
 										{user !== undefined &&

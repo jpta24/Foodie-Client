@@ -242,7 +242,8 @@
 				"delivery": "Delivery Methods:",
 				"products": "Products Types:",
 				"copy": "Copy Link",
-				"categories:": "Categories:",
+				"categories": "Categories:",
+				"description":"Description:",
 				"mTitle": "Delete Business",
 				"mBody2": "business this action has no way back."
 			},
@@ -549,7 +550,8 @@
 				"delivery": "Métodos de Entrega:",
 				"products": "Tipos de Productos:",
 				"copy": "Copiar enlace",
-				"categories:": "Categorías:",
+				"categories": "Categorías:",
+				"description":"Descripción:",
 				"mTitle": "Eliminar negocio",
 				"mBody2": "estás a punto de eliminar el negocio y esta acción no se puede deshacer."
 			},
@@ -857,7 +859,8 @@
 				"delivery": "Liefermethoden:",
 				"products": "Produkttypen:",
 				"copy": "Link kopieren",
-				"categories:": "Kategorien:",
+				"categories": "Kategorien:",
+				"description":"Beschreibung:",
 				"mTitle": "Geschäft löschen",
 				"mBody2": "Geschäft löschen, diese Aktion kann nicht rückgängig gemacht werden."
 			},

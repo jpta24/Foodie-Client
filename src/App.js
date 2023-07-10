@@ -61,7 +61,7 @@ function App() {
         <Route exact path="/:businessName/memberships" element={<MembershipPage />} />
         <Route exact path="/myVisitedBusiness" element={<IsPrivate><RedirectPage /></IsPrivate>} />
         <Route exact path="/:businessName" element={<Business />} />
-        <Route exact path="/:businessName/dashboard" element={<IsPrivate><BusinessView /></IsPrivate>} />
+        <Route exact path="/:businessName/dashboard" element={<BusinessView />} />
         <Route exact path="/:businessName/products" element={<IsPrivate><BusinessProducts /></IsPrivate>} />
         <Route exact path="/:businessName/create-product" element={<IsPrivate><CreateProduct /></IsPrivate>} />
         <Route exact path="/:businessName/edit-product/:productID" element={<IsPrivate><EditProduct/></IsPrivate>} />

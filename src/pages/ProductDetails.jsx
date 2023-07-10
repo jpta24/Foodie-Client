@@ -26,7 +26,7 @@ const ProductDetails = () => {
 		};
 		getAPI(url, thenFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [productID]);
 
 	const [userSaved, setUserSaved] = useState('');
 	let isProdSaved = false;
