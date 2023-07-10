@@ -34,6 +34,7 @@ const CreateProduct = () => {
 		ingredients: [],
 		categories: ['General'],
 		status: 'active',
+		weight:''
 	};
 
 	const [product, setProduct] = useState(initialState);
@@ -262,7 +263,8 @@ const CreateProduct = () => {
 									</InputGroup>
 								</Form.Group>
 							</div>
-							<Form.Group className='mb-3 col-md-5 d-flex flex-column align-items-start'>
+							<div className='d-flex justify-content-between'>
+								<Form.Group className='mb-3 col-md-5 d-flex flex-column align-items-start'>
 								<Form.Label>
 									{languages[0][lang].createProduct.status}
 								</Form.Label>
@@ -281,6 +283,26 @@ const CreateProduct = () => {
 									</option>
 								</Form.Control>
 							</Form.Group>
+							<Form.Group className='mb-3 col-md-6 d-flex flex-column align-items-start'>
+								<Form.Label>
+									{languages[0][lang].createProduct.weight}
+								</Form.Label><Form.Control
+											type='number'
+											placeholder={languages[0][lang].createProduct.weightPh}
+											name='weight'
+											value={product.weight}
+											onChange={(e) => {
+												setProduct({
+													...product,
+													[e.target.name]: e.target.value,
+												});
+											}}
+										/>
+							</Form.Group>
+							
+							</div>
+							
+							
 
 							<Form.Group
 								className='mb-3 d-flex flex-column align-items-start'

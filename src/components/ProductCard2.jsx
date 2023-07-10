@@ -173,7 +173,7 @@ const ProductCard2 = ({
 							: product.price.toFixed(2).slice(0, 6) + '...'}
 					</span>
 					<div className='my-auto'>
-						<span className='card-weigth'>290g</span>
+						<span className='card-weigth'>{product.weight ? `${product.weight}g`:'290g'}</span>
 					</div>
 					<span
 						className='card-add'

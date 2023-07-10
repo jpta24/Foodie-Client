@@ -250,9 +250,7 @@ const BusinessView = () => {
 							{languages[0][lang].businessView.description}
 						</span>
 						<p className='text-start'>
-							Description Here askjdnaskjldna kijasnddkljasnk sdkljasnbdlkjansk
-							as ksajldbaskjdbkjsankj asd ask sakjd asñkjd sakñjnk
-							sdkjasndkljsan skjansdkjnaskj{' '}
+							{business.description}
 						</p>
 					</div>
 				</div>

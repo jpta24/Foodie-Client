@@ -32,6 +32,7 @@ const CreateBusiness = () => {
 			postCode: 0,
 			country: '',
 		},
+		description: '',
 		currency: '',
 		format: {
 			delivery: {
@@ -325,6 +326,31 @@ const CreateBusiness = () => {
 												...business.address,
 												telephone: e.target.value,
 											},
+										});
+									}}
+								/>
+							</Form.Group>
+						</div>
+						<hr className='col-md-9 mx-auto' />
+						<div className='d-flex justify-content-between flex-wrap col-md-8 mx-auto'>
+							<Form.Group
+								className='mb-3 col-12 col-md-12 d-flex flex-column align-items-start'
+								controlId='formCurrency'
+							>
+								<Form.Label>
+									{languages[0][lang].createBusiness.description}
+								</Form.Label>
+								<Form.Control
+									as='textarea'
+									rows={3}
+									type='text'
+									placeholder={languages[0][lang].createBusiness.description}
+									name='description'
+									value={business.description}
+									onChange={(e) => {
+										setBusiness({
+											...business,
+											[e.target.name]: e.target.value,
 										});
 									}}
 								/>

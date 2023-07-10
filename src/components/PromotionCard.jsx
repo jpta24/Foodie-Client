@@ -24,7 +24,7 @@ function PromotionCard({ product, currency }) {
 				<span className='card-title'>{product.name}</span>
 				<p className='promotion-card-text-desc my-1'>{product.description}</p>
 				<div className='my-1'>
-					<span className='card-weigth'>290g</span>
+					<span className='card-weigth'>{product.weight ? `${product.weight}g`:'290g'}</span>
 				</div>
 				<div className='d-flex justify-content-between'>
 					<span className='card-preis'>
