@@ -9,7 +9,7 @@ const TestimonialsCarousel = () => {
 
     return (
         <section id="testimonios" className="py-2">
-          <Container>
+          <div>
             <Row className="mb-1">
               <Col>
                 <h2 className="text-center mb-1 fw-bold text-danger">Testimonials</h2>
@@ -39,7 +39,7 @@ const TestimonialsCarousel = () => {
                 </Carousel>
               </Col>
             </Row>
-          </Container>
+          </div>
         </section>
       );
 };
