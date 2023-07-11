@@ -31,7 +31,7 @@ const EditProduct = () => {
 	useEffect(() => {
 		const url = `products/${productID}`;
 		const thenFunction = (response) => {
-            setProduct(response.data.product);
+			setProduct(response.data.product);
 		};
 		const errorFunction = () => {
 			toastifyError(`${languages[0][lang].tostify.redirect}`);
@@ -44,15 +44,15 @@ const EditProduct = () => {
 	const handleEditProduct = (e) => {
 		e.preventDefault();
 		const requestBody = product;
-		const url = `products/edit/${product._id}`
-		const thenFunction = (response) =>{
+		const url = `products/edit/${product._id}`;
+		const thenFunction = (response) => {
 			navigate(`/${businessNameEncoded}/products`);
-		}
+		};
 		const errorFunction = (error) => {
-			toastifyError(`${languages[0][lang].tostify.prodEditError}`)
-			setErrorMessage(error.response.data.message)
-		}
-		putAPI(url,requestBody,thenFunction,errorFunction)
+			toastifyError(`${languages[0][lang].tostify.prodEditError}`);
+			setErrorMessage(error.response.data.message);
+		};
+		putAPI(url, requestBody, thenFunction, errorFunction);
 	};
 
 	const [currentProductImg, setCurrentProductImg] = useState(null);
@@ -247,25 +247,45 @@ const EditProduct = () => {
 									</InputGroup>
 								</Form.Group>
 							</div>
-							<Form.Group className='mb-3 col-md-5 d-flex flex-column align-items-start'>
-								<Form.Label>
-									{languages[0][lang].createProduct.status}
-								</Form.Label>
-								<Form.Control
-									as='select'
-									value={product.status}
-									onChange={(e) => {
-										setProduct({ ...product, status: e.currentTarget.value });
-									}}
-								>
-									<option value='active'>
-										{languages[0][lang].createProduct.active}
-									</option>
-									<option value='paused'>
-										{languages[0][lang].createProduct.paused}
-									</option>
-								</Form.Control>
-							</Form.Group>
+							<div className='d-flex justify-content-between'>
+								<Form.Group className='mb-3 col-md-5 d-flex flex-column align-items-start'>
+									<Form.Label>
+										{languages[0][lang].createProduct.status}
+									</Form.Label>
+									<Form.Control
+										as='select'
+										value={product.status}
+										onChange={(e) => {
+											setProduct({ ...product, status: e.currentTarget.value });
+										}}
+									>
+										<option value='active'>
+											{languages[0][lang].createProduct.active}
+										</option>
+										<option value='paused'>
+											{languages[0][lang].createProduct.paused}
+										</option>
+									</Form.Control>
+								</Form.Group>
+
+								<Form.Group className='mb-3 col-md-6 d-flex flex-column align-items-start'>
+									<Form.Label>
+										{languages[0][lang].createProduct.weight}
+									</Form.Label>
+									<Form.Control
+										type='number'
+										placeholder={languages[0][lang].createProduct.weightPh}
+										name='weight'
+										value={product.weight}
+										onChange={(e) => {
+											setProduct({
+												...product,
+												[e.target.name]: e.target.value,
+											});
+										}}
+									/>
+								</Form.Group>
+							</div>
 
 							<Form.Group
 								className='mb-3 d-flex flex-column align-items-start'

@@ -71,7 +71,8 @@ const ProductDetailDesktop = ({
 									{languages[0][lang].productDetails.ingredients}
 								</h6>
 								<div className='px-2 col-12 d-flex flex-row mb categories'>
-									{product.product.ingredients.map((cat) => {
+
+								<div className='scroll-container col-12'>{product.product.ingredients.map((cat) => {
 										return (
 											<span
 												key={uuidv4()}
@@ -82,7 +83,8 @@ const ProductDetailDesktop = ({
 												{cat}
 											</span>
 										);
-									})}
+									})}</div>
+									
 								</div>
 								<div className='d-flex justify-content-between'>
 									<h2 className='py-3 mx-2'>

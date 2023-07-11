@@ -169,7 +169,7 @@ const BusinessProducts = () => {
 				</div>
 				<div className='row p-0'>
 					<div className='d-flex flex-column justify-content-center align-items-center'>
-						<h1 className='text-danger foodie-title'>{business.name}</h1>
+						<Link to={`/${businessNameEncoded}`} className='text-danger foodie-title h1'>{business.name}</Link>
 						<Button
 							variant='outline-primary'
 							size='lg'
