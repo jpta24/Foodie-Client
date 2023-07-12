@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 
-import { Carousel, Container, Row, Col } from "react-bootstrap";
+import { Carousel, Row, Col } from "react-bootstrap";
 import testimonials from "../data/testimonials.json";
 
 const TestimonialsCarousel = () => {

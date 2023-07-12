@@ -1,0 +1,22 @@
+[
+    {
+        "_id":1,
+        "title":"IronFood",
+        "txt":{
+            "En":"Model Store for Fast Food",
+            "De":"Fast-Food-Modellladen",
+            "Es":"Tienda Modelo de Comida Rapida"
+        },
+        "img":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1689191966/foodie-gallery/Imagen28_d8pn1x.png"
+    },
+    {
+        "_id":2,
+        "title":"Sweet Cafe",
+        "txt":{
+            "En":"Model Store for Desserts",
+            "De":"Modell-Dessertladen",
+            "Es":"Tienda Modelo de Postres"
+        },
+        "img":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1689191968/foodie-gallery/Imagen27_dbv2zn.png"
+    }
+]

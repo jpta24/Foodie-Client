@@ -10,6 +10,7 @@ import MembershipTable from '../components/MembershipTable';
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
+import HomeStores from '../components/HomeStores';
 
 function HomePage() {
 	const { language: lang, user: userID } = useContext(AuthContext);
@@ -80,7 +81,12 @@ function HomePage() {
 					</Row>
 				</div>
 			</section>
+			
+			{/* Features Stores*/}
+			<section className='my-4'>
+				<HomeStores/>
 
+			</section>						
 			{/* Features Section */}
 			<section className='features-section my-4'>
 				<div>
