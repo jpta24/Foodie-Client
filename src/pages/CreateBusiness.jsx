@@ -147,7 +147,6 @@ const CreateBusiness = () => {
 			membership: { ...preBusiness.membership, plan: string },
 		});
 	};
-
 	return (
 		<div className='container'>
 			<h1>{languages[0][lang].createBusiness.title}</h1>
@@ -399,7 +398,7 @@ const CreateBusiness = () => {
 													...business,
 													payment: {
 														...business.payment,
-														cash: !business.payment.cash,
+														cash: {accepted:!business.payment.cash.accepted},
 													},
 												});
 											}}
@@ -418,7 +417,7 @@ const CreateBusiness = () => {
 													...business,
 													payment: {
 														...business.payment,
-														card: !business.payment.card,
+														card: {accepted:!business.payment.card.accepted},
 													},
 												});
 											}}

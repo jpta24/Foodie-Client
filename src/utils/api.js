@@ -29,6 +29,7 @@ export const getAPI = async (url, thenFunction = thenFunctionDefault, catchFunct
 };
 
 export const postAPI = async (url, requestBody, thenFunction = thenFunctionDefault, catchFunction = catchFunctionDefault) => {
+	
 	try {
 		const response = await axios.post(
 			`${process.env.REACT_APP_SERVER_URL}/${url}`,

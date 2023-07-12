@@ -75,7 +75,7 @@ function HomePage() {
 							</Button>
 						</Col>
 						<Col md={5}>
-							<Image src={iconsCloud[0].homeImg} className='my-5' fluid />
+							<Image src={iconsCloud[0].homeImg} className='my-5 home-img' fluid />
 						</Col>
 					</Row>
 				</div>

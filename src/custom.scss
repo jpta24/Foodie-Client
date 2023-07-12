@@ -155,6 +155,11 @@ a {
 	text-decoration: none;
 }
 
+.home-img {
+	filter: drop-shadow(0px 0px 10px rgb(136, 135, 135));
+	-webkit-filter: drop-shadow(0px 0px 10px rgb(136, 135, 135));
+}
+
 // .categories {
 // 	overflow-y: scroll;
 // }
