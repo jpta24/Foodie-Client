@@ -93,14 +93,14 @@ function HomePage() {
 								pauseonhover='true'
 								indicators={false}
 								controls={false}
-								className='col-11 mx-auto mt-5'
+								className='col-12 mx-auto mt-5'
 							>
 								{images.map((image) => (
 									<Carousel.Item key={uuidv4()}>
 										<div className='col-12 my-1'>
 											<img
 												className='home-img'
-												width={'80%'}
+												width={'100%'}
 												src={image}
 												alt=''
 											/>
