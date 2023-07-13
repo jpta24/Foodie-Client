@@ -61,7 +61,7 @@ function HomePage() {
 		<div className={`container`} style={{ overflow: 'auto' }}>
 			{/* Header Section */}
 			<section className='header-section my-5'>
-				<div className='pb-5'>
+				<div className='pb-3'>
 					<Row>
 						<Col md={7}>
 							<h1
@@ -80,7 +80,7 @@ function HomePage() {
 							</h1>
 							<Button
 								size='lg'
-								className='px-4'
+								className='px-4 mb-5'
 								variant='primary'
 								href='/signup'
 							>
@@ -93,7 +93,7 @@ function HomePage() {
 								pauseonhover='true'
 								indicators={false}
 								controls={false}
-								className='col-12 mx-auto mt-5'
+								className='col-12 mx-auto mt-5 pb-2'
 							>
 								{images.map((image) => (
 									<Carousel.Item key={uuidv4()}>
