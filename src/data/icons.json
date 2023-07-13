@@ -46,7 +46,11 @@
         "dashboard":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1671532672/foodie-gallery/dashboard_koxmhh.png",
         "businessDashboard":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1671532673/foodie-gallery/businessDashboard_wzo7sw.png",
         "homeFeatures":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677502755/foodie-gallery/features_lad632.png",
-        "homeImg":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1689181953/foodie-gallery/Imagen26_mgovbk.png",
+        "homeImg1":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1689181953/foodie-gallery/Imagen26_mgovbk.png",
+        "homeImg2":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1689246967/foodie-gallery/Imagen3_pqwghu.png",
+        "homeImg3":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1689246960/foodie-gallery/Imagen5_gnfekf.png",
+        "homeImg4":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1689246967/foodie-gallery/Imagen4_l4omub.png",
+        "homeImg5":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1689246964/foodie-gallery/Imagen1_fm6yq6.png",
         "jean":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1677519967/foodie-gallery/profile-pic_3_ekzzrj.png",
         "detailsBg":"https://res.cloudinary.com/dwtnqtdcs/image/upload/v1687379600/foodie-gallery/foodie-prodview-bg_smxmqd.png"
     }

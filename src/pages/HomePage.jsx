@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
-import { Row, Col, Image, Button } from 'react-bootstrap';
+import { Row, Col, Image, Button, Carousel } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import TestimonialsCarousel from '../components/HomeCarousel';
 import MembershipTable from '../components/MembershipTable';
@@ -11,6 +11,7 @@ import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
 import HomeStores from '../components/HomeStores';
+import { v4 as uuidv4 } from 'uuid';
 
 function HomePage() {
 	const { language: lang, user: userID } = useContext(AuthContext);
@@ -48,6 +49,14 @@ function HomePage() {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userID]);
+
+	const images = [
+		iconsCloud[0].homeImg1,
+		iconsCloud[0].homeImg2,
+		iconsCloud[0].homeImg3,
+		iconsCloud[0].homeImg4,
+		iconsCloud[0].homeImg5,
+	];
 	return (
 		<div className={`container`} style={{ overflow: 'auto' }}>
 			{/* Header Section */}
@@ -64,7 +73,10 @@ function HomePage() {
 								}
 							>
 								{' '}
-								<strong className='text-danger foodie-title'>FOODIE:</strong> {languages[0][lang].home.slogan}
+								<strong className='text-danger foodie-title'>
+									FOODIE:
+								</strong>{' '}
+								{languages[0][lang].home.slogan}
 							</h1>
 							<Button
 								size='lg'
@@ -76,17 +88,36 @@ function HomePage() {
 							</Button>
 						</Col>
 						<Col md={5}>
-							<Image src={iconsCloud[0].homeImg} className='my-5 home-img' fluid />
+							<Carousel
+								interval={5000}
+								pauseonhover='true'
+								indicators={false}
+								controls={false}
+								className='col-11 mx-auto mt-5'
+							>
+								{images.map((image) => (
+									<Carousel.Item key={uuidv4()}>
+										<div className='col-12 my-1'>
+											<img
+												className='home-img'
+												width={'80%'}
+												src={image}
+												alt=''
+											/>
+										</div>
+									</Carousel.Item>
+								))}
+							</Carousel>
+							{/* <Image src={iconsCloud[0].homeImg} className='my-5 home-img' fluid /> */}
 						</Col>
 					</Row>
 				</div>
 			</section>
-			
-			{/* Features Stores*/}
-			<section className='my-4'>
-				<HomeStores/>
 
-			</section>						
+			{/* Features Stores*/}
+			<section className='my-5 pb-3'>
+				<HomeStores />
+			</section>
 			{/* Features Section */}
 			<section className='features-section my-4'>
 				<div>
@@ -95,7 +126,9 @@ function HomePage() {
 							<Image src={iconsCloud[0].homeFeatures} fluid />
 						</Col>
 						<Col md={7}>
-							<h2 className='text-danger'>{languages[0][lang].home.feaTitle} FOODIE</h2>
+							<h2 className='text-danger'>
+								{languages[0][lang].home.feaTitle} FOODIE
+							</h2>
 							<h5>{languages[0][lang].home.feaContent}</h5>
 						</Col>
 					</Row>
