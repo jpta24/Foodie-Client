@@ -225,7 +225,8 @@
 				"dashboard": "Dashboard",
 				"personal": "Personal",
 				"business": "Business",
-				"stores": "or your visited stores"
+				"stores": "or your visited stores",
+				"reorder":"Reorder"
 			},
 			"business": {
 				"gotocart": "Go to Cart",
@@ -245,7 +246,7 @@
 			"businessView": {
 				"delivery": "Delivery Methods:",
 				"products": "Products Types:",
-				"copy": "Copy Link",
+				"copy": "Copy",
 				"categories": "Categories:",
 				"description":"Description:",
 				"mTitle": "Delete Business",
@@ -539,7 +540,8 @@
 				"dashboard": "Panel de Control",
 				"personal": "Personal",
 				"business": "Negocio",
-				"stores": "o a las tiendas visitadas"
+				"stores": "o a las tiendas visitadas",
+				"reorder":"Reordenar"
 			},
 			"business": {
 				"gotocart": "Ir al carrito",
@@ -559,7 +561,7 @@
 			"businessView": {
 				"delivery": "Métodos de Entrega:",
 				"products": "Tipos de Productos:",
-				"copy": "Copiar enlace",
+				"copy": "Copiar",
 				"categories": "Categorías:",
 				"description":"Descripción:",
 				"mTitle": "Eliminar negocio",
@@ -854,7 +856,8 @@
 				"dashboard": "Dashboard",
 				"personal": "Persönlich",
 				"business": "Geschäft",
-				"stores": "oder Ihre besuchten Geschäfte"
+				"stores": "oder Ihre besuchten Geschäfte",
+				"reorder":"Neu anordnen"
 			},
 			"business": {
 				"gotocart": "Zum Warenkorb",
@@ -874,7 +877,7 @@
 			"businessView": {
 				"delivery": "Liefermethoden:",
 				"products": "Produkttypen:",
-				"copy": "Link kopieren",
+				"copy": "Kopieren",
 				"categories": "Kategorien:",
 				"description":"Beschreibung:",
 				"mTitle": "Geschäft löschen",

@@ -7,6 +7,9 @@ import { getAPI, putAPI } from '../utils/api';
 import { handleAddToCart } from '../utils/functions';
 import { toastifyError } from '../utils/tostify';
 
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
 const ProductCard2 = ({
 	product,
 	businessNameEncoded,
@@ -18,6 +21,7 @@ const ProductCard2 = ({
 	userSaved,
 	handleSavedProductStatus,
 	businessHighlightedProducts,
+	dnd = false
 }) => {
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);
@@ -90,7 +94,17 @@ const ProductCard2 = ({
 		userSaved.savedProducts === undefined
 			? false
 			: userSaved.savedProducts?.includes(product._id);
-	return (
+
+			const { attributes, listeners, setNodeRef, transform, transition } =
+			useSortable({ id: product._id });
+	
+		const style = {
+			transform: CSS.Transform.toString(transform),
+			transition,
+		};
+	
+
+	return !dnd ? (
 		<div
 			className={`mx-1 my-1 card-container ${
 				!prodIsActive ? 'opacity-50' : ''
@@ -186,6 +200,62 @@ const ProductCard2 = ({
 				</div>
 			</div>
 		</div>
+	):(<div
+	style={style}
+			ref={setNodeRef}
+			{...attributes}
+			{...listeners}
+		className={`mx-1 my-1 card-container ${
+			!prodIsActive ? 'opacity-50' : ''
+		}`}
+	>
+		{businessHighlightedProducts.highlightedProducts?.includes(
+			product._id
+		) ? (
+			<span
+				className='card-icon card-icon1'
+			>
+				🔥
+			</span>
+		) : (
+			owner && (
+				<span
+					className='card-icon card-icon1'
+				></span>
+			)
+		)}
+		<span
+			className='card-icon card-icon2'
+		>
+			{isProdSaved ? '❤' : '🖤'}
+		</span>
+		<div>
+			<div className='card-img-container'>
+				<img className='card-img' src={product.mainImg} alt='' />
+			</div>
+		</div>
+
+		<div className='card-section p-3 text-start'>
+			<span className='card-title'>{product.name}</span>
+			<p className='card-text-desc'>{product.description}</p>
+			<div className='d-flex justify-content-between'>
+				<span className='card-preis'>
+					{currency}
+					{product.price.toFixed(2).length < 8
+						? product.price.toFixed(2)
+						: product.price.toFixed(2).slice(0, 6) + '...'}
+				</span>
+				<div className='my-auto'>
+					<span className='card-weigth'>{product.weight ? `${product.weight}g`:'290g'}</span>
+				</div>
+				<span
+					className='card-add'
+				>
+					➕
+				</span>
+			</div>
+		</div>
+	</div>
 	);
 };
 export default ProductCard2;

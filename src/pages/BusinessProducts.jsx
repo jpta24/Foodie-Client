@@ -13,6 +13,13 @@ import { deleteAPI, getAPI, putAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
 import ProductCard2 from '../components/ProductCard2';
 
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+	SortableContext,
+	verticalListSortingStrategy,
+	arrayMove,
+} from '@dnd-kit/sortable';
+
 const BusinessProducts = () => {
 	const { language: lang } = useContext(AuthContext);
 	const { user } = useContext(AuthContext);
@@ -20,6 +27,29 @@ const BusinessProducts = () => {
 	const { cart } = useContext(CartContext);
 	const { businessName } = useParams();
 	const navigate = useNavigate();
+
+	const [prodDnd, setProdDnd] = useState('');
+	const [dnd, setDnd] = useState(false);
+	const handleDragEnd = (event) => {
+		const { active, over } = event;
+
+		if (!active.id !== over.id) {
+			const oldIndex = prodDnd.findIndex((person) => person._id === active.id);
+			const newIndex = prodDnd.findIndex((person) => person._id === over.id);
+			setProdDnd(arrayMove(prodDnd, oldIndex, newIndex));
+
+			const url = `business/reorder/${business._id}`;
+
+			const thenFunction = (response) => {
+				setBusiness(response.data);
+			};
+			const requestBody = {
+				field: 'products',
+				array: arrayMove(prodDnd, oldIndex, newIndex),
+			};
+			putAPI(url, requestBody, thenFunction);
+		}
+	};
 
 	let businessNameEncoded = businessName.split(' ').join('-');
 
@@ -60,6 +90,7 @@ const BusinessProducts = () => {
 		const url = `business/${businessNameEncoded}`;
 		const thenFunction = (response) => {
 			setBusiness(response.data.business);
+			setProdDnd(response.data.business.products)
 		};
 		const errorFunction = () => {
 			toastifyError(`${languages[0][lang].tostify.redirect}`);
@@ -169,38 +200,67 @@ const BusinessProducts = () => {
 				</div>
 				<div className='row p-0'>
 					<div className='d-flex flex-column justify-content-center align-items-center'>
-						<Link to={`/${businessNameEncoded}`} className='text-danger foodie-title h1'>{business.name}</Link>
-						<Button
-							variant='outline-primary'
-							size='lg'
-							className='col-8 col-md-4 m-2'
-							href={`/${businessNameEncoded}/create-product`}
+						<Link
+							to={`/${businessNameEncoded}`}
+							className='text-danger foodie-title h1'
 						>
-							{' '}
-							➕ {languages[0][lang].business.addProduct}
-						</Button>
+							{business.name}
+						</Link>
+						<div className='d-flex justify-content-between col-7'>
+							<span> </span>
+							<Button
+								variant='outline-primary'
+								size='lg'
+								className='col-8 col-md-4 m-2'
+								href={`/${businessNameEncoded}/create-product`}
+							>
+								{' '}
+								➕ {languages[0][lang].business.addProduct}
+							</Button>
+							<span
+								style={{ fontSize: '10px', padding: '3px' }}
+								className={`btn ${
+									!dnd ? 'btn-outline-secondary' : 'btn-danger'
+								} my-auto`}
+								onClick={() => setDnd(!dnd)}
+							>
+								{languages[0][lang].redirect.reorder}
+							</span>
+						</div>
 					</div>
 				</div>
 				<div className='row p-0 justify-content-center'>
-					<div className='col-11 col-md-8 pb-5 d-flex flex-wrap justify-content-around align-items-stretch '>
-						{business.products.map((product) => {
-							return (
-								<ProductCard2
-									key={uuidv4()}
-									product={product}
-									businessNameEncoded={businessNameEncoded}
-									currency={currency}
-									cart={cart}
-									setBusiness={setBusiness}
-									handleModal={handleModal}
-									owner={owner}
-									userSaved={userSaved}
-									handleSavedProductStatus={handleSavedProductStatus}
-									businessHighlightedProducts={businessHighlightedProducts}
-								/>
-							);
-						})}
-					</div>
+					<DndContext
+						collisionDetection={closestCenter}
+						onDragEnd={handleDragEnd}
+					>
+						<div className='col-11 col-md-8 pb-5 d-flex flex-wrap justify-content-around align-items-stretch '>
+						<SortableContext
+									items={prodDnd.map((i) => i._id)}
+									strategy={verticalListSortingStrategy}
+								>
+								{business.products.map((product) => {
+								return (
+									<ProductCard2
+										key={uuidv4()}
+										product={product}
+										businessNameEncoded={businessNameEncoded}
+										currency={currency}
+										cart={cart}
+										setBusiness={setBusiness}
+										handleModal={handleModal}
+										owner={owner}
+										userSaved={userSaved}
+										handleSavedProductStatus={handleSavedProductStatus}
+										businessHighlightedProducts={businessHighlightedProducts}
+										dnd={dnd}
+									/>
+								);
+							})}	
+								</SortableContext>
+								
+						</div>
+					</DndContext>
 				</div>
 				<Modal
 					show={show.show}

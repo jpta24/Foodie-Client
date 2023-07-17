@@ -207,13 +207,13 @@ const BusinessView = () => {
 								</Link>
 							</div>
 							<Button
-								className='btn btn-secondary m-1 btn-sm'
+								className='btn btn-secondary m-1 btn-sm col-5'
 								onClick={() => download()}
 							>
 								Download
 							</Button>
 							<Button
-								className='btn btn-secondary m-1 btn-sm'
+								className='btn btn-secondary m-1 btn-sm col-5'
 								onClick={() => {
 									navigator.clipboard.writeText(link);
 									// eslint-disable-next-line no-lone-blocks

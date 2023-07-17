@@ -3,29 +3,59 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import Loading from '../components/Loading';
 import iconsCloud from '../data/icons.json';
-import { v4 as uuidv4 } from 'uuid';
 
 import { Card, Button } from 'react-bootstrap';
 import RedirectCard from '../components/RedirectCard';
 import languages from '../data/language.json';
 import { putAPI } from '../utils/api';
 
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+	SortableContext,
+	verticalListSortingStrategy,
+	arrayMove,
+} from '@dnd-kit/sortable';
+
 const RedirectPage = () => {
 	const { user: userID, language: lang } = useContext(AuthContext);
 	const [user, setUser] = useState('');
 
+	const [buzDnd, setBuzDnd] = useState('');
+	const [dnd, setDnd] = useState(false);
 	useEffect(() => {
 		const businessStored = localStorage.getItem('businesses')
 			? JSON.parse(localStorage.getItem('businesses'))
 			: [];
-
 		const url = `users/visitedBusiness/${userID._id}`;
 		const thenFunction = (response) => {
 			setUser(response.data);
+			setBuzDnd(response.data.visitedBusiness);
 		};
 		putAPI(url, businessStored, thenFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+	
+	const handleDragEnd = (event) => {
+		const { active, over } = event;
+
+		if (!active.id !== over.id) {
+			const oldIndex = buzDnd.findIndex((person) => person._id === active.id);
+			const newIndex = buzDnd.findIndex((person) => person._id === over.id);
+			setBuzDnd(arrayMove(buzDnd, oldIndex, newIndex))
+
+			const url = `users/reorder/${userID._id}`;
+
+			const thenFunction = (response) => {
+				setUser(response.data);
+			};
+			const requestBody = {
+				field: 'visitedBusiness',
+				array: arrayMove(buzDnd, oldIndex, newIndex),
+			};
+			putAPI(url, requestBody, thenFunction);
+		}
+	};
+
 	if (user) {
 		return (
 			<div className='container-fluid'>
@@ -64,18 +94,40 @@ const RedirectPage = () => {
 						)}
 					</div>
 					<div className='col-md-7 col-11'>
-						<h4 className='col-12'>{languages[0][lang].redirect.stores}</h4>
-						<div
-							className='my-2'
-							style={{
-								maxHeight: `${window.innerWidth < 450 ? '50vh' : '60vh'}`,
-								overflow: 'auto',
-							}}
+						<DndContext
+							collisionDetection={closestCenter}
+							onDragEnd={handleDragEnd}
 						>
-							{user.visitedBusiness.map((buz) => (
-								<RedirectCard key={uuidv4()} business={buz} />
-							))}
-						</div>
+							<div className='d-flex justify-content-between'>
+								<h4 className='col-12'>{languages[0][lang].redirect.stores}</h4>
+								<span
+									style={{ fontSize: '10px', padding: '3px' }}
+									className={`btn ${
+										!dnd ? 'btn-outline-secondary' : 'btn-danger'
+									} my-auto`}
+									onClick={() => setDnd(!dnd)}
+								>
+									{languages[0][lang].redirect.reorder}
+								</span>
+							</div>
+
+							<div
+								className='my-2'
+								style={{
+									maxHeight: `${window.innerWidth < 450 ? '50vh' : '60vh'}`,
+									overflow: 'auto',
+								}}
+							>
+								<SortableContext
+									items={buzDnd.map((i) => i._id)}
+									strategy={verticalListSortingStrategy}
+								>
+									{buzDnd.map((buz) => (
+										<RedirectCard key={buz._id} business={buz} dnd={dnd} />
+									))}
+								</SortableContext>
+							</div>
+						</DndContext>
 					</div>
 				</div>
 			</div>
