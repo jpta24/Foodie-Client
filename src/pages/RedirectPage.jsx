@@ -34,7 +34,7 @@ const RedirectPage = () => {
 		putAPI(url, businessStored, thenFunction);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	
+
 	const handleDragEnd = (event) => {
 		const { active, over } = event;
 
@@ -99,7 +99,7 @@ const RedirectPage = () => {
 							onDragEnd={handleDragEnd}
 						>
 							<div className='d-flex justify-content-between'>
-								<h4 className='col-12'>{languages[0][lang].redirect.stores}</h4>
+								<h4 className='col-md-12'>{languages[0][lang].redirect.stores}</h4>
 								<span
 									style={{ fontSize: '10px', padding: '3px' }}
 									className={`btn ${

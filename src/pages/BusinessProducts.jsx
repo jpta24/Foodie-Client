@@ -206,12 +206,12 @@ const BusinessProducts = () => {
 						>
 							{business.name}
 						</Link>
-						<div className='d-flex justify-content-between col-7'>
+						<div className='d-flex flex-column flex-md-row align-items-center justify-content-between col-7  mx-auto'>
 							<span> </span>
 							<Button
 								variant='outline-primary'
 								size='lg'
-								className='col-8 col-md-4 m-2'
+								className='col-10 col-md-4 my-2 '
 								href={`/${businessNameEncoded}/create-product`}
 							>
 								{' '}
@@ -221,7 +221,7 @@ const BusinessProducts = () => {
 								style={{ fontSize: '10px', padding: '3px' }}
 								className={`btn ${
 									!dnd ? 'btn-outline-secondary' : 'btn-danger'
-								} my-auto`}
+								} my-auto `}
 								onClick={() => setDnd(!dnd)}
 							>
 								{languages[0][lang].redirect.reorder}
