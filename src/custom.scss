@@ -347,7 +347,18 @@ a {
 .card-title {
 	font-size: 1rem;
 	font-weight: 500;
-	max-width: 123px;
+	max-width: 158px;
+	height: 23px;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.card-title-promo {
+	font-size: 1rem;
+	font-weight: 500;
+	max-width: 115px;
 	height: 23px;
 	display: inline-block;
 	overflow: hidden;

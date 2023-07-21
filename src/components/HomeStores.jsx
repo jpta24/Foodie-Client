@@ -10,11 +10,11 @@ const HomeStores = () => {
 		<div className='mb-3'>
 			<h1 className='text-danger m-3'>{languages[0][lang].home.visit}</h1>
 			<h5>{languages[0][lang].home.visitTxt}</h5>
-			<div className='d-flex justify-content-around'>
+			<div className='d-flex justify-content-around pt-2'>
 				{stores.map((store) => {
 					return (
-						<div key={store._id} className='col-5 mx-auto pb-3'>
-							<h3>{store.title}</h3>
+						<div key={store._id} className='col-5 card bg-dark mx-auto pb-3'>
+							<h3 className='mt-4'>{store.title}</h3>
 							<p>{store.txt[lang]}</p>
 							<Link to={`/${store.title}`} className='col-12 my-1'>
 								<img className='home-img' width={'80%'} src={store.img} alt="" />
