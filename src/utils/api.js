@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const storedToken = localStorage.getItem('authToken');
 
+
 const catchFunctionDefault = (error)=>{
 	console.log(error)
 }
@@ -73,12 +74,13 @@ export const postAPI = async (url, requestBody, thenFunction = thenFunctionDefau
     // 			postAPI(url,requestBody,thenFunction,errorFunction)
 
 export const putAPI = async (url, requestBody, thenFunction = thenFunctionDefault, catchFunction = catchFunctionDefault) => {
+	const token = localStorage.getItem('authToken')
 	try {
 		const response = await axios.put(
 			`${process.env.REACT_APP_SERVER_URL}/${url}`,
             requestBody,
 			{
-				headers: { Authorization: `Bearer ${storedToken}` },
+				headers: { Authorization: `Bearer ${token}` },
 			}
 		);
 		thenFunction(response);
