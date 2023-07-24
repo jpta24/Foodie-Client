@@ -16,6 +16,13 @@ import { toastifyError } from '../utils/tostify';
 import CartBanner from '../components/CartBanner';
 import PromotionBanner from '../components/PromotionBanner';
 
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+	SortableContext,
+	horizontalListSortingStrategy,
+	arrayMove,
+} from '@dnd-kit/sortable';
+
 const Business = () => {
 	const { language: lang, isDark, user } = useContext(AuthContext);
 
@@ -39,7 +46,53 @@ const Business = () => {
 	// const [searchProduct, setSearchProduct] = useState('')
 	const [userSaved, setUserSaved] = useState('');
 
-	// let initialMenu = {}
+	const [prodDnd, setProdDnd] = useState('');
+	const [promDnd, setPromDnd] = useState('')
+	const [dnd, setDnd] = useState(false);
+	const handleDragEnd = (event) => {
+		const { active, over } = event;
+
+		if (!active.id !== over.id) {
+			const oldIndex = prodDnd.findIndex((person) => person._id === active.id);
+			const newIndex = prodDnd.findIndex((person) => person._id === over.id);
+			setProdDnd(arrayMove(prodDnd, oldIndex, newIndex));
+
+			const url = `business/reorder/${business._id}`;
+
+			const thenFunction = (response) => {
+				setBusiness(response.data);
+			};
+			const requestBody = {
+				field: 'products',
+				array: arrayMove(prodDnd, oldIndex, newIndex),
+			};
+			putAPI(url, requestBody, thenFunction);
+		}
+	};
+	// console.log(promDnd);
+	const handlePromoDragEnd = (event) => {
+		const { active, over } = event;
+		// console.log({ promDnd });
+
+		if (!active.id !== over.id) {
+			const oldIndex = promDnd.findIndex((person) => person === active.id);
+			const newIndex = promDnd.findIndex((person) => person === over.id);
+			setPromDnd(arrayMove(promDnd, oldIndex, newIndex));
+
+			const url = `business/reorder/${business._id}`;
+
+			const thenFunction = (response) => {
+				setBusiness(response.data);
+			};
+			const requestBody = {
+				field: 'highlightedProducts',
+				array: arrayMove(promDnd, oldIndex, newIndex),
+			};
+
+			putAPI(url, requestBody, thenFunction);
+		}
+	};
+
 	let arrCategories = [];
 	if (business.products) {
 		business.products.forEach((prod) => {
@@ -121,6 +174,8 @@ const Business = () => {
 		const url = `business/${businessNameEncoded}`;
 		const thenFunction = (response) => {
 			setBusiness(response.data.business);
+			setProdDnd(response.data.business.products);
+			setPromDnd(response.data.business.highlightedProducts)
 		};
 		const errorFunction = () => {
 			toastifyError(`${languages[0][lang].tostify.redirect}`);
@@ -170,6 +225,7 @@ const Business = () => {
 			: null;
 
 		const handleHighlightedProduct = (productID) => {
+			
 			if (
 				business.highlightedProducts.includes(productID) ||
 				business.highlightedProducts.length < limitHL
@@ -179,7 +235,10 @@ const Business = () => {
 					productID: productID,
 				};
 				const thenFunction = (response) => {
+					// console.log(response.data);
 					setBusiness(response.data);
+					setProdDnd(response.data.products);
+					setPromDnd(response.data.highlightedProducts)
 				};
 				const errorFunction = (error) => {
 					console.log(error);
@@ -237,9 +296,9 @@ const Business = () => {
 									<span
 										className='business-saved-icon my-2 mx-4'
 										onClick={() =>
-											userSaved !== '' ?
-											handleSavedBusinessStatus(business._id):
-											navigate('/login')
+											userSaved !== ''
+												? handleSavedBusinessStatus(business._id)
+												: navigate('/login')
 										}
 									>
 										{user !== undefined &&
@@ -248,38 +307,61 @@ const Business = () => {
 											: '🖤'}
 									</span>
 								</div>
-								<BusinessMenu
-									handleCategory={handleCategory}
-									category={category}
-									arrCategories={arrCategories}
-									isDark={isDark}
-								/>
+								<div className='d-flex flex-column flex-md-row align-items-center justify-content-between col-10  mx-auto'>
+									{owner && <span> </span>}
+									<BusinessMenu
+										handleCategory={handleCategory}
+										category={category}
+										arrCategories={arrCategories}
+										isDark={isDark}
+									/>
+									{owner && <span
+										style={{ fontSize: '10px', padding: '3px' }}
+										className={`btn ${
+											!dnd ? 'btn-outline-secondary' : 'btn-danger'
+										} my-auto `}
+										onClick={() => setDnd(!dnd)}
+									>
+										{languages[0][lang].redirect.reorder}
+									</span>}
+								</div>
 							</div>
 						</div>
 						<div className='row p-0 justify-content-center'>
-							<div className='col-11 pb-5 d-flex flex-wrap justify-content-around align-items-stretch '>
-								{business.products
-									.filter((prod) => prod.categories.includes(category))
-									.map((product) => {
-										return (
-											<ProductCard2
-												key={uuidv4()}
-												product={product}
-												businessNameEncoded={businessNameEncoded}
-												currency={currency}
-												cart={cart}
-												setBusiness={setBusiness}
-												handleModal={handleModal}
-												owner={owner}
-												userSaved={userSaved}
-												handleSavedProductStatus={handleSavedProductStatus}
-												businessHighlightedProducts={
-													businessHighlightedProducts
-												}
-											/>
-										);
-									})}
-							</div>
+							<DndContext
+								collisionDetection={closestCenter}
+								onDragEnd={handleDragEnd}
+							>
+								<div className='col-11 pb-5 d-flex flex-wrap justify-content-around align-items-stretch '>
+									<SortableContext
+										items={prodDnd.map((i) => i._id)}
+										strategy={horizontalListSortingStrategy}
+									>
+										{business.products
+											.filter((prod) => prod.categories.includes(category))
+											.map((product) => {
+												return (
+													<ProductCard2
+														key={uuidv4()}
+														product={product}
+														businessNameEncoded={businessNameEncoded}
+														currency={currency}
+														cart={cart}
+														setBusiness={setBusiness}
+														handleModal={handleModal}
+														owner={owner}
+														userSaved={userSaved}
+														handleSavedProductStatus={handleSavedProductStatus}
+														businessHighlightedProducts={
+															businessHighlightedProducts
+														}
+														dnd={dnd}
+													/>
+												);
+											})}
+									</SortableContext>
+								</div>
+							</DndContext>
 						</div>
 					</div>
 					{window.innerWidth > 750 && (
@@ -290,6 +372,9 @@ const Business = () => {
 								currency={currency}
 								lang={lang}
 								businessHighlightedProducts={businessHighlightedProducts}
+								dnd={dnd}
+								handlePromoDragEnd={handlePromoDragEnd}
+								promDnd={promDnd}
 							/>
 						</div>
 					)}

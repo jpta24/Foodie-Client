@@ -102,7 +102,7 @@ const ProductCard2 = ({
 		transform: CSS.Transform.toString(transform),
 		transition,
 	};
-
+	// console.log(product._id)
 	return !dnd ? (
 		<div
 			className={`mx-1 my-1 card-container ${
