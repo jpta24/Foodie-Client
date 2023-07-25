@@ -4,6 +4,8 @@ import { AuthContext } from '../context/auth.context';
 import { QRCode } from 'react-qrcode-logo';
 import { Modal, Button } from 'react-bootstrap';
 
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+
 import { toast } from 'react-toastify';
 import BusinessViewCard from '../components/BusinessViewCard';
 
@@ -158,6 +160,41 @@ const BusinessView = () => {
 									</div>
 								)}
 							</div>
+							<ul className='list-unstyled d-flex justify-content-start col-6'>
+								{business.ssmm?.fb && (
+									<li>
+										<a
+											href={business.ssmm.fb}
+											target='_blank'
+											rel='noopener noreferrer'
+										>
+											<FaFacebook className='fs-3 mx-2' />
+										</a>
+									</li>
+								)}
+								{business.ssmm?.ig && (
+									<li>
+										<a
+											href={business.ssmm.ig}
+											target='_blank'
+											rel='noopener noreferrer'
+										>
+											<FaInstagram className='fs-3 mx-2' />
+										</a>
+									</li>
+								)}
+								{business.ssmm?.wa && (
+									<li>
+										<a
+											href={business.ssmm.wa}
+											target='_blank'
+											rel='noopener noreferrer'
+										>
+											<FaWhatsapp className='fs-3 mx-2' />
+										</a>
+									</li>
+								)}
+							</ul>
 
 							<p className='text-start'>{`${business.address.street}, ${business.address.city}, ${business.address.country}`}</p>
 							<span>{languages[0][lang].businessView.delivery}</span>
@@ -249,9 +286,7 @@ const BusinessView = () => {
 						<span className='mt-3 mb-1'>
 							{languages[0][lang].businessView.description}
 						</span>
-						<p className='text-start'>
-							{business.description}
-						</p>
+						<p className='text-start'>{business.description}</p>
 					</div>
 				</div>
 				{owner && (
