@@ -243,31 +243,41 @@ const BusinessView = () => {
 									/>
 								</Link>
 							</div>
-							<Button
-								className='btn btn-secondary m-1 btn-sm col-5'
-								onClick={() => download()}
-							>
-								Download
-							</Button>
-							<Button
-								className='btn btn-secondary m-1 btn-sm col-5'
-								onClick={() => {
-									navigator.clipboard.writeText(link);
-									// eslint-disable-next-line no-lone-blocks
-									{
-										window.innerWidth < 450
-											? toast.success(`${languages[0][lang].tostify.copy}`, {
-													position: toast.POSITION.BOTTOM_CENTER,
-													theme: 'dark',
-											  })
-											: toast.success(`${languages[0][lang].tostify.copy}`, {
-													theme: 'dark',
-											  });
-									}
-								}}
-							>
-								{languages[0][lang].businessView.copy}
-							</Button>
+							{owner && (
+								<>
+									<Button
+										className='btn btn-secondary m-1 btn-sm col-5'
+										onClick={() => download()}
+									>
+										Download
+									</Button>
+									<Button
+										className='btn btn-secondary m-1 btn-sm col-5'
+										onClick={() => {
+											navigator.clipboard.writeText(link);
+											// eslint-disable-next-line no-lone-blocks
+											{
+												window.innerWidth < 450
+													? toast.success(
+															`${languages[0][lang].tostify.copy}`,
+															{
+																position: toast.POSITION.BOTTOM_CENTER,
+																theme: 'dark',
+															}
+													  )
+													: toast.success(
+															`${languages[0][lang].tostify.copy}`,
+															{
+																theme: 'dark',
+															}
+													  );
+											}
+										}}
+									>
+										{languages[0][lang].businessView.copy}
+									</Button>
+								</>
+							)}
 						</div>
 					</div>
 				</div>
