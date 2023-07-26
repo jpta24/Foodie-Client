@@ -8,7 +8,7 @@ import menuCategories from '../data/categories.json';
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import MembershipTable from '../components/MembershipTable';
-import { postAPI } from '../utils/api';
+import { postAPI, putAPI } from '../utils/api';
 import { toastifySuccess, toastifyError } from '../utils/tostify';
 
 import { handleFileUpload } from '../utils/functions';
@@ -31,6 +31,11 @@ const CreateBusiness = () => {
 			email: '',
 			postCode: 0,
 			country: '',
+		},
+		ssmm: {
+			fb: '',
+			ig: '',
+			wa: '',
 		},
 		description: '',
 		currency: '',
@@ -101,20 +106,72 @@ const CreateBusiness = () => {
 		) {
 			return setErrorMessage(`${languages[0][lang].createBusiness.error}`);
 		} else {
-			const requestBody = business;
+			const businessNameEncoded = business.name.split(' ').join('-');
+			const {
+				name,
+				logoUrl,
+				address,
+				ssmm,
+				description,
+				currency,
+				format,
+				payment,
+				type,
+				categories,
+				bgUrl,
+				pdfMenu,
+				owner,
+				membership,
+			} = business;
+
+			const buzPartI = {
+				name,
+				address,
+				categories,
+				type,
+				format,
+				owner,
+				currency,
+				membership,
+			};
+
+			const buzPartII = { logoUrl, ssmm, description, bgUrl, pdfMenu, payment };
+
+			const requestBodyI = { part: 1, buz: buzPartI };
+			const requestBodyII = { part: 2, buz: buzPartII };
 
 			const url = `business`;
-			const thenFunction = (response) => {
-				const nameEncoded = response.data.business.name.split(' ').join('-');
-				navigate(`/${nameEncoded}/dashboard`);
+			const urlII = `business/edit/${businessNameEncoded}`;
+
+			const thenFunctionI = () => {
+				putAPI(urlII, requestBodyII, thenFunctionII, errorFunction);
+			};
+			const thenFunctionII = (response) => {
+				navigate(`/${businessNameEncoded}/dashboard`);
 				toastifySuccess(`${languages[0][lang].tostify.newBusiness}`);
 			};
+
 			const errorFunction = (error) => {
-				toastifyError(`${languages[0][lang].tostify.errorBusiness}`);
+				toastifyError(`${languages[0][lang].tostify.editBuzError}`);
 				setErrorMessage(error.response.data.message);
 			};
-			postAPI(url, requestBody, thenFunction, errorFunction);
+			postAPI(url, requestBodyI, thenFunctionI, errorFunction);
 		}
+		// else {
+		// 	const requestBody = business;
+
+		// 	const url = `business`;
+		// 	const thenFunction = (response) => {
+		// 		const nameEncoded = response.data.business.name.split(' ').join('-');
+		// 		navigate(`/${nameEncoded}/dashboard`);
+		// 		toastifySuccess(`${languages[0][lang].tostify.newBusiness}`);
+		// 	};
+		// 	const errorFunction = (error) => {
+		// 		toastifyError(`${languages[0][lang].tostify.errorBusiness}`);
+		// 		setErrorMessage(error.response.data.message);
+		// 	};
+		// 	postAPI(url, requestBody, thenFunction, errorFunction);
+		// }
 	};
 	const [currentBusinessImg, setCurrentBusinessImg] = useState(null);
 
@@ -356,6 +413,66 @@ const CreateBusiness = () => {
 							</Form.Group>
 						</div>
 						<hr className='col-md-9 mx-auto' />
+						<div className='d-md-flex justify-content-md-between flex-wrap col-md-8 mx-auto'>
+							<Form.Group
+								className='mb-3 col-md-6 d-flex flex-column align-items-start'
+								controlId='formBasicBusinessfb'
+							>
+								<Form.Label>{'Facebook'}</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder={'https://www.facebook.com/foodie'}
+									name='fb'
+									value={business.ssmm.fb}
+									onChange={(e) => {
+										setBusiness({
+											...business,
+											ssmm: { ...business.ssmm, fb: e.target.value },
+										});
+									}}
+								/>
+							</Form.Group>
+
+							<Form.Group
+								className='mb-3 col-md-5 d-flex flex-column align-items-start'
+								controlId='formBasicBusinesswa'
+							>
+								<Form.Label>{'WhatsApp'}</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder={'491753649395'}
+									name='wa'
+									value={business.ssmm.wa}
+									onChange={(e) => {
+										setBusiness({
+											...business,
+											ssmm: { ...business.ssmm, wa: e.target.value },
+										});
+									}}
+								/>
+							</Form.Group>
+						</div>
+						<div className='d-md-flex justify-content-md-between flex-wrap col-md-8 mx-auto'>
+							<Form.Group
+								className='mb-3 col-md-6 d-flex flex-column align-items-start'
+								controlId='formBasicBusinessig'
+							>
+								<Form.Label>{'Instagram'}</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder={'https://www.instagram.com/foodie'}
+									name='ig'
+									value={business.ssmm.ig}
+									onChange={(e) => {
+										setBusiness({
+											...business,
+											ssmm: { ...business.ssmm, ig: e.target.value },
+										});
+									}}
+								/>
+							</Form.Group>
+						</div>
+						<hr className='col-md-9 mx-auto' />
 						<div className='d-flex justify-content-between flex-wrap col-md-8 mx-auto'>
 							<Form.Group
 								className='mb-3 col-12 col-md-4 d-flex flex-column align-items-start'
@@ -398,7 +515,7 @@ const CreateBusiness = () => {
 													...business,
 													payment: {
 														...business.payment,
-														cash: {accepted:!business.payment.cash.accepted},
+														cash: { accepted: !business.payment.cash.accepted },
 													},
 												});
 											}}
@@ -417,7 +534,7 @@ const CreateBusiness = () => {
 													...business,
 													payment: {
 														...business.payment,
-														card: {accepted:!business.payment.card.accepted},
+														card: { accepted: !business.payment.card.accepted },
 													},
 												});
 											}}

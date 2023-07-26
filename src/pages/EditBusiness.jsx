@@ -24,7 +24,7 @@ const EditBusiness = () => {
 	useEffect(() => {
 		const url = `business/${businessNameEncoded}`;
 		const thenFunction = (response) => {
-            setBusiness(response.data.business)
+			setBusiness(response.data.business);
 		};
 		const errorFunction = () => {
 			toastifyError(`${languages[0][lang].tostify.redirect}`);
@@ -50,17 +50,49 @@ const EditBusiness = () => {
 		) {
 			return setErrorMessage(`${languages[0][lang].editBusiness.error}`);
 		} else {
-			const requestBody = business;
-			const url = `business/edit/${businessNameEncoded}`
-			const thenFunction = (response) =>{
-				navigate(`/${businessNameEncoded}/dashboard`);
-				toastifySuccess(`${languages[0][lang].tostify.editBusiness}`)
-			}
+			const {
+				name,
+				logoUrl,
+				address,
+				ssmm,
+				description,
+				currency,
+				format,
+				payment,
+				type,
+				categories,
+				bgUrl,
+				pdfMenu,
+				owner,
+			} = business;
+
+			const buzPartI = {
+				name,
+				address,
+				categories,
+				type,
+				format,
+				owner,
+				currency,
+			};
+			const buzPartII = { logoUrl, ssmm, description, bgUrl, pdfMenu, payment };
+
+			const requestBodyI = { part: 1, buz: buzPartI };
+			const requestBodyII = { part: 2, buz: buzPartII };
+
+			const url = `business/edit/${businessNameEncoded}`;
+			const thenFunctionI = () => {
+				putAPI(url, requestBodyII, thenFunctionII, errorFunction);
+			};
+			const thenFunctionII = (response) => {
+				navigate(`/${business.name.split(' ').join('-')}/dashboard`);
+				toastifySuccess(`${languages[0][lang].tostify.editBusiness}`);
+			};
 			const errorFunction = (error) => {
-				toastifyError(`${languages[0][lang].tostify.editBuzError}`)
-				setErrorMessage(error.response.data.message)
-			}
-			putAPI(url,requestBody,thenFunction,errorFunction)
+				toastifyError(`${languages[0][lang].tostify.editBuzError}`);
+				setErrorMessage(error.response.data.message);
+			};
+			putAPI(url, requestBodyI, thenFunctionI, errorFunction);
 		}
 	};
 
@@ -259,7 +291,7 @@ const EditBusiness = () => {
 										{languages[0][lang].createBusiness.phone}
 									</Form.Label>
 									<Form.Control
-										type='number'
+										type='text'
 										placeholder={languages[0][lang].createBusiness.phone}
 										name='telephone'
 										value={business.address.telephone}
@@ -275,32 +307,91 @@ const EditBusiness = () => {
 									/>
 								</Form.Group>
 							</div>
-							<hr  />
-						<div className='d-flex justify-content-between flex-wrap mx-auto'>
-							<Form.Group
-								className='mb-3 col-12 col-md-12 d-flex flex-column align-items-start'
-								controlId='formCurrency'
-							>
-								<Form.Label>
-									{languages[0][lang].createBusiness.description}
-								</Form.Label>
-								<Form.Control
-									as='textarea'
-									rows={3}
-									type='text'
-									placeholder={languages[0][lang].createBusiness.description}
-									name='description'
-									value={business.description}
-									onChange={(e) => {
-										setBusiness({
-											...business,
-											[e.target.name]: e.target.value,
-										});
-									}}
-								/>
-							</Form.Group>
-						</div>
+							<hr />
+							<div className='d-md-flex justify-content-md-between'>
+								<Form.Group
+									className='mb-3 col-md-6 d-flex flex-column align-items-start'
+									controlId='formBasicBusinessfb'
+								>
+									<Form.Label>{'Facebook'}</Form.Label>
+									<Form.Control
+										type='text'
+										placeholder={'https://www.facebook.com/foodie'}
+										name='fb'
+										value={business.ssmm.fb}
+										onChange={(e) => {
+											setBusiness({
+												...business,
+												ssmm: { ...business.ssmm, fb: e.target.value },
+											});
+										}}
+									/>
+								</Form.Group>
 
+								<Form.Group
+									className='mb-3 col-md-5 d-flex flex-column align-items-start'
+									controlId='formBasicBusinesswa'
+								>
+									<Form.Label>{'WhatsApp'}</Form.Label>
+									<Form.Control
+										type='text'
+										placeholder={'491753649395'}
+										name='wa'
+										value={business.ssmm.wa}
+										onChange={(e) => {
+											setBusiness({
+												...business,
+												ssmm: { ...business.ssmm, wa: e.target.value },
+											});
+										}}
+									/>
+								</Form.Group>
+							</div>
+							<div className='d-md-flex justify-content-md-between'>
+								<Form.Group
+									className='mb-3 col-md-6 d-flex flex-column align-items-start'
+									controlId='formBasicBusinessig'
+								>
+									<Form.Label>{'Instagram'}</Form.Label>
+									<Form.Control
+										type='text'
+										placeholder={'https://www.instagram.com/foodie'}
+										name='ig'
+										value={business.ssmm.ig}
+										onChange={(e) => {
+											setBusiness({
+												...business,
+												ssmm: { ...business.ssmm, ig: e.target.value },
+											});
+										}}
+									/>
+								</Form.Group>
+							</div>
+							<hr />
+							<div className='d-flex justify-content-between flex-wrap mx-auto'>
+								<Form.Group
+									className='mb-3 col-12 col-md-12 d-flex flex-column align-items-start'
+									controlId='formCurrency'
+								>
+									<Form.Label>
+										{languages[0][lang].createBusiness.description}
+									</Form.Label>
+									<Form.Control
+										as='textarea'
+										rows={3}
+										type='text'
+										placeholder={languages[0][lang].createBusiness.description}
+										name='description'
+										value={business.description}
+										onChange={(e) => {
+											setBusiness({
+												...business,
+												[e.target.name]: e.target.value,
+											});
+										}}
+									/>
+								</Form.Group>
+							</div>
 
 							<hr />
 							<div className='d-flex justify-content-between flex-wrap'>

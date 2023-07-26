@@ -61,6 +61,11 @@ const BusinessView = () => {
 		deleteAPI(url, thenFunction, errorFunction);
 	};
 
+	const removeSpacesAndSymbols = (inputString) => {
+		const regex = /[^a-zA-Z0-9]/g;
+		return inputString.replace(regex, '');
+	  }
+
 	if (business !== '') {
 		let owner = false;
 		if (user) {
@@ -186,7 +191,7 @@ const BusinessView = () => {
 								{business.ssmm?.wa && (
 									<li>
 										<a
-											href={business.ssmm.wa}
+											href={`https://api.whatsapp.com/send?phone=${removeSpacesAndSymbols(business.ssmm.wa)}`}
 											target='_blank'
 											rel='noopener noreferrer'
 										>
