@@ -306,7 +306,7 @@ const BusinessView = () => {
 				</div>
 				{owner && (
 					<div className='row d-flex flex-row my-2 justify-content-center'>
-						<div className='col-md-8 col-12 d-flex justify-content-start align-items-start'>
+						<div className='col-md-8 col-12 d-flex justify-content-center align-items-start flex-wrap'>
 							<BusinessViewCard
 								href={`/${businessNameEncoded}/products`}
 								button='Products'
@@ -321,6 +321,11 @@ const BusinessView = () => {
 								href={`/${businessNameEncoded}/orders`}
 								button='Orders'
 								src={iconsCloud[0].orders}
+							/>
+							<BusinessViewCard
+								href={`/${businessNameEncoded}/memberships`}
+								button='Memberships'
+								src={iconsCloud[0].memberships}
 							/>
 						</div>
 					</div>
