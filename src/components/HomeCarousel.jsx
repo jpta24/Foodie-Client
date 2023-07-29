@@ -33,6 +33,7 @@ const TestimonialsCarousel = () => {
 												className='d-block mx-auto border border-dark border-4 rounded-circle'
 												src={testimonio.image}
 												alt={testimonio.business}
+												loading="lazy"
 											/>
 										</div>
 										<h5>{testimonio.txt[lang]}</h5>

@@ -102,7 +102,8 @@ function HomePage() {
 												className='home-img'
 												width={'100%'}
 												src={image}
-												alt=''
+												alt='Foddie'
+												loading="lazy"
 											/>
 										</div>
 									</Carousel.Item>
@@ -123,8 +124,8 @@ function HomePage() {
 				<div>
 					<Row className='d-flex justify-content-around pb-4'>
 						<Col md={4}>
-							<Image src={iconsCloud[0].homeFeatures} fluid />
-						</Col>
+							<Image loading="lazy" src={iconsCloud[0].homeFeatures} fluid />
+						</Col> 				
 						<Col md={7}>
 							<h2 className='text-danger'>
 								{languages[0][lang].home.feaTitle} FOODIE
@@ -145,7 +146,6 @@ function HomePage() {
 			<div className='mt-5'>
 				<TestimonialsCarousel />
 			</div>
-
 			<Footer />
 		</div>
 	);

@@ -27,7 +27,12 @@ function PromotionCard({ product, currency, dnd = false }) {
 				to={`/product/${product._id}`}
 				className='promotion-card-img-container mx-3 my-auto col-5'
 			>
-				<img className='promotion-card-img' src={product.mainImg} alt='' />
+				<img
+					className='promotion-card-img'
+					src={product.mainImg}
+					alt='Product'
+					loading='lazy'
+				/>
 			</Link>
 
 			<span className='card-hl-icon'>🔥</span>
@@ -65,7 +70,12 @@ function PromotionCard({ product, currency, dnd = false }) {
 			className='promotion-card d-flex my-3 mx-2'
 		>
 			<div className='promotion-card-img-container mx-3 my-auto col-5'>
-				<img className='promotion-card-img' src={product.mainImg} alt='' />
+				<img
+					className='promotion-card-img'
+					src={product.mainImg}
+					alt='Product'
+					loading='lazy'
+				/>
 			</div>
 
 			<span className='card-hl-icon'>🔥</span>

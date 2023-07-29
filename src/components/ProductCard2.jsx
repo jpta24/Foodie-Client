@@ -171,7 +171,12 @@ const ProductCard2 = ({
 			</span>
 			<Link to={`/product/${product._id}`}>
 				<div className='card-img-container'>
-					<img className='card-img' src={product.mainImg} alt='' />
+					<img
+						className='card-img'
+						src={product.mainImg}
+						alt='Product'
+						loading='lazy'
+					/>
 				</div>
 			</Link>
 
@@ -221,7 +226,12 @@ const ProductCard2 = ({
 			<span className='card-icon card-icon2'>{isProdSaved ? '❤' : '🖤'}</span>
 			<div>
 				<div className='card-img-container'>
-					<img className='card-img' src={product.mainImg} alt='' />
+					<img
+						className='card-img'
+						src={product.mainImg}
+						alt='Product'
+						loading='lazy'
+					/>
 				</div>
 			</div>
 

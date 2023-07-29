@@ -17,7 +17,13 @@ const HomeStores = () => {
 							<h3 className='mt-4'>{store.title}</h3>
 							<p>{store.txt[lang]}</p>
 							<Link to={`/${store.title}`} className='col-12 my-1'>
-								<img className='home-img' width={'80%'} src={store.img} alt="" />
+								<img
+									className='home-img'
+									width={'80%'}
+									src={store.img}
+									alt='Store'
+									loading='lazy'
+								/>
 							</Link>
 						</div>
 					);
