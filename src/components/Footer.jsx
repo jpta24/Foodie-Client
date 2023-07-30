@@ -57,7 +57,7 @@ function Footer() {
 						<h5>{languages[0][lang].home.footer.terms}</h5>
 						<ul className='list-unstyled'>
 							<li>
-								<Link href='#'>{languages[0][lang].home.footer.privacy}</Link>
+								<Link to={'/private-policy'}>{languages[0][lang].home.footer.privacy}</Link>
 							</li>
 							<li>
 								<Link href='#'>

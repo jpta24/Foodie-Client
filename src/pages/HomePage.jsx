@@ -6,6 +6,7 @@ import { Row, Col, Image, Button, Carousel } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import TestimonialsCarousel from '../components/HomeCarousel';
 import MembershipTable from '../components/MembershipTable';
+import CookiesComponent from '../components/CookiesComponent';
 
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
@@ -147,6 +148,7 @@ function HomePage() {
 				<TestimonialsCarousel />
 			</div>
 			<Footer />
+			<CookiesComponent page={'home'}/>
 		</div>
 	);
 }

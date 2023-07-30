@@ -620,6 +620,42 @@ color: red;
 	transform: translate(-50%, -50%);
   max-height: 100%;
 }
+
+/* ////////////////////   COOKIES   //////////////////////////////// */
+.cookie-icon {
+	position: fixed;
+	bottom: 12px;
+	left: 12px;
+	padding: 10px;
+	background-color: gray;  
+	border-radius: 50%;
+	cursor: pointer;
+	z-index: 2
+}
+
+.cookie-modal {
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	width: calc(100vw - 20px) ;
+	background-color: white;
+	border: solid 1px black;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+}
+
+.cookie-modal-close {
+	color: black;
+	font-size: 2.5rem;
+	position: absolute;
+	right: 20px;
+	top: 0px;
+	z-index: 1;
+	cursor: pointer;
+}
   
 
 @media (max-width: 600px) {

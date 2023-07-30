@@ -7,14 +7,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { Modal, Button } from 'react-bootstrap';
 import languages from '../data/language.json';
 
-import ProductCard2 from '../components/ProductCard2';
-
-import BusinessMenu from '../components/BusinessMenu';
-import Loading from '../components/Loading';
 import { getAPI, putAPI, deleteAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
+
+import ProductCard2 from '../components/ProductCard2';
+import BusinessMenu from '../components/BusinessMenu';
+import Loading from '../components/Loading';
 import CartBanner from '../components/CartBanner';
 import PromotionBanner from '../components/PromotionBanner';
+import CookiesComponent from '../components/CookiesComponent';
 
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
@@ -440,6 +441,8 @@ const Business = () => {
 						</Button>
 					</Modal.Footer>
 				</Modal>
+				
+			<CookiesComponent/>
 			</div>
 		);
 	} else {
