@@ -7,7 +7,26 @@
 				"link": "Privacy Policy.",
 				"acceptAll": "Accept",
 				"decline": "Decline"
+			},
+			"privacy": {
+				"title": "Privacy Policy Statement for Customers",
+				"intro": "At Foodie.com, we value and respect your privacy. This Privacy Policy describes how we collect, use, disclose, and protect the personal information you provide to us or that we collect from you while visiting our website. By using our website, you agree to the terms and conditions of this Privacy Policy.",
+				"collectTitle": "Information Collection",
+				"collectText": "We may collect personally identifiable information, such as your name, email address, and other information you voluntarily provide when registering on our site or completing forms. We may also collect information about your use of our website through cookies and similar technologies.",
+				"useTitle": "Information Use",
+				"useText": "We use the collected information to provide and improve our services, personalize your experience on our website, and send you relevant communications. We may also use the information for analysis purposes and to comply with applicable laws and regulations.",
+				"disclosureTitle": "Information Disclosure",
+				"disclosureText": "We will not share your personal information with third parties, except when necessary to provide the services requested by you or when legally obligated to do so.",
+				"securityTitle": "Information Security",
+				"securityText": "We implement security measures to protect your personal information against unauthorized access and misuse. However, please note that no transmission of data over the Internet is 100% secure, and we cannot guarantee the security of the information you send us.",
+				"thirdTitle": "Third-Party Links",
+				"thirdText": "Our website may contain links to third-party websites. We are not responsible for the privacy practices of those sites, and we recommend that you review the privacy policies of those sites before providing them with your personal information.",
+				"changeTitle": "Changes to this Privacy Policy",
+				"changeText": "We reserve the right to update or modify this Privacy Policy at any time. Any changes will be effective immediately upon posting on this page.",
+				"footText": "If you have any questions or concerns about our Privacy Policies, please feel free to contact us through info@foodie.com or other means provided on our website.",
+				"lastChange": "Last Updated:"
 			}
+			
 				
 		},
 		"Es": {
@@ -17,7 +36,24 @@
                 "link":"Política de Privacidad.",
                 "acceptAll":"Aceptar",
                 "decline":"No acepto"
-				
+			},
+			"privacy":{
+				"title":"Declaración de Políticas de Privacidad para clientes",
+				"intro":"En Foodie.com, valoramos y respetamos su privacidad. Esta Política de Privacidad describe cómo recopilamos, utilizamos, divulgamos y protegemos la información personal que usted nos proporciona o que recopilamos de usted mientras visita nuestro sitio web. Al utilizar nuestro sitio web, usted acepta los términos y condiciones de esta Política de Privacidad.",
+				"collectTitle":"Recopilación de Información",
+				"collectText":"Podemos recopilar información personal identificable, como su nombre, dirección de correo electrónico y otra información que usted nos proporcione voluntariamente al registrarse en nuestro sitio o al completar formularios. También podemos recopilar información sobre su uso de nuestro sitio web a través de cookies y tecnologías similares.",
+				"useTitle":"Uso de la Información",
+				"useText":"Utilizamos la información recopilada para proporcionar y mejorar nuestros servicios, personalizar su experiencia en nuestro sitio web y enviarle comunicaciones relevantes. También podemos utilizar la información para fines de análisis y para cumplir con las leyes y regulaciones aplicables.",
+				"disclosureTitle":"Divulgación de la Información",
+				"disclosureText":"No compartiremos su información personal con terceros, excepto cuando sea necesario para proporcionar los servicios solicitados por usted o cuando estemos legalmente obligados a hacerlo.",
+				"securityTitle":"Seguridad de la Información",
+				"securityText":"Implementamos medidas de seguridad para proteger su información personal contra el acceso no autorizado y el uso indebido. Sin embargo, tenga en cuenta que ninguna transmisión de datos por Internet es 100% segura y no podemos garantizar la seguridad de la información que nos envía.",
+				"thirdTitle":"Enlaces a Terceros",
+				"thirdText":"Nuestro sitio web puede contener enlaces a sitios web de terceros. No somos responsables de las prácticas de privacidad de esos sitios y le recomendamos que revise las políticas de privacidad de esos sitios antes de proporcionarles su información personal.",
+				"changeTitle":"Cambios en esta Política de Privacidad",
+				"changeText":"Nos reservamos el derecho de actualizar o modificar esta Política de Privacidad en cualquier momento. Cualquier cambio entrará en vigencia inmediatamente después de su publicación en esta página.",
+				"footText":"Si tiene alguna pregunta o inquietud sobre nuestras Políticas de Privacidad, no dude en contactarnos a través de info@foodie.com o por otros medios proporcionados en nuestro sitio web.",
+				"lastChange":"Última actualización:"
 			}
 		},
 		"De": {
@@ -27,7 +63,26 @@
 				"link": "Datenschutzerklärung.",
 				"acceptAll": "Akzeptieren",
 				"decline": "Ich lehne ab"
+			},
+			"privacy": {
+				"title": "Datenschutzerklärung für Kunden",
+				"intro": "Bei Foodie.com schätzen und respektieren wir Ihre Privatsphäre. Diese Datenschutzerklärung beschreibt, wie wir personenbezogene Informationen sammeln, verwenden, offenlegen und schützen, die Sie uns zur Verfügung stellen oder die wir von Ihnen während Ihres Besuchs auf unserer Website sammeln. Durch die Nutzung unserer Website akzeptieren Sie die Bedingungen dieser Datenschutzerklärung.",
+				"collectTitle": "Informationssammlung",
+				"collectText": "Wir können personenbezogene Daten wie Ihren Namen, Ihre E-Mail-Adresse und andere Informationen, die Sie freiwillig bei der Registrierung auf unserer Website oder beim Ausfüllen von Formularen angeben, sammeln. Wir können auch Informationen über Ihre Nutzung unserer Website über Cookies und ähnliche Technologien sammeln.",
+				"useTitle": "Informationen verwenden",
+				"useText": "Die gesammelten Informationen nutzen wir, um unsere Dienstleistungen bereitzustellen und zu verbessern, Ihr Erlebnis auf unserer Website zu personalisieren und Ihnen relevante Kommunikation zuzusenden. Wir können die Informationen auch für Analysezwecke und zur Erfüllung geltender Gesetze und Vorschriften verwenden.",
+				"disclosureTitle": "Informationsoffenlegung",
+				"disclosureText": "Wir geben Ihre personenbezogenen Informationen nicht an Dritte weiter, es sei denn, dies ist notwendig, um die von Ihnen angeforderten Dienstleistungen zu erbringen oder wenn wir gesetzlich dazu verpflichtet sind.",
+				"securityTitle": "Informationssicherheit",
+				"securityText": "Wir setzen Sicherheitsmaßnahmen ein, um Ihre personenbezogenen Informationen vor unbefugtem Zugriff und Missbrauch zu schützen. Bitte beachten Sie jedoch, dass keine Datenübertragung über das Internet zu 100% sicher ist und wir die Sicherheit der von Ihnen gesendeten Informationen nicht garantieren können.",
+				"thirdTitle": "Links zu Dritten",
+				"thirdText": "Unsere Website kann Links zu Websites von Dritten enthalten. Wir sind nicht verantwortlich für die Datenschutzpraktiken dieser Websites und empfehlen Ihnen, die Datenschutzrichtlinien dieser Websites zu überprüfen, bevor Sie ihnen personenbezogene Informationen zur Verfügung stellen.",
+				"changeTitle": "Änderungen dieser Datenschutzerklärung",
+				"changeText": "Wir behalten uns das Recht vor, diese Datenschutzerklärung jederzeit zu aktualisieren oder zu ändern. Jede Änderung tritt unmittelbar nach Veröffentlichung auf dieser Seite in Kraft.",
+				"footText": "Wenn Sie Fragen oder Bedenken hinsichtlich unserer Datenschutzrichtlinien haben, zögern Sie nicht, uns über info@foodie.com oder andere auf unserer Website bereitgestellte Kontaktmöglichkeiten zu kontaktieren.",
+				"lastChange": "Letzte Aktualisierung:"
 			}
+			
 			
 		}
 	}
