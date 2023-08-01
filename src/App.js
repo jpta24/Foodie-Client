@@ -32,6 +32,7 @@ import EditProfilePage from "./pages/EditProfile";
 import Test from "./pages/Test";
 import MembershipPage from "./pages/MembershipPage";
 import PrivatePolicyPage from "./pages/PrivatePolicyPage";
+import TermsPage from "./pages/TermsPage";
 
 function App() {
   const {isDark } =	useContext(AuthContext);
@@ -68,6 +69,7 @@ function App() {
         <Route exact path="/:businessName/edit-product/:productID" element={<IsPrivate><EditProduct/></IsPrivate>} />
         <Route exact path="/:businessName/orders" element={<IsPrivate><BusinessOrders /></IsPrivate>} />
         <Route exact path="/private-policy" element={<PrivatePolicyPage />} />
+        <Route exact path="/terms-conditions" element={<TermsPage />} />
         <Route exact path="/errorPage" element={<ErrorPage />} /> 
         <Route exact path="/test" element={<Test />} /> 
       </Routes>

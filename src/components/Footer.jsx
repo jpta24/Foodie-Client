@@ -60,7 +60,7 @@ function Footer() {
 								<Link to={'/private-policy'}>{languages[0][lang].home.footer.privacy}</Link>
 							</li>
 							<li>
-								<Link href='#'>
+								<Link to={'/terms-conditions'}>
 									{languages[0][lang].home.footer.conditions}
 								</Link>
 							</li>

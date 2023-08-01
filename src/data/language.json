@@ -64,6 +64,8 @@
 				"username": "Username",
 				"email": "Email",
 				"password": "Password",
+				"terms":"I accept the ",
+				"termsLink":"Terms and Conditions of Use.",
 				"signup": "Sign Up",
 				"account": "Already have an account?",
 				"login": "Log In"
@@ -380,6 +382,8 @@
 				"username": "Nombre de usuario",
 				"email": "Correo electrónico",
 				"password": "Contraseña",
+				"terms":"Acepto los ",
+				"termsLink":"Términos y Condiciones de Uso.",
 				"signup": "Registrarse",
 				"account": "¿Ya tienes una cuenta?",
 				"login": "Log In"
@@ -695,6 +699,8 @@
 				"username": "Benutzername",
 				"email": "E-Mail",
 				"password": "Passwort",
+				"terms":"Ich akzeptiere die ",
+				"termsLink":"Nutzungsbedingungen.",
 				"signup": "Registrieren",
 				"account": "Hast du bereits ein Konto?",
 				"login": "Einloggen"
