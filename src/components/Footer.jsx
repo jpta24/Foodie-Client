@@ -13,7 +13,7 @@ function Footer() {
 			<hr />
 			<div>
 				<Row>
-					<Col md={4}>
+					<Col md={3}>
 						<h5>{languages[0][lang].home.footer.contactus}</h5>
 						<ul className='list-unstyled'>
 							<li>{languages[0][lang].home.footer.country}, Berlin 10787</li>
@@ -21,7 +21,7 @@ function Footer() {
 							<li>0175-364-3399</li>
 						</ul>
 					</Col>
-					<Col md={4} className=''>
+					<Col md={3} className=''>
 						<h5>{languages[0][lang].home.footer.followus}</h5>
 						<ul className='list-unstyled d-flex justify-content-around col-6 mx-auto'>
 							<li>
@@ -53,7 +53,20 @@ function Footer() {
 							</li>
 						</ul>
 					</Col>
-					<Col md={4}>
+					<Col md={3}>
+						<h5>{languages[0][lang].home.footer.terms}</h5>
+						<ul className='list-unstyled'>
+							<li>
+								<Link to={'/private-policy'}>{languages[0][lang].home.footer.privacy}</Link>
+							</li>
+							<li>
+								<Link to={'/terms-conditions'}>
+									{languages[0][lang].home.footer.conditions}
+								</Link>
+							</li>
+						</ul>
+					</Col>
+                    <Col md={3}>
 						<h5>{languages[0][lang].home.footer.terms}</h5>
 						<ul className='list-unstyled'>
 							<li>

@@ -13,6 +13,11 @@ import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
 import HomeStores from '../components/HomeStores';
 import { v4 as uuidv4 } from 'uuid';
+import homeImg1 from "../assets/Imagen1.png";
+import homeImg2 from "../assets/Imagen2.png";
+import homeImg3 from "../assets/Imagen3.png";
+import homeImg4 from "../assets/Imagen4.png";
+import homeImg5 from "../assets/Imagen5.png";
 
 function HomePage() {
 	const { language: lang, user: userID } = useContext(AuthContext);
@@ -51,13 +56,14 @@ function HomePage() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userID]);
 
-	const images = [
-		iconsCloud[0].homeImg1,
-		iconsCloud[0].homeImg2,
-		iconsCloud[0].homeImg3,
-		iconsCloud[0].homeImg4,
-		iconsCloud[0].homeImg5,
-	];
+	// const images = [
+	// 	iconsCloud[0].homeImg1,
+	// 	iconsCloud[0].homeImg2,
+	// 	iconsCloud[0].homeImg3,
+	// 	iconsCloud[0].homeImg4,
+	// 	iconsCloud[0].homeImg5,
+	// ];
+	const images = [homeImg1,homeImg2,homeImg3,homeImg4,homeImg5];
 	return (
 		<div className={`container`} style={{ overflow: 'auto' }}>
 			{/* Header Section */}
