@@ -54,14 +54,14 @@ function Footer() {
 						</ul>
 					</Col>
 					<Col md={3}>
-						<h5>{languages[0][lang].home.footer.terms}</h5>
+						<h5>How Foodie works</h5>
 						<ul className='list-unstyled'>
 							<li>
-								<Link to={'/private-policy'}>{languages[0][lang].home.footer.privacy}</Link>
+								<Link to={'/private-policy'}>How to use it</Link>
 							</li>
 							<li>
 								<Link to={'/terms-conditions'}>
-									{languages[0][lang].home.footer.conditions}
+									FAQ
 								</Link>
 							</li>
 						</ul>
