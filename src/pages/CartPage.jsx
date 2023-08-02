@@ -105,7 +105,7 @@ const CartPage = () => {
 					);
 				})
 				.map((product) => {
-					return { product: product.product._id, quantity: product.quantity };
+					return { product: product.product._id, quantity: product.quantity, price:product.product.price };
 				});
 
 			const order = {

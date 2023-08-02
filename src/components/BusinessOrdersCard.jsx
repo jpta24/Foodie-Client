@@ -32,26 +32,29 @@ const BusinessOrdersCard = ({ order, handleStatusOrder, handleModal }) => {
 						style={{ fontSize: '0.95em', fontWeight: 'bolder' }}
 					>
 						<span>
-							{languages[0][lang].businessOrderCard.order}{': '}
+							{languages[0][lang].businessOrderCard.order}
+							{': '}
 							{order._id.slice(10).toUpperCase()}
 						</span>
 					</p>
 					<div className='p-1'>
 						{order.products.map((eachProduct) => {
 							return (
-                                eachProduct.product !== null &&
-								<p
-									key={uuidv4()}
-									className='m-0 text-start d-flex justify-content-between'
-								>
-									<span className='col-8'>{`- (${eachProduct.quantity}) ${eachProduct.product.name}`}</span>
-									<span>
-										{order.business.currency}{' '}
-										{(eachProduct.product.price * eachProduct.quantity).toFixed(
-											2
-										)}
-									</span>
-								</p>
+								eachProduct.product !== null && (
+									<p
+										key={uuidv4()}
+										className='m-0 text-start d-flex justify-content-between'
+									>
+										<span className='col-8'>{`- (${eachProduct.quantity}) ${eachProduct.product.name}`}</span>
+										<span>
+											{order.business.currency}{' '}
+											{(
+												(eachProduct.price || eachProduct.product.price) *
+												eachProduct.quantity
+											).toFixed(2)}
+										</span>
+									</p>
+								)
 							);
 						})}
 					</div>

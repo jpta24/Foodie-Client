@@ -71,7 +71,7 @@ const OrderCard = ({ order, handleCancelOrder, handleModal }) => {
 										<span>
 											{order.business.currency}{' '}
 											{(
-												eachProduct.product.price * eachProduct.quantity
+												(eachProduct.price || eachProduct.product.price) * eachProduct.quantity
 											).toFixed(2)}
 										</span>
 									</p>
