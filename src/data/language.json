@@ -19,9 +19,9 @@
 			"home": {
 				"slogan": " The e-commerce platform to take your culinary business to the next level.",
 				"btnSlg": "Open an Account",
-				"visit":"Visit our Model Stores",
-				"visitTxt":"Step into a world of inspiration and find your perfect match. Start your journey today.",
-				"btnVisit":"Visit the Store",
+				"visit": "Visit our Model Stores",
+				"visitTxt": "Step into a world of inspiration and find your perfect match. Start your journey today.",
+				"btnVisit": "Visit the Store",
 				"feaTitle": "Features and Benefits of ",
 				"feaContent": "Here, you can easily create an online store for your food products and reach more customers everywhere. The platform offers a variety of tools and features, such as the ability to customize your online store, manage your products and orders, and offer flexible payment and delivery options. In addition, FOODIE also allows you to generate a unique QR code and URL for your online store, making it easy for your customers to find and purchase your products. With FOODIE, you have everything you need to successfully and efficiently grow your culinary business online.",
 				"freeTitle": "Free Plan",
@@ -64,8 +64,8 @@
 				"username": "Username",
 				"email": "Email",
 				"password": "Password",
-				"terms":"I accept the ",
-				"termsLink":"Terms and Conditions of Use.",
+				"terms": "I accept the ",
+				"termsLink": "Terms and Conditions of Use.",
 				"signup": "Sign Up",
 				"account": "Already have an account?",
 				"login": "Log In"
@@ -137,7 +137,7 @@
 				"country": "Country",
 				"email": "E-mail",
 				"phone": "Telephone",
-				"description":"Description",
+				"description": "Description",
 				"currency": "Currency",
 				"currencyPh": "Simbol",
 				"paymentMethods": "Payment Methods",
@@ -228,7 +228,7 @@
 				"personal": "Personal",
 				"business": "Business",
 				"stores": "or your visited stores",
-				"reorder":"Reorder"
+				"reorder": "Reorder"
 			},
 			"business": {
 				"gotocart": "Go to Cart",
@@ -243,14 +243,14 @@
 				"mHLtext1": "You have reached the maximum limit for Highlighted Products in your current plan",
 				"mHLtext2": "Upgrade your subscription or deselect other Highlighted Products to highlight this product.",
 				"btnMembership": "Go to Membership",
-				"bestSeller":"Best Seller"
+				"bestSeller": "Best Seller"
 			},
 			"businessView": {
 				"delivery": "Delivery Methods:",
 				"products": "Products Types:",
 				"copy": "Copy",
 				"categories": "Categories:",
-				"description":"Description:",
+				"description": "Description:",
 				"mTitle": "Delete Business",
 				"mBody2": "business this action has no way back."
 			},
@@ -266,8 +266,8 @@
 				"price": "Price",
 				"pricePh": "use dot for decimals",
 				"status": "Product Status",
-				"weight":"Weight",
-				"weightPh":"Weight in grams",
+				"weight": "Weight",
+				"weightPh": "Weight in grams",
 				"active": "Active",
 				"paused": "Paused",
 				"categories": "Product Categories",
@@ -275,7 +275,12 @@
 				"ingredients": "Product Ingredientes",
 				"ingredientsPh": "use ',' to add the ingredient",
 				"btnCreate": "Create Product",
-				"btnEdit": "Edit Product"
+				"btnEdit": "Edit Product",
+				"modalTitle": "Recommendation for Uploading Product Photos",
+				"modalText1": "Hello! To make your products look better on Foodie, we recommend using square photos (1:1 aspect ratio) and preferably with no background.",
+				"modalText2": "Remember, a high-quality image can make a significant difference in how your products are perceived by customers. Thank you for being part of our community!",
+				"modalCheckbox": "Do not show this message again.",
+				"modalBtn": "Got it!"
 			},
 			"businessOrders": {
 				"hi": "Hi",
@@ -337,9 +342,9 @@
 			"home": {
 				"slogan": " La plataforma de e-commerce para llevar al siguiente nivel tu negocio culinario.",
 				"btnSlg": "Abrir una cuenta",
-				"visit":"Visita nuestas Tiendas Modelo",
-				"visitTxt":"Entra en un mundo de inspiración y encuentra tu pareja perfecta. Comience su viaje hoy.",
-				"btnVisit":"Visitar la Tienda",
+				"visit": "Visita nuestas Tiendas Modelo",
+				"visitTxt": "Entra en un mundo de inspiración y encuentra tu pareja perfecta. Comience su viaje hoy.",
+				"btnVisit": "Visitar la Tienda",
 				"feaTitle": "Características y beneficios",
 				"feaContent": "Aquí, puedes crear fácilmente una tienda en línea para tus productos de alimentos y llegar a más clientes en todas partes. La plataforma ofrece una variedad de herramientas y características, como la capacidad de personalizar tu tienda en línea, gestionar tus productos y pedidos, y ofrecer opciones flexibles de pago y entrega. Además, FOODIE también te permite generar un código QR único y una URL para tu tienda en línea, lo que facilita que tus clientes encuentren y compren tus productos. Con FOODIE, tienes todo lo que necesitas para hacer crecer tu negocio culinario en línea de manera exitosa y eficiente.",
 				"freeTitle": "Plan Gratuito",
@@ -382,8 +387,8 @@
 				"username": "Nombre de usuario",
 				"email": "Correo electrónico",
 				"password": "Contraseña",
-				"terms":"Acepto los ",
-				"termsLink":"Términos y Condiciones de Uso.",
+				"terms": "Acepto los ",
+				"termsLink": "Términos y Condiciones de Uso.",
 				"signup": "Registrarse",
 				"account": "¿Ya tienes una cuenta?",
 				"login": "Log In"
@@ -455,7 +460,7 @@
 				"country": "País",
 				"email": "Correo electrónico",
 				"phone": "Teléfono",
-				"description":"Descripción",
+				"description": "Descripción",
 				"currency": "Moneda",
 				"currencyPh": "Símbolo",
 				"paymentMethods": "Métodos de pago",
@@ -545,7 +550,7 @@
 				"personal": "Personal",
 				"business": "Negocio",
 				"stores": "o a las tiendas visitadas",
-				"reorder":"Reordenar"
+				"reorder": "Reordenar"
 			},
 			"business": {
 				"gotocart": "Ir al carrito",
@@ -567,7 +572,7 @@
 				"products": "Tipos de Productos:",
 				"copy": "Copiar",
 				"categories": "Categorías:",
-				"description":"Descripción:",
+				"description": "Descripción:",
 				"mTitle": "Eliminar negocio",
 				"mBody2": "estás a punto de eliminar el negocio y esta acción no se puede deshacer."
 			},
@@ -583,8 +588,8 @@
 				"price": "Precio",
 				"pricePh": "Utiliza el punto para los decimales",
 				"status": "Estado del Producto",
-				"weight":"Peso",
-				"weightPh":"Peso en gramos",
+				"weight": "Peso",
+				"weightPh": "Peso en gramos",
 				"active": "Activo",
 				"paused": "En pausa",
 				"categories": "Categorías de Producto",
@@ -592,7 +597,12 @@
 				"ingredients": "Ingredientes del Producto",
 				"ingredientsPh": "Utiliza ',' para agregar los ingredientes",
 				"btnCreate": "Crear Producto",
-				"btnEdit": "Editar Producto"
+				"btnEdit": "Editar Producto",
+				"modalTitle": "Recomendación para cargar fotos de productos",
+				"modalText1": "¡Hola! Para que tus productos luzcan mejor en Foodie, te recomendamos usar fotos cuadradas (1:1) y preferiblemente sin fondo.",
+				"modalText2": "Recuerda que una imagen de calidad puede hacer una gran diferencia en la percepción de tus productos por parte de los clientes. ¡Gracias por ser parte de nuestra comunidad!",
+				"modalCheckbox": "No volver a mostrar este mensaje.",
+				"modalBtn": "Entendido"
 			},
 			"businessOrders": {
 				"hi": "Hola",
@@ -654,9 +664,9 @@
 			"home": {
 				"slogan": " Die E-Commerce Platform für den Einstieg in Ihr kulinarisches Geschäft.",
 				"btnSlg": "Konto eröffnen",
-				"visit":"Besuchen Sie unsere Modellgeschäfte",
-				"visitTxt":"Treten Sie ein in eine Welt voller Inspiration und finden Sie Ihren perfekten Partner. Beginnen Sie noch heute Ihre Reise.",
-				"btnVisit":"Besuch das Geschäft",
+				"visit": "Besuchen Sie unsere Modellgeschäfte",
+				"visitTxt": "Treten Sie ein in eine Welt voller Inspiration und finden Sie Ihren perfekten Partner. Beginnen Sie noch heute Ihre Reise.",
+				"btnVisit": "Besuch das Geschäft",
 				"feaTitle": "Funktionen und Vorteile von ",
 				"feaContent": "Hier können Sie ganz einfach einen Online-Shop für Ihre Lebensmittelprodukte erstellen und überall mehr Kunden erreichen. Die Plattform bietet eine Vielzahl von Tools und Funktionen, wie die Möglichkeit, Ihren Online-Shop anzupassen, Ihre Produkte und Bestellungen zu verwalten und flexible Zahlungs- und Lieferoptionen anzubieten. Darüber hinaus ermöglicht FOODIE Ihnen auch die Erzeugung eines einzigartigen QR-Codes und einer URL für Ihren Online-Shop, so dass es für Ihre Kunden einfach ist, Ihre Produkte zu finden und zu kaufen. Mit FOODIE haben Sie alles, was Sie benötigen, um Ihr kulinarisches Geschäft erfolgreich und effizient online zu erweitern.",
 				"freeTitle": "Kostenloser Plan",
@@ -699,8 +709,8 @@
 				"username": "Benutzername",
 				"email": "E-Mail",
 				"password": "Passwort",
-				"terms":"Ich akzeptiere die ",
-				"termsLink":"Nutzungsbedingungen.",
+				"terms": "Ich akzeptiere die ",
+				"termsLink": "Nutzungsbedingungen.",
 				"signup": "Registrieren",
 				"account": "Hast du bereits ein Konto?",
 				"login": "Einloggen"
@@ -772,7 +782,7 @@
 				"country": "Land",
 				"email": "E-Mail-Addresse",
 				"phone": "Telefon",
-				"description":"Beschreibung",
+				"description": "Beschreibung",
 				"currency": "Währung",
 				"currencyPh": "Symbol",
 				"paymentMethods": "Zahlungsmethoden",
@@ -863,7 +873,7 @@
 				"personal": "Persönlich",
 				"business": "Geschäft",
 				"stores": "oder Ihre besuchten Geschäfte",
-				"reorder":"Neu anordnen"
+				"reorder": "Neu anordnen"
 			},
 			"business": {
 				"gotocart": "Zum Warenkorb",
@@ -885,7 +895,7 @@
 				"products": "Produkttypen:",
 				"copy": "Kopieren",
 				"categories": "Kategorien:",
-				"description":"Beschreibung:",
+				"description": "Beschreibung:",
 				"mTitle": "Geschäft löschen",
 				"mBody2": "Geschäft löschen, diese Aktion kann nicht rückgängig gemacht werden."
 			},
@@ -901,8 +911,8 @@
 				"price": "Preis",
 				"pricePh": "Verwenden Sie einen Punkt für Dezimalstellen",
 				"status": "Produktstatus",
-				"weight":"Gewicht",
-				"weightPh":"Gewicht in grams",
+				"weight": "Gewicht",
+				"weightPh": "Gewicht in grams",
 				"active": "Aktiv",
 				"paused": "Pausiert",
 				"categories": "Produktkategorien",
@@ -910,7 +920,12 @@
 				"ingredients": "Produktzutaten",
 				"ingredientsPh": "Verwenden Sie ',' um die Zutat hinzuzufügen",
 				"btnCreate": "Produkt erstellen",
-				"btnEdit": "Produkt bearbeiten"
+				"btnEdit": "Produkt bearbeiten",
+				"modalTitle": "Empfehlung zum Hochladen von Produktfotos",
+				"modalText1": "Hallo! Damit deine Produkte auf Foodie besser aussehen, empfehlen wir dir, quadratische Fotos (1:1) und vorzugsweise ohne Hintergrund zu verwenden.",
+				"modalText2": "Denke daran, dass ein qualitativ hochwertiges Bild einen großen Unterschied in der Wahrnehmung deiner Produkte durch die Kunden machen kann. Vielen Dank, dass du Teil unserer Community bist!.",
+				"modalCheckbox": "Diese Nachricht nicht erneut anzeigen.",
+				"modalBtn": "Verstanden"
 			},
 			"businessOrders": {
 				"hi": "Hallo",

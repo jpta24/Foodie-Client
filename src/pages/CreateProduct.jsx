@@ -3,7 +3,8 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Form, InputGroup, Button } from 'react-bootstrap';
+import { Form, InputGroup, Button, Modal } from 'react-bootstrap';
+import { HiOutlineInformationCircle } from 'react-icons/hi';
 
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
@@ -34,7 +35,7 @@ const CreateProduct = () => {
 		ingredients: [],
 		categories: ['General'],
 		status: 'active',
-		weight:''
+		weight: '',
 	};
 
 	const [product, setProduct] = useState(initialState);
@@ -78,6 +79,9 @@ const CreateProduct = () => {
 		setProduct({ ...product, [field]: string });
 		setCurrentProductImg(string);
 	};
+	const [showModal, setShowModal] = useState(false);
+
+	const handleCloseModal = () => setShowModal(false);
 
 	if (business !== '') {
 		if (business.owner !== user._id) {
@@ -167,7 +171,11 @@ const CreateProduct = () => {
 									controlId='formBasicProductName'
 								>
 									<Form.Label>
-										{languages[0][lang].createProduct.image}
+										{languages[0][lang].createProduct.image}{' '}
+										<HiOutlineInformationCircle
+											style={{ color: 'red', cursor: 'pointer' }}
+											onClick={() => setShowModal(true)}
+										/>
 									</Form.Label>
 									<Form.Control
 										type='file'
@@ -265,44 +273,42 @@ const CreateProduct = () => {
 							</div>
 							<div className='d-flex justify-content-between'>
 								<Form.Group className='mb-3 col-md-5 d-flex flex-column align-items-start'>
-								<Form.Label>
-									{languages[0][lang].createProduct.status}
-								</Form.Label>
-								<Form.Control
-									as='select'
-									value={product.status}
-									onChange={(e) => {
-										setProduct({ ...product, status: e.currentTarget.value });
-									}}
-								>
-									<option value='active'>
-										{languages[0][lang].createProduct.active}
-									</option>
-									<option value='paused'>
-										{languages[0][lang].createProduct.paused}
-									</option>
-								</Form.Control>
-							</Form.Group>
-							<Form.Group className='mb-3 col-md-6 d-flex flex-column align-items-start'>
-								<Form.Label>
-									{languages[0][lang].createProduct.weight}
-								</Form.Label><Form.Control
-											type='number'
-											placeholder={languages[0][lang].createProduct.weightPh}
-											name='weight'
-											value={product.weight}
-											onChange={(e) => {
-												setProduct({
-													...product,
-													[e.target.name]: e.target.value,
-												});
-											}}
-										/>
-							</Form.Group>
-							
+									<Form.Label>
+										{languages[0][lang].createProduct.status}
+									</Form.Label>
+									<Form.Control
+										as='select'
+										value={product.status}
+										onChange={(e) => {
+											setProduct({ ...product, status: e.currentTarget.value });
+										}}
+									>
+										<option value='active'>
+											{languages[0][lang].createProduct.active}
+										</option>
+										<option value='paused'>
+											{languages[0][lang].createProduct.paused}
+										</option>
+									</Form.Control>
+								</Form.Group>
+								<Form.Group className='mb-3 col-md-6 d-flex flex-column align-items-start'>
+									<Form.Label>
+										{languages[0][lang].createProduct.weight}
+									</Form.Label>
+									<Form.Control
+										type='number'
+										placeholder={languages[0][lang].createProduct.weightPh}
+										name='weight'
+										value={product.weight}
+										onChange={(e) => {
+											setProduct({
+												...product,
+												[e.target.name]: e.target.value,
+											});
+										}}
+									/>
+								</Form.Group>
 							</div>
-							
-							
 
 							<Form.Group
 								className='mb-3 d-flex flex-column align-items-start'
@@ -448,6 +454,28 @@ const CreateProduct = () => {
 						</Form>
 					</div>
 				</div>
+				<Modal
+					show={showModal}
+					onHide={handleCloseModal}
+					backdrop='static'
+					keyboard={false}
+				>
+					<Modal.Header closeButton>
+						<Modal.Title>
+							{languages[0][lang].createProduct.modalTitle}
+						</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{languages[0][lang].createProduct.modalText1} <br />
+						<br />
+						{languages[0][lang].createProduct.modalText2}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant='primary' onClick={handleCloseModal}>
+							{languages[0][lang].createProduct.modalBtn}
+						</Button>
+					</Modal.Footer>
+				</Modal>
 			</div>
 		);
 	}

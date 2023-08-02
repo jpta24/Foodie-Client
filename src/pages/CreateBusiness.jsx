@@ -2,7 +2,8 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, Form, InputGroup, Modal } from 'react-bootstrap';
+import { HiOutlineInformationCircle } from 'react-icons/hi';
 
 import menuCategories from '../data/categories.json';
 import iconsCloud from '../data/icons.json';
@@ -204,6 +205,9 @@ const CreateBusiness = () => {
 			membership: { ...preBusiness.membership, plan: string },
 		});
 	};
+	const [showModal, setShowModal] = useState(false);
+
+	const handleCloseModal = () => setShowModal(false);
 	return (
 		<div className='container'>
 			<h1>{languages[0][lang].createBusiness.title}</h1>
@@ -237,7 +241,10 @@ const CreateBusiness = () => {
 								controlId='formBasicBusinessName'
 							>
 								<Form.Label>
-									{languages[0][lang].createBusiness.logo}
+									{languages[0][lang].createBusiness.logo} <HiOutlineInformationCircle
+											style={{ color: 'red', cursor: 'pointer' }}
+											onClick={() => setShowModal(true)}
+										/>
 								</Form.Label>
 								<Form.Control
 									type='file'
@@ -943,6 +950,28 @@ const CreateBusiness = () => {
 					</Form>
 				</div>
 			</div>
+			<Modal
+					show={showModal}
+					onHide={handleCloseModal}
+					backdrop='static'
+					keyboard={false}
+				>
+					<Modal.Header closeButton>
+						<Modal.Title>
+							{languages[0][lang].createProduct.modalTitle}
+						</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{languages[0][lang].createProduct.modalText1} <br />
+						<br />
+						{languages[0][lang].createProduct.modalText2}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant='primary' onClick={handleCloseModal}>
+							{languages[0][lang].createProduct.modalBtn}
+						</Button>
+					</Modal.Footer>
+				</Modal>
 		</div>
 	);
 };
