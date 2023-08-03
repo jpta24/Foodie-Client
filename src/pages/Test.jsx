@@ -1,9 +1,9 @@
-import CookiesComponent from '../components/CookiesComponent';
+import Sidebar from '../components/Sidebar';
 
 function Test() {
 	return (
 		<div className=''>
-			<CookiesComponent />
+			<Sidebar />
 		</div>
 	);
 }
