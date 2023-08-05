@@ -661,6 +661,19 @@ color: red;
 /* ////////////////////   SIDEBAR   //////////////////////////////// */
 .sidebar-container {
  width:260px;
+ min-height: calc(100vh - 66px);
+ background-color: black;
+}
+
+.sidebar-active {
+	border-bottom: 2px solid #0B5ED7;
+	background-color: black
+}
+
+.sidebar-page-active {
+	background-color: #0B5ED7;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
   
 

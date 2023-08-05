@@ -321,6 +321,10 @@
 				"freeTrialBtn": "1 month Free Trial",
 				"actualPlan": "Actual Plan"
 			},
+			"sidebar":{
+				"personal":["Personal","Dashboard","Profile","Cart","Orders","Saved Business","Saved Products"],
+				"business":["Business","Dashboard","Store","Memberships","Orders","Products","Employees","Billing","Create Business"]
+			},
 			"cloudinaryError": "Error while uploading the file:"
 		},
 		"Es": {
