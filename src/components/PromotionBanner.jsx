@@ -19,6 +19,7 @@ const PromotionBanner = ({
 	promDnd,
 	handlePromoDragEnd,
 }) => {
+	console.log();
 	return (
 		<DndContext
 			collisionDetection={closestCenter}
@@ -29,7 +30,7 @@ const PromotionBanner = ({
 				style={maxHeight ? { maxHeight: '100vh' } : { display: 'flex' }}
 			>
 				<SortableContext
-					items={promDnd}
+					items={promDnd || businessHighlightedProducts.highlightedProducts}
 					strategy={horizontalListSortingStrategy}
 				>
 					<span>{languages[0][lang].business.bestSeller}</span>

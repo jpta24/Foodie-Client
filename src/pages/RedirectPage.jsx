@@ -23,7 +23,8 @@ const RedirectPage = () => {
 	const [buzDnd, setBuzDnd] = useState('');
 	const [dnd, setDnd] = useState(false);
 	useEffect(() => {
-		const businessStored = localStorage.getItem('businesses')
+		if(userID){
+			const businessStored = localStorage.getItem('businesses')
 			? JSON.parse(localStorage.getItem('businesses'))
 			: [];
 		const url = `users/visitedBusiness/${userID._id}`;
@@ -32,8 +33,9 @@ const RedirectPage = () => {
 			setBuzDnd(response.data.visitedBusiness);
 		};
 		putAPI(url, businessStored, thenFunction);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [userID]);
 
 	const handleDragEnd = (event) => {
 		const { active, over } = event;

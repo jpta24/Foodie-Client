@@ -102,7 +102,7 @@
 			"dashboard": {
 				"title": "Dashboard",
 				"btnBusiness": "Business",
-				"btnAddBusiness": "+ Business",
+				"btnAddBusiness": "New Business",
 				"btnCart": "Cart",
 				"btnOrders": "Orders",
 				"btnSavedBusiness": "♥ Business",
@@ -429,7 +429,7 @@
 			"dashboard": {
 				"title": "Tablero",
 				"btnBusiness": "Negocios",
-				"btnAddBusiness": "+ Negocio",
+				"btnAddBusiness": "Nuevo Negocio",
 				"btnCart": "Carrito",
 				"btnOrders": "Pedidos",
 				"btnSavedBusiness": "♥ Negocios",
@@ -751,7 +751,7 @@
 			"dashboard": {
 				"title": "Dashboard",
 				"btnBusiness": "Unternehmen",
-				"btnAddBusiness": "+ Unternehmen",
+				"btnAddBusiness": "Neu Unternehmen",
 				"btnCart": "Warenkorb",
 				"btnOrders": "Bestellungen",
 				"btnSavedBusiness": "♥ Unternehmen",

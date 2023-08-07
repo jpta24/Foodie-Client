@@ -660,7 +660,8 @@ color: red;
 
 /* ////////////////////   SIDEBAR   //////////////////////////////// */
 .sidebar-container {
- width:260px;
+ min-width:260px;
+ max-width: 260px;
  min-height: calc(100vh - 66px);
  background-color: black;
 }
