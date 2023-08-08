@@ -56,7 +56,7 @@ const EditProfilePage = () => {
 	};
 
 	return (
-		<div className='container'>
+		<div className='container content-container'>
 			<Row className='d-flex flex-row justify-content-center pt-3'>
 				<div className='col-3 col-md-2 justify-content-center align-items-center mx-2'>
 					<img

@@ -6,7 +6,8 @@ import policy from '../data/policies.json';
 const TermsPage = () => {
 	const { language: lang } = useContext(AuthContext);
 	return (
-		<div className='container text-start my-5 mx-auto col-md-8 col-10'>
+		<div className='container-fluid  content-container'>
+			<div className='text-start my-5 mx-auto col-md-8 col-10'>
 			<h1 className='my-4'>{policy[0][lang].terms.title}</h1>
 			<p>{policy[0][lang].terms.intro}</p>
 			<hr />
@@ -60,6 +61,7 @@ const TermsPage = () => {
 			<hr />
 			<p className='m-5'>{policy[0][lang].terms.footer}</p>
 			<h4 className='m-5'>{policy[0][lang].terms.thanks} </h4>
+			</div>
 		</div>
 	);
 };

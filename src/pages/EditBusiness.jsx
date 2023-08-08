@@ -119,7 +119,7 @@ const EditBusiness = () => {
 
 	if (business) {
 		return (
-			<div className='container'>
+			<div className='container content-container'>
 				<h1>{languages[0][lang].editBusiness.title}</h1>
 				<div className='row justify-content-center p-4 mb-4'>
 					<div className='col-md-8 '>

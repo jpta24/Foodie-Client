@@ -68,7 +68,7 @@ const EditProduct = () => {
 		}
 
 		return (
-			<div className='container-fluid'>
+			<div className='container-fluid content-container'>
 				<div className='row p-0'>
 					<div
 						className='d-flex flex-column align-items-center justify-content-between'

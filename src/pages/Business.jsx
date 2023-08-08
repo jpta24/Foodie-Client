@@ -256,7 +256,7 @@ const Business = () => {
 		};
 
 		return (
-			<div className={`container-fluid pb-3`}>
+			<div className={`container-fluid pb-3 content-container`}>
 				<div className='row p-0'>
 					<div
 						className='d-flex flex-column align-items-center justify-content-between'

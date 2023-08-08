@@ -209,7 +209,7 @@ const CreateBusiness = () => {
 
 	const handleCloseModal = () => setShowModal(false);
 	return (
-		<div className='container'>
+		<div className='container content-container'>
 			<h1>{languages[0][lang].createBusiness.title}</h1>
 			<div className='row justify-content-center p-4 mb-4'>
 				<div className=''>

@@ -83,7 +83,7 @@ const ProfilePage = () => {
 
 
   return (
-    <div className='container'>
+    <div className='container content-container'>
         <Row className='d-flex flex-row justify-content-center pt-3'>
             <div className='col-3 col-md-2 justify-content-center align-items-center mx-2'>
                 <img src={user.avatarUrl || iconsCloud[0].userDefault} alt='altProfile' className='w-100 rounded-circle border border-dark p-2 d-block'/>

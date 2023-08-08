@@ -62,7 +62,7 @@ function MembershipPage() {
 			navigate('/');
 		}
 		return (
-			<div className='container'>
+			<div className='container content-container'>
 				<MembershipTable btnFunction={openModal} business={business} />
 				<Modal
 					show={show}

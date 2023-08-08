@@ -169,7 +169,7 @@ const CartPage = () => {
 		// console.log(Object.entries(cart[0].product.business.format).map((elem)=>{return (elem[0]==='delivery'?[elem[0],elem[1].delivery]:elem)}));
 
 		return (
-			<div className='container p-0'>
+			<div className='container p-0 content-container'>
 				<div className='row d-flex flex-row rounded border border-dark'>
 					<div className='col-12 col-md-7'>
 						<div className='col-11 d-flex flex-column p-2 my-2 col-12 text-start'>
