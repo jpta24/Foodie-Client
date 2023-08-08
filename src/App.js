@@ -54,8 +54,11 @@ function App() {
 		'/products',
 		'/create-product',
 		'/edit-product',
-		'/business-orders','/employees','/billing','my-business',
-		'/test'
+		'/business-orders',
+		'/employees',
+		'/billing',
+		'/my-business',
+		'/test',
 	];
 	const checkShowSidebar = () => {
 		setShowSidebar(
@@ -75,7 +78,7 @@ function App() {
 				<ToastContainer className='my-5 ztoast' />
 			</div>
 			<div className='d-flex'>
-				{showSidebar && <Sidebar routes={routesWithSidebar}/>}
+				{showSidebar && <Sidebar routes={routesWithSidebar} />}
 				<Routes>
 					<Route exact path='/' element={<HomePage />} />
 					<Route exact path='/about-us' element={<About />} />
@@ -142,7 +145,7 @@ function App() {
 							</IsPrivate>
 						}
 					/>
-					
+
 					<Route
 						exact
 						path='/cart/:userID'
@@ -161,7 +164,7 @@ function App() {
 							</IsPrivate>
 						}
 					/>
-					
+
 					<Route
 						exact
 						path='/redirect'
@@ -179,9 +182,19 @@ function App() {
 								<RedirectPage />
 							</IsPrivate>
 						}
-					/><Route
+					/>
+					<Route
 						exact
 						path='/business-dashboard/:businessName'
+						element={
+							<IsPrivate>
+								<BusinessView />
+							</IsPrivate>
+						}
+					/>
+					<Route
+						exact
+						path='/my-business/:businessName'
 						element={
 							<IsPrivate>
 								<BusinessView />

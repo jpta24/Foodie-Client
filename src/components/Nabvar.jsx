@@ -1,16 +1,29 @@
 import { Button, Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
-import { useContext } from 'react';
+import { useContext,useEffect,useState } from 'react';
 import { AuthContext } from '../context/auth.context';
 import { CartContext } from '../context/cart.context';
 
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import SwitchMode from './SwitchDarkMode';
+import { getAPI } from '../utils/api';
 
 const Nabvar2 = () => {
 	const { isLoggedIn, logOutUser, user, language, changeLanguage,isDark,handleMode } =
 		useContext(AuthContext);
 	const { cart } = useContext(CartContext);
+	const [business, setBusiness] = useState(false)
+
+	useEffect(() => {
+		if (user) {
+			const url = `users/navbar/${user._id}`;
+			const thenFunction = (response) => {
+				setBusiness(response.data.business);
+			};
+			getAPI(url, thenFunction);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user]);
 
 	const titleLang =
 		language === 'En' ? 'En 🇬🇧' : language === 'De' ? 'De 🇩🇪' : 'Es 🇪🇸';
@@ -67,7 +80,7 @@ const Nabvar2 = () => {
 						</div>
 						{isLoggedIn && (
 							<>
-								<Nav.Link href={`/user-dashboard/${user._id}`}>
+								<Nav.Link href={business ? `/business-dashboard/${business.name.split(' ').join('-')}`:`/user-dashboard/${user._id}`}>
 									{languages[0][language].navbar.dashboard} 📉
 								</Nav.Link>
 								<Button

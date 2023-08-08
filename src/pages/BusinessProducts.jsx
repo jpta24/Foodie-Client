@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Modal, Button } from 'react-bootstrap';
 import languages from '../data/language.json';
 
-import iconsCloud from '../data/icons.json';
+// import iconsCloud from '../data/icons.json';
 import Loading from '../components/Loading';
 import { deleteAPI, getAPI, putAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
@@ -179,11 +179,11 @@ const BusinessProducts = () => {
 						}}
 					>
 						<div className='d-flex col-12 justify-content-start'>
-							<Link className='m-2' to={`/view-business/${businessNameEncoded}`}>
+							{/* <Link className='m-2' to={`/view-business/${businessNameEncoded}`}>
 								<span className='shadow m-2 '>
 									<img src={iconsCloud[0].backIcon} alt='backIcon' width={35} />
 								</span>
-							</Link>
+							</Link> */}
 						</div>
 						<div className='d-flex justify-content-center align-items-end'>
 							<div
@@ -317,7 +317,7 @@ const BusinessProducts = () => {
 		);
 	} else {
 		return (
-			<div>
+			<div className='flex-grow-1'>
 				<Loading />
 			</div>
 		);

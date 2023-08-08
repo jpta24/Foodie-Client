@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import { v4 as uuidv4 } from 'uuid';
 
+import { IoCloseSharp } from 'react-icons/io5';
 import { MdOutlineDashboard } from 'react-icons/md';
 import {
 	RiTableLine,
@@ -16,6 +17,7 @@ import {
 import { RxDashboard } from 'react-icons/rx';
 import { FaRegUserCircle, FaUsers } from 'react-icons/fa';
 import { BsBookmarkHeart } from 'react-icons/bs';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
@@ -25,7 +27,6 @@ const Sidebar = ({ routes }) => {
 	const { user: userID, language: lang } = useContext(AuthContext);
 	const [user, setUser] = useState('');
 
-	////////////////////GET THE DATA
 	useEffect(() => {
 		if (userID) {
 			const url = `users/sidebar/${userID._id}`;
@@ -37,7 +38,6 @@ const Sidebar = ({ routes }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userID]);
 
-	// console.log(routes);
 	const [dashboard, setDashboard] = useState('Personal');
 	const [actualState, setActualState] = useState('Dashboard');
 
@@ -113,9 +113,10 @@ const Sidebar = ({ routes }) => {
 			},
 		];
 		const newState = pages.filter((page) => page.pages.includes(actualPage))[0];
-		console.log(newState);
-		setDashboard(newState.dashboard);
-		setActualState(newState.state);
+		if(newState){
+			setDashboard(newState.dashboard);
+			setActualState(newState.state);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [location.pathname]);
 
@@ -154,7 +155,7 @@ const Sidebar = ({ routes }) => {
 			icon: <RiStore2Line className='fs-4' />,
 			text: business.store,
 			field: 'Store',
-			link: `/my-store/${
+			link: `/my-business/${
 				user.business ? user.business.name.split(' ').join('-') : ''
 			}`,
 		},
@@ -274,6 +275,9 @@ const Sidebar = ({ routes }) => {
 					{personal.personal}
 				</Link>
 			</div>
+			{window.innerWidth < 600 && <div>
+			<IoCloseSharp />
+			</div>}
 			{dashboard === 'Business' ? (
 				<div className='d-flex flex-column justify-content-center align-items-center'>
 					<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>

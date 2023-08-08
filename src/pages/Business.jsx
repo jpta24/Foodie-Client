@@ -447,7 +447,7 @@ const Business = () => {
 		);
 	} else {
 		return (
-			<div>
+			<div className='flex-grow-1'>
 				<Loading />
 			</div>
 		);

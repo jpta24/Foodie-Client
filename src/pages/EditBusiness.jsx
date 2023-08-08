@@ -119,7 +119,7 @@ const EditBusiness = () => {
 
 	if (business) {
 		return (
-			<div className='container content-container'>
+			<div className='container-fluid content-container'>
 				<h1>{languages[0][lang].editBusiness.title}</h1>
 				<div className='row justify-content-center p-4 mb-4'>
 					<div className='col-md-8 '>
@@ -864,7 +864,11 @@ const EditBusiness = () => {
 			</div>
 		);
 	} else {
-		<Loading />;
+		return (
+			<div className='flex-grow-1'>
+				<Loading />
+			</div>
+		);
 	}
 };
 

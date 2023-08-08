@@ -435,9 +435,9 @@ const EditProduct = () => {
 		);
 	}
 	return (
-		<div>
-			<Loading />
-		</div>
+		<div className='flex-grow-1'>
+				<Loading />
+			</div>
 	);
 };
 

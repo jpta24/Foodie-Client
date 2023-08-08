@@ -480,7 +480,7 @@ const CreateProduct = () => {
 		);
 	}
 	return (
-		<div>
+		<div className='flex-grow-1'>
 			<Loading />
 		</div>
 	);

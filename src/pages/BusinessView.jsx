@@ -7,9 +7,10 @@ import { Modal, Button } from 'react-bootstrap';
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 import { toast } from 'react-toastify';
-import BusinessViewCard from '../components/BusinessViewCard';
 
-import iconsCloud from '../data/icons.json';
+// import BusinessViewCard from '../components/BusinessViewCard';
+// import iconsCloud from '../data/icons.json';
+
 import languages from '../data/language.json';
 import Loading from '../components/Loading';
 import { getAPI, deleteAPI } from '../utils/api';
@@ -304,7 +305,7 @@ const BusinessView = () => {
 						<p className='text-start'>{business.description}</p>
 					</div>
 				</div>
-				{owner && (
+				{/* {owner && (
 					<div className='row d-flex flex-row my-2 justify-content-center'>
 						<div className='col-md-8 col-12 d-flex justify-content-center align-items-start flex-wrap'>
 							<BusinessViewCard
@@ -329,7 +330,7 @@ const BusinessView = () => {
 							/>
 						</div>
 					</div>
-				)}
+				)} */}
 
 				<Modal
 					show={show.show}
@@ -358,7 +359,7 @@ const BusinessView = () => {
 		);
 	} else {
 		return (
-			<div>
+			<div className='flex-grow-1'>
 				<Loading />
 			</div>
 		);
