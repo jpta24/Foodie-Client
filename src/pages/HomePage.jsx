@@ -35,7 +35,7 @@ function HomePage() {
 	const btnFunctionMembership = (string) => {
 		if (business.name) {
 			let businessNameEncoded = business.name.split(' ').join('-');
-			navigate(`/${businessNameEncoded}/memberships`);
+			navigate(`/memberships/${businessNameEncoded}`);
 		} else if (userID) {
 			navigate(`/create-business`);
 		} else {

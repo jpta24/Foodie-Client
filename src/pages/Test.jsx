@@ -9,7 +9,7 @@ function Test() {
 
 	// Determinar si la ruta actual coincide con las rutas que requieren el Sidebar
 	const checkShowSidebar = () => {
-		const routesWithSidebar = ['/dashboard', '/profile', '/cart', '/orders','/test'];
+		const routesWithSidebar = ['/user-dashboard', '/profile', '/cart', '/user-orders','/test'];
 		setShowSidebar(
 			routesWithSidebar.some((route) => location.pathname.includes(route))
 		);

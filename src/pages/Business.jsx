@@ -271,7 +271,7 @@ const Business = () => {
 						<div className='d-flex col-12 justify-content-start'></div>
 						<div className='d-flex justify-content-center align-items-end'>
 							<Link
-								to={`/${businessNameEncoded}/dashboard`}
+								to={`/view-business/${businessNameEncoded}`}
 								className='rounded-circle border border-dark bg-dark d-flex justify-content-center align-items-center'
 								style={{
 									height: '90px',
@@ -289,7 +289,7 @@ const Business = () => {
 							<div className='d-flex flex-column justify-content-center align-items-center'>
 								<div className='d-flex'>
 									<Link
-										to={`/${businessNameEncoded}/dashboard`}
+										to={`/view-business/${businessNameEncoded}`}
 										className='text-danger foodie-title h1'
 									>
 										{business.name}
@@ -434,7 +434,7 @@ const Business = () => {
 						<Button
 							variant='danger'
 							onClick={() => {
-								navigate(`/${businessNameEncoded}/memberships`);
+								navigate(`/memberships/${businessNameEncoded}`);
 							}}
 						>
 							{languages[0][lang].business.btnMembership}

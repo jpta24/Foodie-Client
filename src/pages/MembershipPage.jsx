@@ -37,7 +37,7 @@ function MembershipPage() {
 		const url = `business/membership/${businessNameEncoded}`;
 		const thenFunction = (response) => {
 			toastifySuccess(`${languages[0][lang].tostify.updateMembership}`);
-			navigate(`/${businessNameEncoded}/dashboard`);
+			navigate(`/view-business/${businessNameEncoded}`);
 		};
 		const errorFunction = (error) => {
 			toastifyError(`${languages[0][lang].tostify.errorMembership}`);

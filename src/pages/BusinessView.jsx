@@ -53,7 +53,7 @@ const BusinessView = () => {
 	const deleteBusiness = () => {
 		const url = `business/delete/${show.businessID}`;
 		const thenFunction = (response) => {
-			navigate(`/dashboard/${user._id}`);
+			navigate(`/user-dashboard/${user._id}`);
 		};
 		const errorFunction = (error) => {
 			toastifyError(error.response.data.message);
@@ -318,12 +318,12 @@ const BusinessView = () => {
 								src={iconsCloud[0].employeeManage}
 							/>
 							<BusinessViewCard
-								href={`/${businessNameEncoded}/orders`}
+								href={`/business-orders/${businessNameEncoded}`}
 								button='Orders'
 								src={iconsCloud[0].orders}
 							/>
 							<BusinessViewCard
-								href={`/${businessNameEncoded}/memberships`}
+								href={`/memberships/${businessNameEncoded}`}
 								button='Memberships'
 								src={iconsCloud[0].memberships}
 							/>

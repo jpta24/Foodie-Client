@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,11 +17,11 @@ import { RxDashboard } from 'react-icons/rx';
 import { FaRegUserCircle, FaUsers } from 'react-icons/fa';
 import { BsBookmarkHeart } from 'react-icons/bs';
 
-import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
 
-const Sidebar = () => {
+const Sidebar = ({ routes }) => {
+	const location = useLocation();
 	const { user: userID, language: lang } = useContext(AuthContext);
 	const [user, setUser] = useState('');
 
@@ -35,6 +36,88 @@ const Sidebar = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userID]);
+
+	// console.log(routes);
+	const [dashboard, setDashboard] = useState('Personal');
+	const [actualState, setActualState] = useState('Dashboard');
+
+	useEffect(() => {
+		const actualPage = routes.filter((route) =>
+			location.pathname.includes(route)
+		)[0];
+		const pages = [
+			{
+				state: 'Dashboard',
+				pages: ['/user-dashboard'],
+				dashboard: 'Personal',
+			},
+			{
+				state: 'Profile',
+				pages: ['/profile', '/edit-profile'],
+				dashboard: 'Personal',
+			},
+			{
+				state: 'Cart',
+				pages: ['/cart'],
+				dashboard: 'Personal',
+			},
+			{
+				state: 'Orders',
+				pages: ['/user-orders'],
+				dashboard: 'Personal',
+			},
+			{
+				state: 'SavedBusiness',
+				pages: ['/saved-Products'],
+				dashboard: 'Personal',
+			},
+			{
+				state: 'SavedBusiness',
+				pages: ['/saved-business'],
+				dashboard: 'Personal',
+			},
+			{
+				state: 'Dashboard',
+				pages: ['/business-dashboard'],
+				dashboard: 'Business',
+			},
+			{
+				state: 'Store',
+				pages: ['/my-business', '/edit-business'],
+				dashboard: 'Business',
+			},
+			{
+				state: 'Memberships',
+				pages: ['/memberships'],
+				dashboard: 'Business',
+			},
+			{
+				state: 'Orders',
+				pages: ['/business-orders'],
+				dashboard: 'Business',
+			},
+			{
+				state: 'Products',
+				pages: ['/products', '/create-product', '/edit-product'],
+				dashboard: 'Business',
+			},
+			{
+				state: 'Employess',
+				pages: ['/employees'],
+				dashboard: 'Business',
+			},
+			{
+				state: 'Billing',
+				pages: ['/billing'],
+				dashboard: 'Business',
+			},
+		];
+		const newState = pages.filter((page) => page.pages.includes(actualPage))[0];
+		console.log(newState);
+		setDashboard(newState.dashboard);
+		setActualState(newState.state);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [location.pathname]);
 
 	const personal = {
 		personal: languages[0][lang].sidebar.personal[0],
@@ -58,44 +141,62 @@ const Sidebar = () => {
 		createBusiness: languages[0][lang].sidebar.business[8],
 	};
 
-	const [dashboard, setDashboard] = useState('Personal');
-	const [actualState, setActualState] = useState('Dashboard');
-
 	const buzList = [
 		{
 			icon: <MdOutlineDashboard className='fs-4' />,
 			text: business.dashboard,
 			field: 'Dashboard',
+			link: `/business-dashboard/${
+				user.business ? user.business.name.split(' ').join('-') : ''
+			}`,
 		},
 		{
 			icon: <RiStore2Line className='fs-4' />,
 			text: business.store,
 			field: 'Store',
+			link: `/my-store/${
+				user.business ? user.business.name.split(' ').join('-') : ''
+			}`,
 		},
 		{
 			icon: <RiTableLine className='fs-4' />,
 			text: business.memberships,
 			field: 'Memberships',
+			link: `/memberships/${
+				user.business ? user.business.name.split(' ').join('-') : ''
+			}`,
 		},
 		{
 			icon: <RiShoppingBagLine className='fs-4' />,
 			text: business.orders,
 			field: 'Orders',
+			link: `/business-orders/${
+				user.business ? user.business.name.split(' ').join('-') : ''
+			}`,
 		},
 		{
 			icon: <RxDashboard className='fs-4' />,
 			text: business.products,
 			field: 'Products',
+			link: `${
+				user.business ? user.business.name.split(' ').join('-') : ''
+			}/products`,
 		},
 		{
 			icon: <FaUsers className='fs-4' />,
 			text: business.employees,
 			field: 'Employees',
+			link: `/employees/${
+				user.business ? user.business.name.split(' ').join('-') : ''
+			}`,
 		},
 		{
 			icon: <RiBillLine className='fs-4' />,
 			text: business.billing,
 			field: 'Billing',
+			link: `/billing/${
+				user.business ? user.business.name.split(' ').join('-') : ''
+			}`,
 		},
 	];
 	const personalList = [
@@ -103,41 +204,48 @@ const Sidebar = () => {
 			icon: <MdOutlineDashboard className='fs-4' />,
 			text: personal.dashboard,
 			field: 'Dashboard',
+			link: `/user-dashboard/${user._id}`,
 		},
 		{
 			icon: <FaRegUserCircle className='fs-4' />,
 			text: personal.profile,
 			field: 'Profile',
+			link: `/profile/${user._id}`,
 		},
 		{
 			icon: <RiShoppingCartLine className='fs-4' />,
 			text: personal.cart,
 			field: 'Cart',
+			link: `/cart/${user._id}`,
 		},
 		{
 			icon: <RiShoppingBagLine className='fs-4' />,
 			text: personal.orders,
 			field: 'Orders',
+			link: `/user-orders/${user._id}`,
 		},
 		{
 			icon: <RiHomeHeartLine className='fs-4' />,
 			text: personal.savedBusiness,
 			field: 'SavedBusiness',
+			link: `/redirect/${user._id}`,
 		},
 		{
 			icon: <BsBookmarkHeart className='fs-4' />,
 			text: personal.savedProducts,
 			field: 'SavedProducts',
+			link: `/redirect/${user._id}`,
 		},
 	];
 	// console.log(user)
 	return (
 		<div className='sidebar-container d-flex flex-column text-light'>
-			<div
-				className='d-flex col-12 justify-content-center h6'
-				style={{ cursor: 'pointer' }}
-			>
-				<div
+			<div className='d-flex col-12 justify-content-center h6'>
+				<Link
+					to={`/business-dashboard/${
+						user.business ? user.business.name.split(' ').join('-') : ''
+					}`}
+					style={{ cursor: 'pointer', color: 'white' }}
 					className={`col-6 py-3 ${
 						dashboard === 'Business' && 'sidebar-active bg-dark'
 					}`}
@@ -149,8 +257,10 @@ const Sidebar = () => {
 					}}
 				>
 					{business.business}
-				</div>
-				<div
+				</Link>
+				<Link
+					to={`/user-dashboard/${user._id}`}
+					style={{ cursor: 'pointer', color: 'white' }}
 					className={`col-6 py-3 ${
 						dashboard === 'Personal' && 'sidebar-active bg-dark'
 					}`}
@@ -162,11 +272,11 @@ const Sidebar = () => {
 					}}
 				>
 					{personal.personal}
-				</div>
+				</Link>
 			</div>
 			{dashboard === 'Business' ? (
 				<div className='d-flex flex-column justify-content-center align-items-center'>
-					<div className='d-flex flex-column justify-content-center align-items-end col-12 mt-3'>
+					<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>
 						{user.business ? (
 							<>
 								<div
@@ -176,29 +286,28 @@ const Sidebar = () => {
 										width: '80px',
 									}}
 								>
-									<img
-										src={user.business.logoUrl}
-										alt='altLogo'
-										width={65}
-									/>
+									<img src={user.business.logoUrl} alt='altLogo' width={65} />
 								</div>
-								<h5 className='align-self-center my-3 foodie-title text-danger'>{user.business.name}</h5>
+								<h5 className='align-self-center my-3 foodie-title text-danger'>
+									{user.business.name}
+								</h5>
 
 								{buzList.map((elem) => {
 									return (
-										<div
-											className={`py-2 ps-2 col-11 text-start ${
+										<Link
+											to={elem.link}
+											className={`py-2 ps-2 col-10 text-start ${
 												actualState === elem.field &&
 												dashboard === 'Business' &&
 												'sidebar-page-active'
 											}`}
-											style={{ cursor: 'pointer' }}
+											style={{ cursor: 'pointer', color: 'white' }}
 											onClick={() => setActualState(elem.field)}
 											key={uuidv4()}
 										>
 											<span>{elem.icon}</span>
 											<span className='h6 mx-3'>{elem.text}</span>
-										</div>
+										</Link>
 									);
 								})}
 							</>
@@ -215,7 +324,7 @@ const Sidebar = () => {
 								</div>
 
 								<div
-									className={`py-2 ps-2 col-11 text-start mt-5 ${
+									className={`py-2 ps-2 col-10 text-start mt-5 ${
 										dashboard === 'Business' && 'sidebar-page-active'
 									}`}
 									style={{ cursor: 'pointer' }}
@@ -233,7 +342,7 @@ const Sidebar = () => {
 				</div>
 			) : (
 				<div className='d-flex flex-column justify-content-center align-items-center'>
-					<div className='d-flex flex-column justify-content-center align-items-end col-12 mt-3'>
+					<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>
 						<div
 							className='rounded-circle border align-self-center border-dark bg-dark d-flex justify-content-center align-items-center'
 							style={{
@@ -247,19 +356,20 @@ const Sidebar = () => {
 
 						{personalList.map((elem) => {
 							return (
-								<div
-									className={`py-2 ps-2 col-11 text-start ${
+								<Link
+									to={elem.link}
+									className={`py-2 ps-2 col-10 text-start ${
 										actualState === elem.field &&
 										dashboard === 'Personal' &&
 										'sidebar-page-active'
 									}`}
-									style={{ cursor: 'pointer' }}
+									style={{ cursor: 'pointer', color: 'white' }}
 									onClick={() => setActualState(elem.field)}
 									key={uuidv4()}
 								>
 									<span>{elem.icon}</span>
 									<span className='h6 mx-3'>{elem.text}</span>
-								</div>
+								</Link>
 							);
 						})}
 					</div>

@@ -68,7 +68,7 @@ const RedirectPage = () => {
 						<h4 className='col-12'>{languages[0][lang].redirect.dashboard}</h4>
 						<Link
 							className='card cardBg col-4 mx-1 my-2 p-1  mx-md-5 col-md-8'
-							to={`/dashboard/${user._id}`}
+							to={`/user-dashboard/${user._id}`}
 						>
 							<Card.Img
 								className='p-1'
@@ -82,7 +82,7 @@ const RedirectPage = () => {
 						{user.business && (
 							<Link
 								className='card cardBg col-4 mx-1 my-2 p-1  mx-md-5 col-md-8'
-								to={`/${user.business.name}/dashboard`}
+								to={`/view-business/${user.business.name}`}
 							>
 								<Card.Img
 									className='p-2'

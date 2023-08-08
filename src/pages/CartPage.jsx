@@ -140,7 +140,7 @@ const CartPage = () => {
 				if (buzs.length > 1) {
 					setShow(true);
 				} else {
-					navigate(`/orders/${user._id}`);
+					navigate(`/user-orders/${user._id}`);
 				}
 			};
 			const errorFunction = (error) => {
@@ -452,7 +452,7 @@ const CartPage = () => {
 						<Button variant='secondary' onClick={handleClose}>
 							{languages[0][lang].cart.btnKeep}
 						</Button>
-						<Button variant='danger' href={`/orders/${user._id}`}>
+						<Button variant='danger' href={`/user-orders/${user._id}`}>
 							{languages[0][lang].cart.btnOrders}
 						</Button>
 					</Modal.Footer>

@@ -321,9 +321,27 @@
 				"freeTrialBtn": "1 month Free Trial",
 				"actualPlan": "Actual Plan"
 			},
-			"sidebar":{
-				"personal":["Personal","Dashboard","Profile","Cart","Orders","Saved Business","Saved Products"],
-				"business":["Business","Dashboard","Store","Memberships","Orders","Products","Employees","Billing","Create Business"]
+			"sidebar": {
+				"personal": [
+					"Personal",
+					"Dashboard",
+					"Profile",
+					"Cart",
+					"Orders",
+					"Saved Business",
+					"Saved Products"
+				],
+				"business": [
+					"Business",
+					"Dashboard",
+					"Store",
+					"Memberships",
+					"Orders",
+					"Products",
+					"Employees",
+					"Billing",
+					"Create Business"
+				]
 			},
 			"cloudinaryError": "Error while uploading the file:"
 		},
@@ -647,6 +665,29 @@
 				"freeTrialBtn": "Prueba gratuita de 1 mes",
 				"actualPlan": "Plan actual"
 			},
+			"sidebar": {
+				"personal": [
+					"Personal",
+					"Dashboard",
+					"Perfil",
+					"Carrito",
+					"Órdenes",
+					"Negocios ❤",
+					"Productos ❤"
+				],
+				"business": [
+					"Negocio",
+					"Panel",
+					"Tienda",
+					"Membresías",
+					"Órdenes",
+					"Productos",
+					"Empleados",
+					"Facturación",
+					"Crear Negocio"
+				]
+			},
+
 			"cloudinaryError": "Error al cargar el archivo:"
 		},
 		"De": {
@@ -970,6 +1011,11 @@
 				"freeTrialBtn": "1 Monat kostenloser Test",
 				"actualPlan": "Aktueller Plan"
 			},
+			"sidebar": {
+				"personal": ["Persönlich", "Dashboard", "Profil", "Warenkorb", "Bestellungen", "❤ Unternehmen", "❤ Produkte"],
+				"business": ["Unternehmen", "Dashboard", "Geschäft", "Mitgliedschaften", "Bestellungen", "Produkte", "Mitarbeiter", "Abrechnung", "Unternehmen erstellen"]
+			}
+			,
 			"cloudinaryError": "Fehler beim Hochladen der Datei:"
 		}
 	}

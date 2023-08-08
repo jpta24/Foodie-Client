@@ -67,7 +67,7 @@ const Nabvar2 = () => {
 						</div>
 						{isLoggedIn && (
 							<>
-								<Nav.Link href={`/dashboard/${user._id}`}>
+								<Nav.Link href={`/user-dashboard/${user._id}`}>
 									{languages[0][language].navbar.dashboard} 📉
 								</Nav.Link>
 								<Button

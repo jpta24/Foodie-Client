@@ -148,7 +148,7 @@ const CreateBusiness = () => {
 				putAPI(urlII, requestBodyII, thenFunctionII, errorFunction);
 			};
 			const thenFunctionII = (response) => {
-				navigate(`/${businessNameEncoded}/dashboard`);
+				navigate(`/view-business/${businessNameEncoded}`);
 				toastifySuccess(`${languages[0][lang].tostify.newBusiness}`);
 			};
 
@@ -164,7 +164,7 @@ const CreateBusiness = () => {
 		// 	const url = `business`;
 		// 	const thenFunction = (response) => {
 		// 		const nameEncoded = response.data.business.name.split(' ').join('-');
-		// 		navigate(`/${nameEncoded}/dashboard`);
+		// 		navigate(`/view-business/${businessNameEncoded}`);
 		// 		toastifySuccess(`${languages[0][lang].tostify.newBusiness}`);
 		// 	};
 		// 	const errorFunction = (error) => {

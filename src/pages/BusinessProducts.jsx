@@ -179,7 +179,7 @@ const BusinessProducts = () => {
 						}}
 					>
 						<div className='d-flex col-12 justify-content-start'>
-							<Link className='m-2' to={`/${businessNameEncoded}/dashboard`}>
+							<Link className='m-2' to={`/view-business/${businessNameEncoded}`}>
 								<span className='shadow m-2 '>
 									<img src={iconsCloud[0].backIcon} alt='backIcon' width={35} />
 								</span>
@@ -306,7 +306,7 @@ const BusinessProducts = () => {
 						<Button
 							variant='danger'
 							onClick={() => {
-								navigate(`/${businessNameEncoded}/memberships`);
+								navigate(`/memberships/${businessNameEncoded}`);
 							}}
 						>
 							{languages[0][lang].business.btnMembership}

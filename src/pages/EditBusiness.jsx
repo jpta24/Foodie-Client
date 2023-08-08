@@ -85,7 +85,7 @@ const EditBusiness = () => {
 				putAPI(url, requestBodyII, thenFunctionII, errorFunction);
 			};
 			const thenFunctionII = (response) => {
-				navigate(`/${business.name.split(' ').join('-')}/dashboard`);
+				navigate(`/view-business/${business.name.split(' ').join('-')}`);
 				toastifySuccess(`${languages[0][lang].tostify.editBusiness}`);
 			};
 			const errorFunction = (error) => {
