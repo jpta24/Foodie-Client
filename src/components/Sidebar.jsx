@@ -41,6 +41,10 @@ const Sidebar = ({ routes }) => {
 	const [dashboard, setDashboard] = useState('Personal');
 	const [actualState, setActualState] = useState('Dashboard');
 
+	const [collapsed, setCollapsed] = useState(true);
+
+	const mobileView = window.innerWidth < 600;
+
 	useEffect(() => {
 		const actualPage = routes.filter((route) =>
 			location.pathname.includes(route)
@@ -113,7 +117,7 @@ const Sidebar = ({ routes }) => {
 			},
 		];
 		const newState = pages.filter((page) => page.pages.includes(actualPage))[0];
-		if(newState){
+		if (newState) {
 			setDashboard(newState.dashboard);
 			setActualState(newState.state);
 		}
@@ -240,7 +244,7 @@ const Sidebar = ({ routes }) => {
 	];
 	// console.log(user)
 	return (
-		<div className='sidebar-container d-flex flex-column text-light'>
+		<div className={`${!mobileView || !collapsed ? 'sidebar-container':'sidebar-collapsed'} d-flex flex-column text-light`}>
 			<div className='d-flex col-12 justify-content-center h6'>
 				<Link
 					to={`/business-dashboard/${
@@ -275,9 +279,16 @@ const Sidebar = ({ routes }) => {
 					{personal.personal}
 				</Link>
 			</div>
-			{window.innerWidth < 600 && <div>
-			<IoCloseSharp />
-			</div>}
+			{mobileView &&
+				(collapsed ? (
+					<div className='sidebar-hamburger border' onClick={()=>setCollapsed(!collapsed)}>
+						<GiHamburgerMenu />
+					</div>
+				) : (
+					<div className='sidebar-close border' onClick={()=>setCollapsed(!collapsed)}>
+						<IoCloseSharp />
+					</div>
+				))}
 			{dashboard === 'Business' ? (
 				<div className='d-flex flex-column justify-content-center align-items-center'>
 					<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>
