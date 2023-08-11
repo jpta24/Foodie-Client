@@ -674,10 +674,12 @@ a {
 }
 
 .sidebar-collapsed {
-	min-width: 200px;
-	max-width: 200px;
-	min-height: calc(100vh - 66px);
+	min-width: 15px;
+	max-width: 15px;
+	height: 80vh;
 	background-color: black;
+	border-bottom-right-radius: 5px;
+	border:rgb(86, 85, 85) 1px solid;
 	transition: all 0.3 ease;
 }
 // .sidebar-collapsed div{

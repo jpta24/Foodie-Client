@@ -243,6 +243,16 @@ const Sidebar = ({ routes }) => {
 		},
 	];
 	// console.log(user)
+	if (mobileView && collapsed) {
+		return (<div className="sidebar-collapsed">
+		<div className='sidebar-hamburger border' onClick={()=>setCollapsed(!collapsed)}>
+						 <GiHamburgerMenu />
+					</div>
+
+		</div>)
+	} else {
+		
+	}
 	return (
 		<div className={`${!mobileView || !collapsed ? 'sidebar-container':'sidebar-collapsed'} d-flex flex-column text-light`}>
 			<div className='d-flex col-12 justify-content-center h6'>
@@ -282,7 +292,7 @@ const Sidebar = ({ routes }) => {
 			{mobileView &&
 				(collapsed ? (
 					<div className='sidebar-hamburger border' onClick={()=>setCollapsed(!collapsed)}>
-						<GiHamburgerMenu />
+						 <GiHamburgerMenu />
 					</div>
 				) : (
 					<div className='sidebar-close border' onClick={()=>setCollapsed(!collapsed)}>
