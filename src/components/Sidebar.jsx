@@ -41,7 +41,7 @@ const Sidebar = ({ routes }) => {
 	const [dashboard, setDashboard] = useState('Personal');
 	const [actualState, setActualState] = useState('Dashboard');
 
-	const [collapsed, setCollapsed] = useState(true);
+	const [collapsed, setCollapsed] = useState(false);
 
 	const mobileView = window.innerWidth < 600;
 
@@ -245,21 +245,22 @@ const Sidebar = ({ routes }) => {
 	// console.log(user)
 	if (mobileView && collapsed) {
 		return (
-			<div className='sidebar-collapsed'>
-			<div className="sidebar-hamburger-position">
+			<div className='sidebar-collapsed' onClick={() => setCollapsed(!collapsed)}>
+			{/* <div className="sidebar-hamburger-position">
 				<div className='sidebar-hamburger' onClick={() => setCollapsed(!collapsed)}>
 						<span></span>
 						<span></span>
 						<span></span>
 					</div>
-			</div>
+			</div> */}
 					
 				
 			</div>
 		);
 	} else {
 		return (
-		<div
+			<>
+			<div
 			className={`${
 				mobileView && !collapsed ? 'sidebar-mobile' :'sidebar-container' 
 			} d-flex flex-column text-light`}
@@ -335,7 +336,8 @@ const Sidebar = ({ routes }) => {
 												'sidebar-page-active'
 											}`}
 											style={{ cursor: 'pointer', color: 'white' }}
-											onClick={() => setActualState(elem.field)}
+											onClick={() => {setActualState(elem.field)
+											setCollapsed(true)}}
 											key={uuidv4()}
 										>
 											<span>{elem.icon}</span>
@@ -397,7 +399,8 @@ const Sidebar = ({ routes }) => {
 										'sidebar-page-active'
 									}`}
 									style={{ cursor: 'pointer', color: 'white' }}
-									onClick={() => setActualState(elem.field)}
+									onClick={() => {setActualState(elem.field)
+									setCollapsed(true)}}
 									key={uuidv4()}
 								>
 									<span>{elem.icon}</span>
@@ -408,7 +411,10 @@ const Sidebar = ({ routes }) => {
 					</div>
 				</div>
 			)}
-		</div>
+		</div>	
+		{mobileView && !collapsed && <div className='sidebar-side'></div>}
+			</>
+		
 	);
 	}
 	// else {
