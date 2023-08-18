@@ -17,7 +17,6 @@ import {
 import { RxDashboard } from 'react-icons/rx';
 import { FaRegUserCircle, FaUsers } from 'react-icons/fa';
 import { BsBookmarkHeart } from 'react-icons/bs';
-import { GiHamburgerMenu } from 'react-icons/gi';
 
 import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
