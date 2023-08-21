@@ -1,8 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link
+ } from 'react-router-dom';
 
 const DaschboardCartCard = ({product,
     currency,
-    userSaved,
     quantity}) => {
         const prodIsActive = product.status === 'paused' ? false : true;
   return (
