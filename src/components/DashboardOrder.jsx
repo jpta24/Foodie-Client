@@ -25,7 +25,7 @@ const DashboardOrder = ({ orders }) => {
 				/>
 				<div
 					className='col-12'
-					style={{ height: '307px', overflow: 'auto' }}
+					style={{ height: '337px', overflow: 'auto' }}
 				>
 					{orders.orders
 						.filter((filt) => {

@@ -7,7 +7,6 @@ const DashboardOrderCardStatus = ({ statues, status, setStatus }) => {
 	return (
 		<div
 			className='col-12 d-flex flex-wrap justify-content-around'
-			style={{ height: '61px' }}
 		>
 			{statues.map((cat) => {
 				return (
@@ -15,7 +14,7 @@ const DashboardOrderCardStatus = ({ statues, status, setStatus }) => {
 						style={{ cursor: 'pointer' }}
 						key={uuidv4()}
 						name={cat}
-						className={`badge col-3 border border-dark my-1 mx-1 ${
+						className={`badge  border border-dark my-1 mx-1 ${
 							status === cat ? active : inactive
 						}`}
 						onClick={() => setStatus(cat)}

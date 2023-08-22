@@ -788,6 +788,15 @@ a {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
+.dashboard-order-card-container {
+    background-color: #282832;
+    font-size: 0.75rem;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
 
 @media (max-width: 600px) {
 	.card-container {
