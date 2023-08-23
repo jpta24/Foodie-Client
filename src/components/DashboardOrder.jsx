@@ -13,7 +13,7 @@ const DashboardOrder = ({ orders }) => {
 		<div className='col-12 col-md-5 text-start my-3'>
 			<Link
 				className='ms-4 h4 text-light'
-				to={`/user-orders/${orders.user._id}`}
+				to={orders.dashboard === 'user' ? `/user-orders/${orders.user._id}`: `/business-orders/${orders.business._id}`}
 			>
 				{languages[0][orders.lang].dashboard.btnOrders}
 			</Link>
@@ -36,7 +36,7 @@ const DashboardOrder = ({ orders }) => {
 						})
 						.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 						.map((order) => {
-							return <DashboardOrderCard key={uuidv4()} order={order} />;
+							return <DashboardOrderCard key={uuidv4()} order={order} dashboard={orders.dashboard} />;
 						})}
 				</div>
 			</div>

@@ -34,6 +34,7 @@ import Test from './pages/Test';
 import MembershipPage from './pages/MembershipPage';
 import PrivatePolicyPage from './pages/PrivatePolicyPage';
 import TermsPage from './pages/TermsPage';
+import DashboardBusiness from './pages/DashboardBusiness';
 
 function App() {
 	const { isDark } = useContext(AuthContext);
@@ -188,7 +189,7 @@ function App() {
 						path='/business-dashboard/:businessName'
 						element={
 							<IsPrivate>
-								<BusinessView />
+								<DashboardBusiness />
 							</IsPrivate>
 						}
 					/>

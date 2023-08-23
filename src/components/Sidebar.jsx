@@ -232,86 +232,149 @@ const Sidebar = ({ routes }) => {
 			icon: <RiHomeHeartLine className='fs-4' />,
 			text: personal.savedBusiness,
 			field: 'SavedBusiness',
-			link: `/redirect/${user._id}`,
+			link: `/redirect/`,
 		},
 		{
 			icon: <BsBookmarkHeart className='fs-4' />,
 			text: personal.savedProducts,
 			field: 'SavedProducts',
-			link: `/redirect/${user._id}`,
+			link: `/redirect/`,
 		},
 	];
 	// console.log(user)
 	if (mobileView && collapsed) {
 		return (
-			<div className='sidebar-collapsed' onClick={() => setCollapsed(!collapsed)}>
-			{/* <div className="sidebar-hamburger-position">
-				<div className='sidebar-hamburger' onClick={() => setCollapsed(!collapsed)}>
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-			</div> */}
-					
-				
-			</div>
+			<div
+				className='sidebar-collapsed'
+				onClick={() => setCollapsed(!collapsed)}
+			></div>
 		);
 	} else {
 		return (
 			<>
-			<div
-			className={`${
-				mobileView && !collapsed ? 'sidebar-mobile' :'sidebar-container' 
-			} d-flex flex-column text-light`}
-		>
-			<div className='d-flex col-12 justify-content-center h6'>
-				<Link
-					to={`/business-dashboard/${
-						user.business ? user.business.name.split(' ').join('-') : ''
-					}`}
-					style={{ cursor: 'pointer', color: 'white' }}
-					className={`col-6 py-3 ${
-						dashboard === 'Business' && 'sidebar-active bg-dark'
-					}`}
-					onClick={() => {
-						if (dashboard !== 'Business') {
-							setActualState('Dashboard');
-							setDashboard('Business');
-						}
-					}}
+				<div
+					className={`${
+						mobileView && !collapsed ? 'sidebar-mobile' : 'sidebar-container'
+					} d-flex flex-column text-light`}
 				>
-					{business.business}
-				</Link>
-				<Link
-					to={`/user-dashboard/${user._id}`}
-					style={{ cursor: 'pointer', color: 'white' }}
-					className={`col-6 py-3 ${
-						dashboard === 'Personal' && 'sidebar-active bg-dark'
-					}`}
-					onClick={() => {
-						if (dashboard !== 'Personal') {
-							setActualState('Dashboard');
-							setDashboard('Personal');
-						}
-					}}
-				>
-					{personal.personal}
-				</Link>
-			</div>
-			{mobileView &&
-				 (
-					<div
-						className='sidebar-close'
-						onClick={() => setCollapsed(!collapsed)}
-					>
-						<IoCloseSharp />
+					<div className='d-flex col-12 justify-content-center h6'>
+						<Link
+							to={`/business-dashboard/${
+								user.business ? user.business.name.split(' ').join('-') : ''
+							}`}
+							style={{ cursor: 'pointer', color: 'white' }}
+							className={`col-6 py-3 ${
+								dashboard === 'Business' && 'sidebar-active bg-dark'
+							}`}
+							onClick={() => {
+								if (dashboard !== 'Business') {
+									setActualState('Dashboard');
+									setDashboard('Business');
+								}
+							}}
+						>
+							{business.business}
+						</Link>
+						<Link
+							to={`/user-dashboard/${user._id}`}
+							style={{ cursor: 'pointer', color: 'white' }}
+							className={`col-6 py-3 ${
+								dashboard === 'Personal' && 'sidebar-active bg-dark'
+							}`}
+							onClick={() => {
+								if (dashboard !== 'Personal') {
+									setActualState('Dashboard');
+									setDashboard('Personal');
+								}
+							}}
+						>
+							{personal.personal}
+						</Link>
 					</div>
-				)}
-			{dashboard === 'Business' ? (
-				<div className='d-flex flex-column justify-content-center align-items-center'>
-					<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>
-						{user.business ? (
-							<>
+					{mobileView && (
+						<div
+							className='sidebar-close'
+							onClick={() => setCollapsed(!collapsed)}
+						>
+							<IoCloseSharp />
+						</div>
+					)}
+					{dashboard === 'Business' ? (
+						<div className='d-flex flex-column justify-content-center align-items-center'>
+							<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>
+								{user.business ? (
+									<>
+										<div
+											className='rounded-circle border align-self-center border-dark bg-dark d-flex justify-content-center align-items-center'
+											style={{
+												height: '80px',
+												width: '80px',
+											}}
+										>
+											<img
+												src={user.business.logoUrl}
+												alt='altLogo'
+												width={65}
+											/>
+										</div>
+										<h5 className='align-self-center my-3 foodie-title text-danger'>
+											{user.business.name}
+										</h5>
+
+										{buzList.map((elem) => {
+											return (
+												<Link
+													to={elem.link}
+													className={`py-2 ps-2 col-10 text-start ${
+														actualState === elem.field &&
+														dashboard === 'Business' &&
+														'sidebar-page-active'
+													}`}
+													style={{ cursor: 'pointer', color: 'white' }}
+													onClick={() => {
+														setActualState(elem.field);
+														setCollapsed(true);
+													}}
+													key={uuidv4()}
+												>
+													<span>{elem.icon}</span>
+													<span className='h6 mx-3'>{elem.text}</span>
+												</Link>
+											);
+										})}
+									</>
+								) : (
+									<>
+										<div
+											className='rounded-circle border align-self-center border-dark bg-dark d-flex justify-content-center align-items-center'
+											style={{
+												height: '80px',
+												width: '80px',
+											}}
+										>
+											<FaRegUserCircle style={{ fontSize: '55px' }} />
+										</div>
+
+										<div
+											className={`py-2 ps-2 col-10 text-start mt-5 ${
+												dashboard === 'Business' && 'sidebar-page-active'
+											}`}
+											style={{ cursor: 'pointer' }}
+										>
+											<span>
+												<RiAddCircleLine className='fs-4' />
+											</span>
+											<span className='h6 mx-3'>
+												{languages[0][lang].dashboard.btnAddBusiness}
+											</span>
+										</div>
+									</>
+								)}
+							</div>
+						</div>
+					) : (
+						<div className='d-flex flex-column justify-content-center align-items-center'>
+							<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>
 								<div
 									className='rounded-circle border align-self-center border-dark bg-dark d-flex justify-content-center align-items-center'
 									style={{
@@ -319,24 +382,24 @@ const Sidebar = ({ routes }) => {
 										width: '80px',
 									}}
 								>
-									<img src={user.business.logoUrl} alt='altLogo' width={65} />
+									<img src={user.avatarUrl} alt='altLogo' width={55} />
 								</div>
-								<h5 className='align-self-center my-3 foodie-title text-danger'>
-									{user.business.name}
-								</h5>
+								<h5 className='align-self-center my-3'>{user.name}</h5>
 
-								{buzList.map((elem) => {
+								{personalList.map((elem) => {
 									return (
 										<Link
 											to={elem.link}
 											className={`py-2 ps-2 col-10 text-start ${
 												actualState === elem.field &&
-												dashboard === 'Business' &&
+												dashboard === 'Personal' &&
 												'sidebar-page-active'
 											}`}
 											style={{ cursor: 'pointer', color: 'white' }}
-											onClick={() => {setActualState(elem.field)
-											setCollapsed(true)}}
+											onClick={() => {
+												setActualState(elem.field);
+												setCollapsed(true);
+											}}
 											key={uuidv4()}
 										>
 											<span>{elem.icon}</span>
@@ -344,77 +407,13 @@ const Sidebar = ({ routes }) => {
 										</Link>
 									);
 								})}
-							</>
-						) : (
-							<>
-								<div
-									className='rounded-circle border align-self-center border-dark bg-dark d-flex justify-content-center align-items-center'
-									style={{
-										height: '80px',
-										width: '80px',
-									}}
-								>
-									<FaRegUserCircle style={{ fontSize: '55px' }} />
-								</div>
-
-								<div
-									className={`py-2 ps-2 col-10 text-start mt-5 ${
-										dashboard === 'Business' && 'sidebar-page-active'
-									}`}
-									style={{ cursor: 'pointer' }}
-								>
-									<span>
-										<RiAddCircleLine className='fs-4' />
-									</span>
-									<span className='h6 mx-3'>
-										{languages[0][lang].dashboard.btnAddBusiness}
-									</span>
-								</div>
-							</>
-						)}
-					</div>
-				</div>
-			) : (
-				<div className='d-flex flex-column justify-content-center align-items-center'>
-					<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>
-						<div
-							className='rounded-circle border align-self-center border-dark bg-dark d-flex justify-content-center align-items-center'
-							style={{
-								height: '80px',
-								width: '80px',
-							}}
-						>
-							<img src={user.avatarUrl} alt='altLogo' width={55} />
+							</div>
 						</div>
-						<h5 className='align-self-center my-3'>{user.name}</h5>
-
-						{personalList.map((elem) => {
-							return (
-								<Link
-									to={elem.link}
-									className={`py-2 ps-2 col-10 text-start ${
-										actualState === elem.field &&
-										dashboard === 'Personal' &&
-										'sidebar-page-active'
-									}`}
-									style={{ cursor: 'pointer', color: 'white' }}
-									onClick={() => {setActualState(elem.field)
-									setCollapsed(true)}}
-									key={uuidv4()}
-								>
-									<span>{elem.icon}</span>
-									<span className='h6 mx-3'>{elem.text}</span>
-								</Link>
-							);
-						})}
-					</div>
+					)}
 				</div>
-			)}
-		</div>	
-		{mobileView && !collapsed && <div className='sidebar-side'></div>}
+				{mobileView && !collapsed && <div className='sidebar-side'></div>}
 			</>
-		
-	);
+		);
 	}
 	// else {
 	// 	return (
@@ -490,7 +489,7 @@ const Sidebar = ({ routes }) => {
 	// 								<h5 className='align-self-center my-3 foodie-title text-danger'>
 	// 									{user.business.name}
 	// 								</h5>
-	
+
 	// 								{buzList.map((elem) => {
 	// 									return (
 	// 										<Link
@@ -521,7 +520,7 @@ const Sidebar = ({ routes }) => {
 	// 								>
 	// 									<FaRegUserCircle style={{ fontSize: '55px' }} />
 	// 								</div>
-	
+
 	// 								<div
 	// 									className={`py-2 ps-2 col-10 text-start mt-5 ${
 	// 										dashboard === 'Business' && 'sidebar-page-active'
@@ -552,7 +551,7 @@ const Sidebar = ({ routes }) => {
 	// 							<img src={user.avatarUrl} alt='altLogo' width={55} />
 	// 						</div>
 	// 						<h5 className='align-self-center my-3'>{user.name}</h5>
-	
+
 	// 						{personalList.map((elem) => {
 	// 							return (
 	// 								<Link
@@ -577,7 +576,6 @@ const Sidebar = ({ routes }) => {
 	// 		</div>
 	// 	);
 	// }
-	
 };
 
 export default Sidebar;

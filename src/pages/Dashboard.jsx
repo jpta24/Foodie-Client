@@ -7,6 +7,7 @@ import { getAPI } from '../utils/api';
 import DashboardCardProd from '../components/DashboardCardProd';
 import DashboardOrder from '../components/DashboardOrder';
 import DashboardStores from '../components/DashboardStores';
+import Loading from '../components/Loading';
 
 const Dashboard = () => {
 	const { language: lang } = useContext(AuthContext);
@@ -22,11 +23,6 @@ const Dashboard = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// let businessNameEncoded;
-	// if (user.business) {
-	// 	businessNameEncoded = user.business.name.split(' ').join('-');
-	// }
-
 	const cart = {
 		lang: lang,
 		cart: user.cart,
@@ -36,6 +32,7 @@ const Dashboard = () => {
 		lang: lang,
 		orders: user.orders,
 		user: user,
+		dashboard:'user'
 	};
 	const stores = {
 		lang: lang,
@@ -53,21 +50,10 @@ const Dashboard = () => {
 					<DashboardOrder orders={orders} />
 					<DashboardStores stores={stores}/>
 				</div>
-
-				{/* <Row xs={1} md={2} className='g-4 px-3 my-3 justify-content-center'>
-				{user.business ? (
-				<DashboardCard href={`/view-business/${businessNameEncoded}`} button={languages[0][lang].dashboard.btnBusiness} src={iconsCloud[0].newBuz}/>
-                ) : <DashboardCard href={`/create-business`} button={languages[0][lang].dashboard.btnAddBusiness} src={iconsCloud[0].newBuz} /> }
-                <DashboardCard href={`/profile/${user._id+''}`} button='Profile' src={iconsCloud[0].profile}/>
-				                
-				
-                <DashboardCard href={`/cart/${user._id}`} button={languages[0][lang].dashboard.btnCart} src={iconsCloud[0].cart} />
-                <DashboardCard href={`/user-orders/${user._id}`} button={languages[0][lang].dashboard.btnOrders} src={iconsCloud[0].orders}/>
-				<DashboardCard href='/myVisitedBusiness' button={languages[0][lang].dashboard.btnSavedBusiness} src={iconsCloud[0].savedBuz}/>
-                <DashboardCard href='/mySavedProducts' button={languages[0][lang].dashboard.btnSavedProducts} src={iconsCloud[0].savedProducts}/>
-			</Row> */}
 			</div>
 		);
+	} else {
+		<Loading/>
 	}
 };
 

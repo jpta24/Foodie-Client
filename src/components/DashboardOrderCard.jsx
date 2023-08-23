@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const DashboardOrderCard = ({ order }) => {
+const DashboardOrderCard = ({ order, dashboard }) => {
 	return (
 		<div className='d-flex col-11 mx-auto justify-content-between dashboard-order-card-container my-2'>
 			<div className='d-flex flex-column'>
@@ -11,7 +11,16 @@ const DashboardOrderCard = ({ order }) => {
 						width: '60px',
 					}}
 				>
-					<img src={order.business.logoUrl} alt='altLogo' width={40} />
+					<img
+						src={
+							dashboard === 'user'
+								? order.business.logoUrl
+								: order.user.avatarUrl ||
+								  'https://cdn2.iconfinder.com/data/icons/user-23/512/User_Generic_1.png'
+						}
+						alt='altLogo'
+						width={40}
+					/>
 				</div>
 				<span className='text-center mb-2'>
 					{order.status.charAt(0).toUpperCase() +
@@ -20,9 +29,16 @@ const DashboardOrderCard = ({ order }) => {
 			</div>
 
 			<div className='d-flex flex-column align-items-start justify-content-start flex-grow-1 my-1'>
-				<span className='foodie-title text-danger' style={{ fontSize: '20px' }}>
-					{order.business.name}
-				</span>
+				{dashboard === 'user' ? (
+					<span
+						className='foodie-title text-danger'
+						style={{ fontSize: '20px' }}
+					>
+						{order.business.name}
+					</span>
+				) : (
+					<span className='text-danger' style={{ fontSize: '16px', fontWeight:'bolder' }}>{order.note.name}</span>
+				)}
 				<div className='d-flex flex-column col-12'>
 					{order.products.map((eachProduct) => {
 						return (
