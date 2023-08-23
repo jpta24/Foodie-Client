@@ -1,10 +1,10 @@
 
-import Loading from '../components/Loading';
+import DashboardBusinessChart from '../components/DashboardBusinessChart';
 
 function Test() {
 	return (
 		<div className='flex-grow-1'>
-			<Loading/>
+			<DashboardBusinessChart/>
 		</div>				
 	);
 }
