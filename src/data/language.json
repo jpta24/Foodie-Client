@@ -23,7 +23,7 @@
 				"visitTxt": "Step into a world of inspiration and find your perfect match. Start your journey today.",
 				"btnVisit": "Visit the Store",
 				"feaTitle": "Features and Benefits of ",
-				"feaContent": "Here, you can easily create an online store for your food products and reach more customers everywhere. The platform offers a variety of tools and features, such as the ability to customize your online store, manage your products and orders, and offer flexible payment and delivery options. In addition, FOODIE also allows you to generate a unique QR code and URL for your online store, making it easy for your customers to find and purchase your products. With FOODIE, you have everything you need to successfully and efficiently grow your culinary business online.",
+				"feaContent": "Here, you can easily create an online store for your food products and reach more customers everywhere. The platform offers a variety of tools and features, such as the ability to customize your online store, manage your products and orders, and offer flexible payment and delivery options. In addition, FOODYS also allows you to generate a unique QR code and URL for your online store, making it easy for your customers to find and purchase your products. With FOODYS, you have everything you need to successfully and efficiently grow your culinary business online.",
 				"freeTitle": "Free Plan",
 				"free1": "Up to 10 products",
 				"free2": "Monthly sales up to $500",
@@ -106,7 +106,9 @@
 				"btnCart": "Cart",
 				"btnOrders": "Orders",
 				"btnSavedBusiness": "♥ Business",
-				"btnSavedProducts": "♥ Products"
+				"btnSavedProducts": "♥ Products",
+				"months": "Month",
+				"year": "Year"
 			},
 			"profile": {
 				"incommingMsg": "Business's owner would let you know about your application",
@@ -277,7 +279,7 @@
 				"btnCreate": "Create Product",
 				"btnEdit": "Edit Product",
 				"modalTitle": "Recommendation for Uploading Product Photos",
-				"modalText1": "Hello! To make your products look better on Foodie, we recommend using square photos (1:1 aspect ratio) and preferably with no background.",
+				"modalText1": "Hello! To make your products look better on Foodys, we recommend using square photos (1:1 aspect ratio) and preferably with no background.",
 				"modalText2": "Remember, a high-quality image can make a significant difference in how your products are perceived by customers. Thank you for being part of our community!",
 				"modalCheckbox": "Do not show this message again.",
 				"modalBtn": "Got it!"
@@ -368,7 +370,7 @@
 				"visitTxt": "Entra en un mundo de inspiración y encuentra tu pareja perfecta. Comience su viaje hoy.",
 				"btnVisit": "Visitar la Tienda",
 				"feaTitle": "Características y beneficios",
-				"feaContent": "Aquí, puedes crear fácilmente una tienda en línea para tus productos de alimentos y llegar a más clientes en todas partes. La plataforma ofrece una variedad de herramientas y características, como la capacidad de personalizar tu tienda en línea, gestionar tus productos y pedidos, y ofrecer opciones flexibles de pago y entrega. Además, FOODIE también te permite generar un código QR único y una URL para tu tienda en línea, lo que facilita que tus clientes encuentren y compren tus productos. Con FOODIE, tienes todo lo que necesitas para hacer crecer tu negocio culinario en línea de manera exitosa y eficiente.",
+				"feaContent": "Aquí, puedes crear fácilmente una tienda en línea para tus productos de alimentos y llegar a más clientes en todas partes. La plataforma ofrece una variedad de herramientas y características, como la capacidad de personalizar tu tienda en línea, gestionar tus productos y pedidos, y ofrecer opciones flexibles de pago y entrega. Además, FOODYS también te permite generar un código QR único y una URL para tu tienda en línea, lo que facilita que tus clientes encuentren y compren tus productos. Con FOODYS, tienes todo lo que necesitas para hacer crecer tu negocio culinario en línea de manera exitosa y eficiente.",
 				"freeTitle": "Plan Gratuito",
 				"free1": "Hasta 10 productos",
 				"free2": "Ventas mensuales de hasta $500",
@@ -451,7 +453,9 @@
 				"btnCart": "Carrito",
 				"btnOrders": "Pedidos",
 				"btnSavedBusiness": "♥ Negocios",
-				"btnSavedProducts": "♥ Productos"
+				"btnSavedProducts": "♥ Productos",
+				"months": "Mes",
+				"year": "Año"
 			},
 			"profile": {
 				"incommingMsg": "El propietario del negocio te informará sobre tu solicitud",
@@ -621,7 +625,7 @@
 				"btnCreate": "Crear Producto",
 				"btnEdit": "Editar Producto",
 				"modalTitle": "Recomendación para cargar fotos de productos",
-				"modalText1": "¡Hola! Para que tus productos luzcan mejor en Foodie, te recomendamos usar fotos cuadradas (1:1) y preferiblemente sin fondo.",
+				"modalText1": "¡Hola! Para que tus productos luzcan mejor en Foodys, te recomendamos usar fotos cuadradas (1:1) y preferiblemente sin fondo.",
 				"modalText2": "Recuerda que una imagen de calidad puede hacer una gran diferencia en la percepción de tus productos por parte de los clientes. ¡Gracias por ser parte de nuestra comunidad!",
 				"modalCheckbox": "No volver a mostrar este mensaje.",
 				"modalBtn": "Entendido"
@@ -713,7 +717,7 @@
 				"visitTxt": "Treten Sie ein in eine Welt voller Inspiration und finden Sie Ihren perfekten Partner. Beginnen Sie noch heute Ihre Reise.",
 				"btnVisit": "Besuch das Geschäft",
 				"feaTitle": "Funktionen und Vorteile von ",
-				"feaContent": "Hier können Sie ganz einfach einen Online-Shop für Ihre Lebensmittelprodukte erstellen und überall mehr Kunden erreichen. Die Plattform bietet eine Vielzahl von Tools und Funktionen, wie die Möglichkeit, Ihren Online-Shop anzupassen, Ihre Produkte und Bestellungen zu verwalten und flexible Zahlungs- und Lieferoptionen anzubieten. Darüber hinaus ermöglicht FOODIE Ihnen auch die Erzeugung eines einzigartigen QR-Codes und einer URL für Ihren Online-Shop, so dass es für Ihre Kunden einfach ist, Ihre Produkte zu finden und zu kaufen. Mit FOODIE haben Sie alles, was Sie benötigen, um Ihr kulinarisches Geschäft erfolgreich und effizient online zu erweitern.",
+				"feaContent": "Hier können Sie ganz einfach einen Online-Shop für Ihre Lebensmittelprodukte erstellen und überall mehr Kunden erreichen. Die Plattform bietet eine Vielzahl von Tools und Funktionen, wie die Möglichkeit, Ihren Online-Shop anzupassen, Ihre Produkte und Bestellungen zu verwalten und flexible Zahlungs- und Lieferoptionen anzubieten. Darüber hinaus ermöglicht FOODYS Ihnen auch die Erzeugung eines einzigartigen QR-Codes und einer URL für Ihren Online-Shop, so dass es für Ihre Kunden einfach ist, Ihre Produkte zu finden und zu kaufen. Mit FOODYS haben Sie alles, was Sie benötigen, um Ihr kulinarisches Geschäft erfolgreich und effizient online zu erweitern.",
 				"freeTitle": "Kostenloser Plan",
 				"free1": "Bis zu 10 Produkte",
 				"free2": "Monatlicher Umsatz bis zu 500 $",
@@ -796,7 +800,9 @@
 				"btnCart": "Warenkorb",
 				"btnOrders": "Bestellungen",
 				"btnSavedBusiness": "Unternehmen",
-				"btnSavedProducts": "♥ Produkte"
+				"btnSavedProducts": "♥ Produkte",
+				"months": "Monate",
+				"year": "Jahr"
 			},
 			"profile": {
 				"incommingMsg": "Der Besitzer des Geschäfts wird Sie über Ihre Bewerbung informieren",
@@ -967,7 +973,7 @@
 				"btnCreate": "Produkt erstellen",
 				"btnEdit": "Produkt bearbeiten",
 				"modalTitle": "Empfehlung zum Hochladen von Produktfotos",
-				"modalText1": "Hallo! Damit deine Produkte auf Foodie besser aussehen, empfehlen wir dir, quadratische Fotos (1:1) und vorzugsweise ohne Hintergrund zu verwenden.",
+				"modalText1": "Hallo! Damit deine Produkte auf Foodys besser aussehen, empfehlen wir dir, quadratische Fotos (1:1) und vorzugsweise ohne Hintergrund zu verwenden.",
 				"modalText2": "Denke daran, dass ein qualitativ hochwertiges Bild einen großen Unterschied in der Wahrnehmung deiner Produkte durch die Kunden machen kann. Vielen Dank, dass du Teil unserer Community bist!.",
 				"modalCheckbox": "Diese Nachricht nicht erneut anzeigen.",
 				"modalBtn": "Verstanden"
@@ -1012,10 +1018,27 @@
 				"actualPlan": "Aktueller Plan"
 			},
 			"sidebar": {
-				"personal": ["Persönlich", "Dashboard", "Profil", "Warenkorb", "Bestellungen", "❤ Unternehmen", "❤ Produkte"],
-				"business": ["Unternehmen", "Dashboard", "Geschäft", "Mitgliedschaften", "Bestellungen", "Produkte", "Mitarbeiter", "Abrechnung", "Unternehmen erstellen"]
-			}
-			,
+				"personal": [
+					"Persönlich",
+					"Dashboard",
+					"Profil",
+					"Warenkorb",
+					"Bestellungen",
+					"❤ Unternehmen",
+					"❤ Produkte"
+				],
+				"business": [
+					"Unternehmen",
+					"Dashboard",
+					"Geschäft",
+					"Mitgliedschaften",
+					"Bestellungen",
+					"Produkte",
+					"Mitarbeiter",
+					"Abrechnung",
+					"Unternehmen erstellen"
+				]
+			},
 			"cloudinaryError": "Fehler beim Hochladen der Datei:"
 		}
 	}

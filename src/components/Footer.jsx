@@ -17,7 +17,7 @@ function Footer() {
 						<h5>{languages[0][lang].home.footer.contactus}</h5>
 						<ul className='list-unstyled'>
 							<li>{languages[0][lang].home.footer.country}, Berlin 10787</li>
-							<li>info@foodie.de</li>
+							<li>info@foodys.app</li>
 							<li>0175-364-3399</li>
 						</ul>
 					</Col>
@@ -26,7 +26,7 @@ function Footer() {
 						<ul className='list-unstyled d-flex justify-content-around col-6 mx-auto'>
 							<li>
 								<a
-									href='https://www.facebook.com/foodie'
+									href='https://www.facebook.com/foodys'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
@@ -54,23 +54,23 @@ function Footer() {
 						</ul>
 					</Col>
 					<Col md={3}>
-						<h5>How Foodie works</h5>
+						<h5>How Foodys works</h5>
 						<ul className='list-unstyled'>
 							<li>
 								<Link to={'/private-policy'}>How to use it</Link>
 							</li>
 							<li>
-								<Link to={'/terms-conditions'}>
-									FAQ
-								</Link>
+								<Link to={'/terms-conditions'}>FAQ</Link>
 							</li>
 						</ul>
 					</Col>
-                    <Col md={3}>
+					<Col md={3}>
 						<h5>{languages[0][lang].home.footer.terms}</h5>
 						<ul className='list-unstyled'>
 							<li>
-								<Link to={'/private-policy'}>{languages[0][lang].home.footer.privacy}</Link>
+								<Link to={'/private-policy'}>
+									{languages[0][lang].home.footer.privacy}
+								</Link>
 							</li>
 							<li>
 								<Link to={'/terms-conditions'}>

@@ -40,7 +40,7 @@ const Sidebar = ({ routes }) => {
 	const [dashboard, setDashboard] = useState('Personal');
 	const [actualState, setActualState] = useState('Dashboard');
 
-	const [collapsed, setCollapsed] = useState(false);
+	const [collapsed, setCollapsed] = useState(true);
 
 	const mobileView = window.innerWidth < 600;
 

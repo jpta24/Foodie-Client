@@ -53,7 +53,9 @@ const Dashboard = () => {
 			</div>
 		);
 	} else {
-		<Loading/>
+		<div className='flex-grow-1'>
+			<Loading />
+		</div>
 	}
 };
 

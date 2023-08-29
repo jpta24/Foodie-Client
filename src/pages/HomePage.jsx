@@ -85,7 +85,7 @@ function HomePage() {
 								>
 									{' '}
 									<strong className='text-danger foodie-title'>
-										FOODIE:
+										FOODYS:
 									</strong>{' '}
 									{languages[0][lang].home.slogan}
 								</h1>
@@ -139,7 +139,7 @@ function HomePage() {
 							</Col>
 							<Col md={7}>
 								<h2 className='text-danger'>
-									{languages[0][lang].home.feaTitle} FOODIE
+									{languages[0][lang].home.feaTitle} FOODYS
 								</h2>
 								<h5>{languages[0][lang].home.feaContent}</h5>
 							</Col>

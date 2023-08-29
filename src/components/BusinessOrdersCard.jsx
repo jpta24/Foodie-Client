@@ -120,7 +120,7 @@ const BusinessOrdersCard = ({ order, handleStatusOrder, handleModal }) => {
 							className='py-0 m-1 col-md-2 col-5'
 							onClick={() =>
 								handleModal(
-									'Please send an email to: contact@foodie.com',
+									'Please send an email to: info@foodys.app',
 									order,
 									'us'
 								)
@@ -128,8 +128,8 @@ const BusinessOrdersCard = ({ order, handleStatusOrder, handleModal }) => {
 						>
 							{languages[0][lang].businessOrderCard.contactus}
 						</Button>
-						{/* <Button variant='outline-secondary' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleModal('Please send an email to: contact@foodie.com',order,'us')}>Contact Us</Button>
-                        <Button variant='outline-secondary' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleModal('Please send an email to: contact@foodie.com',order,'us')}>Contact Us</Button> */}
+						{/* <Button variant='outline-secondary' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleModal('Please send an email to: contact@foodys.app',order,'us')}>Contact Us</Button>
+                        <Button variant='outline-secondary' size='sm' className='py-0 m-1 col-md-2 col-5' onClick={()=>handleModal('Please send an email to: contact@foodys.app',order,'us')}>Contact Us</Button> */}
 					</div>
 				</dir>
 			</div>

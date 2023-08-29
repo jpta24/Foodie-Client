@@ -1,5 +1,5 @@
 import { Button, Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
-import { useContext,useEffect,useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/auth.context';
 import { CartContext } from '../context/cart.context';
 
@@ -9,10 +9,17 @@ import SwitchMode from './SwitchDarkMode';
 import { getAPI } from '../utils/api';
 
 const Nabvar2 = () => {
-	const { isLoggedIn, logOutUser, user, language, changeLanguage,isDark,handleMode } =
-		useContext(AuthContext);
+	const {
+		isLoggedIn,
+		logOutUser,
+		user,
+		language,
+		changeLanguage,
+		isDark,
+		handleMode,
+	} = useContext(AuthContext);
 	const { cart } = useContext(CartContext);
-	const [business, setBusiness] = useState(false)
+	const [business, setBusiness] = useState(false);
 
 	useEffect(() => {
 		if (user) {
@@ -38,14 +45,17 @@ const Nabvar2 = () => {
 				expand='sm'
 				collapseOnSelect
 			>
-				<Navbar.Brand href='/' className='foodie-title d-flex align-items-center'>
+				<Navbar.Brand
+					href='/'
+					className='foodie-title d-flex align-items-center'
+				>
 					<img
 						src={iconsCloud[0].foodieIcon}
 						width='40px'
 						height='40px'
 						alt='altLogo'
 					/>{' '}
-					<span className='ps-2'>Foodie</span>
+					<span className='ps-2'>Foodys</span>
 				</Navbar.Brand>
 
 				<Navbar.Toggle className='coloring' />
@@ -59,7 +69,7 @@ const Nabvar2 = () => {
 					<Nav className='navbar-nav mb-2 mb-lg-0 me-4'>
 						{/* <Nav.Link href="/markets">Markets 🏪</Nav.Link> */}
 						<div className='d-flex justify-content-center'>
-							<SwitchMode isDark={isDark} handleMode={handleMode}/>
+							<SwitchMode isDark={isDark} handleMode={handleMode} />
 
 							<DropdownButton
 								id='dropdown-basic-button'
@@ -80,7 +90,15 @@ const Nabvar2 = () => {
 						</div>
 						{isLoggedIn && (
 							<>
-								<Nav.Link href={business ? `/business-dashboard/${business.name.split(' ').join('-')}`:`/user-dashboard/${user._id}`}>
+								<Nav.Link
+									href={
+										business
+											? `/business-dashboard/${business.name
+													.split(' ')
+													.join('-')}`
+											: `/user-dashboard/${user._id}`
+									}
+								>
 									{languages[0][language].navbar.dashboard} 📉
 								</Nav.Link>
 								<Button
