@@ -66,7 +66,7 @@ const DashboardBusinessChart = ({ chartState,handleState, getLast12Months,getLas
 	};
 
 	return (
-		<div className='col-11 col-md-7 my-3'>
+		<div className='col-12 col-md-8 mt-3'>
 			{' '}
 			<div className='ms-4 h4 text-light text-start'>Sales - Orders</div>
 			<div className='d-flex col-12 justify-content-center h6'>

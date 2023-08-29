@@ -19,10 +19,20 @@ const DashboardBusiness = () => {
 
 	const [business, setBusiness] = useState('');
 
+	const [chartState, setChartState] = useState('');
+
 	useEffect(() => {
 		const url = `business/dashboard/${businessNameEncoded}`;
 		const thenFunction = (response) => {
 			setBusiness(response.data.business);
+			setChartState({
+				period: 'months',
+				labels: getLast31Days(),
+				chartData: calculateOrdersAndSales(
+					response.data.business.orders,
+					'months'
+				),
+			});
 		};
 		const errorFunction = () => {
 			toastifyError(`${languages[0][lang].tostify.redirect}`);
@@ -117,14 +127,6 @@ const DashboardBusiness = () => {
 		return { reversedOrders, reversedSales };
 	};
 
-	const [chartState, setChartState] = useState({
-		period: 'months',
-		labels: getLast31Days(),
-		chartData: business
-			? calculateOrdersAndSales(business.orders, 'months')
-			: '',
-	});
-
 	const handleState = (period, labelFunction) => {
 		if (chartState.period !== period) {
 			setChartState({
@@ -141,15 +143,21 @@ const DashboardBusiness = () => {
 					{languages[0][lang].dashboard.title}
 				</h1>
 				<div className='d-flex flex-wrap col-12 justify-content-around'>
-					<div className='col-12 col-md-7 border d-flex flex-wrap'>
-						<DashboardBusinessChart
-							chartState={chartState}
-							handleState={handleState}
-							getLast12Months={getLast12Months}
-							getLast31Days={getLast31Days}
-						/>
-						{/* <DashboardBusinessIcons chartState={chartState}/> */}
-						<div className='col-12 '>hola 2s</div>
+					<div className='col-12 col-md-7 d-flex flex-column'>
+						<div className='d-flex flex-column flex-md-row col-12'>
+							<DashboardBusinessChart
+								chartState={chartState}
+								handleState={handleState}
+								getLast12Months={getLast12Months}
+								getLast31Days={getLast31Days}
+							/>
+							<DashboardBusinessIcons
+								chartState={chartState}
+								currency={business.currency}
+							/>
+						</div>
+
+						<div className='border'>hola 2s</div>
 					</div>
 					<DashboardOrder orders={orders} />
 				</div>
