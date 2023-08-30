@@ -108,7 +108,9 @@
 				"btnSavedBusiness": "♥ Business",
 				"btnSavedProducts": "♥ Products",
 				"months": "Month",
-				"year": "Year"
+				"year": "Year",
+				"sales":"Sales",
+				"bestSeller":"Best Seller"
 			},
 			"profile": {
 				"incommingMsg": "Business's owner would let you know about your application",
@@ -455,7 +457,9 @@
 				"btnSavedBusiness": "♥ Negocios",
 				"btnSavedProducts": "♥ Productos",
 				"months": "Mes",
-				"year": "Año"
+				"year": "Año",
+				"sales":"Ventas",
+				"bestSeller":"Mejor Vendidos"
 			},
 			"profile": {
 				"incommingMsg": "El propietario del negocio te informará sobre tu solicitud",
@@ -798,11 +802,13 @@
 				"btnBusiness": "Unternehmen",
 				"btnAddBusiness": "Neu Unternehmen",
 				"btnCart": "Warenkorb",
-				"btnOrders": "Bestellungen",
+				"btnOrders": "Bestellung",
 				"btnSavedBusiness": "Unternehmen",
 				"btnSavedProducts": "♥ Produkte",
 				"months": "Monate",
-				"year": "Jahr"
+				"year": "Jahr",
+				"sales":"Umsatz",
+				"bestSeller":"Bestseller"
 			},
 			"profile": {
 				"incommingMsg": "Der Besitzer des Geschäfts wird Sie über Ihre Bewerbung informieren",

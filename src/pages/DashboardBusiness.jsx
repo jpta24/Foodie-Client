@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 import DashboardOrder from '../components/DashboardOrder';
 import DashboardBusinessChart from '../components/DashboardBusinessChart';
 import DashboardBusinessIcons from '../components/DashboardBusinessIcons';
+import DashboardBusinessBestSeller from '../components/DashboardBusinessBestSeller';
 
 const DashboardBusiness = () => {
 	const { language: lang } = useContext(AuthContext);
@@ -139,11 +140,11 @@ const DashboardBusiness = () => {
 	if (business) {
 		return (
 			<div className='dashboard container justify-content-center content-container'>
-				<h1 className='my-2 ms-4 text-start'>
+				{/* <h1 className='my-2 ms-4 text-start'>
 					{languages[0][lang].dashboard.title}
-				</h1>
+				</h1> */}
 				<div className='d-flex flex-wrap col-12 justify-content-around'>
-					<div className='col-12 col-md-7 d-flex flex-column'>
+					<div className='col-12 col-md-7 d-flex flex-column px-2'>
 						<div className='d-flex flex-column flex-md-row col-12'>
 							<DashboardBusinessChart
 								chartState={chartState}
@@ -157,7 +158,10 @@ const DashboardBusiness = () => {
 							/>
 						</div>
 
-						<div className='border'>hola 2s</div>
+						<DashboardBusinessBestSeller
+							orders={orders}
+							currency={business.currency}
+						/>
 					</div>
 					<DashboardOrder orders={orders} />
 				</div>

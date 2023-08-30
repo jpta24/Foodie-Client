@@ -739,7 +739,7 @@ a {
 	-moz-border-radius: 15px;
 	-ms-border-radius: 15px;
 	-o-border-radius: 15px;
-	max-height: 370px;
+	height: calc(100vh - 140px);
 	overflow-y: auto;
 }
 .dashboard-cart-card-img-container {
@@ -798,6 +798,10 @@ a {
     -o-border-radius: 20px;
 }
 
+.dashboard-bestseller{
+	height: 210px
+}
+
 @media (max-width: 600px) {
 	.card-container {
 		width: 136px;
@@ -844,5 +848,13 @@ a {
 		height: 20px;
 		width: 20px;
 		font-size: 7px;
+	}
+
+	.dashboard-cart{
+		max-height:370px;
+	}
+	
+	.dashboard-bestseller{
+		max-height: 420px
 	}
 }

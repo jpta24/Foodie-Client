@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import languages from '../data/language.json';
 import {
@@ -47,7 +47,7 @@ const DashboardBusinessChart = ({ chartState,handleState, getLast12Months,getLas
 		labels: chartState.labels,
 		datasets: [
 			{
-				label: 'Sales',
+				label: languages[0][lang].dashboard.sales,
 				data: chartState.chartData.reversedSales,
 				borderColor: 'rgb(220,53,69)',
 				backgroundColor: 'rgba(220,53,69, 0.5)',
@@ -55,7 +55,7 @@ const DashboardBusinessChart = ({ chartState,handleState, getLast12Months,getLas
 				tension: 0.4,
 			},
 			{
-				label: 'Orders',
+				label: languages[0][lang].dashboard.btnOrders,
 				data: chartState.chartData.reversedOrders,
 				borderColor: 'rgb(25,135,84)',
 				backgroundColor: 'rgba(25,135,84, 0.5)',
@@ -66,9 +66,9 @@ const DashboardBusinessChart = ({ chartState,handleState, getLast12Months,getLas
 	};
 
 	return (
-		<div className='col-12 col-md-8 mt-3'>
+		<div className='col-12 col-md-7 mt-3'>
 			{' '}
-			<div className='ms-4 h4 text-light text-start'>Sales - Orders</div>
+			<div className='ms-4 h4 text-light text-start'>{languages[0][lang].dashboard.sales} - {languages[0][lang].dashboard.btnOrders}</div>
 			<div className='d-flex col-12 justify-content-center h6'>
 				<div
 					style={{ cursor: 'pointer', color: 'white' }}

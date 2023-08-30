@@ -1,12 +1,9 @@
-import { Link
- } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const DaschboardCartCard = ({product,
-    currency,
-    quantity}) => {
-        const prodIsActive = product.status === 'paused' ? false : true;
-  return (
-    <div
+const DaschboardCartCard = ({ product, currency, quantity }) => {
+	const prodIsActive = product.status === 'paused' ? false : true;
+	return (
+		<div
 			className={`mx-1 my-1 dashboard-cart-card-container ${
 				!prodIsActive ? 'opacity-50' : ''
 			}`}
@@ -32,11 +29,11 @@ const DaschboardCartCard = ({product,
 							? product.price.toFixed(2)
 							: product.price.toFixed(2).slice(0, 6) + '...'}
 					</span>
-					 <span className='card-add text-dark fs-6'>{quantity}</span>
+					<span className='card-add text-dark fs-6'>{quantity}</span>
 				</div>
 			</div>
 		</div>
-  )
-}
+	);
+};
 
-export default DaschboardCartCard
+export default DaschboardCartCard;

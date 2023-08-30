@@ -18,8 +18,6 @@ const DashboardCardProd = ({ cart }) => {
 							key={uuidv4()}
 							product={product.product}
 							currency={product.product.business.currency}
-							cart={cart}
-							dashboardCart={false}
 							quantity={product.quantity}
 						/>
 					);

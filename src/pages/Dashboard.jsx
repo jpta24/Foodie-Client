@@ -42,9 +42,9 @@ const Dashboard = () => {
 	if (user) {
 		return (
 			<div className='dashboard container justify-content-center content-container'>
-				<h1 className='my-2 ms-4 text-start'>
+				{/* <h1 className='my-2 ms-4 text-start'>
 					{languages[0][lang].dashboard.title}
-				</h1>
+				</h1> */}
 				<div className='d-flex flex-wrap col-12 justify-content-around'>
 					<DashboardCardProd cart={cart} />
 					<DashboardOrder orders={orders} />
