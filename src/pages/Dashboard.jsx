@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
-import languages from '../data/language.json';
 import { getAPI } from '../utils/api';
 import DashboardCardProd from '../components/DashboardCardProd';
 import DashboardOrder from '../components/DashboardOrder';

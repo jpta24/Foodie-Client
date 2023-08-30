@@ -186,22 +186,22 @@ const Sidebar = ({ routes }) => {
 				user.business ? user.business.name.split(' ').join('-') : ''
 			}/products`,
 		},
-		{
-			icon: <FaUsers className='fs-4' />,
-			text: business.employees,
-			field: 'Employees',
-			link: `/employees/${
-				user.business ? user.business.name.split(' ').join('-') : ''
-			}`,
-		},
-		{
-			icon: <RiBillLine className='fs-4' />,
-			text: business.billing,
-			field: 'Billing',
-			link: `/billing/${
-				user.business ? user.business.name.split(' ').join('-') : ''
-			}`,
-		},
+		// {
+		// 	icon: <FaUsers className='fs-4' />,
+		// 	text: business.employees,
+		// 	field: 'Employees',
+		// 	link: `/employees/${
+		// 		user.business ? user.business.name.split(' ').join('-') : ''
+		// 	}`,
+		// },
+		// {
+		// 	icon: <RiBillLine className='fs-4' />,
+		// 	text: business.billing,
+		// 	field: 'Billing',
+		// 	link: `/billing/${
+		// 		user.business ? user.business.name.split(' ').join('-') : ''
+		// 	}`,
+		// },
 	];
 	const personalList = [
 		{
@@ -228,18 +228,18 @@ const Sidebar = ({ routes }) => {
 			field: 'Orders',
 			link: `/user-orders/${user._id}`,
 		},
-		{
-			icon: <RiHomeHeartLine className='fs-4' />,
-			text: personal.savedBusiness,
-			field: 'SavedBusiness',
-			link: `/redirect/`,
-		},
-		{
-			icon: <BsBookmarkHeart className='fs-4' />,
-			text: personal.savedProducts,
-			field: 'SavedProducts',
-			link: `/redirect/`,
-		},
+		// {
+		// 	icon: <RiHomeHeartLine className='fs-4' />,
+		// 	text: personal.savedBusiness,
+		// 	field: 'SavedBusiness',
+		// 	link: `/redirect/`,
+		// },
+		// {
+		// 	icon: <BsBookmarkHeart className='fs-4' />,
+		// 	text: personal.savedProducts,
+		// 	field: 'SavedProducts',
+		// 	link: `/redirect/`,
+		// },
 	];
 	// console.log(user)
 	if (mobileView && collapsed) {
