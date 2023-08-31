@@ -42,7 +42,11 @@ function AuthProviderWrapper(props) {
 					setUser(user);
 					getCartData();
 					if (url) {
-						navigate(url);
+						navigate(user.business
+							? `/business-dashboard/${user.business.name
+									.split(' ')
+									.join('-')}`
+							: `/user-dashboard/${user._id}`);
 					}
 
 					return axios.get(
