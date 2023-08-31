@@ -141,7 +141,7 @@ const OrderCard = ({ order, handleCancelOrder, handleModal }) => {
 							className='py-0 m-1 col-md-2'
 							onClick={() =>
 								handleModal(
-									'Please send an email to: contact@foodie.com',
+									'Please send an email to: info@foodys.app',
 									order,
 									'us'
 								)

@@ -428,7 +428,7 @@ const CreateBusiness = () => {
 								<Form.Label>{'Facebook'}</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder={'https://www.facebook.com/foodie'}
+									placeholder={'https://www.facebook.com/foodys'}
 									name='fb'
 									value={business.ssmm.fb}
 									onChange={(e) => {
@@ -467,7 +467,7 @@ const CreateBusiness = () => {
 								<Form.Label>{'Instagram'}</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder={'https://www.instagram.com/foodie'}
+									placeholder={'https://www.instagram.com/foodys'}
 									name='ig'
 									value={business.ssmm.ig}
 									onChange={(e) => {

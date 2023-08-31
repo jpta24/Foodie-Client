@@ -75,7 +75,7 @@ const BusinessView = () => {
 		// if (business.owner !== user._id) {
 		// 	navigate('/');
 		// }
-		const link = `https://foodie-de.netlify.app/${business.name}`;
+		const link = `https://www.foodys.app/${business.name}`;
 
 		let arrCategories = [];
 		if (business.products) {
@@ -239,7 +239,7 @@ const BusinessView = () => {
 							<div className='border border-dark shadow-lg'>
 								<Link to={`/${business.name}`}>
 									<QRCode
-										value={`https://foodie-de.netlify.app/${business.name}`}
+										value={`https://www.foodys.app/${business.name}`}
 										size='150'
 										logoImage={business.logoUrl}
 										enableCORS={true}

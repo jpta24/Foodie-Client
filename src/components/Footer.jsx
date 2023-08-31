@@ -35,7 +35,7 @@ function Footer() {
 							</li>
 							<li>
 								<a
-									href='https://www.instagram.com/foodie'
+									href='https://www.instagram.com/foodys'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
