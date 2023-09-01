@@ -10,7 +10,7 @@ const DashboardOrder = ({ orders }) => {
 
 	const statues = ['All Orders', 'Pending', 'Payed', 'Confirmed', 'Cancelled'];
 	return (
-		<div className='col-12 col-md-5 text-start my-3'>
+		<div className='col-12 col-md-7 col-lg-5 text-start my-3'>
 			<Link
 				className='ms-4 h4 text-light'
 				to={orders.dashboard === 'user' ? `/user-orders/${orders.user._id}`: `/business-orders/${orders.business._id}`}

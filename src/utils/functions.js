@@ -93,3 +93,22 @@ export const handleRemoveQtyToCart = (product,qty=1,user,getCartData) => {
 	};
 	putAPI(url, requestBody, thenFunction);
 };
+// import { useState, useEffect, useContext } from 'react';
+// import { listenerResize } from '../utils/functions';
+	// const [isMobile, setIsMobile] = useState(false);
+	
+	// useEffect(() => {
+	// 	listenerResize(setIsMobile, 750);
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
+export const listenerResize = (setIsMobile,width) => {
+	const handleResize = () => {
+		setIsMobile(window.innerWidth < width);
+	};
+	handleResize();
+	window.addEventListener('resize', handleResize);
+
+	return () => {
+		window.removeEventListener('resize', handleResize);
+	};
+};

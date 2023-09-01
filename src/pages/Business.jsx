@@ -9,6 +9,7 @@ import languages from '../data/language.json';
 
 import { getAPI, putAPI, deleteAPI } from '../utils/api';
 import { toastifyError } from '../utils/tostify';
+import { listenerResize } from '../utils/functions';
 
 import ProductCard2 from '../components/ProductCard2';
 import BusinessMenu from '../components/BusinessMenu';
@@ -200,6 +201,14 @@ const Business = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user]);
 
+	
+	const [isMobile, setIsMobile] = useState(false);
+	
+	useEffect(() => {
+		listenerResize(setIsMobile, 1100);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	if (business !== '') {
 		let owner = false;
 		const businessStored = localStorage.getItem('businesses')
@@ -365,7 +374,7 @@ const Business = () => {
 							</DndContext>
 						</div>
 					</div>
-					{window.innerWidth > 750 && (
+					{!isMobile && (
 						<div className='mt-4'>
 							<PromotionBanner
 								maxHeight={true}

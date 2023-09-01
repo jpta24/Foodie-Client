@@ -20,7 +20,7 @@ function MembershipCard({ string, price, btnFunction, business }) {
 	};
 
 	return (
-		<div className='col-md-3 col-10 border border-dark rounded text-start p-4 m-2'>
+		<div className='col-lg-3 col-md-5 col-10 border border-dark rounded text-start p-4 m-2'>
 			<p className='h5 text-danger'>{languages[0][lang].home[`${string}Title`]}</p>
 			<p className='h3'>
 				{price}

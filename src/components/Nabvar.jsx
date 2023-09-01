@@ -42,7 +42,7 @@ const Nabvar2 = () => {
 				bg='dark'
 				variant='dark'
 				sticky='top'
-				expand='sm'
+				expand='lg'
 				collapseOnSelect
 			>
 				<Navbar.Brand

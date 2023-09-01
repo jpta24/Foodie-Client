@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
+
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import { QRCode } from 'react-qrcode-logo';
@@ -7,6 +8,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 import { toast } from 'react-toastify';
+import { listenerResize } from '../utils/functions';
 
 // import BusinessViewCard from '../components/BusinessViewCard';
 // import iconsCloud from '../data/icons.json';
@@ -65,7 +67,14 @@ const BusinessView = () => {
 	const removeSpacesAndSymbols = (inputString) => {
 		const regex = /[^a-zA-Z0-9]/g;
 		return inputString.replace(regex, '');
-	  }
+	};
+
+	const [isMobile, setIsMobile] = useState(false);
+	
+	useEffect(() => {
+		listenerResize(setIsMobile, 450);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	if (business !== '') {
 		let owner = false;
@@ -192,7 +201,9 @@ const BusinessView = () => {
 								{business.ssmm?.wa && (
 									<li>
 										<a
-											href={`https://api.whatsapp.com/send?phone=${removeSpacesAndSymbols(business.ssmm.wa)}`}
+											href={`https://api.whatsapp.com/send?phone=${removeSpacesAndSymbols(
+												business.ssmm.wa
+											)}`}
 											target='_blank'
 											rel='noopener noreferrer'
 										>
@@ -263,7 +274,7 @@ const BusinessView = () => {
 											navigator.clipboard.writeText(link);
 											// eslint-disable-next-line no-lone-blocks
 											{
-												window.innerWidth < 450
+												isMobile
 													? toast.success(
 															`${languages[0][lang].tostify.copy}`,
 															{

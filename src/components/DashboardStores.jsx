@@ -9,7 +9,7 @@ const DashboardStores = ({ stores }) => {
 	const [store, setStore] = useState(stores.stores.saved.length !== 0 ? 'Saved' :'Visited');
 	const storesTypes = ['Saved', 'Visited'];
 	return (
-		<div className='col-12 col-md-2 text-start my-3'>
+		<div className='col-12 col-lg-2 text-start my-3'>
 			<Link className='ms-4 h4 text-light' to={`/redirect`}>
 				{languages[0][stores.lang].dashboard.btnSavedBusiness}
 			</Link>

@@ -171,8 +171,8 @@ const CartPage = () => {
 		return (
 			<div className='container p-0 content-container'>
 				<div className='row d-flex flex-row rounded border border-dark'>
-					<div className='col-12 col-md-7'>
-						<div className='col-11 d-flex flex-column p-2 my-2 col-12 text-start'>
+					<div className='col-12 col-lg-7'>
+						<div className='col-12 d-flex flex-column p-2 my-2 text-start'>
 							<div className='ms-4'>
 								<h1>
 									{languages[0][lang].cart.hi}, {user.username}
@@ -257,7 +257,7 @@ const CartPage = () => {
 							)}
 						</div>
 					</div>
-					<div className='col-12 col-md-5'>
+					<div className='col-12 col-lg-5'>
 						<div className='col-11 d-flex flex-column p-2 mt-2 py-3 form-control bg-dark cartSummary border border-dark text-light'>
 							<h2 className='fw-bold text-light'>
 								{' '}

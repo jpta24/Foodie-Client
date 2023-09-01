@@ -14,7 +14,7 @@ const ProdDetailsExpandText = ({ text }) => {
 			) : (
 				<span>{text}</span>
 			)}
-			{text.length > 140 && <span className='read-more' onClick={handleToggle}>
+			{text.length > 140 && <span className='read-more' onClick={handleToggle} style={{cursor:'pointer'}}>
 				{expanded ? ' read less' : ' read more'}
 			</span>}
 		</p>

@@ -1,12 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/auth.context';
 import { Button } from 'react-bootstrap';
 import languages from '../data/language.json';
-
+import { listenerResize } from '../utils/functions';
 import { v4 as uuidv4 } from 'uuid';
 
 const OrderCard = ({ order, handleCancelOrder, handleModal }) => {
 	const { language: lang } = useContext(AuthContext);
+	
+	const [isMobile, setIsMobile] = useState(false);
+	
+	useEffect(() => {
+		listenerResize(setIsMobile, 750);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className='rounded d-flex flex-row card col-11 align-items-center justify-content-around m-1 shadow bg-dark text-light'>
@@ -25,7 +32,7 @@ const OrderCard = ({ order, handleCancelOrder, handleModal }) => {
 			</div>
 			<div className='p-1 col-11 col-md-10 d-flex flex-column justify-content-between'>
 				<dir className='p-1 m-1'>
-					{window.innerWidth > 750 ? (
+					{isMobile ? (
 						<p
 							className='p-1 m-0 text-start d-flex justify-content-between'
 							style={{ fontSize: '0.95em', fontWeight: 'bolder' }}
@@ -71,7 +78,8 @@ const OrderCard = ({ order, handleCancelOrder, handleModal }) => {
 										<span>
 											{order.business.currency}{' '}
 											{(
-												(eachProduct.price || eachProduct.product.price) * eachProduct.quantity
+												(eachProduct.price || eachProduct.product.price) *
+												eachProduct.quantity
 											).toFixed(2)}
 										</span>
 									</p>

@@ -19,6 +19,8 @@ import homeImg3 from '../assets/Imagen3.png';
 import homeImg4 from '../assets/Imagen4.png';
 import homeImg5 from '../assets/Imagen5.png';
 
+import { listenerResize } from '../utils/functions';
+
 function HomePage() {
 	const { language: lang, user: userID } = useContext(AuthContext);
 	const navigate = useNavigate();
@@ -64,6 +66,12 @@ function HomePage() {
 	// 	iconsCloud[0].homeImg5,
 	// ];
 	const images = [homeImg1, homeImg2, homeImg3, homeImg4, homeImg5];
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		listenerResize(setIsMobile, 450);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return (
 		<div
 			className={`container-fluid content-container`}
@@ -74,14 +82,10 @@ function HomePage() {
 				<section className='header-section my-5'>
 					<div className='pb-3'>
 						<Row>
-							<Col md={7}>
+							<Col lg={7}>
 								<h1
 									className='col-11 my-md-5 my-4'
-									style={
-										window.innerWidth < 450
-											? { fontSize: '30px' }
-											: { fontSize: '45px' }
-									}
+									style={isMobile ? { fontSize: '30px' } : { fontSize: '45px' }}
 								>
 									{' '}
 									<strong className='text-danger foodie-title'>
@@ -98,7 +102,7 @@ function HomePage() {
 									{languages[0][lang].home.btnSlg}
 								</Button>
 							</Col>
-							<Col md={5}>
+							<Col lg={5} className='col-8 mx-auto col-lg-5'>
 								<Carousel
 									interval={5000}
 									pauseonhover='true'
@@ -134,10 +138,10 @@ function HomePage() {
 				<section className='features-section my-4'>
 					<div>
 						<Row className='d-flex justify-content-around pb-4'>
-							<Col md={4}>
+							<Col lg={4} className='col-6 col-lg-4'>
 								<Image loading='lazy' src={iconsCloud[0].homeFeatures} fluid />
 							</Col>
-							<Col md={7}>
+							<Col lg={7}>
 								<h2 className='text-danger'>
 									{languages[0][lang].home.feaTitle} FOODYS
 								</h2>

@@ -144,7 +144,7 @@ const DashboardBusiness = () => {
 					{languages[0][lang].dashboard.title}
 				</h1> */}
 				<div className='d-flex flex-wrap col-12 justify-content-around'>
-					<div className='col-12 col-md-7 d-flex flex-column px-2'>
+					<div className='col-12 col-lg-7 d-flex flex-column px-2'>
 						<div className='d-flex flex-column flex-md-row col-12'>
 							<DashboardBusinessChart
 								chartState={chartState}

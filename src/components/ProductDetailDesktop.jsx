@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { IoCloseSharp } from 'react-icons/io5';
 import { v4 as uuidv4 } from 'uuid';
 
+import { listenerResize } from '../utils/functions';
 import iconsCloud from '../data/icons.json';
 import languages from '../data/language.json';
 import AddRemoveItems from './AddRemoveItems';
@@ -34,8 +36,12 @@ const ProductDetailDesktop = ({
 		highlightedProducts: product.product.business.highlightedProducts,
 		handleHighlightedProduct: handleHighlightedProduct,
 	};
-	// console.log(window.innerHeight);
-	// const nummm = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed'
+	const [isMobile, setIsMobile] = useState(false);
+	
+	useEffect(() => {
+		listenerResize(setIsMobile, 1100);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return (
 		<div className='container-fluid'>
 			<div className='row'>
@@ -146,7 +152,7 @@ const ProductDetailDesktop = ({
 						</div>
 					</div>
 
-					{window.innerWidth > 1100 && (
+					{isMobile && (
 						<PromotionBanner
 							maxHeight={false}
 							business={product.product.business}

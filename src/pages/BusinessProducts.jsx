@@ -211,7 +211,7 @@ const BusinessProducts = () => {
 							<Button
 								variant='outline-primary'
 								size='lg'
-								className='col-10 col-md-4 my-2 '
+								className='col-11 col-lg-8 my-2 '
 								href={`/${businessNameEncoded}/create-product`}
 							>
 								{' '}
@@ -234,7 +234,7 @@ const BusinessProducts = () => {
 						collisionDetection={closestCenter}
 						onDragEnd={handleDragEnd}
 					>
-						<div className='col-11 col-md-8 pb-5 d-flex flex-wrap justify-content-around align-items-stretch '>
+						<div className='col-11 pb-5 d-flex flex-wrap justify-content-around align-items-stretch '>
 						<SortableContext
 									items={prodDnd.map((i) => i._id)}
 									strategy={verticalListSortingStrategy}

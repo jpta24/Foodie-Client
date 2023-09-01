@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import { v4 as uuidv4 } from 'uuid';
-
+import { listenerResize } from '../utils/functions';
 import { IoCloseSharp } from 'react-icons/io5';
 import { MdOutlineDashboard } from 'react-icons/md';
 import {
@@ -42,7 +42,13 @@ const Sidebar = ({ routes }) => {
 
 	const [collapsed, setCollapsed] = useState(true);
 
-	const mobileView = window.innerWidth < 600;
+	
+	const [isMobile, setIsMobile] = useState(false);
+	
+	useEffect(() => {
+		listenerResize(setIsMobile, 600);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		const actualPage = routes.filter((route) =>
@@ -242,7 +248,7 @@ const Sidebar = ({ routes }) => {
 		// },
 	];
 	// console.log(user)
-	if (mobileView && collapsed) {
+	if (isMobile && collapsed) {
 		return (
 			<div
 				className='sidebar-collapsed'
@@ -254,7 +260,7 @@ const Sidebar = ({ routes }) => {
 			<>
 				<div
 					className={`${
-						mobileView && !collapsed ? 'sidebar-mobile' : 'sidebar-container'
+						isMobile && !collapsed ? 'sidebar-mobile' : 'sidebar-container'
 					} d-flex flex-column text-light`}
 				>
 					<div className='d-flex col-12 justify-content-center h6'>
@@ -291,7 +297,7 @@ const Sidebar = ({ routes }) => {
 							{personal.personal}
 						</Link>
 					</div>
-					{mobileView && (
+					{isMobile && (
 						<div
 							className='sidebar-close'
 							onClick={() => setCollapsed(!collapsed)}
@@ -304,6 +310,7 @@ const Sidebar = ({ routes }) => {
 							<div className='d-flex flex-column justify-content-center align-items-center col-12 mt-3'>
 								{user.business ? (
 									<>
+									<Link to={`/${user.business.name}`} style={{cursor:'pointer'}}>
 										<div
 											className='rounded-circle border align-self-center border-dark bg-dark d-flex justify-content-center align-items-center'
 											style={{
@@ -320,6 +327,8 @@ const Sidebar = ({ routes }) => {
 										<h5 className='align-self-center my-3 foodie-title text-danger'>
 											{user.business.name}
 										</h5>
+									</Link>
+										
 
 										{buzList.map((elem) => {
 											return (
@@ -411,7 +420,7 @@ const Sidebar = ({ routes }) => {
 						</div>
 					)}
 				</div>
-				{mobileView && !collapsed && <div className='sidebar-side'></div>}
+				{isMobile && !collapsed && <div className='sidebar-side'></div>}
 			</>
 		);
 	}
@@ -419,7 +428,7 @@ const Sidebar = ({ routes }) => {
 	// 	return (
 	// 		<div
 	// 			className={`${
-	// 				!mobileView || !collapsed ? 'sidebar-container' : 'sidebar-collapsed'
+	// 				!isMobile || !collapsed ? 'sidebar-container' : 'sidebar-collapsed'
 	// 			} d-flex flex-column text-light`}
 	// 		>
 	// 			<div className='d-flex col-12 justify-content-center h6'>
@@ -456,7 +465,7 @@ const Sidebar = ({ routes }) => {
 	// 					{personal.personal}
 	// 				</Link>
 	// 			</div>
-	// 			{mobileView &&
+	// 			{isMobile &&
 	// 				(collapsed ? (
 	// 					<div
 	// 						className='sidebar-hamburger border'

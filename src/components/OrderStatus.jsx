@@ -12,7 +12,7 @@ const OrderStatus = ({ statues, status, setStatus }) => {
 						style={{ cursor: 'pointer' }}
 						key={uuidv4()}
 						name={cat}
-						className={`badge col-md-2 border border-dark my-1 mx-1 ${
+						className={`badge col-lg-2 border border-dark my-1 mx-1 ${
 							status === cat ? active : inactive
 						}`}
 						onClick={() => setStatus(cat)}

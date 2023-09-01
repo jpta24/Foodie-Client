@@ -9,9 +9,9 @@ const BusinessOrdersCard = ({ order, handleStatusOrder, handleModal }) => {
 	const { language: lang } = useContext(AuthContext);
 	return (
 		<div className='rounded d-flex flex-row card col-11 align-items-center justify-content-around my-1 mx-auto shadow shadow bg-dark text-light'>
-			<div className='col-md-1 d-none d-md-block m-1'>
+			<div className='col-lg-1 d-none d-lg-block m-1'>
 				<div
-					className='d-none d-md-block p-2 rounded border border-dark d-flex justify-items-center m-auto'
+					className='d-none d-lg-block p-2 rounded border border-dark d-flex justify-items-center m-auto'
 					style={{
 						height: '60px',
 						width: '60px',
@@ -25,7 +25,7 @@ const BusinessOrdersCard = ({ order, handleStatusOrder, handleModal }) => {
 					}}
 				></div>
 			</div>
-			<div className='p-1 col-11 col-md-10 d-flex flex-column justify-content-between'>
+			<div className='p-1 col-11 col-lg-10 d-flex flex-column justify-content-between'>
 				<dir className='p-1 m-1'>
 					<p
 						className='p-1 m-0 text-start d-flex justify-content-end'
@@ -98,7 +98,7 @@ const BusinessOrdersCard = ({ order, handleStatusOrder, handleModal }) => {
 								<Button
 									variant='success'
 									size='sm'
-									className='py-0 m-1 col-md-2 col-5'
+									className='py-0 m-1 col-lg-2 col-5'
 									onClick={() => handleStatusOrder(order, 'confirmed')}
 								>
 									{languages[0][lang].businessOrderCard.confirm}
@@ -106,7 +106,7 @@ const BusinessOrdersCard = ({ order, handleStatusOrder, handleModal }) => {
 								<Button
 									variant='outline-success'
 									size='sm'
-									className='py-0 m-1 col-md-2 col-5'
+									className='py-0 m-1 col-lg-2 col-5'
 									onClick={() => handleStatusOrder(order, 'cancelled')}
 								>
 									{languages[0][lang].businessOrderCard.cancel}
@@ -117,7 +117,7 @@ const BusinessOrdersCard = ({ order, handleStatusOrder, handleModal }) => {
 						<Button
 							variant='outline-secondary'
 							size='sm'
-							className='py-0 m-1 col-md-2 col-5'
+							className='py-0 m-1 col-lg-2 col-5'
 							onClick={() =>
 								handleModal(
 									'Please send an email to: info@foodys.app',

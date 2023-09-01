@@ -9,6 +9,7 @@ import { getAPI, putAPI } from '../utils/api';
 import ProductDetailMobile from '../components/ProductDetailMobile';
 
 import { handleAddToCart } from '../utils/functions';
+import { listenerResize } from '../utils/functions';
 import ProductDetailDesktop from '../components/ProductDetailDesktop';
 
 const ProductDetails = () => {
@@ -69,6 +70,13 @@ const ProductDetails = () => {
 
 	const rating = 4.5;
 
+	const [isMobile, setIsMobile] = useState(false);
+	
+	useEffect(() => {
+		listenerResize(setIsMobile, 560);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	// const handleAddQtyToCart = () => {
 	// 	const requestBody = {
 	// 		cart: {
@@ -118,7 +126,7 @@ const ProductDetails = () => {
 	if (product) {
 		return (
 			<>
-				{window.innerWidth < 560 ? (
+				{isMobile ? (
 					<ProductDetailMobile
 						product={product}
 						setProduct={setProduct}

@@ -8,6 +8,7 @@ import { Card, Button } from 'react-bootstrap';
 import RedirectCard from '../components/RedirectCard';
 import languages from '../data/language.json';
 import { putAPI } from '../utils/api';
+import { listenerResize } from '../utils/functions';
 
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
@@ -57,6 +58,12 @@ const RedirectPage = () => {
 			putAPI(url, requestBody, thenFunction);
 		}
 	};
+	const [isMobile, setIsMobile] = useState(false);
+	
+	useEffect(() => {
+		listenerResize(setIsMobile, 750);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	if (user) {
 		return (
@@ -116,7 +123,7 @@ const RedirectPage = () => {
 							<div
 								className='my-2'
 								style={{
-									maxHeight: `${window.innerWidth < 450 ? '50vh' : '60vh'}`,
+									maxHeight: `${isMobile < 450 ? '50vh' : '60vh'}`,
 									overflow: 'auto',
 								}}
 							>
