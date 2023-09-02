@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 
+import languages from '../data/language.json';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/cart.context';
 import axios from 'axios';
@@ -116,6 +117,7 @@ function AuthProviderWrapper(props) {
 		} else {
 			setLanguage(lang);
 		}
+		document.title = languages[0][lang].navbar.title;
 	};
 	useEffect(() => {
 		if (user) {

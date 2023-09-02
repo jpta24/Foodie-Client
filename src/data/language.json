@@ -8,7 +8,8 @@
 				"cart": "Cart",
 				"logout": "Log Out",
 				"login": "Log In",
-				"signup": "Sign Up"
+				"signup": "Sign Up",
+				"title":"Foodys - Your Online Food Platform"
 			},
 			"aboutus": {
 				"greeting": "¡Hi! I'm Jean Pierre",
@@ -357,7 +358,8 @@
 				"cart": "Carrito",
 				"logout": "Cerrar sesión",
 				"login": "Iniciar sesión",
-				"signup": "Registrarse"
+				"signup": "Registrarse",
+				"title":"Foodys - Tu Plataforma de Comida en Línea"
 			},
 			"aboutus": {
 				"greeting": "¡Hola! Soy Jean Pierre",
@@ -706,7 +708,8 @@
 				"cart": "Warenkorb",
 				"logout": "Abmelden",
 				"login": "Einloggen",
-				"signup": "Anmelden"
+				"signup": "Anmelden",
+				"title":"Foodys - Ihre Online-Food-Plattform"
 			},
 			"aboutus": {
 				"greeting": "Hallo! Ich bin Jean Pierre",
