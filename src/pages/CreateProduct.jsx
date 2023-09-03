@@ -65,6 +65,7 @@ const CreateProduct = () => {
 		const url = `products`;
 		const thenFunction = (response) => {
 			setProduct({ ...initialState, business: business._id });
+			setCurrentProductImg(null)
 			toastifySuccess(`${languages[0][lang].tostify.newProduct}`);
 		};
 		const errorFunction = (error) => {
