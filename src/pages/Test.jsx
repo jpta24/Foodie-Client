@@ -9,7 +9,7 @@ function Test() {
 	const postAPI = async () => {
 		try {
 			await axios.post(
-				`${process.env.REACT_APP_SERVER_URL}/mails/webfoddys`,
+				`${process.env.REACT_APP_SERVER_URL}/mails/webfoodys`,
 				requestBody
 			);
 		} catch (error) {
