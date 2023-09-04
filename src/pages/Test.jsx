@@ -9,7 +9,7 @@ function Test() {
 	const postAPI = async () => {
 		try {
 			await axios.post(
-				`https://pink-clumsy-gosling.cyclic.app/mails/webfoddys`,
+				`${process.env.REACT_APP_SERVER_URL}/mails/webfoddys`,
 				requestBody
 			);
 		} catch (error) {
