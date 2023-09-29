@@ -31,8 +31,7 @@ function MembershipPage() {
 	};
 	const handleChangeMembership = () => {
 		const requestBody = {
-			selectedPlan,
-			usedTrial: business.membership.usedTrial,
+			selectedPlan
 		};
 		const url = `business/membership/${businessNameEncoded}`;
 		const thenFunction = (response) => {
